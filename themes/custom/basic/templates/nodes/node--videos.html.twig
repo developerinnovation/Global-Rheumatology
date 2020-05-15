@@ -8,7 +8,7 @@
                             {{ content.field_categoria }}
                         </div>
                         <div class="buttons">
-                            <div {% set nid=n ode.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
+                            <div {% set nid=node.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
                         </div>
                     </div>
 
