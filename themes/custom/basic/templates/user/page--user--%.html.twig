@@ -1,12 +1,37 @@
+{% set nombre %}
+    {{ drupal_field('field_nombre', 'user', user.id) }}
+{% endset %}
+
+{% set apellidos %}
+    {{ drupal_field('field_apellidos', 'user', user.id) }}
+{% endset %}
+
 <div id="main" class="user-profile">
     <div class="container">
-          {{ drupal_view('perfil_usuario', 'block_3') }}
+        <div class="views-element-container">
+            <div class="js-view-dom-id-61a20b59062d2c8f464e7b8b631c4c14eaf856bc45751126bf9bb078068fa12f">
+                <div class="views-row"><div class="profile">
+                    <div class="picture">
+                        <figure>  
+                            {{ drupal_field('user_picture', 'user', user.id) }}
+                        </figure>
+                    </div>
+                    <div class="text">
+                        <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+                        <div class="info">
+                            <p>{{ drupal_field('field_perfil_usuario', 'user', user.id) }}</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div><!-- /.container -->
 
     <div class="container">
         <div class="infinite-contents">
             <div class="block-title">
-                <h3>Publicaciones de {{user.nombres }}</h3>
+                <h3>Publicaciones de: {{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
             </div>
             {{ drupal_view('perfil_usuario', 'block_1') }}
         </div>
