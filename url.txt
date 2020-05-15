@@ -1,0 +1,37 @@
+Usuario: administrador
+Pwd: P4nL4r2017
+
+
+Perfil de usuario :http://localhost:204/authenticated/1/admin-panlar (tiene foto, correo, nombre, perfil, bloque de contenido guardado -"solo se ve logueado como slider", bloque de contenido creado por el autor)
+Multimedia: http://localhost:204/secciones/26/multimedia 
+sección o tag general : http://localhost:204/secciones/2/prueba 
+Repuerar contraseña: http://localhost:204/user/password
+Login: http://localhost:204/user/login
+Registro: http://localhost:204/user/register
+
+
+
+Manuscritos: http://localhost:204/node/81 
+    => inicia sesión como (user: autor@autor.com - contraseña:123456)
+
+
+Formulario para envió de Manuscritos : http://localhost:204/new/send/manuscrito - http://localhost:204/update/141/manuscrito
+    => debe quedar igual a http://localhost:204/node/add/manuscrito
+
+
+Página básica: http://localhost:204/porque-publicar-en-pgr
+Listado de manuscritos: http://localhost:204/search/content/manuscrito
+
+Ver contenido guardado: http://localhost:204/authenticated/1/admin-panlar
+
+------------------------------------------------------------------------------------------
+
+Buscador http://localhost:204/global-rheumatology/search/content?title=a 
+
+Menú mobile = footer.html.twig div#menu-fixed.mobile
+
+Landing Manuscritos enviados
+http://localhost:204/show/saved/content =>  modules\custom\manuscrito\templates\listing-list.html.twig
+
+Nodo artículo cientifico
+http://localhost:204/articulo-cientifico/lorem-2-lorem-ipsum-generator-brought-you-manoverboard-purpose-driven-design 

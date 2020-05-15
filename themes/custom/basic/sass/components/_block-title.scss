@@ -1,0 +1,28 @@
+.block-title{
+    padding: 60px 15px 15px;
+    @media only screen and ($tablet){
+        padding: 60px 30px 15px;
+    }
+    h3{
+        font: {
+            weight: 900;
+            size: 28px;
+        }
+        @media only screen and ($tablet){
+            font: {
+                size: 36px;
+            }
+        }
+        &:after{
+            content: '';
+            display: block;
+            margin: 20px 0 20px -15px;
+            width: 120px;
+            height: 3px;
+            background: $accent-blue;
+            @media only screen and ($tablet){
+                margin: 20px 0 20px -30px;
+            }
+        }
+    }
+}

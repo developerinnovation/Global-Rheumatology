@@ -1,0 +1,72 @@
+<!-- ______________________ MAIN _______________________ -->
+<div id="main">
+    <div class="container">
+        <div class="first_new">
+            {{ drupal_view('home', 'block_1') }}
+            <div class="scroll arrow-down"></div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <div class="send_article">
+            <div class="block-title">
+            <h3>{% trans%} Llamada a artículos {% endtrans%}</h3>
+                <!--<h3>{% trans%} Envie su artículo {% endtrans%}</h3>-->
+            </div>
+            <p>Global Rheumatology by PANLAR (GRP) lanza la convocatoria para <br> trabajos de publicación desde el 1ro de mayo de 2020. <br>
+            Las propuestas se aceptan de manera continua y no hay una fecha límite de envío. <br> Los primeros trabajos aceptados se publicarán a partir de mayo  durante el 22 Congreso Panamericano de Reumatología <b>PANLAR</b> 2020 <br> antes de enviar su artículo lea los detalles  <a href="/articulo/llamada-articulos-162">aquí</a> </p>
+
+            <!--<p>Sea parte de Global Rheumalology enviando sus contenidos. <br> Revise en línea el estado de sus publicaciones y revisiones. </p>-->
+            <button class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /new/send/manuscrito {% else %}  {% endif %}">{% trans%} Enviar artículo {% endtrans%} </button>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <div class="last_news">
+            <div class="block-title">
+                <h3>{% trans%} Últimos artículos {% endtrans%}</h3>
+            </div>
+            <dd>{{ drupal_view('home', 'block_3') }}</dd>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <div class="most_read">
+            <div class="top">
+                <div class="left">
+                    <div class="block-title">
+                        <h3>{% trans%} Tendencias {% endtrans%}</h3>
+                    </div>
+                </div>
+                <div class="right">
+                    <span id="read" class="more-read active">{% trans%} Lo más visto {% endtrans%}</span>
+                    <hr>
+                    <span id="shared" class="more-shared">{% trans%} Lo más compartido {% endtrans%}</span>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="view_news more-read active">
+                    <dd>{{ drupal_view('home', 'block_4') }}</dd>
+                </div>
+                <div class="view_news more-shared">
+                    <dd>{{ drupal_view('home', 'block_5') }}</dd>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+        <div class="magazine_news">
+            <div class="block-title">
+                <h3>{% trans%} Magazine {% endtrans%}</h3>
+            </div>
+            <dd>{{ drupal_view('home', 'block_6') }}</dd>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /#main -->

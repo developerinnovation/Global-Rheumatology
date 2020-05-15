@@ -1,0 +1,59 @@
+.owl-carousel{
+    .owl-nav{
+        div{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: {
+                size: 20px;
+                position: center;
+                repeat: no-repeat;
+                color: $primary-color;
+            }
+            -webkit-box-shadow: 0 0 0 5px rgba(22, 91, 152, 0.6);
+            box-shadow: 0 0 0 5px rgba(22, 91, 152, 0.6);
+            font-size: 0;
+            -webkit-transition: all 0.15s linear;
+            transition: all 0.15s linear;
+            @media only screen and ($desktop){
+                background: {
+                    size: 34px;
+                    color: transparent;
+                }
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+            &.owl-prev{
+                background: {
+                    image: url(../../images/flecha-prev-blanca.svg);
+                }
+                left: 5px;
+                @media only screen and ($desktop){
+                    background: {
+                        image: url(../../images/flecha-prev-azul.svg);
+                    }
+                }
+            }
+            &.owl-next{
+                background: {
+                    image: url(../../images/flecha-next-blanca.svg);
+                }
+                right: 5px;
+                @media only screen and ($desktop){
+                    background: {
+                        image: url(../../images/flecha-next-azul.svg);
+                    }
+                    
+                }
+            }
+            &.disabled{
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+        }
+    }
+}

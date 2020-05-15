@@ -1,0 +1,19 @@
+<div class="item-news more-shared home">
+    <div class="picture">
+        <figure>{{ fields.field_image.content }}</figure>
+        <div {% set nid = row._entity.nid.value %} class="save {% if  nid in user.node_saved['split'] %}saved{% else %}no{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}">
+          <a href="#" class="node_saved active">Guardar</a>
+        </div>
+    </div>
+    <div class="text">
+        <span class="category">{{ fields.field_categoria.content }}</span>
+        <h3 class="title">{{ fields.title.content }}</h3>
+        <p class="sumary">{{ fields.body.content }}</p>
+        <div class="info-more">
+            <div class="info">
+                <span><b>{{ fields.field_nombre.content }}</b>,{{ fields.created.content }}</span>
+            </div>
+            <div class="explorer">{{ fields.nothing.content }}</div>
+        </div>
+    </div>
+</div>

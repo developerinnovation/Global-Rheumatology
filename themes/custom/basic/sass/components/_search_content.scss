@@ -1,0 +1,222 @@
+.section-search{
+    .views-element-container{
+        padding: 15px;
+        border-top: 3px solid $accent-blue;
+        @media only screen and ($desktop){
+            padding: 20px 30px;
+        }
+        form{
+            .form-item{
+                position: relative;
+                padding: 10px 0 0;
+                margin: 0 0 20px;
+                label{
+                    position: absolute;
+                    top: 0;
+                    left: 5px;
+                    height: 20px;
+                    padding: 0 3px;
+                    background: #fff;
+                    margin: 0;
+                    font: {
+                        size: 12px;
+                    }
+                    line-height: 20px;
+                    color: $primary-color;
+                    @media only screen and ($tablet){
+                        left: 10px;
+                        padding: 0 5px;
+                        font: {
+                            size: 13px;
+                        }
+                    }
+                }
+                input, select{
+                    width: 100%;
+                    height: 40px;
+                    padding: 0 10px;
+                    border: 2px solid #ddd;
+                    border-radius: 4px;
+                    margin: 0 0 5px;
+                    box-shadow: none;
+                    background: #fff;
+                    font: {
+                        size: 14px;
+                    }
+                    &:focus{
+                        border-color: $primary-color;
+                    }
+                }
+            }
+            .form-actions{
+                margin: 0 0 40px;
+                input{
+                    margin: 0 auto;
+                    display: block;
+                    width: 180px;
+                    height: 40px;
+                    padding: 0;
+                    border: 0;
+                    border-radius: 6px;
+                    background: $primary-color;
+                    outline: none;
+                    font: {
+                        weight: 700;
+                        size: 16px;
+                    }
+                    line-height: 40px;
+                    color: #fff;
+                }
+            }
+        }
+        .views-exposed-form{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            @media only screen and ($desktop){
+                width: 1180px;
+                margin: 0 auto;
+                flex-wrap: nowrap;
+            }
+            .form-item{
+                width: calc(50% - 5px);
+                margin: 0 0 5px;
+                @media only screen and ($tablet){
+                    width: calc(24% - 20px);
+                    margin: 0;
+                }
+                @media only screen and ($desktop){
+                    width: calc(18% - 20px);
+                }
+                &.form-item-title{
+                    width: 100%;
+                    @media only screen and ($tablet){
+                        margin: 0 0 20px;
+                    }
+                    @media only screen and ($desktop){
+                        width: calc(31% - 20px);
+                        margin: 0;
+                    }
+                }
+                &.form-item-langcode{
+                    width: 100%;
+                    @media only screen and ($tablet){
+                        width: calc(24% - 20px);
+                    }
+                    @media only screen and ($desktop){
+                        width: calc(18% - 20px);
+                    }
+                }
+            }
+            .form-actions{
+                width: calc(100% + 10px);
+                margin: 10px -5px 20px;
+                display: flex;
+                @media only screen and ($tablet){
+                    width: calc(34% - 20px);
+                }
+                @media only screen and ($desktop){
+                    width: calc(20% - 20px);
+                }
+                input{
+                    width: 100%;
+                    margin: 0 5px;
+                }
+            }
+        }
+        .tableresponsive-toggle-columns{
+            display: none;
+        }
+        table.sticky-header{
+            z-index: 2;
+        }
+        .cols-6{
+            background: #f4f4f4;
+            border: 2px solid #ddd;
+            @media only screen and ($desktop){
+                width: 1180px;
+                margin: 20px auto;
+            }
+            th, td{
+                display: none;
+                padding: 10px;
+                width: 16%;
+                font: {
+                    size: 13px;
+                }
+                @media only screen and ($tablet){
+                    display: table-cell;
+                }
+                @media only screen and ($desktop){
+                    font: {
+                        size: 14px;
+                    }
+                }
+                &:nth-child(2n+2){
+                    background: #fff;
+                }
+            }
+            th{
+                color: $primary-color;
+                a{
+                    color: $primary-color;
+                }
+            }
+            .views-field-title, .views-field-status {
+                display: table-cell;
+            }
+            .views-field-title {
+                width: 30%;
+            }
+            td.views-field-title {
+                a{
+                    font: {
+                        weight: 600;
+                    }
+                    text-decoration: underline;
+                    text-decoration-color: $accent-blue;
+                }
+            }
+            .views-field-nothing, .views-field-nothing-1{
+                text-align: center;
+                width: 12%;
+                a{
+                    font: {
+                        weight: 600;
+                    }
+                    color: $accent-blue;
+                }
+            }
+        }
+        .js-pager__items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .pager__item {
+                a{
+                    margin: 10px 5px;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    font: {
+                        size: 14px;
+                    }
+                    line-height: 30px;
+                }
+                &.pager__item--active{
+                    a{
+                        background: $accent-blue;
+                        box-shadow: $sombra;
+                    }
+                }
+                &.pager__item--first, &.pager__item--prev, &.pager__item--next, &.pager__item--last{
+                    a{
+                        width: auto;
+                        background: transparent;
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+}

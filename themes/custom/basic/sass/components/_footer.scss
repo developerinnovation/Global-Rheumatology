@@ -1,0 +1,311 @@
+footer{
+    background: $primary-color;
+    padding: 40px 15px 40px;
+    @media only screen and ($desktop){
+        padding: 80px 0 0;
+    }
+    .container{
+        @media only screen and ($tablet){
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer-region{
+            *{
+                color: #fff;
+            }
+            &.info{
+                @media only screen and ($tablet){
+                    width: 280px;
+                    padding: 0 15px;
+                }
+                @media only screen and ($desktop){
+                    width: 500px;
+                    padding: 0 20px 0 0;
+                }
+                .logo{
+                    margin: 0 0 30px;
+                    @media only screen and ($tablet){
+                        margin: 0 0 15px;
+                    }
+                    img{
+                        width: auto;
+                        height: 50px;
+                        @media only screen and ($tablet){
+                            height: 60px;
+                        }
+                        @media only screen and ($desktop){
+                            height: 80px;
+                        }
+                    }
+                }
+                .description{
+                    font: {
+                        size: 14px;
+                    }
+                    line-height: 1.3em;
+                    @media only screen and ($tablet){
+                        line-height: 1.2em;
+                    }
+                }
+                .contact{
+                    span{
+                        font: {
+                            size: 18px;
+                            weight: 700;
+                        }
+                        display: block;
+                        margin: 0 0 10px;
+                        @media only screen and ($tablet){
+                            line-height: 20px;
+                        }
+                    }
+                    a{
+                        font: {
+                            size: 16px;
+                        }
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 14px;
+                            }
+                        }
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 16px;
+                            }
+                        }
+                    }
+                }
+                .social{
+                    .networks{
+                        ul{
+                            display: flex;
+                            li{
+                                margin: 0 10px 0 0;
+                                width: 30px;
+                                height: 30px;
+                                background: {
+                                    size: 30px;
+                                    position: center;
+                                    repeat: no-repeat;
+                                }
+                                font-size: 0;
+                                &.fb{
+                                    background: {
+                                        image: url(../../images/redes-facebook.svg);
+                                    }
+                                }
+                                &.tw{
+                                    background: {
+                                        image: url(../../images/redes-twitter.svg);
+                                    }
+                                }
+                                &.lk{
+                                    background: {
+                                        image: url(../../images/redes-linkedin.svg);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.links{
+                padding: 30px 0;
+                border-bottom: 1px solid $light-blue;
+                @media only screen and ($tablet){
+                    width: 150px;
+                    padding: 0 15px;
+                    border: {
+                        width: 0 1px;
+                        style: solid;
+                        color: $light-blue;
+                    }
+                    margin: 0 14px;
+                }
+                @media only screen and ($desktop){
+                    width: 250px;
+                    padding: 0 40px;
+                }
+                .sections{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin: 0 0 20px;
+                    .navigation_item{
+                        width: 50%;
+                        @media only screen and ($tablet){
+                            width: 100%;
+                        }
+                        a{
+                            text-transform: uppercase;
+                            display: block;
+                            padding: 4px 0;
+                        }
+                    }
+                }
+                .privacy{
+                    font: {
+                        weight: 700;
+                    }
+                }
+            }
+            &.newsletter{
+                padding: 30px 0;
+                border-bottom: 1px solid $light-blue;
+                @media only screen and ($tablet){
+                    width: 280px;
+                    padding: 10px 15px 0;
+                    border-bottom: 0;
+                }
+                @media only screen and ($desktop){
+                    width: 340px;
+                    padding: 10px 0 10px 40px;
+                }
+                h3{
+                    font: {
+                        weight: 700;
+                        size: 12px;
+                    }
+                    letter-spacing: 0.15em;
+                    text-transform: uppercase;
+                    margin: 0 0 5px;
+                    @media only screen and ($tablet){
+                        font: {
+                            size: 13px;
+                        }
+                    }
+                }
+                h2{
+                    font: {
+                        weight: 900;
+                        size: 21px;
+                    }
+                    line-height: 1.2em;
+                    margin: 0 0 10px;
+                    @media only screen and ($tablet){
+                        font: {
+                            size: 24px;
+                        }
+                    }
+                }
+                div{
+                    span{
+                        display: block;
+                        margin: 0 0 10px;
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 18px;
+                            }
+                        }
+                    }
+                    input{
+                        @media only screen and ($tablet){
+                            margin: 0 0 15px;
+                        }
+                        @media only screen and ($desktop){
+                            height: 45px;
+                            margin: 0 0 20px;
+                        }
+                    }
+                    button{
+                        font: {
+                            weight: 700;
+                            size: 20px;
+                        }
+                        color: $primary-color;
+                        width: 100%;
+                        border-radius: 6px;
+                        background: $light-blue;
+                        @media only screen and ($tablet){
+                            width: 160px;
+                        }
+                        @media only screen and ($desktop){
+                            width: 210px;
+                            height: 45px;
+                        }
+                    }
+                }
+            }
+            &.copy{
+                padding: 30px 0;
+                @media only screen and ($tablet){
+                    width: 100%;
+                }
+                .logo-iv{
+                    img{
+                        margin: 0 auto;
+                        display: block;
+                        width: auto;
+                        height: 60px;
+                    }
+                }
+                .copy-text{
+                    font: {
+                        size: 10px;
+                    }
+                    text-align: center;
+                }
+            }
+        }
+    }
+    #menu-fixed{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 44px;
+        background: $primary-color;
+        -webkit-box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: space-evenly;
+        z-index: 1;
+        @media only screen and ($desktop){
+            display: none;
+        }
+        .icon{
+            height: 44px;
+            width: 44px;
+            background: {
+                size: 24px;
+                position: center;
+                repeat: no-repeat;
+            }
+            font: {
+                size: 0;
+            }
+            &.home{
+                background: {
+                    image: url(../../images/icon-home.svg);
+                }
+            }
+            &.search{
+                background: {
+                    image: url(../../images/icon-buscador.svg);
+                }
+            }
+            &.multimedia{
+                background: {
+                    image: url(../../images/icon-multimedia.svg);
+                }
+            }
+            &.save{
+                background: {
+                    image: url(../../images/icon-save-menu.svg);
+                }
+            }
+            &.perfil{
+                background: {
+                    image: url(../../images/icon-perfil.svg);
+                }
+            }
+        }
+        hr{
+            margin: 10px 0;
+            width: 1px; 
+            height: 24px;
+            border: 0;
+            background: $accent-blue;
+        }
+    }
+}

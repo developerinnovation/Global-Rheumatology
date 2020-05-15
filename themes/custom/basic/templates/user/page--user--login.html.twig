@@ -1,0 +1,65 @@
+<div id="main" class="user-form user-login">
+
+    <!--<div class="tab-user">
+        <ul class="option">
+            <li class="login active">
+                <i class="icon icon-login"></i>
+                <a href="/user/login">{% trans%} Iniciar sesión {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="register">
+                <i class="icon icon-register"></i>
+                <a href="/user/register">{% trans%} Registrarse {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="password">
+                <i class="icon icon-pwd"></i>
+                <a href="/user/password">{% trans%} Forgot password {% endtrans%}</a>
+            </li>
+        </ul>
+    </div>-->
+
+    <div class="container user" id="form-login">
+        <div class="block-title">
+            <h3>{% trans%} Iniciar sesión {% endtrans%}</h3>
+        </div>
+        <div class="profile">
+              <dd>{{ login_form }}</dd>
+        </div>
+        <div class="hr">
+            <span>ó</span>
+        </div>
+        <div class="options">
+            <a href="/user/register" class="register">{% trans%} Registrarse {% endtrans%}</a>
+            <a href="/user/password" class="password">{% trans%} ¿Has olvidado tu contraseña ? {% endtrans%}</a>
+        </div>
+    </div><!-- /.container -->
+
+    <div class="shared">
+    <label>{% trans%} Comparte esta web con tus colegas {% endtrans%}</label>  
+        <div class="a2a_kit a2a_default_style redes">
+            <a class="a2a_button_facebook">
+                <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+            </a>
+            <a class="a2a_button_whatsapp">
+                <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+            </a>
+            <a class="a2a_button_twitter">
+                <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+            </a>
+            <a class="a2a_button_linkedin">
+                <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+            </a>
+        </div>
+    </div>
+
+    <!-- <div class="container">
+        <div class="last_news">  
+            <div class="block-title">
+                <h3>{% trans%} Last articles {% endtrans%}</h3>
+            </div>
+            <dd></dd>
+        </div>
+    </div> /.container -->
+
+</div>

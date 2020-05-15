@@ -1,0 +1,38 @@
+.send_article{
+    padding: 0 15px 60px 60px;
+    @media only screen and ($tablet){
+        padding: 0 100px 60px;
+    }
+    @media only screen and ($desktop){
+        padding: 0 100px 60px calc(50vw - 125px);
+    }
+    .block-title{
+        padding: 60px 0 15px;
+        @media only screen and ($tablet){
+            padding: 60px 0 0;
+        }
+        h3{
+            @media only screen and ($tablet){
+                font: {
+                    size: 38px;
+                }
+            }
+            &:after{
+                margin: 40px 0 20px -60px;
+                @media only screen and ($tablet){
+                    width: 200px;
+                    margin: 20px 0 5px -100px;
+                }
+                @media only screen and ($desktop){
+                    width: calc(50vw - 65px);
+                    margin: 15px 0 0 calc(125px - 50vw);
+                }
+            }
+        }
+    }
+    button{
+        width: 150px;
+        border-radius: 6px;
+        color: #fff;
+    }
+}

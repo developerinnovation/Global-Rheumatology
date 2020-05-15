@@ -1,0 +1,225 @@
+
+{% set classes = ['node'] %}
+
+<article {{ attributes.addClass(classes) }}>
+  <div id="main">
+    <div class="container two-col">
+      <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+        <div class="box">
+          <div class="top">
+            {{ content.field_categoria }}
+            <div class="buttons">
+              <div class="sound">Escuchar</div>           
+              <div {% set nid = node.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
+            </div>
+          </div>        
+          
+          <h1 {{ attributes }}>
+            {{ node.field_titulo_corto.value }}
+          </h1>
+         
+          <div class="info article">
+            <span>
+              {% for autor in node.field_autores %}
+                <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
+              {% endfor %}
+              <date>{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+            </span>
+          </div>
+
+          <div class="statistics">
+              <label>Stats</label>
+            <div class="item views">
+              <i class="icon icon-views">Vistas</i>
+              <span><b>1,909</b>Readers</span>
+            </div>
+            <div class=" item downloads">
+              <i class="icon icon-download">Descargas</i>
+              <span><b>1,909</b>Descargas</span>
+            </div>
+            <div class="item shareds">
+              <i class="icon icon-shared">Shared</i>
+              <span><b>1,909</b>Shared</span>
+            </div>
+          </div>
+
+          <div class="tags">
+            {% if content.field_tags[0] %}
+              <label>Tags</label>
+              <ul>
+                {% for key, item in content.field_tags if key|first != '#' %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="shared">
+            <label>Share</label> 
+            <div class="a2a_kit a2a_default_style">
+                <a class="a2a_button_facebook">
+                    <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+                </a>
+                <a class="a2a_button_whatsapp">
+                    <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+                </a>
+                <a class="a2a_button_twitter">
+                    <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+                </a>
+                <a class="a2a_button_linkedin">
+                    <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+                </a>
+                <a class="" href="/download-article" target="_blank">
+                    <img src="\themes\custom\basic\images\icon-downloads.svg" border="0" alt="Share" width="27" height="27">
+                </a>
+            </div>
+          </div>
+
+          <div class="tablas">
+            <label>Descargas</label> 
+
+            <div class="ico">
+              <a href="/xml/{{node.id}}/content/article/doaj" class="link" target="_blank" >
+                <div class="file xml">
+                </div>
+                <div class="title">
+                  <h3>XML DOAJ</h3>
+                </div>
+              </a>
+            </div>
+
+            <div class="ico">
+              <a href="/xml/{{node.id}}/content/article/pubmed" class="link" target="_blank" >
+                <div class="file xml">
+                </div>
+                <div class="title">
+                  <h3>XML PubMed</h3>
+                </div>
+              </a>
+            </div>
+
+            {% for tabla in node.field_tablas %}
+              {% set doc = tabla.entity.getFilename|split('.') %}
+              <div class="ico">
+                <a href="{{ file_url(tabla.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+                  <div class="file {{  doc[1] }}">
+                  </div>
+                  <div class="title">
+                    <h3>{{ doc[0]|slice(0, 13) }}...</h3>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+
+          {% if node.field_incluir_enlace.value == "si" %}
+            <div class="item-news article-node cientifico"> 
+              <div class="text">
+                <div class="explorer">
+                  <a href="{{ node.field_enlace_redireccion.uri }}" target="_blank" >{{ node.field_enlace_redireccion.title }}</a>
+                </div>
+              </div>              
+            </div>
+          {% endif %}
+
+        </div>
+        
+
+      </div>
+      
+      <div class="right">
+
+        <div class="content article">
+
+          <div class="title large">
+            <h2>{{ node.title.value|raw }}</h2>
+          </div> 
+
+          <div class="block resumen">
+              <div class="title-block">
+                  <h2>Resumen</h2>
+                  <button class="btn-show-text active" data-id="resumen">cerrar</button>
+              </div>
+              <div class="box active">
+                  <p>{{ node.field_resumen.value|raw }}</p>
+              </div>
+          </div>
+
+          <div class="block introduccion">
+              <div class="title-block">
+                  <h2>Introducción</h2>
+                  <button class="btn-show-text active" data-id="introduccion">cerrar</button>
+              </div>
+              <div class="box active">
+                  <p>{{ node.field_introduccion.value|raw }}</p>
+              </div>
+          </div>
+
+          <div class="block metodos">
+              <div class="title-block">
+                  <h2>Métodos</h2>
+                  <button class="btn-show-text active" data-id="metodos">cerrar</button>
+              </div>
+              <div class="box active">
+                  <p>{{ node.field_metodos.value|raw }}</p>
+              </div>
+          </div>
+
+          <div class="block resultados">
+              <div class="title-block">
+                  <h2>Resultados</h2>
+                  <button class="btn-show-text active" data-id="resultados">cerrar</button>
+              </div>
+              <div class="box active">
+                  <p>{{ node.field_resultado.value|raw }}</p>
+              </div>
+          </div>
+
+          <div class="block conclusiones">
+              <div class="title-block">
+                  <h2>Conclusiones</h2>
+                  <button class="btn-show-text active" data-id="reconclusiones">cerrar</button>
+              </div>
+              <div class="box active">
+                  <p>{{ node.field_conclusion.value|raw }}</p>
+              </div>
+          </div>
+     
+          <div class="block referencias">
+              <div class="title-block">
+                  <h2>Referencias</h2>
+                  <button class="btn-show-text" data-id="referencias">cerrar</button>
+              </div>
+              <div class="box">
+                {% for item in node.field_referencias %}
+                    <div class="ref paragraph" id="paragraph-{{ item.target_id }}" data-paragraph="{{ item.target_id }}">
+                      {{ drupal_entity('paragraph', item.target_id) }}
+                    </div>
+                {% endfor %}
+              </div>
+          </div>
+      
+
+        </div>
+          
+
+          <div class="popup node-article-cientifico ">
+              <button id="close-reference">X</button>
+              <div class="box"></div>
+          </div>
+
+
+      </div>
+    
+    </div><!-- /.container -->
+    <div class="container">
+        <div class="news related last_news"> 
+            <div class="block-title">
+                <h3>Related articles</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo</p>
+            </div>
+            <dd>{{ drupal_view('articulos', 'block_1') }}</dd>
+        </div>
+    </div><!-- /.container -->
+  </div><!-- /#main -->
+</article><!-- /.node -->

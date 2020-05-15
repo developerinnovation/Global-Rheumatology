@@ -1,0 +1,12 @@
+.clearfix:after, .container:after{
+    display: none;
+}
+#toolbar-administration{
+    display: none;
+    @media only screen and ($tablet){
+        display: block;
+    }
+}
+#block-basic-page-title, #block-basic-breadcrumbs{
+    display: none;
+}

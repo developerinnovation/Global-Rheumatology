@@ -1,0 +1,121 @@
+
+{% set classes = ['node'] %}
+
+<article{{ attributes.addClass(classes) }}>
+  <div id="main">
+    <div class="container two-col">
+      <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+        <div class="box">
+          <div class="top">
+            {{ content.field_categoria }}
+            <div class="buttons">
+              <div class="sound">Escuchar</div>           
+              <div {% set nid = node.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
+            </div>
+          </div>        
+        
+          <h1 {{ attributes }}>
+            {{ node.title.value }}
+          </h1>
+
+          <div class="read article">
+            <span>¿Por qué leer este artículo?</span>
+            <p class="why">"{{ node.field_porque_leer.value }}"</p>
+          </div>
+          
+          <div class="info article">
+              <span>
+                {% for autor in node.field_autores %}
+                  <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
+                {% endfor %}
+                <date>{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+              </span>
+            </div>
+
+          <div class="statistics">
+              <label>Stats</label>
+            <div class="item views">
+              <i class="icon icon-views">Vistas</i>
+              <span><b>1,909</b>Readers</span>
+            </div>
+            <div class=" item downloads">
+              <i class="icon icon-download">Descargas</i>
+              <span><b>1,909</b>Descargas</span>
+            </div>
+            <div class="item shareds">
+              <i class="icon icon-shared">Shared</i>
+              <span><b>1,909</b>Shared</span>
+            </div>
+          </div>
+
+          <div class="tags">
+            {% if content.field_tags[0] %}
+              <label>Tags</label>
+              <ul>
+                {% for key, item in content.field_tags if key|first != '#' %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="shared">
+            <label>Compartir</label>          
+
+            <div class="a2a_kit a2a_default_style">
+                <a class="a2a_button_facebook">
+                    <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+                </a>
+                <a class="a2a_button_whatsapp">
+                    <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+                </a>
+                <a class="a2a_button_twitter">
+                    <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+                </a>
+                <a class="a2a_button_linkedin">
+                    <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+                </a>
+                <a class="" href="/download-article" target="_blank">
+                    <img src="\themes\custom\basic\images\icon-downloads.svg" border="0" alt="Share" width="27" height="27">
+                </a>
+            </div>
+          </div>
+
+            
+          {% if node.field_incluir_enlace.value == "si" %}
+            <div class="item-news article-node"> 
+              <div class="text">
+                <div class="explorer">
+                  <a href="{{ node.field_enlace_redireccion.uri }}" target="_blank" >{{ node.field_enlace_redireccion.title }}</a>
+                </div>
+              </div>              
+            </div>
+          {% endif %}
+        </div>
+        
+
+      </div>
+      
+      <div class="right">
+        <div class="content article">
+          <div class="summary">
+            <p>{{ node.body.summary }}</p>
+          </div>
+          <div class="article__body">
+            {{ node.body.value|raw }}
+          </div>
+        </div>
+      </div>
+    
+    </div><!-- /.container -->
+    <div class="container">
+        <div class="news related last_news"> 
+            <div class="block-title">
+                <h3>Artículos relacionados</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo</p>
+            </div>
+            <dd>{{ drupal_view('articulos', 'block_1') }}</dd>
+        </div>
+    </div><!-- /.container -->
+  </div><!-- /#main -->
+</article><!-- /.node -->

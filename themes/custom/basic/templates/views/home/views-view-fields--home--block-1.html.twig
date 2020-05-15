@@ -1,0 +1,12 @@
+<div class="item-news destacada home">
+    <figure>{{ fields.field_image.content }}</figure>
+    <div class="text">
+        <div {% set nid = row._entity.nid.value %} class="save {% if  nid in user.node_saved['split'] %}saved{% else %}no{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}">
+            <a href="#" class="node_saved">Guardar</a>
+        </div>
+        <span class="category">{{ fields.field_categoria.content }}</span>
+        <h2 class="title">{{ fields.title.content }}</h2>
+        <p class="sumary">{{ fields.body.content }}</p>
+        <div class="explorer">{{ fields.nothing_1.content }}</div>
+    </div>
+</div>

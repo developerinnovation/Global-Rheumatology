@@ -1,0 +1,15 @@
+<div class="profile">
+    <div class="picture">
+        <figure>{{ fields.user_picture.content }}</figure>
+    </div>
+    <div class="text">
+        <div {% set nid = row._entity.nid.value %} class="save {% if  nid in user.node_saved['split'] %}saved{% else %}no{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}">
+            <a href="#" class="node_saved">Guardar</a>
+        </div>
+        <h3 class="title">{{ fields.field_nombre.content }}</h3>
+        <div class="mail">{{ fields.mail.content }}</div>
+        <div class="info">
+            <p>{{ fields.field_perfil_usuario.content }}</p>
+        </div>
+    </div>
+</div>

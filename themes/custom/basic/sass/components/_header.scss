@@ -1,0 +1,724 @@
+header{
+    position: relative;
+    z-index: 10;
+    .container{
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0));
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        -webkit-transition: all 0.15s linear;
+        transition: all 0.15s linear;
+        @media only screen and ($tablet){
+            padding: 55px 15px 15px;
+        }
+        @media only screen and ($desktop){
+            padding: 55px calc(50vw - 590px) 15px;
+        }
+        .left{
+            @media only screen and ($desktop){
+                width: 20%;
+                display: flex;
+            }
+            .lang{
+                .links{
+                    @media only screen and ($tablet){
+                        display: flex;
+                        margin: 24px 0;
+                    }
+                    @media only screen and ($desktop){
+                        margin: 28px 0;
+                    }
+                    li{
+                        @media only screen and ($tablet){
+                            display: flex;
+                            padding: 0 0 0 5px;
+                        }
+                        a{
+                            font-size: 0;
+                            display: block;
+                            @media only screen and ($tablet){
+                                padding: 0 4px 0 0;
+                            }
+                            &:before{
+                                font: {
+                                    weight: 700;
+                                    size: 14px;
+                                }
+                                line-height: 22px;
+                                color: #fff;
+                                text-align: center;
+                                text-transform: uppercase;
+                                display: block;
+                                width: 22px;
+                            }
+                        }
+                        &.es{
+                            margin: 0 0 6px;
+                            @media only screen and ($tablet){
+                                margin: 0;
+                            }
+                            a{
+                                &:before{
+                                    content: 'ES'
+                                }
+                            }
+                            &:after{
+                                @media only screen and ($tablet){
+                                    content: '';
+                                    display: block;
+                                    width: 1px;
+                                    height: 21px;
+                                    background: #fff;
+                                }
+                            }
+                        }
+                        &.en{
+                            a{
+                                &:before{
+                                    content: 'EN'
+                                }
+                            }
+                        }
+                        &.active{
+                            a{
+                                &:before{
+                                    background: $accent-blue;
+                                    color: #fff;
+                                    border-radius: 3px;
+                                    @media only screen and ($tablet){
+                                        background: transparent;
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .search{
+                display: none;
+                @media only screen and ($desktop){
+                    display: block;
+                    margin: 20px;
+                    -webkit-filter: brightness(3);
+                    filter: brightness(3);
+                    -webkit-transition: all 0.15s linear;
+                    transition: all 0.15s linear;
+                }
+            }
+        }
+        #logo{
+            img{
+                width: auto;
+                height: 50px;
+                @media only screen and ($tablet){
+                    height: 70px;
+                }
+                @media only screen and ($desktop){
+                    height: 80px;
+                }
+            }
+        }
+        .right{
+            @media only screen and ($desktop){
+                width: 20%;
+                display: flex;
+                justify-content: flex-end;
+            }
+            .notification{
+                display: none;
+                @media only screen and ($desktop){
+                    display: block;
+                    margin: 20px 0;
+                    position: relative;
+                }
+                .icon-notification{
+                    display: block;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: {
+                        image: url(../../images/icon-notification.svg);
+                        size: 30px;
+                        position: center;
+                        repeat: no-repeat;
+                        color: #fff;
+                    }
+                    cursor: pointer;
+                }
+                .counter{
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    padding: 0 2px 0 0;
+                    border-radius: 50%;
+                    background: #b10012;
+                    font: {
+                        weight: 700;
+                        size: 11px;
+                    }
+                    line-height: 18px;
+                    color: #fff;
+                    letter-spacing: -0.1em;
+                    text-align: center;
+                }
+            }
+            .user{
+                display: none;
+                @media only screen and ($desktop){
+                    display: block;
+                    margin: 20px;
+                }
+                a{
+                    img{
+                        border-radius: 50%;
+                    }
+                }
+            }
+            #btn-menu{
+                position: relative;
+                width: 50px;
+                height: 50px;
+                padding: 0;
+                border: 3px solid #fff;
+                border-radius: 50%;
+                background: transparent;
+                font: {
+                    size: 10px;
+                }
+                color: #fff;
+                text-transform: uppercase;
+                -webkit-transition: all 0.15s linear;
+                transition: all 0.15s linear;
+                @media only screen and ($tablet){
+                    width: 60px;
+                    height: 60px;
+                    margin: 5px 0;
+                }
+                @media only screen and ($desktop){
+                    margin: 10px 0;
+                }
+                &:before, &:after{
+                    content: '';
+                    display: block;
+                    width: 28px;
+                    height: 3px;
+                    border-radius: 3px;
+                    background: #fff;
+                    position: absolute;
+                    right: 0;
+                    left: 0;
+                    margin: auto;
+                    -webkit-transition: all 0.15s linear;
+                    transition: all 0.15s linear;
+                }
+                &:before{
+                    top: 10px;
+                    @media only screen and ($tablet){
+                        top: 15px;
+                    }
+                }
+                &:after{
+                    bottom: 10px;
+                    @media only screen and ($tablet){
+                        bottom: 15px;
+                    }
+                }
+                &.active{
+                    font-size: 0;
+                    &:before{
+                        top: 20.5px;
+                        -webkit-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                        @media only screen and ($tablet){
+                            top: 25.5px;
+                        }
+                    }
+                    &:after{
+                        bottom: 20.5px;
+                        -webkit-transform: rotate(-45deg);
+                        transform: rotate(-45deg);
+                        @media only screen and ($tablet){
+                            bottom: 25.5px;
+                        }
+                    }
+                }
+            }
+        }
+        .box-menu{
+            position: fixed;
+            top: 80px;
+            right: -300px;
+            width: 300px;
+            max-height: calc(100vh - 150px);
+            background: #fff;
+            -webkit-box-shadow: $sombra;
+            box-shadow: $sombra;
+            -webkit-transition: all 0.15s linear;
+            transition: all 0.15s linear;
+            overflow: auto;
+            @media only screen and ($tablet){
+                top: 140px;
+            }
+            @media only screen and ($desktop){
+                top: 150px;
+                right: -100%;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 0 calc(50% - 620px);
+                background: #f0f0f0;    
+            }
+            .user{
+                padding: 30px 25px 15px;
+                border-bottom: 1px solid #f0f0f0;
+                background: #F0F0F0;
+                display: flex;
+                justify-content: space-between;
+                @media only screen and ($desktop){
+                    padding: 50px 25px 15px;
+                    width: 20%;
+                }
+                img{
+                    display: block;
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+                .info{
+                    width: calc(100% - 60px);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    @media only screen and ($desktop){
+                        height: 50px;
+                    }
+                    .nombre{
+                        font: {
+                            weight: 900;
+                            size: 18px;
+                        }
+                    }
+                    .editar{
+                        font: {
+                            size: 13px;
+                        }
+                        color: $primary-color;
+                    }
+                }
+            }
+            nav{
+                @media only screen and ($desktop){
+                    width: 80%;
+                }
+                >ul{
+                    @media only screen and ($desktop){
+                        display: flex;
+                        justify-content: space-around;
+                        padding: 50px 20px 30px;
+                        background: #fff;
+                    }
+                    .navigation__item{
+                        a{
+                            font: {
+                                size: 13px;
+                            }
+                            line-height: 45px;
+                            display: block;
+                            padding: 0 10px 0 60px;
+                            border-bottom: 1px solid #f0f0f0;
+                            background: {
+                                image: url(../../images/icon-section.svg);
+                                size: 30px;
+                                position: center left 20px;
+                                repeat: no-repeat;
+                            }
+                            -webkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            &:hover{
+                                color: $primary-color;
+                                text-decoration: underline;
+                            }
+                            @media only screen and ($desktop){
+                                font: {
+                                    size: 14px;
+                                    weight: 600;
+                                }
+                                padding: 0 10px 0 30px;
+                                background: {
+                                    position: center left;
+                                }
+                                white-space: nowrap;
+                            }
+                        }
+                        &.submenu{
+                            >a{
+                                position: relative;
+                                cursor: pointer;
+                                &:after{
+                                    content: '';
+                                    display: block;
+                                    width: 20px;
+                                    height: 20px;
+                                    background: {
+                                        image: url(../../images/icon-desplegar.svg);
+                                        size: 20px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    position: absolute;
+                                    top: 0;
+                                    right: 10px;
+                                    bottom: 0;
+                                    margin: auto;
+                                    -webkit-transition: all 0.15s linear;
+                                    transition: all 0.15s linear;
+                                    @media only screen and ($desktop){
+                                        display: none;
+                                    }
+                                }
+                            }
+                            ul{
+                                @media only screen and ($desktop){
+                                    display: block;
+                                }
+                                li{
+                                    a{
+                                        line-height: 35px;
+                                        padding: 0 10px 0 90px;
+                                        border-bottom: 1px solid #ddd;
+                                        background: {
+                                            position: center left 50px;
+                                            color: #f0f0f0;
+                                        }
+                                        @media only screen and ($desktop){
+                                            font: {
+                                                size: 14px;
+                                                weight: 400;
+                                            }
+                                            line-height: 30px;
+                                            padding: 0 0 0 30px;
+                                            border-bottom: 0;
+                                            border-top: 1px solid #ddd;
+                                            background: {
+                                                position: center left 3px;
+                                                size: 24px;
+                                                color: #fff;
+                                            }
+                                        }
+                                    }
+                                    &:first-child{
+                                        a{
+                                            @media only screen and ($desktop){
+                                                border: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.active{
+                                >a{
+                                    &:after{
+                                        -webkit-transform: rotate(180deg);
+                                        transform: rotate(180deg);
+                                    }
+                                }
+                            }
+                            &.seconds{
+                                ul{
+                                    &.seconds{
+                                        &.inactive{
+                                            @media only screen and ($desktop){
+                                                display: block;
+                                            }
+                                        }
+                                    }
+                                    li{
+                                        a{
+                                            padding: 0 10px 0 120px;
+                                            border-bottom: 1px solid #ccc;
+                                            background: {
+                                                position: center left 80px;
+                                                color: #ddd;
+                                            }
+                                            @media only screen and ($desktop){
+                                                font: {
+                                                    size: 12px;
+                                                }
+                                                line-height: 30px;
+                                                padding: 0 0 0 30px;
+                                                border-bottom: 0;
+                                                border-top: 1px dashed #ddd;
+                                                background: #fff;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .bottom{
+                padding: 20px 25px;
+                background: #F0F0F0;
+                @media only screen and ($desktop){
+                    width: 100%;
+                }
+                .search{
+                    display: flex;
+                    .views-element-container{
+                        @media only screen and ($desktop){
+                            width: 100%;
+                        }
+                    }
+                    .form-item{
+                        input{
+                            width: 100%;
+                            height: 40px;
+                            padding: 0 0 0 40px;
+                            border: 0;
+                            background: {
+                                image: url(../../images/icon-search.svg);
+                                size: 30px;
+                                position: center left 5px;
+                                repeat: no-repeat;
+                            }
+                            -webkit-box-shadow: $sombra;
+                            box-shadow: $sombra;
+                        }
+                    }
+                    .form-actions{
+                        display: none;
+                    }
+                    h3{
+                        display: none;
+                    }
+                }
+                .info{
+                    ul{
+                        @media only screen and ($desktop){
+                            display: flex;
+                            justify-content: center;
+                        }
+                        li{
+                            a{
+                                font: {
+                                    size: 12px;
+                                }
+                                line-height: 24px;
+                                color: $primary-color;
+                                display: block;
+                                padding: 0 0 0 30px;
+                                &.support{
+                                    background: {
+                                        image: url(../../images/icon-support.svg);
+                                        size: 20px;
+                                        position: center left;
+                                        repeat: no-repeat;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.active{
+                right: 0;
+            }
+        }
+    }
+    &.fixed{
+        .container{
+            position: fixed;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.9);
+            @media only screen and ($tablet){
+                padding: 10px 35px;
+            }
+            .left{
+                .search{
+                    margin: 15px;
+                }
+                .lang{
+                    .links{
+                        @media only screen and ($desktop){
+                            margin: 23px 0;
+                        }
+                    }
+                }
+            }
+            #logo{
+                img{
+                    @media only screen and ($desktop){
+                        height: 70px;
+                    }
+                }
+            }
+            .right{
+                .notification{
+                    margin: 15px 0;
+                }
+                .user{
+                    margin: 15px;
+                }
+                #btn-menu{
+                    @media only screen and ($desktop){
+                        margin: 5px 0;
+                    }
+                }
+            }
+            .box-menu{
+                max-height: calc(100vh - 90px);
+                @media only screen and ($desktop){
+                    top: 90px;
+                }
+            }
+        }
+    }
+    &.not-home{
+        height: 80px;
+        @media only screen and ($tablet){
+            height: 140px;
+        }
+        @media only screen and ($desktop){
+            height: 150px;
+        }
+        .container{
+            background: #fff;
+            width: 100%;
+            padding: 15px;
+            @media only screen and ($tablet){
+                padding: 35px;
+            }
+            .left{
+                .lang{
+                    .links{
+                        li{
+                            a{
+                                &:before{
+                                    color: #000;
+                                }
+                            }
+                            &.es{
+                                &:after{
+                                    @media only screen and ($tablet){
+                                        background: #000;
+                                    }
+                                }
+                            }
+                            &.active{
+                                a{
+                                    &:before{
+                                        color: #fff;
+                                        @media only screen and ($tablet){
+                                            color: #000;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .search{
+                    -webkit-filter: contrast(0) brightness(0);
+                    filter: contrast(0) brightness(0);
+                }
+            }
+            #btn-menu{
+                -webkit-filter: brightness(0);
+                filter: brightness(0);
+            }
+            &.fixed{
+                position: fixed;
+                left: 0;
+                -webkit-box-shadow: $sombra;
+                box-shadow: $sombra;
+                @media only screen and ($desktop){
+                    height: auto;
+                    padding: 10px 35px;
+                }
+                .left{
+                    .search{
+                        margin: 15px;
+                    }
+                    .lang{
+                        .links{
+                            @media only screen and ($desktop){
+                                margin: 23px 0;
+                            }
+                        }
+                    }
+                }
+                #logo{
+                    img{
+                        @media only screen and ($desktop){
+                            height: 70px;
+                        }
+                    }
+                }
+                .right{
+                    .notification{
+                        margin: 15px 0;
+                    }
+                    .user{
+                        margin: 15px;
+                    }
+                    #btn-menu{
+                        @media only screen and ($desktop){
+                            margin: 5px 0;
+                        }
+                    }
+                }
+                .box-menu{
+                    max-height: calc(100vh - 90px);
+                    @media only screen and ($desktop){
+                        top: 90px;
+                    }
+                }
+            }
+        }
+    }
+}
+.role--authenticated{
+    header{
+        .container{
+            .box-menu{
+                @media only screen and ($desktop){
+                    top: 230px;
+                }
+            }
+        }
+        &.not-home{
+            .container{
+                .box-menu{
+                    @media only screen and ($desktop){
+                        top: 230px;
+                    }
+                }
+                &.fixed{
+                    .box-menu{
+                        @media only screen and ($desktop){
+                            top: 170px;
+                        }
+                    }
+                }
+            }
+        }
+        &.fixed{
+            .container{
+                .box-menu{
+                    @media only screen and ($desktop){
+                        top: 170px;
+                    }
+                }
+            }
+        }
+    }
+}

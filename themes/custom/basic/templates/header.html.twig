@@ -1,0 +1,146 @@
+{% set items = simplify_menu('menu-principal') %}
+
+<header id="header" class="{% if is_front %}home{% else %}not-home{% endif %}">
+    <div class="container">
+        <div class="left">
+            <div class="lang">
+                {{ page.lang }}
+            </div>
+            <div class="search">
+                <a href="/search/content?title=">
+                    <img src="/{{ directory }}/images/icon-search.svg" class="ico icon-search {% if not  is_front %}no-front{% endif %} " alt="buscar" width="40" height="40" />
+                </a>
+            </div>
+        </div>
+        <div id="logo">
+            {% if is_front %}
+                <a href="/">
+                    <img src="/{{ directory }}/images/logo-blanco.svg" class="logo home" alt="Global Rheumaatology" width="200" height="200" />
+                </a>
+            {% else %}
+                <a href="/">
+                    <img src="/{{ directory }}/images/logo-color.svg" class="logo not-home" alt="Global Rheumaatology" width="200" height="200" />
+                </a>
+            {% endif %}
+        </div>
+        <div class="right">
+            <!--<div class="notification">
+                <span class="ico icon-notification"></span>
+                <span class="counter">+1</span>
+            </div>-->
+            <div class="user">
+                <a href="/user">
+                    {% if logged_in %}
+                        {{ drupal_view('usuarios', 'block_1') }}
+                    {% else %}
+                        <img src="/themes/custom/basic/images/invitado.jpg" title="Usuario invitado"  class="img-responsive img-circle" width="40" height="40"/>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="box icon-menu">
+                <button id="btn-menu">Menu</button>
+            </div>
+        </div>        
+        <!--<div class="box-notification">
+            <ul>
+                <li>
+                    <a href="">Envía un artículo</a>
+                </li>
+                <li>
+                    <a href="">Completa tu perfil</a>
+                </li>
+                <li>
+                    <a href="">test</a>
+                </li>
+            </ul>
+        </div>-->
+        <div class="box-menu">
+            <div class="user">            
+                {% if logged_in %}
+                {{ drupal_view('usuarios', 'block_1') }}
+                {% else %}
+                    <img src="/themes/custom/basic/images/invitado.jpg" title="Usuario invitado"  class="img-responsive img-circle" width="40" height="40"/>
+                {% endif %}
+                <div class="info">                
+                    {% if logged_in %}
+                        <span class="nombre">{{ user.nombres }}</span>
+                        <a class="editar" href="/user/{{ user.id }}">Mi perfil</a>
+                        <a class="editar" href="/user/{{ user.id }}/edit">Editar perfil</a>
+                        <a class="editar" href="/user/logout">Cerrar sesión</a>
+                    {% else %}
+                        <span class="nombre">{% trans%} Invitado {% endtrans%}</span>
+                    {% endif %}
+                </div>   
+            </div>
+            
+            <nav>
+                <ul> <!-- menu principal -->
+                    {% if logged_in != true %}
+                        <li class=" navigation__item">
+                            <a href="/user/login" class="">{% trans%}Iniciar sesión{% endtrans%}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if logged_in %}
+                        <li class=" navigation__item">
+                            <a href="/new/send/manuscrito" class="">{% trans%}Publicar{% endtrans%}</a>
+                        </li>
+                        <li class=" navigation__item">
+                            <a href="/show/saved/content" class="">{% trans%}Artículos guardados{% endtrans%}</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for menu_item in items.menu_tree %}                        
+                        <li class="{{ item_class }} main navigation__item {% if menu_item.submenu %}submenu{% endif %}" {% if menu_item.url == "/new/send/manuscrito" and logged_in != true %} style="display:none" {% endif %}>
+                            {% if menu_item.submenu %}
+                                <a class="submenu {{ link_class }}">{{ menu_item.text }}</a>
+                                <ul class="box main inactive">
+                                    {% for submenu_item in menu_item.submenu %}
+                                        <li class="{% if submenu_item.submenu %}seconds navigation__item submenu{% endif %}">
+                                            <a {% if not submenu_item.submenu  %}href="{{ submenu_item.url }}"{% endif %} class="seconds submenu{{ link_class }}">{{ submenu_item.text }}</a>
+                                            {% if submenu_item.submenu %}
+                                                <ul class="seconds inactive">
+                                                    {% for last_submenu_item in submenu_item.submenu %}
+                                                        <li class="last_submenu">
+                                                            <a href="{{ last_submenu_item.url }}" class="{{ link_class }}">{{ last_submenu_item.text }}</a>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text }}</a>
+                            {% endif %}
+                        </li>                   
+                    {% endfor %} 
+                </ul>
+            </nav>
+            <div class="bottom">
+                <div class="search">
+                    {{ drupal_view('general', 'page_1') }}
+                </div>
+                <div class="info">
+                    <ul>
+                        <li>
+                            <a class="support" href="http://" target="_blank" rel="noopener noreferrer">{% trans%} Soporte {% endtrans%}</a>
+                        </li>
+                        <li>
+                            <a href="http://" target="_blank" rel="noopener noreferrer">{% trans%} Política de privacidad {% endtrans%}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>        
+        </div>
+    </div>
+</header>
+
+<style>
+    li.main.navigation__item ul.main.inactive {
+        display:none;
+    }
+    li.main.navigation__item .seconds.submenu ul.seconds.inactive {
+        display:none;
+    }
+</style>

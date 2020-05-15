@@ -1,0 +1,326 @@
+.infinite-contents{
+    background: #F8F8F8;
+    padding: 0 0 40px;
+    @media only screen and ($desktop){
+        padding: 0 0 80px;
+        background: transparent;
+    }
+    .block-title{
+        @media only screen and ($tablet){
+            padding: 60px 60px 15px;
+        }
+        @media only screen and ($desktop){
+            width: 1200px;
+            padding: 80px 15px 15px;
+            margin: 0 auto;
+        }
+        h3{
+            &:after{
+                @media only screen and ($tablet){
+                    margin: 20px 0 20px -60px;
+                }
+                @media only screen and ($desktop){
+                    width: calc(50vw - 510px);
+                    margin: 20px 0 20px calc(550px - 50vw);
+                }
+            }
+        }
+    }
+    .views-element-container{
+        @media only screen and ($tablet){
+            padding: 0 60px;
+        }
+        @media only screen and ($desktop){
+            width: 1200px;
+            padding: 0;
+            margin: 0 auto;
+        }
+        .views-infinite-scroll-content-wrapper, >div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            @media only screen and ($desktop){
+                justify-content: flex-start;
+            }
+            .views-row{
+                width: 100%;
+                margin: 0 20px 20px;
+                background: #fff;
+                -webkit-box-shadow: $sombra;
+                box-shadow: $sombra;
+                @media only screen and ($tablet){
+                    width: calc(50% - 10px);
+                    margin: 0 0 20px;   
+                }
+                @media only screen and ($desktop){
+                    width: calc(25% - 20px);
+                    margin: 0 10px 20px;
+                    background: transparent;
+                    -webkkit-transition: all 0.15s linear;
+                    transition: all 0.15s linear;
+                }
+                .picture{
+                    position: relative;
+                    .count{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 40px;
+                        height: 40px;
+                        background: $primary-color;
+                        font: {
+                            weight: 900;
+                            size: 30px;
+                        }
+                        line-height: 40px;
+                        color: #fff;
+                        text-align: center;
+                        z-index: 1;
+                    }
+                    figure{
+                        position: relative;
+                        a{
+                            display: block;
+                            &:before{
+                                content: '';
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                background: {
+                                    position: center;
+                                    size: 50px;
+                                    repeat: no-repeat;
+                                    color: rgba(0, 0, 0, 0.3);
+                                }
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                            }
+                        }
+                        &.video{
+                            a{
+                                &:before{
+                                    background: {
+                                        image: url(../../images/icon-video.svg);
+                                    }
+                                }
+                            }
+                        }
+                        &.infographics{
+                            a{
+                                &:before{
+                                    background: {
+                                        image: url(../../images/icon-infographics.svg);
+                                    }
+                                }
+                            }
+                        }
+                        &.podcast{
+                            a{
+                                &:before{
+                                    background: {
+                                        image: url(../../images/icon-podcast.svg);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .save{
+                        top: 20px;
+                        -webkit-filter: brightness(30);
+                        filter: brightness(30);
+                    }
+                }
+                .text{
+                    padding: 20px;
+                    @media only screen and ($tablet){
+                        height: 220px;
+                    }
+                    .title{
+                        a{
+                            @media only screen and ($tablet){
+                                font: {
+                                    size: 21px;
+                                }
+                            }
+                        }
+                    }
+                    .sumary{
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;  
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 14px;
+                            }
+                        }
+                    }
+                    .info{
+                        .cont{
+                            .reader{
+                                width: 14px;
+                                height: 14px;
+                                margin: 0 5px 0 0;
+                                background: {
+                                    image: url(../../images/icon-read.svg);
+                                    size: 100%;
+                                    position: center;
+                                    repeat: no-repeat;
+                                }
+                            }
+                            display: flex;
+                            font:{
+                                weight: 700;
+                                size: 14px;
+                                style: normal;
+                            }
+                            line-height: 15px;
+                            color: $primary-color;
+                        }
+                    }
+                    .bottom{
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 20px 0 0;
+                        @media only screen and ($tablet){
+                            position: absolute;
+                            bottom: 20px;
+                            width: calc(100% - 40px);
+                        }
+                    }
+                }
+                &:hover{
+                    @media only screen and ($tablet){
+                        background: #fff;
+                        -webkit-box-shadow: $sombra;
+                        box-shadow: $sombra;
+                    }
+                }
+            }
+        }
+    }
+    &.podcast, &.manuscrito{
+        .views-element-container{
+            .views-infinite-scroll-content-wrapper, >div{
+                .views-row{
+                    .item-news{
+                        .text{
+                            @media only screen and ($tablet){
+                                height: 300px;
+                            }
+                            .save{
+                                top: 20px;
+                            }
+                        }
+                    }
+                    &:nth-child(2n+2){
+                        .item-news{
+                            background: {
+                                color: $primary-color;
+                            }
+                            .save{
+                                -webkit-filter: brightness(30);
+                                filter: brightness(30);
+                            }
+                            .category{
+                                a{
+                                    color: #fff;
+                                }
+                            }
+                            .title{
+                                a{
+                                    color: #fff;
+                                }
+                            }
+                            .sumary, p{
+                                color: #fff;
+                            }
+                            .bottom{
+                                .info{
+                                    .author{
+                                        a{
+                                            color: #fff;
+                                        }
+                                    } 
+                                    date{
+                                        color: #fff;
+                                    }
+                                }
+                                .explorer{
+                                    background: #fff;
+                                    a{
+                                        color: $primary-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.manuscrito{
+        .views-element-container{
+            .views-infinite-scroll-content-wrapper{
+                .views-row{
+                    .item-news{
+                        .text{
+                            .info{
+                                .status{
+                                    span{
+                                        font: {
+                                            style: normal;
+                                        }
+                                    }
+                                }
+                            }
+                            .bottom{
+                                .explorer{
+                                    &.view{
+                                        width: calc(55% - 6px);
+                                    }
+                                    &.revision{
+                                        width: calc(45% - 5px);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:nth-child(2n+2){
+                        .item-news{
+                            .text{
+                                .info{
+                                    .author{
+                                        a{
+                                            color: #fff;
+                                        }
+                                    } 
+                                    .status{
+                                        span{
+                                            color: #fff;
+                                        }
+                                    }
+                                    date{
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &#taxonomias{
+        .views-element-container{
+            .views-infinite-scroll-content-wrapper, >div{
+                .views-row{
+                    @media only screen and ($desktop){
+                        width: calc(33.3% - 15px);
+                    }
+                }
+            }
+        }
+    }
+}

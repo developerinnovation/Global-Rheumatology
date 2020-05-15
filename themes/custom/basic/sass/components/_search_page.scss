@@ -1,0 +1,114 @@
+.page-global-rheumatology-search-content{
+    #content-area{
+        .views-element-container{
+            >div{
+                @media only screen and ($tablet){
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 0 15px;
+                }
+                @media only screen and ($desktop){
+                    padding: 0;
+                    justify-content: center;
+                }
+                .views-exposed-form{
+                    padding: 15px;
+                    border-top: 3px solid $accent-blue;
+                    background: #F0F0F0;
+                    display: flex;
+                    width: 100%;
+                    @media only screen and ($desktop){
+                        padding: 40px 0;
+                        justify-content: center;
+                    }
+                    .form-item{
+                        @media only screen and ($tablet){
+                            width: calc(100% - 120px);
+                        }
+                        @media only screen and ($desktop){
+                            width: 450px;
+                        }
+                        input{
+                            -webkit-appearance: none;
+                            display: block;
+                            margin: 0;
+                            height: 40px;
+                            padding: 0 10px;
+                            border: 0;
+                            -webkit-box-shadow: $sombra;
+                            box-shadow: $sombra;
+                        }
+                    }
+                    .form-actions{
+                        display: flex;
+                        input{
+                            -webkit-appearance: none;
+                            display: block;
+                            height: 40px;
+                            padding: 0;
+                            border: 0;
+                            &#edit-submit-general{
+                                width: 40px;
+                                background: {
+                                    image: url(../../images/icon-buscador.svg);
+                                    size: 20px;
+                                    position: center;
+                                    repeat: no-repeat;
+                                    color: $accent-blue;
+                                }
+                                -webkit-box-shadow: $sombra;
+                                box-shadow: $sombra;
+                                font: {
+                                    size: 0;
+                                }
+                            }
+                            &#edit-reset{
+                                margin: 0 0 0 10px;
+                                padding: 0 30px 0 10px;
+                                border-radius: 2px;
+                                background: {
+                                    image: url(../../images/icon-cerrar.svg);
+                                    size: 20px;
+                                    position: center right 5px;
+                                    repeat: no-repeat;
+                                    color: #a1d0f9;
+                                }
+                                font: {
+                                    size: 14px;
+                                }
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+                .views-row{
+                    margin: 20px 15px;
+                    padding: 0 0 20px;
+                    border-bottom: 1px solid #ddd;
+                    @media only screen and ($tablet){
+                        width: calc(50% - 30px);
+                    }
+                    @media only screen and ($desktop){
+                        width: 280px;
+                        margin: 20px 10px;
+                    }
+                    .item-news{
+                        .picture{
+                            margin: 0 0 15px;
+                            img{
+                                height: 52vw;
+                                object-fit: cover;
+                                @media only screen and ($tablet){
+                                    height: 178px;
+                                }
+                                @media only screen and ($desktop){
+                                    height: 150px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

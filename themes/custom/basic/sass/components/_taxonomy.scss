@@ -1,0 +1,178 @@
+.main{
+    &.taxonommy{
+        .block-title{
+            padding: 20px 15px 15px;
+            border-top: 1px solid #ddd;
+            @media only screen and ($desktop){
+                padding: 40px 30px 15px calc(50vw - 125px);
+            }
+            h1{
+                font: {
+                    weight: 900;
+                    size: 28px;
+                }
+                @media only screen and ($tablet){
+                    font: {
+                        size: 36px;
+                    }
+                }
+                &:after{
+                    content: '';
+                    display: block;
+                    margin: 20px 0 20px -15px;
+                    width: 120px;
+                    height: 3px;
+                    background: $accent-blue;
+                    @media only screen and ($desktop){
+                        width: calc(50vw - 65px);
+                        margin: 15px 0 0 calc(125px - 50vw);
+                    }
+                }
+            }
+        }
+        .container{
+            &.destacada{
+                @media only screen and ($tablet){
+                    padding: 40px 50px 20px;
+                    background: #efefef;
+                    margin: 0 0 40px;
+                }
+                @media only screen and ($desktop){
+                    padding: 40px calc(50% - 590px) 20px;
+                }
+                .views-element-container{
+                    .views-row{
+                        .item-news{
+                            position: relative;
+                            margin: 0 0 20px;
+                            @media only screen and ($desktop){
+                                display: flex;
+                            }
+                            .picture{
+                                @media only screen and ($desktop){
+                                    width: 750px;
+                                }
+                                .icon{
+                                    a{
+                                        img{
+                                            height: 100vw;
+                                            @media only screen and ($tablet){
+                                                height: 380px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .text{
+                                display: flex;
+                                justify-content: space-between;
+                                flex-direction: column;
+                                width: 100%;
+                                height: 100%;
+                                padding: 70px 20px 20px 60px;
+                                background: {
+                                    position: top 70px left 20px;
+                                    size: 30px;
+                                    repeat: no-repeat;
+                                    color: rgba(0, 0, 0, 0.5);
+                                }
+                                position: absolute;
+                                top: 0;
+                                @media only screen and ($tablet){
+                                    padding: 90px 30px 30px 110px;
+                                    background: {
+                                        position: top 90px left 30px;
+                                        size: 50px;
+                                    }
+                                }
+                                @media only screen and ($desktop){
+                                    width: 430px;
+                                    height: 380px;
+                                    padding: 100px 40px 30px;
+                                    position: relative;
+                                    background: {
+                                        color: $primary-color;
+                                    }
+                                }
+                                .save{
+                                    top: 20px;
+                                    -webkit-filter: brightness(100);
+                                    filter: brightness(100);
+                                    @media only screen and ($tablet){
+                                        top: 30px;
+                                        right: 30px;
+                                    }
+                                }
+                                .title{
+                                    a{
+                                        font: {
+                                            size: 24px;
+                                        }
+                                        color: #fff;
+                                        @media only screen and ($tablet){
+                                            font: {
+                                                size: 48px;
+                                            }
+                                        }
+                                    }
+                                }
+                                .sumary, p{
+                                    line-height: 1.25em;
+                                    color: #fff;
+                                    overflow: hidden;
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 3;
+                                    -webkit-box-orient: vertical;
+                                    @media only screen and ($tablet){
+                                        font: {
+                                            size: 21px;
+                                        }
+                                    }
+                                }
+                                .bottom{
+                                    display: flex;
+                                    justify-content: space-between;
+                                    .info{
+                                        margin: 0;
+                                        .author{
+                                            a{
+                                                color: #fff;
+                                            }
+                                        }
+                                        date{
+                                            color: #fff;
+                                        }
+                                    }
+                                    .explorer{
+                                        background: #fff;
+                                        a{
+                                            color: $primary-color;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.infinite-contents{
+                .views-element-container{
+                    .views-row{
+                        .item-news{
+                            .text{
+                                @media only screen and ($tablet){
+                                    height: 240px;
+                                }
+                                .bottom{
+                                    .info{
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

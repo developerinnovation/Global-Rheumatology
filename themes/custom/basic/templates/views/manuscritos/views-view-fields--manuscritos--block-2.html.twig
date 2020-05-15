@@ -1,0 +1,18 @@
+<div class="item-news">
+    <i class="icon icon-edit"></i>
+    <div class="text">
+        <h3 class="title ico icon-link">{{ fields.title.content }}</h3>
+        <p class="sumary">{{ fields.body.content }}</p>
+        <div class="info">
+            <span class="author">{{ fields.field_nombre.content }}</span>
+            <div class="status">
+                <span><b>Estado:</b> {{ fields.field_estado_del_articulo.content }} </span>
+            </div>
+            <date>{{ fields.created.content }}</date>
+        </div>
+        <div class="bottom">
+            <div class="explorer view">{{ fields.view_node.content }}</div>
+            <div class="explorer revision">{{ fields.link_to_revision.content }}</div>
+        </div>
+    </div>
+</div>

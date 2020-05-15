@@ -1,0 +1,173 @@
+.first_new{
+    position: relative;
+    .views-element-container{
+        .item-news{
+            height: 100vh;
+            position: relative;
+            @media only screen and ($desktop){
+                min-height: 580px;
+            }
+            .save{
+                top: auto;
+                bottom: 60px;
+                filter: brightness(100);
+                @media only screen and ($tablet){
+                    bottom: 70px;
+                }
+                @media only screen and ($desktop){
+                    bottom: 130px;
+                    right: calc(50vw - 540px);
+                }
+            }
+            figure{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                img{
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .text{
+                display: flex;
+                justify-content: flex-end;
+                flex-direction: column;
+                height: 100%;
+                padding: 100px 15px 60px;
+                background: rgba(0, 0, 0, 0.5);
+                @media only screen and ($tablet){
+                    padding: 120px 30px;
+                }
+                @media only screen and ($desktop){
+                    padding: 140px calc(50% - 540px);
+                }
+                .category{
+                    a{
+                        color: #fff;
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 18px;
+                            }
+                        }
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 20px;
+                            }
+                        }
+                        &:after{
+                            display: none;
+                        }
+                    }
+                }
+                .title{
+                    a{
+                        font: {
+                            weight: 900;
+                            size: 32px;
+                        }
+                        color: #fff;
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 60px;
+                            }
+                        }
+                    }
+                }
+                .sumary{
+                    font: {
+                        size: 16px;
+                    }
+                    color: #fff;
+                    @media only screen and ($tablet){
+                        width: 600px;
+                        font: {
+                            size: 21px;
+                        }
+                    }
+                }
+                .explorer{
+                    @media only screen and ($tablet){
+                        width: 180px;
+                        height: 50px;
+                    }
+                    a{
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 21px;
+                            }
+                            line-height: 50px;
+                        }
+                    }
+                }
+            }
+        }
+        .owl-carousel{
+            .owl-nav{
+                div{
+                    &.owl-prev{
+                        @media only screen and ($desktop){
+                            background: {
+                                image: url(../../images/flecha-prev-blanca.svg);
+                            }
+                        }
+                    }
+                    &.owl-next{
+                        @media only screen and ($desktop){
+                            background: {
+                                image: url(../../images/flecha-next-blanca.svg);
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .scroll {
+        &.arrow-down{
+            position: absolute;
+            right: 0;
+            bottom: 30px;
+            left: 0;
+            margin: auto;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: {
+                image: url(../../images/flecha-bajar-blanca.svg);
+                size: auto 25px;
+                position: center;
+                repeat: no-repeat;
+                color: rgba(255, 255, 255, 0.2);
+            }
+            transition: all 0.25s linear;
+            animation: transparencia 3s infinite;
+            cursor: pointer;
+            z-index: 1;
+            &:hover{
+                background: {
+                    color: $accent-blue;
+                }
+                animation: none;
+            }
+        }
+        @keyframes transparencia{
+            0%, 100% {
+                background: {
+                    color: rgba(255, 255, 255, 0.2);
+                }
+                bottom: 30px;
+            }
+            50% {
+                background: {
+                    color: $accent-blue;
+                }
+                bottom: 40px;
+            }
+        }
+    }
+}

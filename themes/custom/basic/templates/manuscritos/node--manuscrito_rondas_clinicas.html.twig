@@ -1,0 +1,177 @@
+<script>
+    var id = {{ node.nid.value }};
+    var type = "{{ node.getType }}";
+    $(".tabs.primary li a").eq(1).attr('href', '/update/' + type.replace("manuscrito_","") +'/'+ id );
+</script>
+{% set classes = ['node'] %}
+
+<article {{ attributes.addClass(classes) }}>
+    <div id="main" class="despliegue-nodo">
+        <div class="container two-col">
+            <div class="left" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+                <div class="box">
+
+                    <h1 {{ attributes }}>{{ node.title.value }}</h1>
+                    
+                    
+                    <div class="info">                            
+                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                    </div>
+
+                    <div class="revision">                        
+                        <dd>{{ drupal_view('manuscritos', 'block_1') }}</dd>
+                    </div>
+
+                    <div class="tags">
+                        {% if content.field_tags[0] %}
+                        <label>Tags</label>
+                        <ul>
+                            {% for key, item in content.field_tags if key|first != '#' %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %} 
+                    </div> 
+
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="content article">
+                    <div class="title large">
+                        <h2>{{ node.field_titulo_ingles.value }}</h2> 
+                    </div>
+
+                    <div class="block abstract">
+                        <div class="title-block">
+                            <h2>Abstract</h2>
+                            <button class="btn-show-text" data-id="abstract">cerrar</button>
+                        </div> 
+                        <div class="box active">
+                            {{ content.field_resumen_abstract }}  
+                        </div>
+                    </div>    
+
+                    {% if node.field_mensajes_clave.value %}
+                        <div class="block mensaje">
+                            <div class="title-block">
+                                <h2>Mensajes Claves</h2>
+                                <button class="btn-show-text" data-id="mensaje">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_mensajes_clave.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.agradecimientos.value %}
+                        <div class="block agradecimiento">
+                            <div class="title-block">
+                                <h2>Agradecimiento</h2>
+                                <button class="btn-show-text" data-id="agradecimiento">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.agradecimientos.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_conflicto_interes.value %}
+                        <div class="block conflic">
+                            <div class="title-block">
+                                <h2>Conflicto de interés</h2>
+                                <button class="btn-show-text" data-id="conflic">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conflicto_interes.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_financiacion.value %}
+                        <div class="block finan">
+                            <div class="title-block">
+                                <h2>Financiación</h2>
+                                <button class="btn-show-text" data-id="finan">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_financiacion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_introduccion.value %}
+                        <div class="block introduccion">
+                            <div class="title-block">
+                                <h2>Introducción</h2>
+                                <button class="btn-show-text" data-id="introduccion">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_introduccion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_introduccion.value %}
+                        <div class="block caso">
+                            <div class="title-block">
+                                <h2>Caso Clínico</h2>
+                                <button class="btn-show-text" data-id="caso">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_caso_clinico.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_discusion.value %}
+                        <div class="block discusion">
+                            <div class="title-block">
+                                <h2>Discusión</h2>
+                                <button class="btn-show-text" data-id="discusion">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_discusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_conclusion.value %}    
+                        <div class="block conclusion">
+                            <div class="title-block">
+                                <h2>Conclusión</h2>
+                                <button class="btn-show-text" data-id="conclusion">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conclusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}                    
+
+                    <div class="block referencias">
+                        <div class="title-block">
+                            <h2>Referencias</h2>
+                            <button class="btn-show-text" data-id="referencias">cerrar</button>
+                        </div>
+                        <div class="box active">
+                            {{ node.field_referencia.value|raw }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="news infinite-contents manuscrito">
+                {% set array = [user.id,node.nid.value] %}
+                <div class="block-title">
+                    <h3>Mis manuscritos</h3>
+                </div>
+                {{ drupal_view('manuscritos', 'block_2',user.id) }}
+            </div>
+        </div>
+    </div>
+    <!-- /#main -->
+</article>
+<!-- /.node -->

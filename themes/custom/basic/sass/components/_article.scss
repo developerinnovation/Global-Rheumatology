@@ -1,0 +1,915 @@
+article.node{
+    .container{
+        &.two-col{
+            @media only screen and ($desktop){
+                display: flex;
+            }
+            .left{
+                background: {
+                    size: cover;
+                    attachment: fixed;
+                }
+                @media only screen and ($desktop){
+                    background: {
+                        size: auto 100vh;
+                    }
+                    width: calc(50% - 100px);
+                }
+                .box{
+                    padding: 30px 20px;
+                    background: linear-gradient(rgba(85, 24, 182, 0.8),rgba(59, 31, 153, 0.8),rgba(38, 37, 131, 0.8),rgba(26, 41, 117, 0.8),rgba(22, 43, 113, 0.8));
+                    @media only screen and ($tablet){
+                        padding: 50px 60px;
+                    }
+                    @media only screen and ($desktop){
+                        padding: 50px 60px 50px calc(100% - 480px);
+                        height: 100%;
+                    }
+                    .top{
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0 0 15px;
+                        @media only screen and ($tablet){
+                            margin: 0 0 20px;
+                        }
+                        .article__categoria, .articulo_cientifico__categoria{
+                            a{
+                                font: {
+                                    weight: 700;
+                                    size: 13px;
+                                }
+                                color: #fff;
+                                letter-spacing: 0.15em;
+                                text-transform: uppercase;
+                                position: relative;
+                                display: inline-block;
+                                &:after{
+                                    content: '';
+                                    margin: 5px 0 0;
+                                    display: block;
+                                    width: 30px;
+                                    height: 3px;
+                                    background: #fff;
+                                }
+                            }
+                        }
+                        .buttons{
+                            display: flex;
+                            .sound{
+                                display: block;
+                                margin: 0 10px 0 0;
+                                width: 30px;
+                                height: 30px;
+                                background: {
+                                    image: url(../../images/icon-audio.svg);
+                                    size: auto 30px;
+                                    position: center;
+                                    repeat: no-repeat;
+                                }
+                                font-size: 0;
+                            }
+                            .node_save{
+                                display: block;
+                                width: 30px;
+                                height: 30px;
+                                background: {
+                                    image: url(../../images/icon-save.svg);
+                                    size: auto 30px;
+                                    position: center;
+                                    repeat: no-repeat;
+                                }
+                                -webkit-filter: brightness(100);
+                                filter: brightness(100);
+                                font-size: 0;
+                                &.saved{
+                                    background: {
+                                        image: url(../../images/icon-saved.svg);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    h1{
+                        font: {
+                            weight: 900;
+                            size: 28px;
+                        }
+                        color: #fff;
+                        @media only screen and ($tablet){
+                            font: {
+                                size: 36px;
+                            }
+                        }
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 38px;
+                            }
+                        }
+                        &:after{
+                            content: '';
+                            display: block;
+                            margin: 20px 0 20px -20px;
+                            width: 40px;
+                            height: 3px;
+                            background: #fff;
+                            @media only screen and ($tablet){
+                                margin: 20px 0 20px -60px;
+                                width: 120px;
+                            }
+                        }
+                    }
+                    .read{
+                        span{
+                            font: {
+                                weight: 700;
+                                size: 18px;
+                            }
+                            color: #fff;
+                            display: block;
+                            margin: 0 0 15px;
+                            @media only screen and ($tablet){
+                                font: {
+                                    size: 20px;
+                                }
+                            }
+                        }
+                        .why{
+                            font: {
+                                weight: 300;
+                                size: 19px;
+                            }
+                            line-height: 1.25em;
+                            color: #fff;
+                            @media only screen and ($tablet){
+                                font: {
+                                    size: 21px;
+                                }
+                            }
+                        }
+                    }
+                    .info, .revision{
+                        span, date{
+                            font: {
+                                size: 14px;
+                                style: italic;
+                            }
+                            color: #fff;
+                            b{
+                                font: {
+                                    weight: 700;
+                                }
+                            }
+                        }
+                    }
+                    .revision{
+                        .block{
+                            display: flex;
+                            margin: 10px 0 0;
+                            label{
+                                font: {
+                                    weight: 700;
+                                    size: 14px;
+                                }
+                                color: #fff;
+                                margin: 0 8px 0 0;
+                            }
+                        }
+                        .action{
+                            a{
+                                &:last-child{
+                                    display: block;
+                                    width: 100px;
+                                    background: #fff;
+                                    border-radius: 6px;
+                                    font: {
+                                        weight: 700;
+                                        size: 14px;
+                                    }
+                                    line-height: 40px;
+                                    color: $primary-color;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    .statistics{
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-evenly;
+                        margin: 30px 0 0;
+                        @media only screen and ($tablet){
+                            justify-content: flex-start;
+                        }
+                        label{
+                            font: {
+                                weight: 700;
+                                size: 20px;
+                            }
+                            color: #fff;
+                            width: 100%;
+                            @media only screen and ($tablet){
+                                width: 100px;
+                                margin: 0;
+                            }
+                            @media only screen and ($desktop){
+                                width: 100%;
+                                margin: 0 0 20px;
+                            }
+                        }
+                        .item{
+                            @media only screen and ($tablet){
+                                margin: 0 20px 0 0;
+                                display: flex;
+                            }
+                            .icon{
+                                display: block;
+                                margin: 0 auto;
+                                width: 40px;
+                                height: 40px;
+                                border: 2px solid #fff;
+                                border-radius: 50%;
+                                background: {
+                                    size: 60%;
+                                    position: center;
+                                    repeat: no-repeat;
+                                }
+                                font-size: 0;
+                                &.icon-views{
+                                    background: {
+                                        image: url(../../images/icon-readers.svg);
+                                    }
+                                }
+                                &.icon-download{
+                                    background: {
+                                        image: url(../../images/icon-downloads.svg);
+                                    }
+                                }
+                                &.icon-quotes{
+                                    background: {
+                                        image: url(../../images/icon-quotes.svg);
+                                    }
+                                }
+                                &.icon-shared{
+                                    background: {
+                                        image: url(../../images/icon-shared.svg);
+                                    }
+                                }
+                            }
+                            span{
+                                font: {
+                                    weight: 300;
+                                    size: 14px;
+                                }
+                                color: #fff;
+                                text-align: center;
+                                @media only screen and ($tablet){
+                                    line-height: 1.4em;
+                                    text-align: left;
+                                    margin: 0 0 0 10px;
+                                }
+                                b{
+                                font: {
+                                        weight: 700;
+                                        size: 18px;
+                                    }
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                    .tags{
+                        margin: 30px 0 0;
+                        @media only screen and ($tablet){
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                        label{
+                            font: {
+                                weight: 700;
+                                size: 20px;
+                            }
+                            color: #fff;
+                            width: 100%;
+                            @media only screen and ($tablet){
+                                width: 100px;
+                                margin: 0;
+                            }
+                            @media only screen and ($desktop){
+                                width: 100%;
+                                margin: 0 0 10px;
+                            }
+                        }
+                        ul{
+                            display: flex;
+                            flex-wrap: wrap;
+                            li{
+                                margin: 0 6px 6px 0;
+                                @media only screen and ($tablet){
+                                    margin: 6px 6px 0 0;
+                                }
+                                @media only screen and ($desktop){
+                                    margin: 0 6px 6px 0;
+                                }
+                                a{
+                                    font: {
+                                        size: 14px;
+                                    }
+                                    color: #fff;
+                                    text-transform: uppercase;
+                                    &:after{
+                                        content: ',';
+                                    }
+                                }
+                                &:last-child{
+                                    a{
+                                        &:after{
+                                            display: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .shared{
+                        margin: 30px 0 0;
+                        @media only screen and ($tablet){
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                        label{
+                            font: {
+                                weight: 700;
+                                size: 20px;
+                            }
+                            color: #fff;
+                            width: 100%;
+                            @media only screen and ($tablet){
+                                width: 100px;
+                                margin: 0;
+                            }
+                            @media only screen and ($desktop){
+                                width: 100%;
+                                margin: 0 0 10px;
+                            }
+                        }
+                        ul{
+                            display: flex;
+                            flex-wrap: wrap;
+                            li{
+                                margin: 0 15px 0 0;
+                                a{
+                                    display: block;
+                                    width: 30px;
+                                    height: 30px;
+                                    background: {
+                                        size: 30px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    font-size: 0;
+                                    &.icon-facebook{
+                                        background: {
+                                            image: url(../../images/redes-facebook.svg);
+                                        }
+                                    }
+                                    &.icon-whatsapp{
+                                        background: {
+                                            image: url(../../images/redes-whatsapp.svg);
+                                        }
+                                    }
+                                    &.icon-twitter{
+                                        background: {
+                                            image: url(../../images/redes-twitter.svg);
+                                        }
+                                    }
+                                    &.icon-linkedin{
+                                        background: {
+                                            image: url(../../images/redes-linkedin.svg);
+                                        }
+                                    }
+                                    &.icon-download{
+                                        background: {
+                                            image: url(../../images/icon-downloads.svg);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .tablas{
+                        margin: 30px 0 0;
+                        display: flex;
+                        flex-wrap: wrap;
+                        label{
+                            font: {
+                                weight: 700;
+                                size: 20px;
+                            }
+                            color: #fff;
+                            width: 100%;
+                            margin: 0 0 10px;
+                        }
+                        .ico{
+                            margin: 0 0 20px;
+                            width: 50%;
+                            @media only screen and ($tablet){
+                                width: 33.3%;
+                            }
+                            a{
+                                color: #fff;
+                                .file{
+                                    width: 50px;
+                                    height: 50px;
+                                    background: {
+                                        image: url(../../images/icon-file-download.svg);
+                                        size: 50px;
+                                    }
+                                    position: relative;
+                                    &:after{
+                                        display: block;
+                                        width: 40px;
+                                        height: 20px;
+                                        border: 3px solid #fff;
+                                        border-left: 0;
+                                        border-radius: 0 4px 4px 0;
+                                        font: {
+                                            weight: 900;
+                                            size: 10px;
+                                        }
+                                        line-height: 15px;
+                                        color: #fff;
+                                        text-align: center;
+                                        text-transform: uppercase;
+                                        position: absolute;
+                                        left: 40px;
+                                        bottom: 10px;
+                                    }
+                                    &.pdf{
+                                        &:after{
+                                            content: 'pdf';
+                                        }
+                                    }
+                                    &.doc{
+                                        &:after{
+                                            content: 'doc';
+                                        }
+                                    }
+                                    &.xls{
+                                        &:after{
+                                            content: 'xls';
+                                        }
+                                    }
+                                    &.txt{
+                                        &:after{
+                                            content: 'txt';
+                                        }
+                                    }
+                                    &.docs{
+                                        &:after{
+                                            content: 'docs';
+                                        }
+                                    }
+                                    &.other{
+                                        &:after{
+                                            content: '•••';
+                                        }
+                                    }
+                                }
+                                .title{
+                                    h3{
+                                        font: {
+                                            size: 12px;
+                                        }
+                                        line-height: 1.2em;
+                                        padding: 0 20px 0 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .cientifico{
+                        .explorer{
+                            width: 200px;
+                            background: #fff;
+                            a{
+                                color: $primary-color;
+                            }
+                        }
+                    }
+                }
+            }
+            .right{
+                position: relative;
+                padding: 30px 20px;
+                @media only screen and ($tablet){
+                    padding: 50px 60px;
+                }
+                @media only screen and ($desktop){
+                    width: calc(50% + 100px);
+                    padding: 50px 0 0 60px;
+                }
+                .content{
+                    @media only screen and ($desktop){
+                        width: 625px;
+                        padding: 0 0 50px;
+                        border-bottom: 1px solid #999;
+                    }
+                    .summary{
+                        p{
+                            font: {
+                                weight: 700;
+                                size: 21pX;
+                            }
+                            line-height: 1.25em;
+                        }
+                    }
+                    .block {
+                        overflow: hidden;
+                        border-bottom: 1px solid #ddd;
+                        .title-block{
+                            display: flex;
+                            h2{
+                                font: {
+                                    size: 21px;
+                                }
+                                line-height: 100px;
+                                margin: 0;
+                                @media only screen and ($desktop){
+                                    font: {
+                                        size: 27px;
+                                    }
+                                }
+                            }
+                            button{
+                                margin: 30px 0 30px 15px;
+                                background: {
+                                    image: url(../../images/icon-desplegar.svg);
+                                    size: 20px;
+                                    position: center;
+                                    repeat: no-repeat;
+                                    color: transparent;
+                                }
+                                -webkit-transition: all 0.1s linear;
+                                transition: all 0.1s linear;
+                                font: {
+                                    size: 0;
+                                }
+                                &.active{
+                                    -webkit-transform: rotate(180deg);
+                                    transform: rotate(180deg);
+                                }
+                            }
+                        }
+                        .box{
+                            -webkit-transform: scale(1,0);
+                            transform: scale(1,0);
+                            transform-origin: top;
+                            opacity: 0;
+                            visibility: hidden;
+                            -webkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            height: 0;
+                            &.active{
+                                -webkit-transform: scale(1);
+                                transform: scale(1);
+                                opacity: 1;
+                                visibility: visible;
+                                height: auto;
+                                padding: 0 0 30px;
+                            }
+                        }
+                        &:last-child{
+                            border: 0;
+                        }
+                        &.referencias{
+                            .box{
+                                .ref{
+                                    margin: 0 0 35px;
+                                    .title-ref{
+                                        margin: 0 0 10px;
+                                    }
+                                    .refence_item{
+                                        display: flex;
+                                        ol{
+                                            display: flex;
+                                            .reference__author{
+                                                a{
+                                                    font: {
+                                                        weight: 700;
+                                                    }
+                                                    &:hover{
+                                                        color: $accent-blue;
+                                                    }
+                                                }
+                                            }
+                                            i{
+                                                margin: 0 0.2em 0 0;
+                                            }
+                                        }
+                                    }
+                                    .reference__origin{
+                                        i{
+                                            .referencias__origen-referencia{
+                                                p{
+                                                    margin: 0 0 5px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .doi{
+                                        .referencias__url-referencia{
+                                            a{
+                                                display: inline-block;
+                                                height: 30px;
+                                                padding: 0 30px 0 10px;
+                                                border-radius: 6px;
+                                                background:{
+                                                    
+                                                    image: url(../../images/flecha-next-blanca.svg);
+                                                    size: auto 10px;
+                                                    position: center right 10px;
+                                                    repeat: no-repeat;
+                                                    color: $primary-color;
+                                                }
+                                                font: {
+                                                    weight: 700;
+                                                    size: 12px;
+                                                }
+                                                line-height: 30px;
+                                                color: #fff;
+                                                transition: all 0.1s linear;
+                                                @media only screen and ($tablet){
+                                                    font: {
+                                                        size: 14px;
+                                                    }
+                                                }
+                                                &:hover{
+                                                    background: {
+                                                        color: accent-blue;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    fn {
+                      border-bottom: 1px dotted #212121;
+                      color: #212121;
+                      text-decoration: none;
+                      cursor: alias;
+                  }
+                }
+                .popup{
+                    position: fixed;
+                    top: 30vh;
+                    right: 5%;
+                    width: 90%;
+                    padding: 20px;
+                    border-radius: 4px;
+                    background: #666;
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                    transform-origin: center;
+                    opacity: 0;
+                    visibility: hidden;
+                    -webkit-transition: all 0.15s linear;
+                    transition: all 0.15s linear;
+                    z-index: 2;
+                    @media only screen and ($desktop){
+                        top: 280px;
+                        right: calc(50vw - 585px);
+                        width: 625px;
+                    }
+                    #close-reference{
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        height: 30px;
+                        background: {
+                            image: url(../../images/icon-cerrar.svg);
+                            size: 30px;
+                            position: center;
+                            repeat: no-repeat;
+                            color: transparent;
+                        }
+                        filter: brightness(1000);
+                        font-size: 0;
+                    }
+                    .box{
+                        .title-ref{
+                            margin: 0 0 10px;
+                            color: #fff;
+                        }
+                        .refence_item{
+                            display: flex;
+                            color: #fff;
+                            ol{
+                                display: flex;
+                                .reference__author{
+                                    a{
+                                        font: {
+                                            weight: 700;
+                                        }
+                                        color: #fff;
+                                    }
+                                }
+                                i{
+                                    margin: 0 0.2em 0 0;
+                                }
+                            }
+                        }
+                        .reference__origin{
+                            i{
+                                .referencias__origen-referencia{
+                                    p{
+                                        color: #fff;
+                                        margin: 0 0 5px;
+                                    }
+                                }
+                            }
+                        }
+                        .doi{
+                            .referencias__url-referencia{
+                                a{
+                                    display: inline-block;
+                                    height: 30px;
+                                    padding: 0 30px 0 10px;
+                                    border-radius: 6px;
+                                    background:{
+
+                                        image: url(../../images/flecha-next-blanca.svg);
+                                        size: auto 10px;
+                                        position: center right 10px;
+                                        repeat: no-repeat;
+                                        color: $accent-blue;
+                                    }
+                                    font: {
+                                        weight: 700;
+                                        size: 12px;
+                                    }
+                                    line-height: 30px;
+                                    color: #fff;
+                                    transition: all 0.1s linear;
+                                    @media only screen and ($tablet){
+                                        font: {
+                                            size: 14px;
+                                        }
+                                    }
+                                    &:hover{
+                                        background: {
+                                            color: accent-blue;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &.active{
+                        -webkit-transform: scale(1);
+                        transform: scale(1);
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+        .related{
+            @media only screen and ($desktop){
+                background: #fff;
+            }
+            .views-element-container{
+                .owl-carousel{
+                    .owl-item{
+                        .item-news{
+                            margin: 0 5px 20px;
+                            opacity: 0.4;
+                            -webkkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            @media only screen and ($desktop){
+                                margin: 0 7px 20px;
+                                opacity: 1;
+                            }
+                            .picture{
+                                position: relative;
+                                figure{
+                                    a{
+                                        display: block;
+                                        position: relative;
+                                        &:after{
+                                            content: '';
+                                            display: block;
+                                            width: 100%;
+                                            height: 100%;
+                                            background: {
+                                                position: top 10px left 10px;
+                                                size: 30px;
+                                                repeat: no-repeat;
+                                                color: rgba(0, 0, 0, 0.3);
+                                            }
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            @media only screen and ($tablet){
+                                                background: {
+                                                    position: center;
+                                                    size: 50px;
+                                                }
+                                            }
+                                        }
+                                        img{
+                                            height: 52vw;
+                                            object-fit: cover;
+                                            @media only screen and ($tablet){
+                                                height: 135px;
+                                            }
+                                        }
+                                    }
+                                }
+                                .save{
+                                    top: 10px;
+                                    right: 10px;
+                                    -webkit-filter: brightness(100);
+                                    filter: brightness(100);
+                                }
+                            }
+                            .text{
+                                padding: 10px 10px 15px;
+                                .title{
+                                    a{
+                                        @media only screen and ($tablet){
+                                            font: {
+                                                size: 21px;
+                                            }
+                                        }
+                                    }
+                                }
+                                .info{
+                                    .cont{
+                                        .reader{
+                                            width: 14px;
+                                            height: 14px;
+                                            margin: 0 5px 0 0;
+                                            background: {
+                                                image: url(../../images/icon-read.svg);
+                                                size: 100%;
+                                                position: center;
+                                                repeat: no-repeat;
+                                            }
+                                        }
+                                        display: flex;
+                                        font:{
+                                            weight: 700;
+                                            size: 14px;
+                                            style: normal;
+                                        }
+                                        line-height: 15px;
+                                        color: $primary-color;
+                                    }
+                                }
+                            }
+                        }
+                        &.center{
+                            .item-news{
+                                opacity: 1;
+                                -webkit-box-shadow: $sombra;
+                                box-shadow: $sombra;
+                            }
+                        }
+                        &:hover{
+                            .item-news{
+                                @media only screen and ($tablet){
+                                    -webkit-box-shadow: $sombra;
+                                    box-shadow: $sombra;
+                                }
+                            }
+                        }
+                    }
+                    .owl-nav{
+                        div{
+                            &.owl-prev{
+                                @media only screen and ($tablet){
+                                    left: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    left: -75px;
+                                }
+                            }
+                            &.owl-next{
+                                @media only screen and ($tablet){
+                                    right: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    right: -75px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

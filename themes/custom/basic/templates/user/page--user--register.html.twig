@@ -1,0 +1,44 @@
+<div id="main" class="user-form user-register">
+
+    <div class="tab-user">
+        <ul class="option">
+            <li class="login">
+                <i class="icon icon-login"></i>
+                <a href="/user/login">{% trans%} Iniciar sesión {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="register active">
+                <i class="icon icon-register"></i>
+                <a href="/user/register">{% trans%} Registrarse {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="password">
+                <i class="icon icon-pwd"></i>
+                <a href="/user/password">{% trans%} Recuperar Contraseña {% endtrans%}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container user" id="form-password">
+        <div class="block-title">
+            <h3>{% trans%} Registrarse {% endtrans%}</h3>
+        </div>
+        <div class="profile">
+            <dd>{{ register_form }}</dd>
+        </div>
+    </div><!-- /.container -->  
+    
+    <!--<div class="container">
+        <div class="last_news">  
+            <div class="block-title">
+                <h3>{% trans%} Last articles {% endtrans%}</h3>
+            </div>
+            <dd></dd>
+        </div>
+    </div> /.container -->
+
+</div>
+
+<script>
+$("div#edit-field-tratamiento-datos-wrapper--2 label").replaceWith('<label class="option" for="edit-field-tratamiento-datos-value--2"><a href="/politicas-de-proteccion-de-datos/165" target="_blank" style="text-decoration: underline;color: #165B98;"> Autoriza el tratamiento de datos personales<span class="form-required" title="Este campo es obligatorio.">*</span></a></label>');
+</script>

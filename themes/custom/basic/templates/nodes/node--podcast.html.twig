@@ -1,0 +1,115 @@
+<article {{ attributes.addClass(classes) }}>
+    <div id="main" class="despliegue-nodo">
+        <div id="node-podcast" class="container contenido-nodo">
+            <div class="left background-image" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+                <div class="box">
+                    <div class="top">
+                        <div class="section">
+                            {{ content.field_categoria }}
+                        </div>
+                        <div class="buttons">
+                            <div {% set nid = node.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
+                        </div>
+                    </div>
+
+                    <h1 {{ attributes }}> {{ node.title.value }} </h1>
+
+                    <div class="info">
+                        <span class="author">
+                            {% for autor in node.field_autores %}
+                                <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
+                            {% endfor %}
+                        </span>
+                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                    </div>
+
+                    <div class="statistics">
+                        <label>Stats</label>
+                        <div class="item views">
+                            <i class="icon icon-views">Vistas</i>
+                            <span><b>1,909</b>Readers</span>
+                        </div>
+                        <div class="item shareds">
+                            <i class="icon icon-shared">Shared</i>
+                            <span><b>1,909</b>Shared</span>
+                        </div>
+                    </div>
+
+                    <div class="tags">
+                        <label>Tags</label> {% if content.field_tags[0] %}
+                        <ul>
+                            {% for key, item in content.field_tags if key|first != '#' %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="shared">
+                        <label>Share</label>
+                        <div class="a2a_kit a2a_default_style">
+                            <a class="a2a_button_facebook">
+                                <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_whatsapp">
+                                <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_twitter">
+                                <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_linkedin">
+                                <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="content article">
+
+
+                    <div class="summary">
+                        <p>{{ node.body.summary }}</p>
+                    </div>
+
+                    <div class="article__body">
+                        {{ node.body.value|raw }}
+                    </div>
+
+                    <!--Inicio audio del podcast-->
+                    <div class="player_podcast">
+                        <div class="audio-player">
+                            <audio class="audio-player-r" src="{{ file_url(node.field_podcast.entity.uri.value) }}" type="audio/mp3" controls="controls"></audio>
+                        </div>
+                    </div>
+                    <!--Fin audio del podcast-->
+                </div>
+            </div>
+        </div>
+
+        <div class="container more-podcast">
+            <div class="news infinite-contents podcast">
+                <div class="block-title">
+                    <h3>More podcast</h3>
+                </div>
+                {{ drupal_view('podcast', 'block_2',node.nid.value) }}
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script type="text/javascript">
+    $(window).load(function() {
+        var miAudio = document.getElementsByClassName("audio-player-r");
+        var duracion = parseInt(miAudio[1].duration);
+        var segundos_d;
+        var minutos_d;
+        segundos_d = duracion % 60;
+        minutos_d = parseInt(duracion / 60);
+        if (segundos_d < 10) segundos_d = '0' + duracion % 60;
+        if (minutos_d < 10) minutos_d = '0' + parseInt(duracion / 60);
+        $(".mejs-clear").html("<span>" + minutos_d + ":" + segundos_d + "s</span>");
+    });
+</script>

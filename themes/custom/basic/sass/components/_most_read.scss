@@ -1,0 +1,230 @@
+.most_read{
+    padding: 0 0 40px;
+    @media only screen and ($desktop){
+        padding: 0 0 80px;
+    }
+    .top{
+        @media only screen and ($desktop){
+            display: flex;
+            justify-content: space-between;
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .left{
+            .block-title{
+                @media only screen and ($desktop){
+                    padding: 60px 15px 15px;
+                }
+                h3{
+                    &:after{
+                        @media only screen and ($desktop){
+                            width: calc(50vw - 510px);
+                            margin: 20px 0 20px calc(550px - 50vw);
+                        }
+                    }
+                }
+            }
+        }
+        .right{
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px 30px;
+            @media only screen and ($tablet){
+                margin: 0 auto;
+                width: 440px;
+            }
+            @media only screen and ($desktop){
+                width: auto;
+                padding: 100px 0 0;
+                margin: 0 40px 0 0;
+            }
+            span{
+                width: calc(50% - 10px);
+                height: 30px;
+                border-bottom: 2px solid #ddd;
+                font: {
+                    size: 16px;
+                }
+                line-height: 30px;
+                color: #666;
+                text-align: center;
+                -webkkit-transition: all 0.15s linear;
+                transition: all 0.15s linear;
+                @media only screen and ($tablet){
+                    font: {
+                        size: 18px;
+                    }
+                    line-height: 26px;
+                    border-bottom: 3px solid #ddd;
+                    cursor: pointer;
+                }
+                @media only screen and ($desktop){
+                    width: auto;
+                    font: {
+                        size: 22px;
+                    }
+                }
+                &.active{
+                    border-color: $accent-blue;
+                    color: #000;
+                }
+            }
+            hr{
+                margin: 0;
+                width: 1px;
+                height: 30px;
+                background: #ddd;
+                @media only screen and ($desktop){
+                    margin: 0 40px;
+                }
+            }
+        }
+    }
+    .bottom{
+        position: relative;
+        background: #fff;
+        overflow: hidden;
+        .view_news{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+            @media only screen and ($tablet){
+                padding: 0 40px;
+            }
+            @media only screen and ($desktop){
+                width: 1014px;
+                margin: 0 auto;
+                padding: 0;
+            }
+            .views-element-container{
+                .owl-carousel{
+                    .owl-item{
+                        .item-news{
+                            margin: 0 5px 20px;
+                            opacity: 0.4;
+                            -webkkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            @media only screen and ($desktop){
+                                margin: 0 7px 20px;
+                                opacity: 1;
+                            }
+                            .picture{
+                                position: relative;
+                                .count{
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    width: 40px;
+                                    height: 40px;
+                                    background: $primary-color;
+                                    font: {
+                                        weight: 900;
+                                        size: 30px;
+                                    }
+                                    line-height: 40px;
+                                    color: #fff;
+                                    text-align: center;
+                                    z-index: 1;
+                                }
+                                figure{
+                                    a{
+                                        img{
+                                            height: 52vw;
+                                            object-fit: cover;
+                                            @media only screen and ($tablet){
+                                                height: 135px;
+                                            }
+                                            @media only screen and ($desktop){
+                                                height: 155px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .text{
+                                padding: 10px 10px 15px;
+                                @media only screen and ($desktop){
+                                    padding: 10px 15px 15px;
+                                }
+                                .top{
+                                    display: flex;
+                                    justify-content: space-between;
+                                    width: auto;
+                                    .save{
+                                        position: relative;
+                                        top: auto;
+                                        right: auto;
+                                    }
+                                }
+                                .info{
+                                    .cont{
+                                        .reader{
+                                            width: 14px;
+                                            height: 14px;
+                                            margin: 0 5px 0 0;
+                                            background: {
+                                                image: url(../../images/icon-read.svg);
+                                                size: 100%;
+                                                position: center;
+                                                repeat: no-repeat;
+                                            }
+                                        }
+                                        display: flex;
+                                        font:{
+                                            weight: 700;
+                                            size: 14px;
+                                            style: normal;
+                                        }
+                                        line-height: 15px;
+                                        color: $primary-color;
+                                    }
+                                }
+                            }
+                        }
+                        &.center{
+                            .item-news{
+                                opacity: 1;
+                                -webkit-box-shadow: $sombra;
+                                box-shadow: $sombra;
+                            }
+                        }
+                        &:hover{
+                            .item-news{
+                                @media only screen and ($tablet){
+                                    -webkit-box-shadow: $sombra;
+                                    box-shadow: $sombra;
+                                }
+                            }
+                        }
+                    }
+                    .owl-nav{
+                        div{
+                            &.owl-prev{
+                                @media only screen and ($tablet){
+                                    left: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    left: -75px;
+                                }
+                            }
+                            &.owl-next{
+                                @media only screen and ($tablet){
+                                    right: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    right: -75px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.active{
+                position: relative;
+                z-index: 1;
+            }
+        }
+    }
+}

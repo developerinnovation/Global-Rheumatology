@@ -1,0 +1,300 @@
+<?php
+
+/**
+ * @file
+ * Preprocess functions for Basic.
+ */
+
+
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Connection;
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+/**
+ * Prepares variables for the html.html.twig template.
+ */
+function basic_preprocess_html(&$variables) {
+
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  }
+  catch (Exception $e) {
+    // If the database is not yet available, set default values for these
+    // variables.
+    $variables['is_front'] = FALSE;
+  }
+
+  // If we're on the front page.
+  if (!$variables['is_front']) {
+    // Add unique classes for each page and website section.
+    $path = \Drupal::service('path.current')->getPath();
+    $alias = \Drupal::service('path.alias_manager')->getAliasByPath($path);
+    $alias = trim($alias, '/');
+    if (!empty($alias)) {
+      $name = str_replace('/', '-', $alias);
+      $variables['attributes']['class'][] = 'page-' . $name;
+      list($section,) = explode('/', $alias, 2);
+      if (!empty($section)) {
+        $variables['attributes']['class'][] = 'section-' . $section;
+      }
+    }
+  }
+
+  // Add cachability metadata.
+  $theme_name = \Drupal::theme()->getActiveTheme()->getName();
+  $theme_settings = \Drupal::config($theme_name . '.settings');
+  CacheableMetadata::createFromRenderArray($variables)
+    ->addCacheableDependency($theme_settings)
+    ->applyTo($variables);
+  // Union all theme setting variables to the html.html.twig template.
+  $variables += $theme_settings->getOriginal();
+}
+
+/**
+ * Prepares variables for the field.html.twig template.
+ */
+function basic_preprocess_field(&$variables, $hook) {
+  // Make additional variables available to the template.
+  $variables['bundle'] = $variables['element']['#bundle'];
+  if ($node = \Drupal::request()->attributes->get('node')) {
+    $variables['nid'] = $node->id();
+  }
+}
+
+
+/**
+ * Implementation of theme_menu_link__MENU_NAME().
+ */
+function basic_menu_link__main_menu(array $variables) {
+  $element = $variables ['element'];
+  $sub_menu = '';
+
+  if ($element ['#below']) {
+    $sub_menu = drupal_render($element ['#below']);
+  }
+  $icon = 'icon-' . $element['#title'];
+  $output = l($icon . $element ['#title'], $element ['#href'], $element ['#localized_options']);
+  return '<li' . drupal_attributes($element ['#attributes']) . '>' . $output . $sub_menu . "</li>\n";
+}
+
+/**
+ * Implements hook_preprocess_user().
+ */
+function basic_preprocess_user(&$variables) {
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  $variables['userDate'] = $user->get('uid')->value;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function basic_entity_base_field_info(EntityTypeInterface $entity_type) {
+  if ($entity_type->id() === 'user') {
+    $fields['field1'] = BaseFieldDefinition::create('text')
+      ->setLabel(t('New field 1'))
+      ->setTranslatable(TRUE);
+    return $fields;
+  }
+}
+
+
+ 
+function basic_preprocess_block(&$variables)  {
+  
+  //if(null !== Drupal::currentUser()->id()) {
+      $user = User::load(Drupal::currentUser()->id()); 
+          $file = $user->get('user_picture')->target_id ? File::load($user->get('user_picture')->target_id) : null;
+          if(null !== $user->get('user_picture')->target_id) {
+            $uri = $file->get('uri')->value;
+            $img_user_account = file_create_url($uri);
+          }else{
+            $img_user_account = '/' . $variables['directory'] . '/images/invitado.jpg';
+          }
+
+      
+
+          $u = $variables['user'];
+          $u->img_user_account = $img_user_account;
+          $u->nombres = ucfirst($user->get('field_nombre')->value)." ".ucfirst($user->get('field_apellidos')->value);
+          $u->uid = $user->get('uid')->value; 
+          $u->profile = $user->get('field_perfil_usuario')->value;  
+          $u->mail = $user->get('mail')->value;   
+          $u->node_saved = load_saved_node();
+          $variables['user'] = $u;
+ // }  
+}
+
+function basic_preprocess_profile(&$variables) {
+    $profile = $variables['elements']['#profile'];
+    $variables['uid'] = $profile->getOwnerId();
+    $variables['user'] = $profile->getOwner();
+}
+
+function basic_preprocess_page(&$variables) {
+  // You will most likely want to show and render the form for anonymous users.
+  $variables['login_form'] = FALSE;
+  $variables['register_form'] = FALSE;
+  $variables['pass_form'] = FALSE;
+ 
+  if (!\Drupal::currentUser()->id()) {
+    $form = Drupal::formBuilder()->getForm(Drupal\user\Form\UserLoginForm::class) ; 
+    $render = Drupal::service('renderer');
+    $variables['login_form'] = $render->renderPlain($form);
+
+    $form = Drupal::formBuilder()->getForm(Drupal\user\Form\UserPasswordForm::class) ; 
+    $render = Drupal::service('renderer');
+    $variables['pass_form'] = $render->renderPlain($form);
+   
+
+    $entity = \Drupal::entityTypeManager()->getStorage('user')->create(array());
+    $formObject = \Drupal::entityTypeManager()
+      ->getFormObject('user', 'register')
+      ->setEntity($entity);
+    $form = \Drupal::formBuilder()->getForm($formObject);
+    $variables['register_form'] = \Drupal::service('renderer')->render($form);
+
+  }
+}
+
+/**''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''**/
+
+function basic_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  //print $form_id."<br>";
+  $title = isset($form['title']['widget'][0]['value']['#default_value']) ? $form['title']['widget'][0]['value']['#default_value'] : null ;
+  
+  // redirección restablecer contraseña
+  
+  
+  switch ($form_id) { 
+    
+    case 'node_manuscrito_editorial_form';
+    case 'node_manuscrito_articulo_original_form';
+    case 'node_manuscrito_articulo_revision_form';
+    case 'node_manuscrito_mini_revision_form';
+    case 'node_manuscrito_rondas_clinicas_form';
+    case 'node_manuscrito_comentarios_respues_form';
+    case 'node_manuscrito_articulo_especial_form';
+    case 'node_manuscrito_ciencia_panlar_form';
+    case 'node_manuscrito_reportajes_especiales_form';
+    case 'node_manuscrito_multimedia_form';
+    case 'node_manuscrito_noticia_form';
+    case 'node_manuscrito_columnas_form';
+    case 'node_manuscrito_form';
+      if($title){
+        $form['actions']['submit']['#value'] = t('Actualizar');
+        foreach (array_keys($form['actions']) as $action) {
+          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+            $form['actions'][$action]['#submit'][] = 'basic_manuscrito_form_update';
+          }
+        }       
+      }else{
+        $form['actions']['submit']['#value'] = t('Enviar');
+        foreach (array_keys($form['actions']) as $action) {
+          if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+            $form['actions'][$action]['#submit'][] = 'basic_manuscrito_form_submit';
+          }
+        }   
+      }         
+    break;    
+
+  }
+}
+
+
+function basic_manuscrito_form_update($form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $nid = $form_state->getformObject()->getEntity()->id();
+  $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+  $label = 'Actualización de artículo recibida';
+
+  $revisorId =  $node->get('revision_uid')->getValue()[0]['target_id'];
+  $autorId = $node->get('uid')->getValue()[0]['target_id'];
+  $execute = autor_revisor($node,$nid);
+  $statusArticle = (string)$execute['status'];
+  $revisorMail = $execute['to_revisor'];
+  $autorMail = $execute['to_autor'];
+  if($revisorId == $autorId){    
+    exec_mail($statusArticle, $node, $nid, $autorMail); // notificacion autor
+  }else{
+    exec_mail('202', $node, $nid, $revisorMail); // notificacion revisor
+  }
+
+
+}
+
+function basic_manuscrito_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $nid = $form_state->getformObject()->getEntity()->id();
+  $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+  $execute = autor_revisor($node,$nid);
+
+  // send_mail_user($execute['to_revisor'],$execute['title'],$body_revisor,$execute['url'],$nid,$label);
+  // send_mail_user($execute['to_autor'],$execute['title'],$body_autor,$execute['url'],$nid,$label);
+  $revisorMail = $execute['to_revisor'];
+  $autorMail = $execute['to_autor'];
+  exec_mail('new', $node, $nid, $autorMail); // notificacion autor
+  exec_mail('201', $node, $nid, $revisorMail); // notificacion revisor general
+  
+  
+  $url = Url::fromRoute('thanks_module_page', [
+    'type' => $node->get('type')->getValue()[0]['target_id'],
+    'nid' => $nid,
+  ]);
+  
+  $form_state->setRedirectUrl($url);
+  
+}
+
+
+function load_node($nid){
+  return $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+}
+
+function autor_revisor($node,$nid){
+  $mail = null;
+  $revisor = User::load($node->get('field_revisor')->getValue()[0]['target_id']);
+  $autor =   User::load($node->get('uid')->getValue()[0]['target_id']); 
+  $mail = array(
+    'title' => $node->get('title')->getValue()[0]['value'],
+    'to_revisor' => $revisor->get('mail')->getValue()[0]['value'],
+    'name_revisor' =>  ucfirst($revisor->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($revisor->get('field_apellidos')->getValue()[0]['value']),
+    'to_autor' => $autor->get('mail')->getValue()[0]['value'],
+    'name_autor' => ucfirst($autor->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($autor->get('field_apellidos')->getValue()[0]['value']),
+    'url' => \Drupal::request()->getSchemeAndHttpHost().\Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nid),
+    'status' => $node->get('field_estado_del_articulo')->getValue()[0]['target_id'],
+  );
+
+  return $mail;
+}
+
+function load_saved_node(){
+  $id_node = null;
+  $rows = [];
+  if(Drupal::currentUser()->id() != 0 || null !== Drupal::currentUser()->id()){
+    $uid = Drupal::currentUser()->id();
+    $query =  \Drupal::database()->select('entity_wishlist', 'ew');
+    $query->fields('ew', ["wid", "entity_id"]);
+    $query->condition('uid', $uid, "=");
+    $query->distinct();
+    $pager = $query->extend('Drupal\Core\Database\Query\PagerSelectExtender')->limit(10);
+    $list_records = $query->execute()->fetchAll();    
+    foreach ($list_records as $data) {
+      array_push($rows,$data->entity_id);
+    }
+    $id_node = implode(',',$rows);    
+  }
+  return [
+    'string' => $id_node,
+    'split' => $rows,
+  ];
+}
+
+
+function basic_preprocess(array &$variables, $hook) {
+  //this is a global hook, its variables are available in any template file
+  $variables['nodo_saved'] = load_saved_node();
+}

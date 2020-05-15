@@ -1,0 +1,21 @@
+.js-pager__items{
+    width: 100%;
+    .pager__item {
+      display: inline;
+        a {
+            margin: 20px auto;
+            display: block;
+            width: 140px;
+            height: 40px;
+            border-radius: 6px;
+            background: $primary-color;
+            font: {
+                weight: 700;
+                size: 16px;
+            }
+            line-height: 40px;
+            color: #fff;
+            text-align: center;
+        }
+    }
+}

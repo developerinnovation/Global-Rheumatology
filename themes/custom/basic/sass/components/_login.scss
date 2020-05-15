@@ -1,0 +1,616 @@
+.user-form{
+    border-top: 2px solid $primary-color;
+    .tab-user{
+        .option{
+            display: flex;
+            justify-content: space-evenly;
+            height: 44px;
+            background: #f4f4f4;
+            -webkit-box-shadow: $sombra;
+            box-shadow: $sombra;
+            @media only screen and ($tablet){
+                justify-content: center;
+            }
+            li{
+                @media only screen and ($tablet){
+                    width: 180px;
+                    margin: 0 20px;
+                }
+                a{
+                    font: {
+                        size: 14px;
+                    }
+                    line-height: 44px;
+                    color: #666;
+                    text-align: center;
+                    display: block;
+                    position: relative;
+                    -webkit-transform-style: all 0.15s linear;
+                    transform-style: all 0.15s linear;
+                    &:after{
+                        content: '';
+                        display: block;
+                        width: 100%;
+                        height: 0;
+                        border-radius: 4px 4px 0 0;
+                        background: $primary-color;
+                        position: absolute;
+                        bottom: 0;
+                        -webkit-transform-style: all 0.15s linear;
+                        transform-style: all 0.15s linear;
+                    }
+                }
+                &.active{
+                    a{
+                        font: {
+                            weight: 600;
+                        }
+                        color: $primary-color;
+                        &:after{
+                            height: 4px;
+                        }
+                    }
+                }
+            }
+            hr{
+                margin: 10px 0;
+                width: 1px;
+                height: 24px;
+                background: #ccc;
+            }
+        }
+    }
+    .block-title{
+        @media only screen and ($desktop){
+            padding: 60px 30px 15px calc(50vw - 125px);
+        }
+        h3{
+            &:after{
+                @media only screen and ($desktop){
+                    width: calc(50vw - 65px);
+                    margin: 15px 0 0 calc(125px - 50vw);
+                }
+            }
+        }
+    }
+    .container{
+        .profile{
+            padding: 0 15px;
+            @media only screen and ($tablet){
+                width: 480px;
+                padding: 40px 40px 20px;
+                margin: 0 auto;
+            }
+            form{
+                .form-item{
+                    position: relative;
+                    padding: 10px 0 0;
+                    margin: 0 0 20px;
+                    label{
+                        font: {
+                            size: 13px;
+                        }
+                        line-height: 20px;
+                        color: $primary-color;
+                        margin: 0;
+                        height: 20px;
+                        padding: 0 5px;
+                        background: #fff;
+                        position: absolute;
+                        top: 0;
+                        left: 10px;
+                        z-index: 1;
+                    }
+                    input[type="email"], input[type="file"], input[type="text"], input[type="password"], input[type="url"], textarea, select{
+                        width: 100%;
+                        height: 40px;
+                        padding: 0 10px;
+                        border: 2px solid #ddd;
+                        border-radius: 4px;
+                        margin: 0 0 5px;
+                        box-shadow: none;
+                        &:focus{
+                            border-color: $primary-color;
+                        }
+                    }
+                    input[type="file"]{
+                        height: 65px;
+                        padding: 20px;
+                    }
+                    textarea{
+                        height: 120px;
+                    }
+                    .description{
+                        font: {
+                            size: 12px;
+                        }
+                        line-height: 1.15em;
+                        color: #666;
+                    }
+                }
+                p{
+                    font: {
+                        size: 14px;
+                    }
+                    line-height: 1.15em;
+                    color: #666;
+                    text-align: center;
+                    margin: 0 0 40px;
+                }
+                .form-actions{
+                    input{
+                        margin: 0 auto;
+                        display: block;
+                        width: 180px;
+                        height: 40px;
+                        padding: 0;
+                        border: 0;
+                        border-radius: 6px;
+                        background: $primary-color;
+                        font: {
+                            weight: 700;
+                            size: 16px;
+                        }
+                        line-height: 40px;
+                        color: #fff;
+                    }
+                }
+                fieldset{
+                    .form-item{
+                        label{
+                            position: relative;
+                            left: 0;
+                            display: inline;
+                        }
+                    }
+                }
+            }
+        }
+        .hr{
+            padding: 10px 0 0;
+            border-bottom: 2px solid #ddd;
+            margin: 10px 15px 30px;
+            @media only screen and ($tablet){
+                width: 400px;
+                margin: 0px auto 40px;
+            }
+            span{
+                display: block;
+                margin: 0 auto -10px;
+                width: 20px;
+                height: 20px;
+                background: #fff;
+                font: {
+                    size: 18px;
+                }
+                line-height: 20px;
+                color: #666;
+                text-align: center;
+            }
+        }
+        .options{
+            .register{
+                margin: 0 auto;
+                display: block;
+                width: 180px;
+                height: 40px;
+                padding: 0;
+                border: 0;
+                border-radius: 6px;
+                background: $primary-color;
+                font: {
+                    weight: 700;
+                    size: 16px;
+                }
+                line-height: 40px;
+                color: #fff;
+                text-align: center;
+            }
+            .password{
+                display: block;
+                margin: 10px auto;
+                font: {
+                    weight: 500;
+                    size: 14px;
+                }
+                color: $primary-color;
+                text-align: center;
+                text-decoration: underline;
+            }
+        }
+    }
+    .shared{
+        padding: 20px;
+        background: $primary-color;
+        margin: 20px 0 3px;
+        label{
+            font: {
+                size: 14px;
+            }
+            color: #fff;
+            text-align: center;
+            @media only screen and ($tablet){
+                font: {
+                    size: 18px;
+                }
+            }
+        }
+        .redes{
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0 0;
+            @media only screen and ($tablet){
+                width: 300px;
+                margin: 15px auto 0;
+            }
+            a{
+                display: block;
+                width: 30px;
+                img{
+                    width: 30px;
+                    height: 30px;
+                    display: block;
+                }
+            }
+            div{
+                display: none;
+            }
+        }
+    }
+    &.user-register{
+        .container{
+            .profile{
+                form{
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                    .form-item{
+                        width: 100%;
+                        .description{
+                            display: none;
+                        }
+                        .password-strength{
+                            .password-strength__meter{
+                                height: 6px;
+                                border-radius: 4px;
+                                .password-strength__indicator{
+                                    background: #165B98;
+                                    border-radius: 4px;
+                                }
+                            }
+                            .password-strength__title{
+                                font:{
+                                    size: 12px;
+                                }
+                            }
+                        }
+                        .password-confirm{
+                            font:{
+                                size: 12px;
+                            }
+                        }
+                    }
+                    .form-actions, details, .field--name-user-picture{
+                        width: 100%;
+                    }
+                    .filter-wrapper{
+                        display: none;
+                    }
+                    .field--name-field-nombre, .field--name-field-apellidos{
+                        width: calc(50% - 10px);
+                    }
+                    #edit-field-genero-wrapper--2{
+                        width: calc(30% - 10px);
+                    }
+                    #edit-field-como-prefiero-ser-llamado-wrapper--2, #edit-field-como-prefiero-ser-llamado-wrapper{
+                        width: calc(70% - 10px);
+                    }
+                    #edit-field-pais-wrapper--2, #edit-field-areas-interes-academico-wrapper--2, #edit-field-registrarse-como-wrapper--2, #edit-field-tratamiento-datos-wrapper--2, #edit-field-registrarse-como-wrapper{
+                        width: 100%;
+                    }
+                    #edit-field-tratamiento-datos-wrapper--2{
+                        .form-item{
+                            label{
+                                position: relative;
+                                left: 0;
+                                display: inline;
+                            }
+                        }
+                    }
+                    #edit-field-idiomas-conoce-wrapper--2{
+                        margin: 0 0 20px;
+                        .form-item{
+                            padding: 0;
+                            margin: 0;
+                        }
+                    }
+                    #edit-field-pais-wrapper, #edit-field-areas-interes-academico-wrapper{
+                        width: 100%;
+                        .form-item{
+                            .chosen-container{
+                                width: 100% !important;
+                                .chosen-single{
+                                    width: 100%;
+                                    height: 40px;
+                                    padding: 0 10px;
+                                    border: 2px solid #ddd;
+                                    border-radius: 4px;
+                                    margin: 0 0 5px;
+                                    box-shadow: none;
+                                    &:focus{
+                                        border-color: $primary-color;
+                                    }
+                                    span{
+                                        line-height: 36px;
+                                    }
+                                    div{
+                                        b{
+                                            background: url("chosen-sprite.png") no-repeat 0px 10px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #edit-field-idiomas-conoce-wrapper{
+                        legend{
+                            margin: 0;
+                        }
+                        .fieldset-wrapper{
+                            .form-checkboxes{
+                                .form-item{
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
+                        }
+                    }
+                    #edit-field-tratamiento-datos-wrapper{
+                        width: 100%;
+                        .form-item{
+                            padding: 0;
+                            display: flex;
+                            label{
+                                position: relative;
+                                padding: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.user-profile{
+    .container{
+        .views-element-container{
+            .views-row{
+                .profile{
+                    background: #f4f4f4;
+                    padding: 20px;
+                    @media only screen and ($desktop){
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 30px calc(50% - 400px);
+                    }
+                    figure{
+                        img{
+                            display: block;
+                            margin: 20px auto;
+                            width: 80px;
+                            height: 80px;
+                            border: 2px solid $primary-color;
+                            border-radius: 50%;
+                            box-shadow: 0 0 0 4px #fff, 0 0 0 8px $accent-blue;
+                            font: {
+                                size: 8px;
+                            }
+                            @media only screen and ($desktop){
+                                width: 160px;
+                                height: 160px;
+                            }
+                        }
+                    }
+                    .text{
+                        @media only screen and ($desktop){
+                            width: calc(100% - 220px);
+                        }
+                        .save{
+                            display: none;
+                        }
+                        h3{
+                            font: {
+                                size: 21px;
+                            }
+                            text-align: center;
+                            @media only screen and ($desktop){
+                                fpnt: {
+                                    size: 28px;
+                                }
+                                text-align: left;
+                                margin: 10px 0 20px;
+                            }
+                            &:after{
+                                content: '';
+                                margin: 5px auto 0;
+                                display: block;
+                                width: 60px;
+                                height: 3px;
+                                background: $accent-blue;
+                                @media only screen and ($desktop){
+                                    margin: 5px 0 0;
+                                }
+                            }
+                        }
+                        p{
+                            font: {
+                                size: 14px;
+                            }
+                            color: #666;
+                            @media only screen and ($desktop){
+                                font: {
+                                    size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .node_saved{
+            @media only screen and ($tablet){
+                padding: 0 40px;
+            }
+            @media only screen and ($desktop){
+                width: 1200px;
+                padding: 0 10px;
+                margin: 0 auto;
+            }
+            .views-element-container{
+                .owl-carousel{
+                    .owl-item{
+                        .item-news{
+                            margin: 0 5px 20px;
+                            opacity: 0.4;
+                            -webkkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            @media only screen and ($desktop){
+                                margin: 0 7px 20px;
+                                opacity: 1;
+                            }
+                            .picture{
+                                position: relative;
+                                figure{
+                                    a{
+                                        display: block;
+                                        position: relative;
+                                        img{
+                                            object-fit: cover;
+                                            @media only screen and ($desktop){
+                                                height: 155px;
+                                            }
+                                        }
+                                        &:after{
+                                            content: '';
+                                            display: block;
+                                            width: 100%;
+                                            height: 100%;
+                                            background: {
+                                                position: top 10px left 10px;
+                                                size: 30px;
+                                                repeat: no-repeat;
+                                                color: rgba(0, 0, 0, 0.3);
+                                            }
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            @media only screen and ($tablet){
+                                                background: {
+                                                    position: center;
+                                                    size: 50px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .save{
+                                    top: 10px;
+                                    right: 10px;
+                                    -webkit-filter: brightness(100);
+                                    filter: brightness(100);
+                                }
+                            }
+                            .text{
+                                padding: 10px 10px 15px;
+                                .info{
+                                    .cont{
+                                        .reader{
+                                            width: 14px;
+                                            height: 14px;
+                                            margin: 0 5px 0 0;
+                                            background: {
+                                                image: url(../../images/icon-read.svg);
+                                                size: 100%;
+                                                position: center;
+                                                repeat: no-repeat;
+                                            }
+                                        }
+                                        display: flex;
+                                        font:{
+                                            weight: 700;
+                                            size: 14px;
+                                            style: normal;
+                                        }
+                                        line-height: 15px;
+                                        color: $primary-color;
+                                    }
+                                }
+                            }
+                        }
+                        &.center{
+                            .item-news{
+                                opacity: 1;
+                                -webkit-box-shadow: $sombra;
+                                box-shadow: $sombra;
+                            }
+                        }
+                        &:hover{
+                            .item-news{
+                                @media only screen and ($tablet){
+                                    -webkit-box-shadow: $sombra;
+                                    box-shadow: $sombra;
+                                }
+                            }
+                        }
+                    }
+                    .owl-nav{
+                        div{
+                            &.owl-prev{
+                                @media only screen and ($tablet){
+                                    left: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    left: -75px;
+                                }
+                            }
+                            &.owl-next{
+                                @media only screen and ($tablet){
+                                    right: -15px;
+                                }
+                                @media only screen and ($desktop){
+                                    right: -75px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .infinite-contents{
+            .views-element-container{
+                .views-infinite-scroll-content-wrapper, >div{
+                    .views-row{
+                        .item-news{
+                            .picture{
+                                figure{
+                                    a{
+                                        img{
+                                            height: 52vw;
+                                            object-fit: cover;
+                                            @media only screen and ($tablet){
+                                                height: 155px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .info{
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

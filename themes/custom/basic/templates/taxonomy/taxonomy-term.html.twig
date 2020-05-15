@@ -1,0 +1,15 @@
+<div class="main taxonommy tags">
+     <div class="block-title">
+        <h1>{{ name }}</h1>
+    </div>
+    <div class="container destacada">
+        <div class="">
+            {{ drupal_view('taxonomias', 'block_1',term.tid.value) }}
+        </div>
+    </div>
+    <div class="container infinite-contents">
+      <div class="">
+        {{ drupal_view('taxonomias', 'block_2',term.tid.value) }}
+      </div>
+    </div>
+</div>

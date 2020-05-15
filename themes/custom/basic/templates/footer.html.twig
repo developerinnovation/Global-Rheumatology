@@ -1,0 +1,74 @@
+<footer id="footer">
+  <div class="container">    
+    <div class="footer-region info">
+        <figure class="logo">
+            <img src="/{{ directory }}/images/logo-blanco.svg" alt="Global Rheumatology" width="200" height="200" />
+        </figure>
+        <p class="description">
+            Es un órgano de divulgación de la Liga Panamericana de Asociaciones de Reumatología (PANLAR). 
+        </p>
+
+        <div class="contact">
+            <span>{% trans%} Contáctenos {% endtrans%}:</span>
+            <a href="mailto:info@globalrheumpanlar.org">info@globalrheumpanlar.org</a>
+        </div>
+
+        <div class="social">
+            <nav class="networks">
+                <ul>
+                  <li class="fb">Facebook</li>
+                  <li class="tw">Twitter</li>
+                  <li class="lk">Linkedin</li>
+                </ul>
+            </nav>       
+        </div>
+        
+    </div>
+    <div class="footer-region links">
+        {% set items = simplify_menu('menu-footer') %}
+        <ul class="sections">
+            {% if logged_in != true %}
+                <li class=" navigation__item">
+                    <a href="/user/login" class="">{% trans%}INICIAR SESIÓN{% endtrans%}</a>
+                </li>
+            {% endif %}
+
+            {% if logged_in %}
+                <li class=" navigation__item">
+                    <a href="/new/send/manuscrito" class="">{% trans%}PUBLICAR{% endtrans%}</a>
+                </li>
+                <li class=" navigation__item">
+                    <a href="/show/saved/content" class="">{% trans%}ARTÍCULOS GUARDADOS{% endtrans%}</a>
+                </li>
+            {% endif %}
+            {% for menu_item in items.menu_tree %}
+                <li class="{{ item_class }} navigation_item">
+                    <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="#" class="privacy">{% trans%} Política de privacidad {% endtrans%}</a>
+    </div>
+    <div class="footer-region newsletter">
+      <h3>Suscríbase</h3>
+      <h2>{% trans%} Obtenga las últimas noticias directamente a su correo  {% endtrans%}</h2>
+      <div>
+        <input type="text" placeholder="ingrese su correo">
+        <button>{% trans%} Subscribirse {% endtrans%}</button>
+      </div>
+    </div>    
+    <div class="footer-region copy">
+      <figure class="logo-iv">
+        <img src="/{{ directory }}/images/inteligencia-viral.webp" alt="Global Rheumatology" width="200" height="200" />
+      </figure>
+      <p class="copy-text">Diseño & desarrollo por Inteligencia Viral <br> &copy;2019 Global Rheumatology by Panlar.</p>
+    </div>
+  </div>
+  <nav id="menu-fixed" class="mobile">
+      <a class="icon home" href="/">Inicio</a>
+      <a class="icon search" href="/global-rheumatology/search/content">Buscar</a>
+      <a class="icon multimedia" href="/secciones/26/multimedia">Multimedia</a>
+      <a class="icon save" href="/show/saved/content">Guardados</a>
+      <a class="icon perfil" href="/user">Perfil</a>
+  </nav>
+</footer>

@@ -1,0 +1,17 @@
+<li>
+    <h6 class="title-ref">{{ content.field_nombre_completo }}</h6>
+    <div class="refence_item">
+        <ol class="reference__authors_list">
+            <li class="reference__author">{{ content.field_titulo_academico }}</li>
+        </ol>
+        <span class="reference__authors_list_suffix">{{ content.field_titulo_academico }}, {{ content.field_institucion }}</span>
+    </div>
+    <div class="reference__origin">
+        <i>
+            <div class="referencias__origen-referencia">
+                <p>{{ content.field_correo }}</p>
+            </div>
+        </i>
+    </div>
+    <div class="doi">ORCID: {{ content.field_codigo_orcid }}</div>
+</li>

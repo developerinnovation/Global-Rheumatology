@@ -1,0 +1,32 @@
+<div id="main" class="user-form user-register">
+
+    <div class="tab-user">
+        <ul class="option">
+            <li class="login">
+                <i class="icon icon-login"></i>
+                <a href="/user/login">{% trans%} Iniciar sesión {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="register">
+                <i class="icon icon-register"></i>
+                <a href="/user/register">{% trans%} Registrarse {% endtrans%}</a>
+            </li>
+            <hr>
+            <li class="password active">
+                <i class="icon icon-pwd"></i>
+                <a href="/user/password">{% trans%} Recuperar Contraseña {% endtrans%}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container user" id="form-password">
+        <div class="block-title">
+            <h3>{% trans%} Restablecer contraseña {% endtrans%}</h3>
+        </div>
+        <div class="profile">
+            {% if content %}
+                {{- content -}}
+            {% endif %}
+            {{ reset_form }}
+        </div>
+    </div><!-- /.container -->  

@@ -1,0 +1,249 @@
+.magazine_news{
+    background: rgba(240, 240, 240, 0.5);
+    padding: 0 0 35px;
+    @media only screen and ($tablet){
+        padding: 0 0 10px;
+    }
+    @media only screen and ($desktop){
+        padding: 0 0 60px;
+    }
+    .block-title{
+        @media only screen and ($desktop){
+            padding: 90px 30px 15px calc(50vw - 125px);
+        }
+        h3{
+            &:after{
+                @media only screen and ($desktop){
+                    width: calc(50vw - 65px);
+                    margin: 15px 0 0 calc(125px - 50vw);
+                }
+            }
+        }
+    }
+    .views-element-container{
+        padding: 15px;
+        @media only screen and ($tablet){
+            padding: 30px;
+        }
+        @media only screen and ($desktop){
+            padding: 0;
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .views-infinite-scroll-content-wrapper{
+            @media only screen and ($tablet){
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .views-row{
+                margin: 0 0 20px;
+                @media only screen and ($tablet){
+                    width: calc(50% - 10px);
+                }
+                @media only screen and ($desktop){
+                    margin: 0 15px 30px;
+                }
+                .item-news{
+                    background: #fff;
+                    -webkit-box-shadow: $sombra;
+                    box-shadow: $sombra;
+                    @media only screen and ($tablet){
+                        height: 100%;
+                    }
+                    .text{
+                        padding: 15px 20px 20px;
+                        @media only screen and ($tablet){
+                            height: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            flex-direction: column;
+                        }
+                        .top{
+                            display: flex;
+                            justify-content: space-between;
+                            .save{
+                                position: relative;
+                                top: auto;
+                                right: auto;
+                            }
+                        }
+                        .info-more{
+                            display: flex;
+                            justify-content: space-between;
+                            @media only screen and ($tablet){
+                                display: block;
+                            }
+                            .info{
+                                margin: 0;
+                                @media only screen and ($tablet){
+                                    margin: 0 0 15px;
+                                }
+                                span{
+                                    b{
+                                        @media only screen and ($desktop){
+                                            display: block;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(5n+1){
+                    @media only screen and ($tablet){
+                        width: 100%;
+                    }
+                    @media only screen and ($desktop){
+                        width: 680px;
+                    }
+                    .item-news{
+                        @media only screen and ($tablet){
+                            display: flex;
+                        }
+                        .picture{
+                            @media only screen and ($tablet){
+                                width: 340px;
+                            }
+                            figure{
+                                img{
+                                    height: calc(100vw - 25px);
+                                    @media only screen and ($tablet){
+                                        height: 348px;
+                                    }
+                                }
+                            }
+                        }
+                        .text{
+                            @media only screen and ($tablet){
+                                width: calc(100% - 340px);
+                                padding: 25px 35px;
+                            }
+                        }
+                    }
+                }
+                &:nth-child(5n+2){
+                    @media only screen and ($desktop){
+                        width: 460px;
+                    }
+                    .item-news{
+                        background: $primary-color;
+                        .picture{
+                            display: none;
+                        }
+                        .text{
+                            @media only screen and ($desktop){
+                                padding: 25px 55px;
+                            }
+                            .save{
+                                filter: brightness(100);
+                            }
+                            .category, .title{
+                                a{
+                                    color: #fff;
+                                }
+                            }
+                            .sumary{
+                                color: #fff;
+                            }
+                            .info{
+                                span{
+                                    color: #fff;
+                                    b{
+                                        a{
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                            }
+                            .explorer{
+                                background: #fff;
+                                a{
+                                    color: $primary-color;
+                                }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(5n+3){
+                    @media only screen and ($desktop){
+                        width: 460px;
+                    }
+                    .item-news{
+                        .picture{
+                            display: none;
+                        }
+                        .text{
+                            @media only screen and ($desktop){
+                                padding: 25px 55px;
+                            }
+                        }
+                    }
+                }
+                &:nth-child(5n+4){
+                    @media only screen and ($desktop){
+                        width: 270px;
+                    }
+                    .item-news{
+                        .picture{
+                            figure{
+                                img{
+                                    height: calc(50vw - 25px);
+                                    @media only screen and ($tablet){
+                                        height: 130px;
+                                    }
+                                    @media only screen and ($desktop){
+                                        height: 150px;
+                                    }
+                                }
+                            }
+                        }
+                        .text{
+                            @media only screen and ($tablet){
+                                height: auto;
+                            }
+                            .title{
+                                a{
+                                    @media only screen and ($desktop){
+                                        font: {
+                                            size: 21px;
+                                        }
+                                    }
+                                }
+                            }
+                            .sumary{
+                                display: none;
+                            }
+                            .info-more{
+                                .info{
+                                    span{
+                                        b{
+                                            @media only screen and ($desktop){
+                                                display: inline;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &:nth-child(5n+5){
+                    @media only screen and ($desktop){
+                        width: 380px;
+                    }
+                    .item-news{
+                        .picture{
+                            display: none;
+                        }
+                        .text{
+                            @media only screen and ($desktop){
+                                padding: 25px 45px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

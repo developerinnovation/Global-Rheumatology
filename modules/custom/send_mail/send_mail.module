@@ -1,0 +1,122 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+
+function send_mail_help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        // Main module help for the send_mail module.
+        case 'help.page.send_mail':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('send_mail') . '</p>';
+        return $output;
+
+    default:
+    }
+}
+
+
+
+function send_mail_user($to,$title,$body,$url_node,$nid,$label){
+
+
+    // Para enviar un correo HTML, debe establecerse la cabecera Content-type
+    $titulo = 'Global Rheumatology - '.$label;
+    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+    $cabeceras .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+    // Cabeceras adicionales
+    $cabeceras .= 'From: Global Rheumatology <no-reply@davidmartinezb.com>' . "\r\n";
+    // Enviarlo
+
+   $mensaje = "";
+
+    mail($to, $titulo, $mensaje, $cabeceras);	
+}
+
+
+/**
+ * exec_mail
+ * [token-title]
+ * [token-city]
+ * [token-date]
+ * [token-nid]
+ * 
+ * @param  string $status
+ * @param  object $article
+ * @param  string $to
+ * @return void
+ */
+function exec_mail($status, $article, $nidArticle, $toMail){
+
+    $articleId = $nidArticle;
+    $titleArticle = '';
+
+    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+    $cabeceras .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+
+    switch ($status) {
+        case 'new': // 196 
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(196);
+            
+            break;
+
+        case '573': // en revision // 194
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(194);
+            break;
+        
+        case '574': // en edicion " autor debe modificar el articulo " // 197
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(197);
+            break;
+        
+        case '585': // rechazado // 195
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(195);
+            break;
+        
+        case '586': // aceptado y publicado  // 196
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(203);
+            break;
+
+        case '201': // actualizado por autor
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(201);
+            break;
+
+        case '202': // actualizado por autor
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(202);
+            break;
+    }
+    if($status != '571'){
+        $asunto = $plantilla->get('title')->getValue()[0]['value'];
+        $mensaje = $plantilla->get('body')->getValue()[0]['value'];
+    
+        $titleArticle = $article->get('title')->getValue()[0]['value'];
+        $url = \Drupal::request()->getSchemeAndHttpHost().\Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nidArticle);
+        $linkTitle = '<a href="'.$url.'">'.$titleArticle.'</a>';
+        $convertDate = convertDate();
+        
+        $mensaje = str_replace('[token-city]', 'Atlanta', $mensaje);
+        $mensaje = str_replace('[token-date]', $convertDate, $mensaje);
+        $mensaje = str_replace('[token-nid]', $articleId, $mensaje);
+        $mensaje = str_replace('[token-title]', $linkTitle, $mensaje);
+        
+        mail($toMail, $asunto, $mensaje, $cabeceras);	
+    }
+   
+}
+
+
+
+function convertDate(){
+
+    $formatDate = '%B';
+    setlocale(LC_ALL,"es_ES");
+    $date = date('Y-m-d');
+    $transaction_date = strftime($formatDate, strtotime($date));
+    $transaction_date = ucfirst($transaction_date).' '.date('d,Y');
+    return $transaction_date;
+    
+}
+
+

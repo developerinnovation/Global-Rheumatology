@@ -1,0 +1,124 @@
+<script>
+    var id = {{ node.nid.value }};
+    var type = "{{ node.getType }}";
+    $(".tabs.primary li a").eq(1).attr('href', '/update/' + type.replace("manuscrito_","") +'/'+ id );
+</script>
+{% set classes = ['node'] %}
+
+<article {{ attributes.addClass(classes) }}>
+    <div id="main" class="despliegue-nodo">
+        <div id="node-manuscrito" class="container contenido-nodo">
+            <div class="left" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+                <div class="box">
+
+                    <h1 {{ attributes }}>{{ node.title.value }}</h1>
+                    
+                    
+                    <div class="info">    
+                        <span class="author">Artículo tipo: {{ node.field_tipo_articulo.value }}</span>                    
+                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                    </div>
+
+                    <div class="revision">
+                        
+                        <dd>{{ drupal_view('manuscritos', 'block_1') }}</dd>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="content article">
+
+                    {% if node.body.value %}
+                        <div class="summary">
+                            <p>{{ node.body.summary }}</p>
+                        </div>
+                        <div class="article__body">
+                            {{ node.body.value|raw }}
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_resumen.value %}
+                        <div class="block resumen">
+                            <div class="title-block"><h2>Resumen</h2></div> 
+                            <div class="box active">
+                                <p>{{ node.field_resumen.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_introduccion.value %}    
+                        <div class="block introduccion">
+                            <div class="title-block"><h2>Introducción</h2></div>
+                            <div class="box active">
+                                <p>{{ node.field_introduccion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_metodos.value %}
+                        <div class="block metodos">
+                            <div class="title-block">
+                                <h2>Métodos</h2>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_metodos.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_resultado.value %}
+                        <div class="block resultados">
+                            <div class="title-block">
+                                <h2>Resultados</h2>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_resultado.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_conclusion.value %}
+                        <div class="block conclusiones">
+                            <div class="title-block">
+                                <h2>Conclusiones</h2>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conclusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_referencias[0] %}
+                        {{ dump(node.field_referencias) }}
+                        <div class="block referencias">
+                            <div class="title-block">
+                                <h2>Referencias</h2>
+                            </div>
+                            <div class="box">
+                                {% for item in node.field_referencias %}
+                                    <div class="ref paragraph" id="paragraph-{{ item.target_id }}" data-paragraph="{{ item.target_id }}">
+                                        {{ drupal_entity('paragraph', item.target_id) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="news infinite-contents manuscrito">
+                {% set array = [user.id,node.nid.value] %}
+                <div class="block-title">
+                    <h3>Mis manuscritos</h3>
+                </div>
+                {{ drupal_view('manuscritos', 'block_2',user.id) }}
+            </div>
+        </div>
+    </div>
+    <!-- /#main -->
+</article>
+<!-- /.node -->
