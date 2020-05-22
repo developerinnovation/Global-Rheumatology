@@ -16,8 +16,8 @@
 
         <div class="box-type">
             <div class="article active">
-                <p style="text-align: justify;">Global Rheumatology publicará artículos de relevancia para el clínico practicante en las siguientes secciones: Artículo original, Revisión, Mini reseña, Artículos cortos, Comentarios y respuestas rápidas Reporte de un caso, Carta al editor</p>
                 <ul>
+                    <p style="text-align: justify;">Global Rheumatology publicará artículos de relevancia para el clínico practicante en las siguientes secciones: Artículo original, Revisión, Mini reseña, Artículos cortos, Comentarios y respuestas rápidas Reporte de un caso, Carta al editor</p>
                     <li class="target" data-type="editorial" data-node="170">
                         <img src="/themes/custom/basic/images/article_tipo/articulo-editorial.svg" alt="" title="" width="100">
                         <h3>Editorial</h3>
@@ -49,32 +49,33 @@
                 </ul>
             </div>
             <div class="magazine">
-                <p style="text-align: justify;">Global Rheumatology publicarán contenido accesible a todo tipo de publico en secciones llamadas: Ciencia Panlar, Reportajes especiales, Columnas, Multimedia, Infografías, Podcast, VideoBlog, Microlearning y Noticias. Para enviar su propuesta a esta sección debe comunicarse con el equipo editorial a través del siguiente correo electrónico <a href="mailto:magazine@globalrheumpanlar.org">magazine@globalrheumpanlar.org</a> </p>
+                
                 {% set roles = user.getroles(TRUE) %}
-                {% if ('administrator' in roles) or ('revisores' in roles) or ('editores' in roles) or ('autor_magazine' in roles) %}
                     <ul>
-                        <li class="target" data-type="ciencia_panlar" data-node="176">
-                            <img src="/themes/custom/basic/images/article_tipo/ciencia.svg" alt="" title="" width="100">
-                            <h3>Ciencia Panlar</h3>
-                        </li>
-                        <li class="target" data-type="reportajes_especiales" data-node="177">
-                            <img src="/themes/custom/basic/images/article_tipo/reportaje.svg" alt="" title="" width="100">
-                            <h3>Reportaje Especial</h3>
-                        </li>
-                        <li class="target" data-type="multimedia" data-node="178">
-                            <img src="/themes/custom/basic/images/article_tipo/multimedia.svg" alt="" title="" width="100">
-                            <h3>Multimedia</h3>
-                        </li>
-                        <li class="target" data-type="noticia" data-node="179">
-                            <img src="/themes/custom/basic/images/article_tipo/noticia.svg" alt="" title="" width="100">
-                            <h3>Noticias</h3>
-                        </li>
-                        <li class="target" data-type="columnas" data-node="192">
-                            <img src="/themes/custom/basic/images/article_tipo/reportaje.svg" alt="" title="" width="100">
-                            <h3>Columnas</h3>
-                        </li>
+                        <p style="text-align: justify;">Global Rheumatology publicarán contenido accesible a todo tipo de publico en secciones llamadas: Ciencia Panlar, Reportajes especiales, Columnas, Multimedia, Infografías, Podcast, VideoBlog, Microlearning y Noticias. Para enviar su propuesta a esta sección debe comunicarse con el equipo editorial a través del siguiente correo electrónico <a href="mailto:magazine@globalrheumpanlar.org">magazine@globalrheumpanlar.org</a> </p>
+                        {% if ('administrator' in roles) or ('revisores' in roles) or ('editores' in roles) or ('autor_magazine' in roles) %}
+                            <li class="target" data-type="ciencia_panlar" data-node="176">
+                                <img src="/themes/custom/basic/images/article_tipo/ciencia.svg" alt="" title="" width="100">
+                                <h3>Ciencia Panlar</h3>
+                            </li>
+                            <li class="target" data-type="reportajes_especiales" data-node="177">
+                                <img src="/themes/custom/basic/images/article_tipo/reportaje.svg" alt="" title="" width="100">
+                                <h3>Reportaje Especial</h3>
+                            </li>
+                            <li class="target" data-type="multimedia" data-node="178">
+                                <img src="/themes/custom/basic/images/article_tipo/multimedia.svg" alt="" title="" width="100">
+                                <h3>Multimedia</h3>
+                            </li>
+                            <li class="target" data-type="noticia" data-node="179">
+                                <img src="/themes/custom/basic/images/article_tipo/noticia.svg" alt="" title="" width="100">
+                                <h3>Noticias</h3>
+                            </li>
+                            <li class="target" data-type="columnas" data-node="192">
+                                <img src="/themes/custom/basic/images/article_tipo/reportaje.svg" alt="" title="" width="100">
+                                <h3>Columnas</h3>
+                            </li>
+                        {% endif %}
                     </ul>
-                {% endif %}
             </div>
         </div>    
     </div>
