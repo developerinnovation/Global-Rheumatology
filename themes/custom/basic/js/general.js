@@ -399,6 +399,9 @@ function checkWord(e){
         ctnWord +=  parseInt($( this ).text().split(",")[1].replace("Palabras: ",""));
     });
 
+    
+    var referencia = parseInt($("#cke_wordcount_edit-field-referencia-0-value").text().split(",")[1].replace("Palabras: ",""))
+    
     var type = location.pathname.split("/")[2];
     var limit = 0;
     switch(type) {
@@ -424,7 +427,7 @@ function checkWord(e){
             limit = 2500;
         break;
       }
-
+      ctnWord = ctnWord - referencia;
     if (ctnWord > limit) {
         alert('El limite de '+ limit +' palabras fue excedido, por favor verifique su artículo.');
         e.preventDefault();
