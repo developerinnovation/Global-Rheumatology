@@ -64,42 +64,6 @@
                         </div>
                     {% endif %}
 
-                    {% if node.agradecimientos.value %}
-                        <div class="block agradecimiento">
-                            <div class="title-block">
-                                <h2>Agradecimiento</h2>
-                                <button class="btn-show-text" data-id="agradecimiento">cerrar</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.agradecimientos.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_conflicto_interes.value %}
-                        <div class="block conflic">
-                            <div class="title-block">
-                                <h2>Conflicto de interés</h2>
-                                <button class="btn-show-text" data-id="conflic">cerrar</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_conflicto_interes.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_financiacion.value %}
-                        <div class="block finan">
-                            <div class="title-block">
-                                <h2>Financiación</h2>
-                                <button class="btn-show-text" data-id="finan">cerrar</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_financiacion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
                     {% if node.field_introduccion.value %}
                         <div class="block introduccion">
                             <div class="title-block">
@@ -136,6 +100,41 @@
                         </div>
                     {% endif %}
 
+                    {% if node.agradecimientos.value %}
+                        <div class="block agradecimiento">
+                            <div class="title-block">
+                                <h2>Agradecimiento</h2>
+                                <button class="btn-show-text" data-id="agradecimiento">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.agradecimientos.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_conflicto_interes.value %}
+                        <div class="block conflic">
+                            <div class="title-block">
+                                <h2>Conflicto de interés</h2>
+                                <button class="btn-show-text" data-id="conflic">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conflicto_interes.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_financiacion.value %}
+                        <div class="block finan">
+                            <div class="title-block">
+                                <h2>Financiación</h2>
+                                <button class="btn-show-text" data-id="finan">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_financiacion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                     
 
                     <div class="block referencias">

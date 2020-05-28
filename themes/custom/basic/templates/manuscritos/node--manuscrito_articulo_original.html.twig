@@ -64,6 +64,68 @@
                         </div>
                     {% endif %}
 
+                    {% if node.field_introduccion.value %}
+                        <div class="block introduccion">
+                            <div class="title-block">
+                                <h2>Introducción</h2>
+                                <button class="btn-show-text" data-id="introduccion">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_introduccion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_metodos.value %}
+                        <div class="block metodos">
+                            <div class="title-block">
+                                <h2>Material y Métodos</h2>
+                                <button class="btn-show-text" data-id="metodos">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_metodos.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_resultados.value %}
+                        <div class="block resultados">
+                            <div class="title-block">
+                                <h2>Resultados</h2>
+                                <button class="btn-show-text" data-id="resultados">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.field_resultados.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_discusion.value %}    
+                        <div class="block discusion">
+                            <div class="title-block">
+                                <h2>Conclusión</h2>
+                                <button class="btn-show-text" data-id="discusion">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_discusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    {% if node.field_conclusion.value %}    
+                        <div class="block conclusion">
+                            <div class="title-block">
+                                <h2>Conclusión</h2>
+                                <button class="btn-show-text" data-id="conclusion">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conclusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
                     {% if node.agradecimientos.value %}
                         <div class="block agradecimiento">
                             <div class="title-block">
@@ -100,56 +162,6 @@
                         </div>
                     {% endif %}
 
-                    {% if node.field_introduccion.value %}
-                        <div class="block introduccion">
-                            <div class="title-block">
-                                <h2>Introducción</h2>
-                                <button class="btn-show-text" data-id="introduccion">cerrar</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_introduccion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_metodos.value %}
-                        <div class="block metodos">
-                            <div class="title-block">
-                                <h2>Materia y Métodos</h2>
-                                <button class="btn-show-text" data-id="metodos">cerrar</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_metodos.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_resultados.value %}
-                        <div class="block resultados">
-                            <div class="title-block">
-                                <h2>Resultados</h2>
-                                <button class="btn-show-text" data-id="resultados">cerrar</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_resultados.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-
-                    {% if node.field_conclusion.value %}    
-                        <div class="block conclusion">
-                            <div class="title-block">
-                                <h2>Conclusión</h2>
-                                <button class="btn-show-text" data-id="conclusion">cerrar</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_conclusion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    
 
                     <div class="block referencias">
                         <div class="title-block">

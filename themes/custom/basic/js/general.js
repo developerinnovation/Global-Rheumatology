@@ -400,8 +400,14 @@ function checkWord(e){
     });
 
     
-    var referencia = parseInt($("#cke_wordcount_edit-field-referencia-0-value").text().split(",")[1].replace("Palabras: ",""))
+    var referencia = parseInt($("#cke_wordcount_edit-field-referencia-0-value").text().split(",")[1].replace("Palabras: ",""));
+    var resume_espanol = parseInt($("#cke_wordcount_edit-field-resumen-abstract-0-subform-field-resumen-espanol-0-value").text().split(",")[1].replace("Palabras: ",""));
+    var resume_ingles = parseInt($("#cke_wordcount_edit-field-resumen-abstract-0-subform-field-resumen-ingles-0-value").text().split(",")[1].replace("Palabras: ",""));
+    var resume_portugues = parseInt($("#cke_wordcount_edit-field-resumen-abstract-0-subform-field-resumen-portugues-0-value").text().split(",")[1].replace("Palabras: ",""));
+    var agradecimientos = parseInt($("#cke_wordcount_edit-field-agradecimientos-0-value").text().split(",")[1].replace("Palabras: ",""));
     
+    var rest = resume_espanol + referencia + resume_ingles + resume_portugues + agradecimientos;
+
     var type = location.pathname.split("/")[2];
     var limit = 0;
     switch(type) {
@@ -427,7 +433,7 @@ function checkWord(e){
             limit = 2500;
         break;
       }
-      ctnWord = ctnWord - referencia;
+      ctnWord = ctnWord - rest;
     if (ctnWord > limit) {
         alert('El limite de '+ limit +' palabras fue excedido, por favor verifique su artículo.');
         e.preventDefault();
