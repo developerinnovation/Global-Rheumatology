@@ -11,11 +11,12 @@
     <div class="container">
         <div class="send_article">
             <div class="block-title">
-            <h3>{% trans%} Llamada a artículos {% endtrans%}</h3>
+            <h3>{{ drupal_field('title', 'node',  208) }}</h3>
                 <!--<h3>{% trans%} Envie su artículo {% endtrans%}</h3>-->
             </div>
-            <p>Global Rheumatology by PANLAR (GRP) lanza la convocatoria para <br> trabajos de publicación desde el 1ro de mayo de 2020. <br>
-            Las propuestas se aceptan de manera continua y no hay una fecha límite de envío. <br> Los primeros trabajos aceptados se publicarán a partir de mayo  durante el 22 Congreso Panamericano de Reumatología <b>PANLAR</b> 2020 <br> antes de enviar su artículo lea los detalles  <a href="/articulo/llamada-articulos-162">aquí</a> </p>
+            <div>
+                {{ drupal_field('body', 'node',  208) }}
+            </div>
 
             <!--<p>Sea parte de Global Rheumalology enviando sus contenidos. <br> Revise en línea el estado de sus publicaciones y revisiones. </p>-->
             <button class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /new/send/manuscrito {% else %}  {% endif %}">{% trans%} Enviar artículo {% endtrans%} </button>
