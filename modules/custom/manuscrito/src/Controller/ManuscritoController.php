@@ -15,7 +15,9 @@ use Drupal\Core\Database\Connection;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\Role;
 use Symfony\Component\HttpFoundation\JsonResponse;
- 
+use Drupal\user\Entity\User;
+use Drupal\rest\ResourceResponse;
+
 class ManuscritoController extends ControllerBase
 { 
 
@@ -163,4 +165,97 @@ class ManuscritoController extends ControllerBase
             '#theme' => 'error_list',
         ];
     }
+
+    public function search(Request $request){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        $data = [];
+        $_GET["tipo"];
+        if($_GET["name"] != ""){
+            $data = $this->getNodeByTitle($_GET["tipo"]);
+        }
+
+        if($_GET["tipo"] != ""){
+            $data = $this->getNodeByType($_GET["tipo"]);
+        }
+
+        if($_GET["autor"] != ""){
+            $data = $this->getNodeByAuthor($_GET["autor"]);
+        }
+
+        return [
+            '#theme' => 'search',
+            '#users' => $this->getAllAuthor(),
+            '#name' => isset($_GET["name"]) ? $_GET["name"] : NULL,
+            '#tipo' => isset($_GET["tipo"]) ? $_GET["tipo"] : NULL,
+            '#autor' => isset($_GET["autor"]) ? $_GET["autor"] : NULL,
+            '#data' => $data,
+        ];
+    }
+
+    public function getAllAuthor(){
+        $userlist = [];
+        $ids = \Drupal::entityQuery('user')
+        ->condition('status', 1)
+        ->condition('roles', 'autores')
+        ->execute();
+        $users = User::loadMultiple($ids);
+        
+        foreach($users as $user){
+            $username = ucfirst($user->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($user->get('field_apellidos')->getValue()[0]['value']);
+            $list = [
+                'name' => $username,
+                'uid' => $user->get('uid')->value,
+            ];
+            array_push($userlist,$list);
+        } 
+    
+    return $userlist;
+    }
+
+    public function getNodeByTitle($title){
+        $nid = \Drupal::entityQuery('node')
+                ->condition('status', 1)
+                ->condition('title', $title. '%', 'like')
+                ->sort('created' , 'DESC')
+                ->execute();
+        $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+        return $this->structureContentDest($nodes);
+    }
+
+    public function getNodeByAuthor($uid){
+        $nid = \Drupal::entityQuery('node')
+                ->condition('status', 1)
+                ->condition('uid', $uid)
+                ->sort('created' , 'DESC')
+                ->execute();
+        $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+        return $this->structureContentDest($nodes);
+    }
+
+    public function getNodeByType($type){
+        $nid = \Drupal::entityQuery('node')
+                ->condition('status', 1)
+                ->condition('type', $type)
+                ->sort('created' , 'DESC')
+                ->execute();
+        $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+        return $this->structureContentDest($nodes);
+    }
+
+    public function structureContentDest($nodes) {
+        $contents = [];
+        foreach ($nodes as $node) {
+            $content = [
+                'nid' => $node->get('nid')->getValue()[0]['value'],
+                'title' => $node->get('title')->getValue()[0]['value'],
+                'type' => $node->bundle(),
+                'uid' => $node->getOwnerId(),
+                'node' => $node,
+            ];
+            array_push($contents,$content);
+        }
+        return $contents;
+    }
+
 }

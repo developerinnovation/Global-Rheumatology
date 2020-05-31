@@ -369,6 +369,39 @@ var limitResume = 250;
         $("#edit-preview").click(function(e) {
             checkWord(e);
         });
+
+        // Buscador
+        $("#info-article .list-type .option ul li#name").click(function() {
+            $(this).addClass("active");
+            $("#info-article .list-type .option ul li#tipo").removeClass("active");
+            $("#info-article .list-type .option ul li#autor").removeClass("active");
+            $("#info-article .list-type .box-type .article.autor").removeClass("active");
+            $("#info-article .list-type .box-type .article.name").addClass("active");
+            $("#info-article .list-type .box-type .article.tipo").removeClass("active");
+        });
+        $("#info-article .list-type .option ul li#autor").click(function() {
+            $(this).addClass("active");
+            $("#info-article .list-type .option ul li#tipo").removeClass("active");
+            $("#info-article .list-type .option ul li#name").removeClass("active");
+            $("#info-article .list-type .box-type .article.autor").addClass("active");
+            $("#info-article .list-type .box-type .article.name").removeClass("active");
+            $("#info-article .list-type .box-type .article.tipo").removeClass("active");
+        });
+        $("#info-article .list-type .option ul li#tipo").click(function() {
+            $(this).addClass("active");
+            $("#info-article .list-type .option ul li#name").removeClass("active");
+            $("#info-article .list-type .option ul li#autor").removeClass("active");
+            $("#info-article .list-type .box-type .article.autor").removeClass("active");
+            $("#info-article .list-type .box-type .article.name").removeClass("active");
+            $("#info-article .list-type .box-type .article.tipo").addClass("active");
+        });
+        if(window.location.pathname == "/search/content/by/type"){
+            var parametro = window.location.search;
+            parametro = parametro.split('=');
+            parametro = parametro[0].replace('?','');
+            $("#info-article .list-type .option ul li#"+parametro).trigger( "click" );
+        }
+
     });
 })(jQuery);
 

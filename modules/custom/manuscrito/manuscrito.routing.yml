@@ -54,3 +54,10 @@ thanks_module_page:
         _title: 'Artículo recibido'
     requirements:
         _permission: 'New Manuscrito'
+search_module_page:
+    path: 'search/content/by/type'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::search'
+        _title: 'Buscardor'
+    requirements:
+       _access: 'TRUE'
