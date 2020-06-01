@@ -219,4 +219,156 @@
             }
         }
     }
+    main#info-article{
+        .list-type{
+            .option{
+                ul{
+                    li{
+                        width: calc(33% - 4px);
+                        height: 40px;
+                        padding: 6px 4px;
+                        @media only screen and ($tablet){
+                            width: 200px;
+                            height: 70px;
+                            padding: 10px;
+                        }
+                        img{
+                            margin: 0;
+                            @media only screen and ($tablet){
+                                margin: 0 10px 0 0;
+                            }
+                        }
+                        h2{
+                            font: {
+                                size: 12px;
+                            }
+                            line-height: 24px;
+                            margin: 0;
+                            @media only screen and ($tablet){
+                                font: {
+                                    size: 21px;
+                                }
+                                line-height: 48px;
+                            }
+                        }
+                    }
+                }
+            }
+            .box-type{
+                background: #F8F8F8;
+                .article{
+                    form{
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0 0 20px;
+                        border-bottom: 1px dashed #ddd;
+                        margin: 0 0 20px;
+                        @media only screen and ($tablet){
+                            justify-content: center;
+                        }
+                        input{
+                            -webkit-appearance: inherit;
+                            display: block;
+                            height: 34px;
+                            border-radius: 6px;
+                            @media only screen and ($tablet){
+                                height: 44px;
+                            }
+                            &[type="search"]{
+                                width: calc(100% - 110px);
+                                padding: 0 10px;
+                                border: 2px solid $primary-color;
+                                @media only screen and ($tablet){
+                                    width: 520px;
+                                    margin: 0 20px 0 0;
+                                }
+                            }
+                            &[type="submit"]{
+                                width: 100px;
+                                padding: 0;
+                                border: 0;
+                                background: #165B98;
+                                font: {
+                                    weight: 700;
+                                    size: 14px;
+                                }
+                                line-height: 34px;
+                                color: #fff;
+                                text-align: center;
+                            }
+                        }
+                        select{
+                            display: block;
+                            width: calc(100% - 110px);
+                            height: 34px;
+                            padding: 0 10px;
+                            border: 2px solid $primary-color;
+                            border-radius: 6px;
+                            margin: 0;
+                            @media only screen and ($tablet){
+                                width: 520px;
+                                height: 44px;
+                                margin: 0 20px 0 0;
+                            }
+                        }
+                    }
+                    .search-result{
+                        .no-result{
+                            margin: 0 0 20px;
+                            p{
+                                text-align: center;
+                                color: #666;
+                                @media only screen and ($tablet){
+                                    font: {
+                                        size: 24px;
+                                    }
+                                }
+                                @media only screen and ($desktop){
+                                    font: {
+                                        size: 28px;
+                                    }
+                                }
+                            }
+                        }
+                        .result{
+                            @media only screen and ($tablet){
+                                display: flex;
+                                flex-wrap: wrap;
+                            }
+                            .item-news{
+                                background: #fff;
+                                margin: 0 0 20px;
+                                opacity: 1;
+                                -webkit-box-shadow: $sombra;
+                                box-shadow: $sombra;
+                                @media only screen and ($tablet){
+                                    width: calc(33.3% - 20px);
+                                    margin: 0 10px 20px;
+                                }
+                                @media only screen and ($desktop){
+                                    width: calc(25% - 20px);
+                                }
+                                .text{
+                                    padding: 25px 20px 30px;
+                                    @media only screen and ($tablet){
+                                        padding: 25px 35px 30px;
+                                    }
+                                    .title{
+                                        @media only screen and ($tablet){
+                                            min-height: 110px;
+                                        }
+                                    }
+                                    .sumary{
+                                        @media only screen and ($tablet){
+                                            min-height: 70px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
