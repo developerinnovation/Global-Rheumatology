@@ -16,6 +16,7 @@ use Drupal\node\Entity\Node;
 use Drupal\user\Entity\Role;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\user\Entity\User;
+use Drupal\Core\Url;
 use Drupal\rest\ResourceResponse;
 
 class ManuscritoController extends ControllerBase
@@ -194,6 +195,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function getAllAuthor(){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $userlist = [];
         $ids = \Drupal::entityQuery('user')
         ->condition('status', 1)
@@ -214,9 +216,13 @@ class ManuscritoController extends ControllerBase
     }
 
     public function getNodeByTitle($title){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $nid = \Drupal::entityQuery('node')
                 ->condition('status', 1)
-                ->condition('title', $title. '%', 'like')
+                ->condition('title',  '%'.$title, 'like')
+                ->condition('type', 'plantillas_correos', '!=')
+                ->condition('type', 'page', '!=')
+                ->condition('type', 'manuscrito', '!=')
                 ->sort('created' , 'DESC')
                 ->execute();
         $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
@@ -224,6 +230,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function getNodeByAuthor($uid){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $nid = \Drupal::entityQuery('node')
                 ->condition('status', 1)
                 ->condition('uid', $uid)
@@ -234,6 +241,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function getNodeByType($type){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $nid = \Drupal::entityQuery('node')
                 ->condition('status', 1)
                 ->condition('type', $type)
@@ -244,18 +252,41 @@ class ManuscritoController extends ControllerBase
     }
 
     public function structureContentDest($nodes) {
+        date_default_timezone_set('America/Bogota');
+        setlocale(LC_ALL, 'es_Es');
+
         $contents = [];
         foreach ($nodes as $node) {
             $content = [
                 'nid' => $node->get('nid')->getValue()[0]['value'],
                 'title' => $node->get('title')->getValue()[0]['value'],
-                'type' => $node->bundle(),
-                'uid' => $node->getOwnerId(),
+                'type' => $this->bundleLabel($node->bundle()),
+                'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $node->get('nid')->getValue()[0]['value']),
+                'autor' => $this->load_author($node->getOwnerId()),
+                'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'M Y'),
                 'node' => $node,
             ];
             array_push($contents,$content);
         }
         return $contents;
+    }
+
+    public function load_author($uid){
+        $user =   User::load($uid); 
+        $experto = [
+            'uid' => $user->get('uid')->getValue()[0]['value'],
+            'name_author' => ucfirst($user->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($user->get('field_apellidos')->getValue()[0]['value']),
+            'uri' => \Drupal::service('path.alias_manager')->getAliasByPath('/user/'.$user->get('uid')->getValue()[0]['value']),
+        ];
+        return $experto;
+    }
+
+    public function bundleLabel($node_type){
+        $bundle_label = \Drupal::entityTypeManager()
+            ->getStorage('node_type')
+            ->load($node_type)
+            ->label();
+        return ucfirst(str_replace('Manuscrito', '', $bundle_label)); 
     }
 
 }
