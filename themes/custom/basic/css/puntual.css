@@ -21,3 +21,9 @@
 .filter-wrapper.js-form-wrapper.form-wrapper {
     display: none;
 }
+
+.block-printfriendly {
+    float: left;
+    line-height: 16px;
+    padding: 0 2px;
+}
