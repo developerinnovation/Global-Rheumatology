@@ -21,14 +21,14 @@
                                 <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
                             {% endfor %}
                         </span>
-                        <date>{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                        <date>{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
                     </div>
 
                     <div class="statistics">
-                        <label>Stats</label>
+                        <label>Estadísticas</label>
                         <div class="item views">
                             <i class="icon icon-views">Vistas</i>
-                            <span><b>1,909</b>Readers</span>
+                            <span><b>1,909</b>Vistas</span>
                         </div>
                     </div>
 

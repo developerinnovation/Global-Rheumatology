@@ -20,18 +20,18 @@
                                 <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
                             {% endfor %}
                         </span>
-                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
                     </div>
 
                     <div class="statistics">
-                        <label>Stats</label>
+                        <label>Estadísticas</label>
                         <div class="item views">
                             <i class="icon icon-views">Vistas</i>
-                            <span><b>1,909</b>Readers</span>
+                            <span><b>1,909</b>Vistas</span>
                         </div>
                         <div class="item shareds">
-                            <i class="icon icon-shared">Shared</i>
-                            <span><b>1,909</b>Shared</span>
+                            <i class="icon icon-shared">Compartidas</i>
+                            <span><b>1,909</b>Compartidas</span>
                         </div>
                     </div>
 
@@ -60,8 +60,10 @@
                             <a class="a2a_button_linkedin">
                                 <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
                             </a>
+                            {{ drupal_block('block_printfriendly') }}
                         </div>
                     </div>
+                    
                 </div>
             </div>
 

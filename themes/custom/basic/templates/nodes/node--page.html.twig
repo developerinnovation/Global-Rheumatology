@@ -21,7 +21,7 @@
           
           <div class="info article">
               <span><b>{{ node.uid.entity.field_nombre.value }} {{ node.uid.entity.field_apellidos.value }}</b>,<date>
-              {{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date></span>
+              {{ content.field_fecha.value|date('U')|format_date('global') }}</date></span>
           </div>
 
 
@@ -40,6 +40,7 @@
                   <a class="a2a_button_linkedin">
                       <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
                   </a>
+                  {{ drupal_block('block_printfriendly') }}
               </div>
           </div>
         </div>

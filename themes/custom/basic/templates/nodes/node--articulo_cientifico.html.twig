@@ -23,23 +23,19 @@
               {% for autor in node.field_autores %}
                 <b>{{ autor.entity.field_nombre.value }} {{ autor.entity.field_apellidos.value }}</b> -              
               {% endfor %}
-              <date>{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+              <date>{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
             </span>
           </div>
 
           <div class="statistics">
-              <label>Stats</label>
+              <label>Estadísticas</label>
             <div class="item views">
               <i class="icon icon-views">Vistas</i>
-              <span><b>1,909</b>Readers</span>
-            </div>
-            <div class=" item downloads">
-              <i class="icon icon-download">Descargas</i>
-              <span><b>1,909</b>Descargas</span>
+              <span><b>1,909</b>Vistas</span>
             </div>
             <div class="item shareds">
-              <i class="icon icon-shared">Shared</i>
-              <span><b>1,909</b>Shared</span>
+              <i class="icon icon-shared">Compartidas</i>
+              <span><b>1,909</b>Compartidas</span>
             </div>
           </div>
 
@@ -69,9 +65,7 @@
                 <a class="a2a_button_linkedin">
                     <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
                 </a>
-                <a class="" href="/download-article" target="_blank">
-                    <img src="\themes\custom\basic\images\icon-downloads.svg" border="0" alt="Share" width="27" height="27">
-                </a>
+                {{ drupal_block('block_printfriendly') }}
             </div>
           </div>
 
@@ -215,7 +209,7 @@
     <div class="container">
         <div class="news related last_news"> 
             <div class="block-title">
-                <h3>Artículos relacionados</h3>
+                <h3>Artículos científicos</h3>
             </div>
             <dd>{{ drupal_view('articulos', 'block_1') }}</dd>
         </div>

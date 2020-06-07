@@ -15,7 +15,7 @@
                     
                     
                     <div class="info">                            
-                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('mes_ano') }}</date>
+                        <date class="date">{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
                     </div>
 
                     <div class="revision">                        
@@ -31,7 +31,29 @@
                             {% endfor %}
                         </ul>
                         {% endif %} 
-                    </div> 
+                    </div>
+
+                    {% if node.status.value == 1 %}
+                    <div class="shared">
+                        <label>Compartir</label>          
+
+                        <div class="a2a_kit a2a_default_style">
+                            <a class="a2a_button_facebook">
+                                <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_whatsapp">
+                                <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_twitter">
+                                <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_linkedin">
+                                <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+                            </a>
+                            {{ drupal_block('block_printfriendly') }}
+                        </div>
+                    </div>
+                    {% endif %}  
 
                 </div>
             </div>
