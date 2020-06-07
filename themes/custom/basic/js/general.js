@@ -6,6 +6,10 @@ var limitResume = 250;
 
         // <!------------------------------- General ------------------------------>
 
+        $("header .container .box-menu .bottom .search .form-item input").click(function() {
+            window.location.href="/search/content/by/type"
+        });
+
         // icono enviar artículo
 
         $("#launcher-button").mouseover(function() {
@@ -401,6 +405,8 @@ var limitResume = 250;
             parametro = parametro[0].replace('?','');
             $("#info-article .list-type .option ul li#"+parametro).trigger( "click" );
         }
+      
+        
 
     });
 })(jQuery);
