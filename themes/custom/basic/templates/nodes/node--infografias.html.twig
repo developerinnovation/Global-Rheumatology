@@ -20,7 +20,7 @@
                         {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                         {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
                         <div class="author">
-                            <span>Por: <b>{{ nombre|striptags|trim|capitalize }} {{ apellidos|striptags|trim|capitalize }}</b> <br>{{ afiliacion|striptags|trim|capitalize }}</span>
+                            <span>Por: <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
                         </div>
                         <br>
                         <div>
