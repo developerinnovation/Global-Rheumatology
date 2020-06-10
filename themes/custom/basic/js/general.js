@@ -6,9 +6,9 @@ var limitResume = 250;
 
         // <!------------------------------- General ------------------------------>
 
-        // $("header .container .box-menu .bottom .search .form-item input").click(function() {
-        //     window.location.href="/search/content/by/type"
-        // });
+        $("header .container .box-menu .bottom .search .form-item input").click(function() {
+            window.location.href="/search/content/by/type"
+        });
 
         // icono enviar artículo
 

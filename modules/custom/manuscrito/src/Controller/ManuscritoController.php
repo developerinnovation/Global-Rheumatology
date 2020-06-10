@@ -173,7 +173,7 @@ class ManuscritoController extends ControllerBase
         $data = [];
         $_GET["tipo"];
         if($_GET["name"] != ""){
-            $data = $this->getNodeByTitle($_GET["tipo"]);
+            $data = $this->getNodeByTitle($_GET["name"]);
         }
 
         if($_GET["tipo"] != ""){
@@ -219,7 +219,7 @@ class ManuscritoController extends ControllerBase
         \Drupal::service('page_cache_kill_switch')->trigger();
         $nid = \Drupal::entityQuery('node')
                 ->condition('status', 1)
-                ->condition('title',  '%'.$title, 'like')
+                ->condition('title',  $title.'%', 'like')
                 ->condition('type', 'plantillas_correos', '!=')
                 ->condition('type', 'page', '!=')
                 ->condition('type', 'manuscrito', '!=')
