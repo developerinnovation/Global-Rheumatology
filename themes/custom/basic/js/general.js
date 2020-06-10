@@ -85,13 +85,13 @@ var limitResume = 250;
         });
 
         $("#article-cientifico").click(function() {
-            $(".more-read").toggleClass("active");
+            $(".more-cientifico").toggleClass("active");
             $(".more-magazine").toggleClass("active");
         });
 
         $("#article-magazine").click(function() {
             $(".more-magazine").toggleClass("active");
-            $(".more-read").toggleClass("active");
+            $(".more-cientifico").toggleClass("active");
         });
 
         
