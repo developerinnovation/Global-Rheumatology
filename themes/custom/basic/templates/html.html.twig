@@ -36,8 +36,8 @@ CSS files in the head. * - scripts: Script tags necessary to load the JavaScript
 
                             <div id="skip">
                                 <a href="#main-menu" class="visually-hidden focusable skip-link">
-        {{ 'Skip to main navigation'|t }}
-      </a>
+                                    {{ 'Skip to main navigation'|t }}
+                                </a>
                             </div>
 
 
@@ -56,6 +56,8 @@ CSS files in the head. * - scripts: Script tags necessary to load the JavaScript
                                     <span class="launcher-message">Envía un artículo</span>
                                 </div>
                             </div>
+
+                            {% include '@basic/popup.html.twig' %}
 
                             <!-- ___________________ END MAIN _______________________ -->
 
