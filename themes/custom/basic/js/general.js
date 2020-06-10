@@ -80,10 +80,21 @@ var limitResume = 250;
         });
 
         $("#read").click(function() {
-            $(".more-read").toggleClass("active");
+            $(".more-cientifico").toggleClass("active");
             $(".more-shared").toggleClass("active");
         });
 
+        $("#article-cientifico").click(function() {
+            $(".more-read").toggleClass("active");
+            $(".more-magazine").toggleClass("active");
+        });
+
+        $("#article-magazine").click(function() {
+            $(".more-magazine").toggleClass("active");
+            $(".more-read").toggleClass("active");
+        });
+
+        
         // Scroll fixed header Home
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();

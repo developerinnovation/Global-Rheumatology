@@ -26,10 +26,26 @@
 
     <div class="container">
         <div class="last_news">
-            <div class="block-title">
-                <h3>{% trans%} Últimos artículos {% endtrans%}</h3>
+            <div class="top">
+                <div class="left">
+                    <div class="block-title">
+                        <h3>{% trans%} Últimos artículos {% endtrans%}</h3>
+                    </div>
+                </div>
+                <div class="right">
+                    <span id="article-cientifico" class="more-cientifico active">{% trans%} Artículos científicos {% endtrans%}</span>
+                    <hr>
+                    <span id="article-magazine" class="more-magazine">{% trans%} Magazine {% endtrans%}</span>
+                </div>
             </div>
-            <dd>{{ drupal_view('home', 'block_3') }}</dd>
+            <div class="bottom">
+                <div class="view_news more-cientifico active">
+                    <dd>{{ drupal_view('home', 'block_3') }}</dd>
+                </div>
+                <div class="view_news more-magazine">
+                    <dd>{{ drupal_view('home', 'block_7') }}</dd>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.container -->
