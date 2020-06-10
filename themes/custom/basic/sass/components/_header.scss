@@ -471,7 +471,7 @@ header{
                 @media only screen and ($desktop){
                     width: 100%;
                 }
-                .search{
+                >.search{
                     display: flex;
                     .views-element-container{
                         @media only screen and ($desktop){
@@ -497,8 +497,58 @@ header{
                     .form-actions{
                         display: none;
                     }
-                    h3{
-                        display: none;
+                    .views-infinite-scroll-content-wrapper{
+                        @media only screen and ($desktop){
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                        .views-row{
+                            margin: 0 0 15px;
+                            border-bottom: 1px solid #ccc;
+                            padding: 0 0 15px;
+                            @media only screen and ($desktop){
+                                width: calc(20% - 20px);
+                                margin: 0 10px 15px;
+                            }
+                            .picture{
+                                figure{
+                                    img{
+                                        @media only screen and ($desktop){
+                                            height: 138px;
+                                        }
+                                    }
+                                }
+                            }
+                            .text{
+                                @media only screen and ($desktop){
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    height: 300px;
+                                }
+                                .title{
+                                    a{
+                                        @media only screen and ($desktop){
+                                            font: {
+                                                size: 16px;
+                                            }
+                                        }
+                                    }
+                                }
+                                .sumary{
+                                    @media only screen and ($desktop){
+                                        font: {
+                                            size: 14px;
+                                        }
+                                    }
+                                }
+                                .info{
+                                    span{
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
                 .info{
