@@ -95,19 +95,26 @@ sessionStorage.setItem('firstVisit', '0');
             items: 1,
         });
 
+        // eventos tap ultimos articulos y mas leidos, publicados 
+
         $("#read").click(function() {
-            $(".more-cientifico").toggleClass("active");
-            $(".more-shared").toggleClass("active");
+            $(".more-read").addClass("active");
+            $(".more-shared").removeClass("active");
+        });
+
+        $("#shared").click(function() {
+            $(".more-shared").addClass("active");
+            $(".more-read").removeClass("active");
         });
 
         $("#article-cientifico").click(function() {
-            $(".more-cientifico").toggleClass("active");
-            $(".more-magazine").toggleClass("active");
+            $(".more-cientifico").addClass("active");
+            $(".more-magazine").removeClass("active");
         });
 
         $("#article-magazine").click(function() {
-            $(".more-magazine").toggleClass("active");
-            $(".more-cientifico").toggleClass("active");
+            $(".more-magazine").addClass("active");
+            $(".more-cientifico").removeClass("active");
         });
 
         
@@ -205,10 +212,7 @@ sessionStorage.setItem('firstVisit', '0');
             $("#info-article aside.live-box").removeClass("active");
         });
 
-        $("#shared").click(function() {
-            $(".more-shared").toggleClass("active");
-            $(".more-read").toggleClass("active");
-        });
+        
 
         // last news
         $(".last_news .views-element-container >div").owlCarousel({
