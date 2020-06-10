@@ -9,7 +9,7 @@ sessionStorage.setItem('firstVisit', '0');
 
         //popup informativo
         
-        if(sessionStorage.getItem('firstVisit') == "0"){
+        if(sessionStorage.getItem('firstVisit') === "0"){
             sessionStorage.setItem('firstVisit', '1');
             $("body").addClass("popup-active");
             $("#message-popup").addClass("active"); 
