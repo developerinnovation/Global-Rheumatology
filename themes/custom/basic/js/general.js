@@ -1,11 +1,27 @@
 var read = 1;
 var shared = 1;
 var limitResume = 250;
+sessionStorage.setItem('firstVisit', '0');
 (function($) {
     $(document).ready(function() {
 
         // <!------------------------------- General ------------------------------>
 
+        //popup informativo
+        
+        if(sessionStorage.getItem('firstVisit') === "0"){
+            sessionStorage.setItem('firstVisit', '1');
+            $("body").addClass("popup-active");
+            $("#message-popup").addClass("active"); 
+        } 
+
+        //popup informativo
+        $("#message-popup-close").click(function(){
+            $("body").removeClass("popup-active");
+            $("#message-popup").removeClass("active");
+        });
+
+        // buscador
         $("header .container .box-menu .bottom .search .form-item input").click(function() {
             window.location.href="/search/content/by/type"
         });
@@ -80,10 +96,21 @@ var limitResume = 250;
         });
 
         $("#read").click(function() {
-            $(".more-read").toggleClass("active");
+            $(".more-cientifico").toggleClass("active");
             $(".more-shared").toggleClass("active");
         });
 
+        $("#article-cientifico").click(function() {
+            $(".more-cientifico").toggleClass("active");
+            $(".more-magazine").toggleClass("active");
+        });
+
+        $("#article-magazine").click(function() {
+            $(".more-magazine").toggleClass("active");
+            $(".more-cientifico").toggleClass("active");
+        });
+
+        
         // Scroll fixed header Home
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
