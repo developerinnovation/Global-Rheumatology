@@ -523,6 +523,12 @@ article.node{
                             line-height: 1.25em;
                         }
                     }
+                    .article__body{
+                        ol{
+                            list-style-type: decimal;
+                            margin: 30px;
+                        }
+                    }
                     .block {
                         overflow: hidden;
                         border-bottom: 1px solid #ddd;

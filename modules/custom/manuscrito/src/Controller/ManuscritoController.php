@@ -219,7 +219,7 @@ class ManuscritoController extends ControllerBase
         \Drupal::service('page_cache_kill_switch')->trigger();
         $nid = \Drupal::entityQuery('node')
                 ->condition('status', 1)
-                ->condition('title',  $title.'%', 'like')
+                ->condition('title',  '%'.$title.'%', 'like')
                 ->condition('type', 'plantillas_correos', '!=')
                 ->condition('type', 'page', '!=')
                 ->condition('type', 'manuscrito', '!=')
