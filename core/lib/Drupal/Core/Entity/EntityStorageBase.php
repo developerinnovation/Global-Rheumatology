@@ -22,7 +22,7 @@ abstract class EntityStorageBase extends EntityHandlerBase implements EntityStor
    *
    * The following code returns the same object:
    * @code
-   * \Drupal::entityManager()->getDefinition($this->entityTypeId)
+   * \Drupal::entityTypeManager()->getDefinition($this->entityTypeId)
    * @endcode
    *
    * @var \Drupal\Core\Entity\EntityTypeInterface
@@ -246,6 +246,7 @@ abstract class EntityStorageBase extends EntityHandlerBase implements EntityStor
    * {@inheritdoc}
    */
   public function load($id) {
+    assert(!is_null($id), sprintf('Cannot load the "%s" entity with NULL ID.', $this->entityTypeId));
     $entities = $this->loadMultiple([$id]);
     return isset($entities[$id]) ? $entities[$id] : NULL;
   }
@@ -255,14 +256,14 @@ abstract class EntityStorageBase extends EntityHandlerBase implements EntityStor
    */
   public function loadMultiple(array $ids = NULL) {
     $entities = [];
+    $preloaded_entities = [];
 
     // Create a new variable which is either a prepared version of the $ids
     // array for later comparison with the entity cache, or FALSE if no $ids
     // were passed. The $ids array is reduced as items are loaded from cache,
     // and we need to know if it is empty for this reason to avoid querying the
     // database when all requested entities are loaded from cache.
-    //$flipped_ids = !empty($ids) ? array_flip(array_filter($ids)) : FALSE;
-     $flipped_ids = !empty($ids) ? array_flip($ids) : FALSE;
+    $flipped_ids = $ids ? array_flip($ids) : FALSE;
     // Try to load entities from the static cache, if the entity type supports
     // static caching.
     if ($ids) {
@@ -271,15 +272,22 @@ abstract class EntityStorageBase extends EntityHandlerBase implements EntityStor
       $ids = array_keys(array_diff_key($flipped_ids, $entities));
     }
 
-    // Gather entities from a 'preload' method. This method can invoke a hook to
-    // be used by modules that need, for example, to swap the default revision
-    // of an entity with a different one. Even though the base entity storage
-    // class does not actually invoke any preload hooks, we need to call the
-    // method here so we can add the pre-loaded entity objects to the static
-    // cache below.
-    $preloaded_entities = $this->preLoad($ids);
+    // Try to gather any remaining entities from a 'preload' method. This method
+    // can invoke a hook to be used by modules that need, for example, to swap
+    // the default revision of an entity with a different one. Even though the
+    // base entity storage class does not actually invoke any preload hooks, we
+    // need to call the method here so we can add the pre-loaded entity objects
+    // to the static cache below. If all the entities were fetched from the
+    // static cache, skip this step.
+    if ($ids === NULL || $ids) {
+      $preloaded_entities = $this->preLoad($ids);
+    }
     if (!empty($preloaded_entities)) {
       $entities += $preloaded_entities;
+
+      // If any entities were pre-loaded, remove them from the IDs still to
+      // load.
+      $ids = array_keys(array_diff_key($flipped_ids, $entities));
 
       // Add pre-loaded entities to the cache.
       $this->setStaticCache($preloaded_entities);
@@ -538,10 +546,7 @@ abstract class EntityStorageBase extends EntityHandlerBase implements EntityStor
    * {@inheritdoc}
    */
   public function restore(EntityInterface $entity) {
-    // Allow code to run before saving.
-    $entity->preSave($this);
-
-    // The restore process does not invoke any post-save operations.
+    // The restore process does not invoke any pre or post-save operations.
     $this->doSave($entity->id(), $entity);
   }
 
