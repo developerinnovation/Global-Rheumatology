@@ -61,3 +61,10 @@ search_module_page:
         _title: 'Buscardor'
     requirements:
        _access: 'TRUE'
+acciones_module_page:
+    path: 'grp/set/config/general'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::access'
+        _title: 'Mis accesos'
+    requirements:
+       _access: 'TRUE'

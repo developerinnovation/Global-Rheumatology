@@ -289,4 +289,11 @@ class ManuscritoController extends ControllerBase
         return ucfirst(str_replace('Manuscrito', '', $bundle_label)); 
     }
 
+    public function access(){
+        return [
+            '#theme' => 'access',
+            '#users' => 'data',
+        ];
+    }
+
 }
