@@ -36,6 +36,7 @@
             margin: 0 auto;
         }
         .views-infinite-scroll-content-wrapper, >div{
+            width: 100%;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
