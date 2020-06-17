@@ -1,24 +1,29 @@
-{% set seccion %} {{ fields.type.content }}  {% endset %}
+{% set tipo %} {{ fields.type.content }}  {% endset %}
+{% set tipo %} {{ tipo|trim }} {% endset %}
 {% set categoria %} {{ fields.field_categoria.content }} {% endset %}
 {% set title %} {{ fields.title.content }} {% endset %}
 
-<div class="item-news destacada home">
+<div class="item-news destacada home {{ tipo }}">
     <figure>{{ fields.field_image.content }}</figure>
     <div class="text">
         <div {% set nid = row._entity.nid.value %} class="save {% if  nid in user.node_saved['split'] %}saved{% else %}no{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}">
             <a href="#" class="node_saved">Guardar</a>
         </div>
         
-        {% if seccion == 'Comunicaciones' %}
-            <span class="category">{{ categoria|striptags }}</span>
-            <h2 class="title">{{ title }}</h2>
+        {% if tipo == ' Comunicaciones ' %}
+            <span class="category"> 
+                <a href="#" hreflang="es">{{ categoria|striptags }}</a> 
+            </span>
+            <h2 class="title"> 
+                <a href="#" hreflang="es">{{ title|striptags }}</a> 
+            </h2>
         {% else %}
-            <span class="category">{{ categoria|striptags }}</span>
+            <span class="category">{{ categoria }}</span>
             <h2 class="title">{{ title }}</h2>
         {% endif %}
 
         <p class="sumary">{{ fields.body.content }}</p>
-        {% if seccion == 'Comunicaciones' %}
+        {% if tipo == ' Comunicaciones ' %}
             <div class="explorer">{{ fields.field_enlace_redireccion.content }}</div>
         {% else %}
             <div class="explorer">{{ fields.nothing_1.content }}</div>
