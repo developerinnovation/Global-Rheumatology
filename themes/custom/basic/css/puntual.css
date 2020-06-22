@@ -27,3 +27,7 @@
     line-height: 16px;
     padding: 0 2px;
 }
+
+audio#talkify-audio {
+    display: none;
+}
