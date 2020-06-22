@@ -349,6 +349,9 @@ sessionStorage.setItem('firstVisit', '0');
         });
 
         // <!------------------------------- node artículo cientifico ------------------------------>// 
+
+        // controles del audio en el módulo talkify
+        
         $(".btn-show-text").click(function() {
             var iDatrr = $(this).attr("data-id");
             $(this).toggleClass("active");

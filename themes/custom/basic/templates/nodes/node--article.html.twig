@@ -9,7 +9,12 @@
           <div class="top">
             {{ content.field_categoria }}
             <div class="buttons">
-              <div class="sound">Escuchar</div>           
+              <div class="sound active">Escuchar</div> 
+              <div class="control-audio">
+                <div class="pause active">Pause</div> 
+                <div class="play">Play</div> 
+                <div class="stop">Stop</div> 
+              </div>          
               <div {% set nid = node.id %} class="node_save {% if nid in nodo_saved['split'] %}saved{% endif %}" data-id="{{ nid }}" data-session="{% if user.id != 0 %}authentificate{% else %}anonime{% endif %}"></div>
             </div>
           </div>        

@@ -1,0 +1,4 @@
+services:
+  talkify.config:
+    class: Drupal\talkify\Plugin\Config\Form\ConfigFormClass
+    arguments: []

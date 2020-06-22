@@ -56,7 +56,8 @@ article.node{
                         .buttons{
                             display: flex;
                             .sound{
-                                display: block;
+                                display: none;
+                                cursor: pointer;
                                 margin: 0 10px 0 0;
                                 width: 30px;
                                 height: 30px;
@@ -67,6 +68,9 @@ article.node{
                                     repeat: no-repeat;
                                 }
                                 font-size: 0;
+                                &.active{
+                                    display: initial;
+                                }
                             }
                             .node_save{
                                 display: block;
@@ -85,6 +89,75 @@ article.node{
                                     background: {
                                         image: url(../../images/icon-saved.svg);
                                     }
+                                }
+                            }
+                            .control-audio{
+                                display: flex;
+                                display: none;
+                                .play{
+                                    cursor: pointer;
+                                    display: none;
+                                    margin: 0 10px 0 0;
+                                    width: 30px;
+                                    height: 30px;
+                                    background: {
+                                        image: url(../../images/icon-play.svg);
+                                        size: auto 30px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    &.active{
+                                        display: block;
+                                    }
+                                    font-size: 0;
+                                }
+                                .pause{
+                                    cursor: pointer;
+                                    display: none;
+                                    margin: 0 10px 0 0;
+                                    width: 30px;
+                                    height: 30px;
+                                    background: {
+                                        image: url(../../images/icon-pause.svg);
+                                        size: auto 30px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    &.active{
+                                        display: block;
+                                    }
+                                    font-size: 0;
+                                }
+                                .stop{
+                                    cursor: pointer;
+                                    display: block;
+                                    margin: 0 10px 0 0;
+                                    width: 30px;
+                                    height: 30px;
+                                    background: {
+                                        image: url(../../images/icon-stop.svg);
+                                        size: auto 30px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    font-size: 0;
+                                }
+                                .mute{
+                                    cursor: pointer;
+                                    display: block;
+                                    margin: 0 10px 0 0;
+                                    width: 30px;
+                                    height: 30px;
+                                    background: {
+                                        image: url(../../images/icon-mute.svg);
+                                        size: auto 30px;
+                                        position: center;
+                                        repeat: no-repeat;
+                                    }
+                                    font-size: 0;
+                                }
+                                &.active{
+                                    display: contents;
                                 }
                             }
                         }

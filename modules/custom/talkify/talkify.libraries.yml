@@ -1,0 +1,10 @@
+talkify:
+  version: 1.x
+  css:
+    theme:
+      asset/css/talkify-audiocontrols.css: {}
+      asset/css/talkify-common.css: {}
+      asset/css/talkify-playlist.css: {}
+  js:
+    asset/js/talkify.min.js: {}
+    asset/js/config-talkify.js: {}

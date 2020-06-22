@@ -1,0 +1,8 @@
+name: 'Talkify'
+description: 'Permite reproducir texto a voz'
+core: 8.x
+type: module
+package: Custom
+configure: talkify.config
+libraries: 
+  - talkify/talkify

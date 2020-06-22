@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Contains talkify.module..
+ */
+
+use Drupal\Core\Form\FormState;
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Implements hook_help().
+ */
+function talkify_help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        // Main module help for the talkify module.
+        case 'help.page.talkify':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Talkify is a cloud service that transforms text into lifelike, natural sounding, speech').'</p>';
+            $output .= '<dl>';
+            $output .= '<dd>' . t('This helps you build speech-enabled applications and products') . '</dd>';
+            $output .= '<dt>' . t('A speech-enabled product can aid users with visual impairments or users with no direct access to a screen') . '</dt>';
+            $output .= '<dd>' . t('A speech-enabled product can be a web application as well as a vehicle or public announcement system.') . '</dd>';
+            $output .= '<dd>' . t('  <a href":talkify">Configurations</a> .', [':talkify' => Url::fromRoute('talkify.config')->toString()]) . '</dd>';
+            $output .= '</dl>';
+        return $output;
+
+    default:
+    }
+}
+
+/**
+ * talkify_preprocess_html
+ *
+ * @param  mixed $variables
+ * @return void
+ */
+function talkify_preprocess_html(&$variables) {
+    $variables['#attached']['library'][] = 'talkify/talkify';
+    
+}
+
+function talkify_page_attachments(array &$attachments) {
+
+    $config = \Drupal::config('talkify.adminSettingsConfig');
+    $attachments['#attached']['drupalSettings']['api_key_talkify'] = $config->get('api_key');
+    $attachments['#attached']['drupalSettings']['host_talkify'] = $config->get('host');
+    $attachments['#attached']['drupalSettings']['speech_baseUrl_talkify'] = $config->get('speech_baseUrl');
+    $attachments['#attached']['drupalSettings']['voice_talkify'] = $config->get('voice');  
+    $attachments['#attached']['drupalSettings']['position_talkify'] = $config->get('class_id');  
+}
