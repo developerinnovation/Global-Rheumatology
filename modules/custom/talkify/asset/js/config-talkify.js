@@ -73,7 +73,7 @@
 })(jQuery, Drupal, drupalSettings);
 
 $(document).ready(function() {
-    var text = $('body .right').text().trim();
+    var text = $('body #main .right').text().trim();
     var player = null;
     $('.buttons .sound').click(function() {
         $(this).removeClass("active");
