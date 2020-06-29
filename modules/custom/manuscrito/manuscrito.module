@@ -20,11 +20,23 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             'variables' => array('markup' => NULL,'type' => NULL),
             'template' => 'form-list',
         ),
+        'form_comments' => array( // create comments
+            'variables' => array(
+                'markup' => NULL,
+                'type' => NULL,
+                'revision' => NULL
+            ),
+            'template' => 'form-comments',
+        ),
         'thanks_list' => array( // article saved message
             'variables' => array('type' => NULL,'id' => NULL),
             'template' => 'thank-list',
         ),
         'error_list' => array( // error message
+            'variables' => array(
+                'title' => NULL,
+                'body' => NULL
+            ),
             'template' => 'error-list',
         ),
         'update_locked' => array( // error message
@@ -46,6 +58,32 @@ function manuscrito_theme($existing, $type, $theme, $path) {
                 'users' => NULL,
             ),
             'template' => 'access-list',
+        ),
+        // proceso editorial
+        'article_qualify' => array( 
+            'variables' => array(
+                'markup' => NULL,
+                'type' => NULL
+            ),
+            'template' => 'article-qualify',
+        ),
+        'history_autor' => array( 
+            'variables' => array(
+                'data' => NULL,
+            ),
+            'template' => 'history-autor',
+        ),
+        'history_revisor' => array(
+            'variables' => array(
+                'data' => NULL,
+            ),
+            'template' => 'history-revisor',
+        ),
+        'history_editor' => array( 
+            'variables' => array(
+                'data' => NULL,
+            ),
+            'template' => 'history-editor',
         ),
     );
 }

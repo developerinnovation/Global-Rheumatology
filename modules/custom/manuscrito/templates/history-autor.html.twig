@@ -1,0 +1,39 @@
+{{ attach_library('basic/tables') }}
+<main id="info-article">
+    <h2> {{ 'Mis artíiculos enviados'|t }} </h2>
+    <div class="list-type">
+
+        <div class="box-type">           
+            <div class="article active">
+                <table class="tg">
+                    <thead>
+                        <tr>
+                            <th class="tg-wman" rowspan="3"> {{ 'Título'|t }} </th>
+                            <th class="tg-wman" rowspan="3"> {{ 'Tipo'|t }} </th>
+                            <th class="tg-wman" rowspan="3"> {{ 'Estado'|t }} </th>
+                            <th class="tg-wman" rowspan="3"> {{ 'Recibido'|t }} </th>
+                            <th class="tg-wman" rowspan="3">{{ 'Actualizado'|t }}</th>
+                            <th class="tg-wman" colspan="2" rowspan="3">{{ 'Acciones'|t }}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="tg-y9ds">Text</td>
+                            <td class="tg-y9ds">Article</td>
+                            <td class="tg-y9ds">Active</td>
+                            <td class="tg-y9ds">20 junio</td>
+                            <td class="tg-y9ds">21 junio</td>
+                            <td class="tg-y9ds">
+                                <a href=""> {{ 'Ver'|t }} </a>
+                            </td>
+                            <td class="tg-y9ds">
+                                <a href=""> {{ 'Ver comentarios'|t }} </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>    
+    </div>
+</main>

@@ -1,0 +1,37 @@
+{% set classes = ['node'] %}
+
+<article {{ attributes.addClass(classes) }}>
+  <div id="main">
+    <div class="container two-col">
+      <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+        <div class="box">
+          <h1 {{ attributes }}>
+            {{ 'Id del comentario'|t }} : {{ node.title.value }}
+          </h1>
+          
+          <div class="info article">
+              <br>
+              <div>
+                <date>{{ content.created.value|date('U')|format_date('global') }}</date>
+              </div>
+              <br>
+          </div>
+
+        </div>
+        
+
+      </div>
+      
+      <div class="right">
+        <div class="content article">
+          <h3> {{ 'Detalle del comentario para artículo'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          <div class="article__body">
+            {{ 'Comentario'|t }} : <br>
+            {{ node.field_comentarios.value|raw }}
+          </div>
+        </div>
+      </div>
+    
+    </div><!-- /.container -->
+  </div><!-- /#main -->
+</article><!-- /.node -->

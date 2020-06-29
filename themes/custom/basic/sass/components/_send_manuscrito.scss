@@ -354,7 +354,8 @@
             text-align: center;
             text-transform: uppercase;
             @media only screen and ($desktop){
-                width: 140px;
+                width: auto;
+                padding: 0px 10px;
             }
         }
         .button--danger{

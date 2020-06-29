@@ -68,3 +68,38 @@ acciones_module_page:
         _title: 'Mis accesos'
     requirements:
        _access: 'TRUE'
+revision_autor_page:
+    path: 'article/review/autor/{nid}/{token}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionAutor'
+        _title: 'Mis artículos enviados'
+    requirements:
+        _permission: 'New Manuscrito'
+revision_revisor_page:
+    path: 'article/review/revisor/{nid}/{token}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionRevisor'
+        _title: 'Artículos en revisión'
+    requirements:
+        _permission: 'Review Manuscrito revisor'
+qualify_article_page:
+    path: 'article/qualify/{nid}/{token}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::qualify'
+        _title: 'Calificar artículos'
+    requirements:
+        _permission: 'Review Manuscrito revisor'
+revision_editor_page:
+    path: 'article/review/editor/{uid}/{token}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionEditor'
+        _title: 'Artículos en revisión'
+    requirements:
+        _permission: 'Review Manuscrito editor'
+comment_page:
+    path: 'comments/review/{rol}/{nid}/{tokenRol}/{tokenNid}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::comments'
+        _title: 'Comentarios para artículos en revisión'
+    requirements:
+        _permission: 'Realizar comentarios'

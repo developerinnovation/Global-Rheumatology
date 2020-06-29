@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\rest\ResourceResponse;
+use Drupal\taxonomy\Entity\Term;
 
 class ManuscritoController extends ControllerBase
 { 
@@ -74,6 +75,8 @@ class ManuscritoController extends ControllerBase
         }else{
             return [
                 '#theme' => 'error_list',
+                '#title' => t('Contenido no encontrado'),
+                '#body' => '<p>'.t('No hemos encontrado en la revista GLOBAL RHEUMATOLOGY una url válida para su búsqueda por favor verifique la url ingresada en su navegador').'</p>',
             ];
         }
         
@@ -121,11 +124,6 @@ class ManuscritoController extends ControllerBase
             '#type' => 'markup',
             '#markup' => render($node_create_form),
         ];
-
-        /*return array(
-            '#type' => 'markup',
-            '#markup' => render($node_create_form),
-        );*/
     }
 
     public function guia(Request $request, $id = NULL){
@@ -140,10 +138,6 @@ class ManuscritoController extends ControllerBase
         }
 
         return new JsonResponse( $data );
-        /*return array(
-            '#type' => 'json',
-            '#plain_text' =>json_encode($data)
-        );*/
     }
 
     public function thanks(Request $request, $type = NULL, $nid = NULL){
@@ -157,6 +151,8 @@ class ManuscritoController extends ControllerBase
         }else{
             return [
                 '#theme' => 'error_list',
+                '#title' => t('Contenido no encontrado'),
+                '#body' => '<p>'.t('No hemos encontrado en la revista GLOBAL RHEUMATOLOGY una url válida para su búsqueda por favor verifique la url ingresada en su navegador').'</p>',
             ];
         }
     }
@@ -164,6 +160,8 @@ class ManuscritoController extends ControllerBase
     public function error_found(Request $request){
         return [
             '#theme' => 'error_list',
+            '#title' => t('Contenido no encontrado'),
+            '#body' => '<p>'.t('No hemos encontrado en la revista GLOBAL RHEUMATOLOGY una url válida para su búsqueda por favor verifique la url ingresada en su navegador').'</p>',
         ];
     }
 
@@ -264,6 +262,7 @@ class ManuscritoController extends ControllerBase
                 'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $node->get('nid')->getValue()[0]['value']),
                 'autor' => $this->load_author($node->getOwnerId()),
                 'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'M Y'),
+                'update' =>  \Drupal::service('date.formatter')->format($node->get('changed')->getValue()[0]['value'], 'custom', 'M Y'),
                 'node' => $node,
             ];
             array_push($contents,$content);
@@ -294,6 +293,215 @@ class ManuscritoController extends ControllerBase
             '#theme' => 'access',
             '#users' => 'data',
         ];
+    }
+
+      // proceso editorial
+    
+    /**
+     * qualify
+     *
+     * @param  mixed $route_match
+     * @param  mixed $nid
+     * @return void
+     * 
+     * Proceso para calificar artículos por los revisores
+     * 
+     */
+    public function qualify(RouteMatchInterface $route_match, $nid = NULL){
+        $node = $this->entityManager()->getStorage('node')->load($nid);
+        $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+        $node_create_form = $this->entityFormBuilder()->getForm($node);    
+        
+        return [
+            '#theme' => 'article_revision',
+            '#type' => 'markup',
+            '#markup' => render($node_create_form),
+        ];
+    }
+    
+    /**
+     * revisionAutor
+     *
+     * @param  mixed $route_match
+     * @param  mixed $nid
+     * @return void
+     * 
+     * Listado para el autor
+     * 
+     */
+    public function revisionAutor(RouteMatchInterface $route_match, $nid = NULL){
+        return [
+            '#theme' => 'history_autor',
+            '#data' => 'data',
+        ];
+    }
+    
+    /**
+     * revisionRevisor
+     *
+     * @param  mixed $route_match
+     * @param  mixed $nid
+     * @return void
+     * 
+     * Listado para el revisor
+     * 
+     */
+    public function revisionRevisor(RouteMatchInterface $route_match, $nid = NULL){
+        return [
+            '#theme' => 'history_revisor',
+            '#data' => 'data',
+        ];
+    }
+    
+    /**
+     * revisionEditor
+     *
+     * @param  mixed $route_match
+     * @param  mixed $nid
+     * @return void
+     * 
+     * Listado para el editor
+     * 
+     */
+    public function revisionEditor(RouteMatchInterface $route_match, $uid = NULL, $token = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        
+        $type = [
+            'manuscrito_articulo_revision',
+            'manuscrito_articulo_especial',
+            'manuscrito_articulo_original',
+            'manuscrito_ciencia_panlar',
+            'manuscrito_comentarios_respues',
+            'manuscrito_editorial',
+            'manuscrito_mini_revision',
+            'manuscrito_multimedia',
+            'manuscrito_noticia',
+            'manuscrito_reportajes_especiales',
+            'manuscrito_rondas_clinicas'
+        ];
+
+        $user = \Drupal\user\Entity\User::load($uid);
+        $user_rol = $user->getRoles();
+        $permi = array("administrator", "editores");
+        $aut = FALSE;
+
+        foreach($user_rol as $rep){
+            if (in_array($rep, $permi) and $aut != TRUE) {
+                $aut = TRUE;  
+            }
+        }
+
+        if($user){
+            if($aut){
+                $hashUid = hash ('md5',$uid,false);
+                if($token == $hashUid){
+                    $nid = \Drupal::entityQuery('node')
+                        ->condition('status', 0)
+                        ->condition('field_revisor', $uid)
+                        ->condition('type',$type, 'IN')
+                        ->sort('created' , 'DESC')
+                        ->execute();
+                    $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+                    $array = $this->structureArticleRevision($nodes);
+                    return [
+                        '#theme' => 'history_editor',
+                        '#data' => $array,
+                    ];
+                }else{
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('Actividad sospechosa'),
+                        '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Acceso denegado'),
+                    '#body' => '<p>'.t('Hemos detectado que no tienes acceso a está sección de GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
+
+    }
+
+    public function comments(Request $request, $rol = NULL, $nid = NULL, $tokenRol = NULL, $tokenNid = NULL) {
+        if(\Drupal::currentUser()->id() != 0){
+            if($rol == 'autor' || $rol == 'editor' || $rol == 'revisor'){
+                $article = \Drupal::entityManager()->getStorage('node')->load($nid);        
+                if(hash('md5',$rol,false) == $tokenRol && hash('md5',$nid,false) == $tokenNid && $article){
+                    $typ = node_type_load('comentarios_para_'.$rol); 
+                    $node = $this->entityManager()->getStorage('node')->create(array(
+                        'type' => $typ->id(),
+                    ));
+                    $node_create_form = $this->entityFormBuilder()->getForm($node);  
+                    $revision = $article->get('title')->getValue()[0]['value'].' ('.$nid.')';
+                    return [
+                        '#theme' => 'form_comments',
+                        '#type' => 'markup',
+                        '#revision' => $revision,
+                        '#markup' => render($node_create_form),
+                    ];
+                }else{
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('Actividad sospechosa'),
+                        '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Contenido no encontrado'),
+                    '#body' => '<p>'.t('No hemos encontrado en la revista GLOBAL RHEUMATOLOGY una url válida para su búsqueda por favor verifique la url ingresada en su navegador').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
+    }
+
+    public function structureArticleRevision($nodes) {
+        date_default_timezone_set('America/Bogota');
+        setlocale(LC_ALL, 'es_Es');
+
+        $contents = [];
+        foreach ($nodes as $node) {
+            $nid = $node->get('nid')->getValue()[0]['value'];
+            $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
+            $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+            $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+            $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
+            $statusName = Term::load($statusId);
+
+            $content = [
+                'nid' => $nid,
+                'title' => $node->get('title')->getValue()[0]['value'],
+                'type' => $this->bundleLabel($node->bundle()),
+                'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid),
+                'autor' => $this->load_author($node->getOwnerId()),
+                'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                'update' =>  \Drupal::service('date.formatter')->format($node->get('changed')->getValue()[0]['value'], 'custom', 'd M Y'),
+                'status' => $statusName->get('name')->getValue()[0]['value'],
+                'publish' => 'junio',
+                'comments_autor' => $comments_autor,
+                'comments_editor' => $comments_editor,
+                'comments_revisor' => $comments_revisor,
+                'node' => $node,
+            ];
+            array_push($contents,$content);
+        }
+        return $contents;
     }
 
 }

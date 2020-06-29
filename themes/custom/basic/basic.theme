@@ -203,6 +203,23 @@ function basic_form_alter(&$form, FormStateInterface $form_state, $form_id) {
       }         
     break;    
 
+    // commnents form
+    case 'node_comentarios_para_autor_form';
+      $form['actions']['submit']['#value'] = t('Enviar comentarios al autor');
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'basic_comentarios_form_submit';
+        }
+      }   
+    break; 
+    case 'node_comentarios_para_editor_form';
+      $form['actions']['submit']['#value'] = t('Enviar comentarios al editor');
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'basic_comentarios_form_submit';
+        }
+      }   
+    break; 
   }
 }
 
@@ -232,8 +249,6 @@ function basic_manuscrito_form_submit($form, \Drupal\Core\Form\FormStateInterfac
   $node = \Drupal::entityManager()->getStorage('node')->load($nid);
   $execute = autor_revisor($node,$nid);
 
-  // send_mail_user($execute['to_revisor'],$execute['title'],$body_revisor,$execute['url'],$nid,$label);
-  // send_mail_user($execute['to_autor'],$execute['title'],$body_autor,$execute['url'],$nid,$label);
   $revisorMail = $execute['to_revisor'];
   $autorMail = $execute['to_autor'];
   exec_mail('new', $node, $nid, $autorMail); // notificacion autor
@@ -246,6 +261,35 @@ function basic_manuscrito_form_submit($form, \Drupal\Core\Form\FormStateInterfac
   ]);
   
   $form_state->setRedirectUrl($url);
+  
+}
+
+function basic_comentarios_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $nid = $form_state->getformObject()->getEntity()->id();
+  $comentario = \Drupal::entityManager()->getStorage('node')->load($nid);
+
+  $idComentario = $comentario->get('title')->getValue()[0]['value'];
+  $nidArticle = $comentario->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+  $type = $comentario->get('type')->getValue()[0]['target_id'];
+  $bodyComment = $comentario->get('field_comentarios')->getValue()[0]['value'];
+  $node = \Drupal::entityManager()->getStorage('node')->load($nidArticle);
+  
+  $execute = autor_revisor($node,$nidArticle);
+
+  $revisorMail = $execute['to_revisor'];
+  $autorMail = $execute['to_autor'];
+
+  switch ($type) { 
+    
+    case 'comentarios_para_autor';
+      exec_mail('comments', $node, $nidArticle, $autorMail, $idComentario, $bodyComment); 
+    break;
+
+    case 'comentarios_para_editor';
+      exec_mail('comments', $node, $nidArticle, $revisorMail, $idComentario, $bodyComment); 
+    break;
+  }
+  
   
 }
 

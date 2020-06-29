@@ -531,3 +531,13 @@ function obtenerCookie(clave) {
     }
     return "";
 }
+
+
+function searchRevision(title){
+    console.log(title);
+    $('.article table').hide(0,function(){ 
+        if($('.article table:animated').length===0){
+            $('.article table:contains(' + title.toUpperCase() + ')').show() 
+        }
+    });
+}
