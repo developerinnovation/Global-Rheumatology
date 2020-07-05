@@ -1,16 +1,17 @@
 <main id="form-node-manuscrito">
-    <h2> {{ "Enviar nuevo comentario"|t }} </h2>
+    <h2> {{ "Asignar revisor"|t }} </h2>
     {{ markup }}
 </main>
-
 
 <script>
     $("#edit-title-0-value").prop('disabled', true);
     $("#edit-field-articulo-en-revision-0-target-id").prop('disabled', true);
+    $("#edit-field-revisor-acepto-revision-value").prop('disabled', true);
     $("#edit-title-0-value").val(new Date().getTime());
     $("#edit-field-articulo-en-revision-0-target-id").val('{{ revision }}');
     $("#edit-submit").click(function() {
         $("#edit-title-0-value").prop('disabled', false);
         $("#edit-field-articulo-en-revision-0-target-id").prop('disabled', false);
+        $("#edit-field-revisor-acepto-revision-value").prop('disabled', false);
     });
 </script>

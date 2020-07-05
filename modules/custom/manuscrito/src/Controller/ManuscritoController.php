@@ -363,10 +363,10 @@ class ManuscritoController extends ControllerBase
      * Listado para el editor
      * 
      */
-    public function revisionEditor(RouteMatchInterface $route_match, $uid = NULL, $token = NULL){
+    public function revisionEditor(RouteMatchInterface $route_match, $type = NULL, $uid = NULL){
         \Drupal::service('page_cache_kill_switch')->trigger();
         
-        $type = [
+        $typesArticles = [
             'manuscrito_articulo_revision',
             'manuscrito_articulo_especial',
             'manuscrito_articulo_original',
@@ -393,25 +393,54 @@ class ManuscritoController extends ControllerBase
 
         if($user){
             if($aut){
-                $hashUid = hash ('md5',$uid,false);
-                if($token == $hashUid){
+                switch ($type) { 
+                    case 'created';
+                        $status = 1;
+                        break;
+                    case 'process';
+                            $status = 0;
+                            $operator = 'NOT IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'rejected';
+                            $status = 0;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'published';
+                            $status = 1;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['586'];
+                        break;
+                }
+                if($type != 'created'){
                     $nid = \Drupal::entityQuery('node')
-                        ->condition('status', 0)
+                        ->condition('status', $status)
                         ->condition('field_revisor', $uid)
-                        ->condition('type',$type, 'IN')
+                        ->condition('field_estado_del_articulo', $statusTaxonomy, $operator)
+                        ->condition('type',$typesArticles, 'IN')
                         ->sort('created' , 'DESC')
                         ->execute();
-                    $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
-                    $array = $this->structureArticleRevision($nodes);
+                }else{
+                    $nid = \Drupal::entityQuery('node')
+                        ->condition('status', $status)
+                        ->condition('uid', $uid)
+                        ->sort('created' , 'DESC')
+                        ->execute();
+                }
+                $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+                if($nodes != NULL){
+                    $array = $this->structureArticleRevision($nodes, $type);
                     return [
                         '#theme' => 'history_editor',
+                        '#type' => $type,
                         '#data' => $array,
                     ];
                 }else{
                     return [
                         '#theme' => 'error_list',
-                        '#title' => t('Actividad sospechosa'),
-                        '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                        '#title' => t('No hay información'),
+                        '#body' => '<p>'.t('No encontramos información asociada a la consulta realizada, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
                     ];
                 }
             }else{
@@ -471,18 +500,22 @@ class ManuscritoController extends ControllerBase
         }
     }
 
-    public function structureArticleRevision($nodes) {
+    public function structureArticleRevision($nodes,$type) {
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
 
         $contents = [];
         foreach ($nodes as $node) {
             $nid = $node->get('nid')->getValue()[0]['value'];
-            $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
-            $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
-            $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
-            $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
-            $statusName = Term::load($statusId);
+            if($type != 'created'){
+                $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
+                $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+                $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+                $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
+                $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
+                $statusName = Term::load($statusId);
+                $valueStatusName =  $statusName->get('name')->getValue()[0]['value'];
+            }
 
             $content = [
                 'nid' => $nid,
@@ -492,16 +525,115 @@ class ManuscritoController extends ControllerBase
                 'autor' => $this->load_author($node->getOwnerId()),
                 'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
                 'update' =>  \Drupal::service('date.formatter')->format($node->get('changed')->getValue()[0]['value'], 'custom', 'd M Y'),
-                'status' => $statusName->get('name')->getValue()[0]['value'],
-                'publish' => 'junio',
-                'comments_autor' => $comments_autor,
-                'comments_editor' => $comments_editor,
-                'comments_revisor' => $comments_revisor,
+                'status' => isset($valueStatusName) ? $valueStatusName : '',
+                'publish' => '',
+                'comments_autor' => isset($comments_autor) ? $comments_autor : '',
+                'comments_editor' => isset($comments_editor) ? $comments_editor : '',
+                'comments_revisor' => isset($comments_revisor) ? $comments_revisor : '',
+                'assign' => isset($assign) ? $assign : '',
                 'node' => $node,
             ];
             array_push($contents,$content);
         }
         return $contents;
+    }
+
+    public function assign(Request $request, $nid = NULL, $tokenNid = NULL){
+
+        if(\Drupal::currentUser()->id() != 0){
+
+            $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+            $user_rol = $user->getRoles();
+            $permi = array("administrator", "editores");
+            $aut = FALSE;
+
+            foreach($user_rol as $rep){
+                if (in_array($rep, $permi) and $aut != TRUE) {
+                    $aut = TRUE;  
+                }
+            }
+            if($aut){
+                $article = \Drupal::entityManager()->getStorage('node')->load($nid);        
+                if(hash('md5',$nid,false) == $tokenNid && $article){
+                    $typ = node_type_load('asignacion_revisores'); 
+                    $node = $this->entityManager()->getStorage('node')->create(array(
+                        'type' => $typ->id(),
+                    ));
+                    $node_create_form = $this->entityFormBuilder()->getForm($node);  
+                    $revision = $article->get('title')->getValue()[0]['value'].' ('.$nid.')';
+                    return [
+                        '#theme' => 'assign_revisor',
+                        '#type' => 'markup',
+                        '#revision' => $revision,
+                        '#markup' => render($node_create_form),
+                    ];
+                }else{
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('Actividad sospechosa'),
+                        '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Acceso denegado'),
+                    '#body' => '<p>'.t('Hemos detectado que no tienes acceso a está sección de GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
+    }
+
+    public function assignResponse(Request $request, $nid = NULL, $tokenNid = NULL){
+        $assign = \Drupal::entityManager()->getStorage('node')->load($nid);        
+        if(hash('md5',$nid,false) == $tokenNid && $assign){
+            $accept = $assign->get('field_revisor_acepto_revision')->getValue()[0]['value'];
+            $revisionId = $assign->get('title')->getValue()[0]['value'];
+
+            $articleId = $assign->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+            $article = \Drupal::entityManager()->getStorage('node')->load($articleId);       
+            $titleArticle = $article->get('title')->getValue()[0]['value'];
+
+            if(!$accept || $accept != 1 || $accept != '1') {
+                
+                $idrevisor = $assign->get('field_asignar_revisor')->getValue()[0]['target_id'];
+                $revisor = User::load($idrevisor);
+                $revisorMail = $revisor->get('mail')->getValue()[0]['value'];
+                $editor = User::load($assign->getOwnerId());
+                $editorMail = $editor->get('mail')->getValue()[0]['value'];
+                $revisorName = ucfirst($revisor->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($revisor->get('field_apellidos')->getValue()[0]['value']);
+                $tokenExtra = 'El revisor <b>'.$revisorName.'</b> aceptó la revisión del artículo "'.$titleArticle.'", podrá verificar la asignación buscando el Id '.$revisionId.'<br> en el listado de asignaciones realizadas por usted.';
+                
+                $assign->set('field_revisor_acepto_revision',1);
+                $assign->save();
+                
+                exec_mail('assignResponse', $article, $nid, $editorMail, $tokenExtra);
+
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Revisión aceptada.'),
+                    '#body' => '<p>'.t('Gracias por aceptar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p>',
+                ];
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Revisión aceptada con anterioridad'),
+                    '#body' => '<p>'.t('Hemos detectado que ya aceptó la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY, '.t('gracias por utilizar nuestra plataforma.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Actividad sospechosa'),
+                '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+            ];
+        }
     }
 
 }

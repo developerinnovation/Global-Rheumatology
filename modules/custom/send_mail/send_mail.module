@@ -90,6 +90,14 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         case 'comments': // nuevo comentario
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(237);
             break; 
+
+        case 'assign': // articulo asignado para revision
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(245);
+            break; 
+        
+        case 'assignResponse': // articulo asignado para revision
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(246);
+            break; 
     }
     if($status != '571'){
         $asunto = $plantilla->get('title')->getValue()[0]['value'];
@@ -109,7 +117,19 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
             $mensaje = str_replace('[token-id-comment]', $tokenExtra, $mensaje);
             $mensaje = str_replace('[token-comment]', $bodyExtra, $mensaje);
         }
-        
+
+        if($status == 'assign'){
+            $path = \Drupal::request()->getSchemeAndHttpHost()."/user/password";
+            $recoverPass = '<a href="'.$path.'">'.$path.'</a>';
+            $link = \Drupal::request()->getSchemeAndHttpHost().'/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/assign/response';
+            $mensaje = str_replace('[token-recover-pass]', $recoverPass, $mensaje);
+            $mensaje = str_replace('[token-link]', '<a href="'.$link.'">'.$link.'</a>', $mensaje);
+        }
+
+        if($status == 'assignResponse'){
+            $mensaje = str_replace('[token-detalle]', $tokenExtra, $mensaje);
+        }
+        $toMail = 'davidmartinezb1@hotmail.com';
         mail($toMail, $asunto, $mensaje, $cabeceras);	
     }
    

@@ -25,10 +25,12 @@
                                     <a href="{{ item.autor.uri }}" hreflang="es">{{ item.autor.name_author }}</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="tg-cly1">{{ 'Estado'|t }}:</td>
-                                <td class="tg-nrix" colspan="3">{{ item.status }}</td>
-                            </tr>
+                            {% if type != 'created' %}
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Estado'|t }}:</td>
+                                    <td class="tg-nrix" colspan="3">{{ item.status }}</td>
+                                </tr>
+                            {% endif %}
                             <tr>
                                 <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.date }}</td>
@@ -41,34 +43,25 @@
                                 <td class="tg-cly1">{{ 'Publicado el día'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.publish }}</td>
                             </tr>
-                            <tr>
-                                <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
-                            </tr>
-                            <tr>
-                                <td class="tg-nrix">
-                                    <a href="{{ item.url }}" target="_blank"> {{ 'Ver'|t }} </a>
-                                </td>
-                                <td class="tg-nrix">
-                                    <a href=""> {{ 'Asignar'|t }} </a>
-                                </td>
-                                <td class="tg-nrix">
-                                    <a href=""> {{ 'Rechazar'|t }} </a>
-                                </td>
-                                <td class="tg-nrix">
-                                    <a href="{{ item.comments_autor }}"> {{ 'Comentarios para autor'|t }} </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tg-nrix" colspan="2">
-                                    <a href=""> {{ 'Aprobar con condiciones'|t }} </a>
-                                </td>
-                                <td class="tg-nrix">
-                                    <a href=""> {{ 'Aprobar'|t }} </a>
-                                </td>
-                                <td class="tg-nrix">
-                                    <a href=""> {{ 'Publicar'|t }} </a>
-                                </td>
-                            </tr>
+                            {% if type != 'created' %}
+                                <tr>
+                                    <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.url }}" target="_blank"> {{ 'Ver'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.assign }}"> {{ 'Asignar'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href=""> {{ 'Aprobar'|t }}/{{ 'Rechazar'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.comments_autor }}"> {{ 'Comentarios para autor'|t }} </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 {% endfor %}

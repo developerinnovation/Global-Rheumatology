@@ -77,16 +77,77 @@
                 <ul> <!-- menu principal -->
                     {% if logged_in != true %}
                         <li class=" navigation__item">
-                            <a href="/user/login" class="">{% trans%}Iniciar sesión{% endtrans%}</a>
+                            <a href="/user/login" class="submenu">{% trans%}Iniciar sesión{% endtrans%}</a>
                         </li>
                     {% endif %}
 
                     {% if logged_in %}
-                        <li class=" navigation__item">
-                            <a href="/new/send/manuscrito" class="">{% trans%}Publicar{% endtrans%}</a>
-                        </li>
-                        <li class=" navigation__item">
-                            <a href="/show/saved/content" class="">{% trans%}Artículos guardados{% endtrans%}</a>
+                        <li class="main navigation__item submenu">
+                            <a href="/" class="submenu ">Home</a>
+                            <ul class="box main inactive">
+                                <li class="seconds navigation__item submenu">
+                                    <a href="/new/send/manuscrito" class="seconds submenu">{% trans%}Publicar{% endtrans%}</a>
+                                    <ul class="seconds inactive">
+                                        <li class="last_submenu">
+                                            <a href="/show/saved/content">{% trans%}Artículos guardados{% endtrans%}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {% if 'editores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
+                                    <li class="seconds navigation__item submenu">
+                                        <a class="seconds submenu">{% trans%}Acciones para Editor{% endtrans%}</a>
+                                        <ul class="seconds inactive">
+                                            <li class="last_submenu">
+                                                <a href="/articles/editor/created/{{ user.id }}">{% trans%}Mis Artículos{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/editor/process/{{ user.id }}">{% trans%}Artículos en proceso{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/editor/rejected/{{ user.id }}">{% trans%}Artículos rechazados{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/editor/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                {% if 'autores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
+                                    <li class="seconds navigation__item submenu">
+                                        <a class="seconds submenu">{% trans%}Acciones para Autor{% endtrans%}</a>
+                                        <ul class="seconds inactive">
+                                            <li class="last_submenu">
+                                                <a href="/articles/author/process/{{ user.id }}">{% trans%}Artículos en proceso{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/author/rejected/{{ user.id }}">{% trans%}Artículos rechazados{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/author/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                {% if 'revisores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
+                                    <li class="seconds navigation__item submenu">
+                                        <a class="seconds submenu">{% trans%}Acciones para Revisor{% endtrans%}</a>
+                                        <ul class="seconds inactive">
+                                            <li class="last_submenu">
+                                                <a href="/articles/reviser/created/{{ user.id }}">{% trans%}Mis artículos{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/reviser/assigned/{{ user.id }}">{% trans%}Artículos asignados{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/reviser/reviewed/{{ user.id }}">{% trans%}Artículos Revisados{% endtrans%}</a>
+                                            </li>
+                                            <li class="last_submenu">
+                                                <a href="/articles/reviser/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </li>
                     {% endif %}
                     

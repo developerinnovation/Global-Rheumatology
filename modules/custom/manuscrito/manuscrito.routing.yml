@@ -68,15 +68,8 @@ acciones_module_page:
         _title: 'Mis accesos'
     requirements:
        _access: 'TRUE'
-revision_autor_page:
-    path: 'article/review/autor/{nid}/{token}'
-    defaults:
-        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionAutor'
-        _title: 'Mis artículos enviados'
-    requirements:
-        _permission: 'New Manuscrito'
 revision_revisor_page:
-    path: 'article/review/revisor/{nid}/{token}'
+    path: 'articles/reviser/{type}/{uid}'
     defaults:
         _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionRevisor'
         _title: 'Artículos en revisión'
@@ -90,9 +83,16 @@ qualify_article_page:
     requirements:
         _permission: 'Review Manuscrito revisor'
 revision_editor_page:
-    path: 'article/review/editor/{uid}/{token}'
+    path: 'articles/editor/{type}/{uid}'
     defaults:
         _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionEditor'
+        _title: 'Artículos en revisión'
+    requirements:
+        _permission: 'Review Manuscrito editor'
+revision_autor_page:
+    path: 'articles/author/{type}/{uid}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionAutor'
         _title: 'Artículos en revisión'
     requirements:
         _permission: 'Review Manuscrito editor'
@@ -103,3 +103,17 @@ comment_page:
         _title: 'Comentarios para artículos en revisión'
     requirements:
         _permission: 'Realizar comentarios'
+assign_page:
+    path: 'assign/{nid}/{tokenNid}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::assign'
+        _title: 'Asignar revisor'
+    requirements:
+        _permission: 'Asignar revisor'
+response_assign_page:
+    path: 'article/{nid}/review/{tokenNid}/assign/response'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::assignResponse'
+        _title: 'Aceptar revision'
+    requirements:
+        _permission: 'Aceptar revision'

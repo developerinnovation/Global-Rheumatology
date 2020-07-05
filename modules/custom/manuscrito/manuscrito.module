@@ -70,20 +70,31 @@ function manuscrito_theme($existing, $type, $theme, $path) {
         'history_autor' => array( 
             'variables' => array(
                 'data' => NULL,
+                'type' => NULL,
             ),
             'template' => 'history-autor',
         ),
         'history_revisor' => array(
             'variables' => array(
+                'type' => NULL,
                 'data' => NULL,
             ),
             'template' => 'history-revisor',
         ),
         'history_editor' => array( 
             'variables' => array(
+                'type' => NULL,
                 'data' => NULL,
             ),
             'template' => 'history-editor',
+        ),
+        'assign_revisor' => array(
+            'variables' => array(
+                'markup' => NULL,
+                'type' => NULL,
+                'revision' => NULL
+            ),
+            'template' => 'assign-revisor',
         ),
     );
 }

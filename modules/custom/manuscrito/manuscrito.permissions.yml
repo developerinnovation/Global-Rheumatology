@@ -28,3 +28,14 @@
   description: 'Gives second level permission to the users.'
   restrict access: true
 
+'Asignar revisor':
+  title: 'Asignar revisor'
+  description: 'Permite asignar artículos a revisores'
+  restrict access: true
+
+'Aceptar revision':
+  title: 'Aceptar revision'
+  description: 'Permite aceptar invitación a revisión, no requiere iniciar sesión'
+  restrict access: false
+
+

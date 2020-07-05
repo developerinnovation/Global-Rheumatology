@@ -220,6 +220,15 @@ function basic_form_alter(&$form, FormStateInterface $form_state, $form_id) {
         }
       }   
     break; 
+
+    case 'node_asignacion_revisores_form';
+      $form['actions']['submit']['#value'] = t('Asignar revisor');
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'basic_asignacion_revisores_submit';
+        }
+      }   
+    break; 
   }
 }
 
@@ -291,6 +300,22 @@ function basic_comentarios_form_submit($form, \Drupal\Core\Form\FormStateInterfa
   }
   
   
+}
+
+function basic_asignacion_revisores_submit ($form, \Drupal\Core\Form\FormStateInterface $form_state){
+  $nid = $form_state->getformObject()->getEntity()->id();
+  $asignacion = \Drupal::entityManager()->getStorage('node')->load($nid);
+  $revisor = User::load($asignacion->get('field_asignar_revisor')->getValue()[0]['target_id']);
+  $revisorMail = $revisor->get('mail')->getValue()[0]['value'];
+
+  $idAsignacion = $asignacion->get('title')->getValue()[0]['value'];
+  $nidArticle = $asignacion->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+  $node = \Drupal::entityManager()->getStorage('node')->load($nidArticle);
+  
+
+  $execute = autor_revisor($node,$nidArticle);
+
+  exec_mail('assign', $node, $nid, $autorMail);
 }
 
 
