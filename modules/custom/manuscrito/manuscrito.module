@@ -96,5 +96,13 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             ),
             'template' => 'assign-revisor',
         ),
+        'history_comments' => array( 
+            'variables' => array(
+                'type' => NULL,
+                'data' => NULL,
+                'titleArticle' => NULL,
+            ),
+            'template' => 'history-comments',
+        ),
     );
 }

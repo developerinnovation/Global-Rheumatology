@@ -329,11 +329,92 @@ class ManuscritoController extends ControllerBase
      * Listado para el autor
      * 
      */
-    public function revisionAutor(RouteMatchInterface $route_match, $nid = NULL){
-        return [
-            '#theme' => 'history_autor',
-            '#data' => 'data',
+    public function revisionAutor(RouteMatchInterface $route_match, $type = NULL, $uid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        $typesArticles = [
+            'manuscrito_articulo_revision',
+            'manuscrito_articulo_especial',
+            'manuscrito_articulo_original',
+            'manuscrito_ciencia_panlar',
+            'manuscrito_comentarios_respues',
+            'manuscrito_editorial',
+            'manuscrito_mini_revision',
+            'manuscrito_multimedia',
+            'manuscrito_noticia',
+            'manuscrito_reportajes_especiales',
+            'manuscrito_rondas_clinicas'
         ];
+        
+        $user = \Drupal\user\Entity\User::load($uid);
+        $user_rol = $user->getRoles();
+        $permi = array("administrator", "autores");
+        $aut = FALSE;
+
+        foreach($user_rol as $rep){
+            if (in_array($rep, $permi) and $aut != TRUE) {
+                $aut = TRUE;  
+            }
+        }
+
+        if($user){
+            if($aut){
+                switch ($type) { 
+                    case 'process';
+                            $status = 0;
+                            $operator = 'NOT IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'rejected';
+                            $status = 0;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'published';
+                            $status = 1;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['586'];
+                        break;
+                }
+                
+                $nid = \Drupal::entityQuery('node')
+                    ->condition('status', $status)
+                    ->condition('uid', $uid)
+                    ->condition('field_estado_del_articulo', $statusTaxonomy, $operator)
+                    ->condition('type',$typesArticles, 'IN')
+                    ->sort('created' , 'DESC')
+                    ->execute();
+            
+                $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+                if($nodes != NULL){
+                    $array = $this->structureArticleRevision($nodes, $type);
+                    return [
+                        '#theme' => 'history_autor',
+                        '#type' => $type,
+                        '#data' => $array,
+                    ];
+                }else{
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('No hay información'),
+                        '#body' => '<p>'.t('No encontramos información asociada a la consulta realizada, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Acceso denegado'),
+                    '#body' => '<p>'.t('Hemos detectado que no tienes acceso a está sección de GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
+
     }
     
     /**
@@ -346,11 +427,118 @@ class ManuscritoController extends ControllerBase
      * Listado para el revisor
      * 
      */
-    public function revisionRevisor(RouteMatchInterface $route_match, $nid = NULL){
-        return [
-            '#theme' => 'history_revisor',
-            '#data' => 'data',
+    public function revisionRevisor(RouteMatchInterface $route_match, $type = NULL, $uid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        $typesArticles = [
+            'manuscrito_articulo_revision',
+            'manuscrito_articulo_especial',
+            'manuscrito_articulo_original',
+            'manuscrito_ciencia_panlar',
+            'manuscrito_comentarios_respues',
+            'manuscrito_editorial',
+            'manuscrito_mini_revision',
+            'manuscrito_multimedia',
+            'manuscrito_noticia',
+            'manuscrito_reportajes_especiales',
+            'manuscrito_rondas_clinicas'
         ];
+
+        $user = \Drupal\user\Entity\User::load($uid);
+        $user_rol = $user->getRoles();
+        $permi = array("administrator", "revisores");
+        $aut = FALSE;
+
+        foreach($user_rol as $rep){
+            if (in_array($rep, $permi) and $aut != TRUE) {
+                $aut = TRUE;  
+            }
+        }
+
+        if($user){
+            if($aut){
+                switch ($type) { 
+                    case 'created';
+                        $status = 1;
+                        break;
+                    case 'process';
+                            $status = 0;
+                            $operator = 'NOT IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'rejected';
+                            $status = 0;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['585'];
+                        break;
+                    case 'published';
+                            $status = 1;
+                            $operator = 'IN';
+                            $statusTaxonomy = ['586'];
+                        break;
+                    case 'assigned';
+                            $status = 0;
+                        break;
+                    default:
+                            return [
+                                '#theme' => 'error_list',
+                                '#title' => t('Recurso no encontrado'),
+                                '#body' => '<p>'.t('No encontramos el recurso solicitado, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                            ];
+                        break;
+                }
+                if($type != 'created' && $type != 'assigned'){
+                    $nid = \Drupal::entityQuery('node')
+                        ->condition('status', $status)
+                        ->condition('field_revisor', $uid)
+                        ->condition('field_estado_del_articulo', $statusTaxonomy, $operator)
+                        ->condition('type',$typesArticles, 'IN')
+                        ->sort('created' , 'DESC')
+                        ->execute();
+                }elseif($type == 'assigned'){
+                    $nid = \Drupal::entityQuery('node')
+                        ->condition('status', $status)
+                        ->condition('type','asignacion_revisores')
+                        ->condition('field_asignar_revisor', $uid)
+                        ->sort('created' , 'DESC')
+                        ->execute();
+                }else{
+                    $nid = \Drupal::entityQuery('node')
+                        ->condition('uid', $uid)
+                        ->sort('created' , 'DESC')
+                        ->execute();
+                }
+
+                $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+                if($nodes != NULL){
+                    $array = $this->structureArticleRevision($nodes, $type);
+                    return [
+                        '#theme' => 'history_revisor',
+                        '#type' => $type,
+                        '#data' => $array,
+                    ];
+                }else{
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('No hay información'),
+                        '#body' => '<p>'.t('No encontramos información asociada a la consulta realizada, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Acceso denegado'),
+                    '#body' => '<p>'.t('Hemos detectado que no tienes acceso a está sección de GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
+
     }
     
     /**
@@ -511,10 +699,12 @@ class ManuscritoController extends ControllerBase
                 $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
                 $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
                 $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
-                $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
-                $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
-                $statusName = Term::load($statusId);
-                $valueStatusName =  $statusName->get('name')->getValue()[0]['value'];
+                if($type != 'assigned'){
+                    $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
+                    $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
+                    $statusName = Term::load($statusId);
+                    $valueStatusName =  $statusName->get('name')->getValue()[0]['value'];
+                }
             }
 
             $content = [
@@ -633,6 +823,88 @@ class ManuscritoController extends ControllerBase
                 '#title' => t('Actividad sospechosa'),
                 '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
             ];
+        }
+    }
+
+    public function getComments(Request $request, $uid = NULL, $nid = NULL, $type = NULL){
+        
+        date_default_timezone_set('America/Bogota');
+        setlocale(LC_ALL, 'es_Es');
+
+        $article = NULL;
+
+        switch ($type) { 
+            case 'author';
+                    $status = 0;
+                    $typeComments = 'comentarios_para_autor';
+                break;
+            case 'editor';
+                    $status = 0;
+                    $typeComments = 'comentarios_para_editor';
+                break;
+            case 'reviser';
+                    $status = 0;
+                break;
+            default: 
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('Recurso no encontrado'),
+                        '#body' => '<p>'.t('No encontramos el recurso solicitado, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                break;
+        }
+        if($type != 'reviser'){
+            $nodes = \Drupal::entityQuery('node')
+                ->condition('status', $status)
+                ->condition('type', $typeComments)
+                ->condition('field_articulo_en_revision', $nid)
+                ->sort('created' , 'DESC')
+                ->execute();
+        }else{
+            $nodes = \Drupal::entityQuery('node')
+                ->condition('status', $status)
+                ->condition('uid', $uid)
+                ->sort('created' , 'DESC')
+                ->execute();
+        }
+
+        $article = \Drupal\node\Entity\Node::load($nid); 
+        if($article == NULL || !$article){
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Recurso no encontrado'),
+                '#body' => '<p>'.t('No encontramos el recurso solicitado, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+            ];
+        }else{
+            $titleArticle = $article->get('title')->getValue()[0]['value'];
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nodes);
+            if($nodes != NULL){
+                $contents = [];
+                foreach ($nodes as $node) {
+                    if($type == 'reviser'){
+                        $commnetsTo = $typeComments == 'comentarios_para_autor' ? t('Para el autor') : t('Para el editor');
+                    }
+                    $content = [
+                        'id' => $node->get('title')->getValue()[0]['value'],
+                        'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                        'comment' => $node->get('field_comentarios')->getValue()[0]['value'],
+                        'to' => isset($commnetsTo) ? $commnetsTo : '',
+                    ];
+                    array_push($contents,$content);
+                }
+                return [
+                    '#theme' => 'history_comments',
+                    '#type' => $type,
+                    '#titleArticle' => $titleArticle,
+                    '#data' => $contents,
+                ];
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('No hay comentarios'),
+                    '#body' => '<p>'.t('No encontramos comentarios asociadas al artículo '). $titleArticle .', '.t('si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
         }
     }
 

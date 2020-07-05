@@ -1,0 +1,58 @@
+<main id="info-article">
+    <h2>
+        {% if type == 'author' %}
+            {{ 'Historial de comentarios recibidos'|t }}
+        {% elseif type  == 'editor' %}
+            {{ 'Historial de comentarios en plataforma'|t }}
+        {% else %}
+            {{ 'Historial de comentarios realizados'|t }}
+        {% endif %}
+    </h2>
+    <div class="list-type">
+        <div class="search">
+            <input type="search" name="search-article-history" id="search-article-history" placeholder="{{ 'Buscar artículo'|t }}" onkeyup="searchRevision(this.value)">
+        </div>
+        <div class="box-type revision">           
+            <div class="article active">
+                <table class="tg">
+                    <tbody>
+                        <tr>
+                            <td class="tg-cly1">{{ 'Artículo relacionado'|t }}:<br></td>
+                            <td class="tg-nrix" colspan="3"><b>{{ titleArticle }}</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% for item in data %}
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                <td class="tg-nrix" colspan="3">{{ item.id }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-nrix" colspan="3">{{ item.date }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Detalle del comentario'|t }}:</td>
+                                <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>    
+    </div>
+</main>
+<script>
+    $('.launcher-box-message').removeClass('active');
+</script>
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-cly1{text-align:left;vertical-align:middle}
+    .tg .tg-nrix{text-align:center;vertical-align:middle}
+</style>

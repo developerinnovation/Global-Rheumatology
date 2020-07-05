@@ -1,45 +1,89 @@
-{{ attach_library('basic/tables') }}
 <main id="info-article">
-    <h2> {{ 'Historial de revisiones'|t }} </h2>
+    <h2>
+        {% if type == 'assigned' %}
+            {{ 'Historial de asignaciones'|t }}
+        {% elseif type  == 'reviewed' %}
+            {{ 'Artículos revisados'|t }}
+        {% elseif type  == 'created' %}
+            {{ 'Mis Artículos'|t }}
+        {% else %}
+            {{ 'Artículos published'|t }}
+        {% endif %}
+    </h2>
     <div class="list-type">
-
-        <div class="box-type">           
+        <div class="search">
+            <input type="search" name="search-article-history" id="search-article-history" placeholder="{{ 'Buscar artículo'|t }}" onkeyup="searchRevision(this.value)">
+        </div>
+        <div class="box-type revision">           
             <div class="article active">
-                <table class="tg">
-                    <thead>
-                        <tr>
-                            <th class="tg-wman" rowspan="3"> {{ 'Título'|t }} </th>
-                            <th class="tg-wman" rowspan="3"> {{ 'Tipo'|t }} </th>
-                            <th class="tg-wman" rowspan="3"> {{ 'Estado'|t }} </th>
-                            <th class="tg-wman" rowspan="3"> {{ 'Recibido'|t }} </th>
-                            <th class="tg-wman" rowspan="3">{{ 'Actualizado'|t }}</th>
-                            <th class="tg-wman" colspan="4" rowspan="3">{{ 'Acciones'|t }}</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td class="tg-y9ds">Text</td>
-                            <td class="tg-y9ds">Article</td>
-                            <td class="tg-y9ds">Active</td>
-                            <td class="tg-y9ds">20 junio</td>
-                            <td class="tg-y9ds">21 junio</td>
-                            <td class="tg-y9ds">
-                                <a href=""> {{ 'Ver'|t }} </a>
-                            </td>
-                            <td class="tg-y9ds">
-                                <a href=""> {{ 'Revisar'|t }} </a>
-                            </td>
-                            <td class="tg-y9ds">
-                                <a href=""> {{ 'Comentar al Autor'|t }} </a>
-                            </td>
-                            <td class="tg-y9ds">
-                                <a href=""> {{ 'Comentar al Editor'|t }} </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                {% for item in data %}
+                    <table class="tg">
+                        <tbody>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                <td class="tg-nrix" colspan="3">
+                                    <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                <td class="tg-nrix" colspan="3">{{ item.type }}</td>
+                            </tr>
+                            {% if type != 'created' and type != 'assigned' %}
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Autor'|t }}:</td>
+                                    <td class="tg-nrix" colspan="3">
+                                        <a href="{{ item.autor.uri }}" hreflang="es">{{ item.autor.name_author }}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Estado'|t }}:</td>
+                                    <td class="tg-nrix" colspan="3">{{ item.status }}</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-nrix" colspan="3">{{ item.date }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-cly1">{{ 'Actualizado el día'|t }}:</td>
+                                <td class="tg-nrix" colspan="3">{{ item.update }}</td>
+                            </tr>
+                            {% if type != 'created' %}
+                                <tr>
+                                    <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.url }}" target="_blank"> {{ 'Ver'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.assign }}"> {{ 'Revisar'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.comments_editor }}"> {{ 'Comentarios para editor'|t }} </a>
+                                    </td>
+                                    <td class="tg-nrix">
+                                        <a href="{{ item.comments_autor }}"> {{ 'Comentarios para autor'|t }} </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                {% endfor %}
             </div>
         </div>    
     </div>
 </main>
+<script>
+    $('.launcher-box-message').removeClass('active');
+</script>
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-cly1{text-align:left;vertical-align:middle}
+    .tg .tg-nrix{text-align:center;vertical-align:middle}
+</style>

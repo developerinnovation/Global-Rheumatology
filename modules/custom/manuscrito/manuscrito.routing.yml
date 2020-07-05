@@ -96,6 +96,13 @@ revision_autor_page:
         _title: 'Artículos en revisión'
     requirements:
         _permission: 'Review Manuscrito editor'
+comments_history_page:
+    path: '/comments/register/article/{uid}/{nid}/{type}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::getComments'
+        _title: 'Comentarios recibidos'
+    requirements:
+        _permission: 'ver comentarios'
 comment_page:
     path: 'comments/review/{rol}/{nid}/{tokenRol}/{tokenNid}'
     defaults:
