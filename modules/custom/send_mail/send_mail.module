@@ -129,7 +129,6 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         if($status == 'assignResponse'){
             $mensaje = str_replace('[token-detalle]', $tokenExtra, $mensaje);
         }
-        $toMail = 'davidmartinezb1@hotmail.com';
         mail($toMail, $asunto, $mensaje, $cabeceras);	
     }
    
