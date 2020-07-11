@@ -38,7 +38,7 @@
   description: 'Permite aceptar invitación a revisión, no requiere iniciar sesión'
   restrict access: false
 
-'Ver comentarios'
+'Ver comentarios':
   title: 'Ver comentarios'
   description: 'Permite ver el historial de comentarios recibidos, para autores, ediotres, revisores'
   restrict access: true
