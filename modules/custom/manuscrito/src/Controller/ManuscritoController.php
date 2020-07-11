@@ -308,9 +308,68 @@ class ManuscritoController extends ControllerBase
      * 
      */
     public function qualify(RouteMatchInterface $route_match, $nid = NULL){
-        $node = $this->entityManager()->getStorage('node')->load($nid);
-        $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-        $node_create_form = $this->entityFormBuilder()->getForm($node);    
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        
+        $uid = \Drupal::currentUser()->id();
+        $user = \Drupal\user\Entity\User::load($uid);
+        $user_rol = $user->getRoles();
+        $permi = array("administrator", "revisores");
+        $aut = FALSE;
+
+        foreach($user_rol as $rep){
+            if (in_array($rep, $permi) and $aut != TRUE) {
+                $aut = TRUE;  
+            }
+        }
+
+        if($user){
+            if($aut){
+                $article = \Drupal::entityManager()->getStorage('node')->load($nid); 
+                $title = $article->get('title')->getValue()[0]['value'].' ('.$nid.')';
+
+                $nids = \Drupal::entityQuery('node')
+                    ->condition('status', $status)
+                    ->condition('uid', $uid)
+                    ->condition('field_articulo_en_revision', [$nid], 'NOT IN')
+                    ->condition('type','revision_de_articulos')
+                    ->sort('created' , 'DESC')
+                    ->execute();
+                
+                if($nids){
+                    
+                    return [
+                        '#theme' => 'error_list',
+                        '#title' => t('Artículo calificado con anterioridad'),
+                        '#body' => '<p>'.t('Hemos detectado que ya realizaste la calificación en GLOBAL RHEUMATOLOGY del artículo').' "'.$title.'", '.t('si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                    ];
+                }else{
+                    $typ = node_type_load('revision_de_articulos'); 
+                    $node = $this->entityManager()->getStorage('node')->create(array(
+                        'type' => $typ->id(),
+                    ));
+                    $node_create_form = $this->entityFormBuilder()->getForm($node);  
+                    $revision = $article->get('title')->getValue()[0]['value'].' ('.$nid.')';
+                    return [
+                        '#theme' => 'article_qualify',
+                        '#type' => 'markup',
+                        '#revision' => $title,
+                        '#markup' => render($node_create_form),
+                    ];
+                }
+           }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Acceso denegado'),
+                    '#body' => '<p>'.t('Hemos detectado que no tienes acceso a está sección de GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Acceso denegado'),
+                '#body' => '<p>'.t('Hemos detectado que no tiene acceso a está sección de GLOBAL RHEUMATOLOGY por favor verifique si tiene una sesión activa en nuestra plataforma.').'</p>',
+            ];
+        }
         
         return [
             '#theme' => 'article_revision',
@@ -699,6 +758,7 @@ class ManuscritoController extends ControllerBase
                 $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
                 $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
                 $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+                $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
                 if($type != 'assigned'){
                     $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
                     $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
@@ -721,6 +781,7 @@ class ManuscritoController extends ControllerBase
                 'comments_editor' => isset($comments_editor) ? $comments_editor : '',
                 'comments_revisor' => isset($comments_revisor) ? $comments_revisor : '',
                 'assign' => isset($assign) ? $assign : '',
+                'qualify' => isset($qualify) ? $qualify : '',
                 'node' => $node,
             ];
             array_push($contents,$content);

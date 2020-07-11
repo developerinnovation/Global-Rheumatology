@@ -98,6 +98,10 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         case 'assignResponse': // articulo asignado para revision
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(246);
             break; 
+        
+        case 'qualify': // articulo asignado para revision
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(253);
+            break; 
     }
     if($status != '571'){
         $asunto = $plantilla->get('title')->getValue()[0]['value'];
@@ -128,6 +132,10 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
 
         if($status == 'assignResponse'){
             $mensaje = str_replace('[token-detalle]', $tokenExtra, $mensaje);
+        }
+
+        if($status == 'qualify'){
+            $mensaje = str_replace('[token-qualify]', $tokenExtra, $mensaje);
         }
         mail($toMail, $asunto, $mensaje, $cabeceras);	
     }

@@ -1,0 +1,58 @@
+{% set classes = ['node'] %}
+
+<article {{ attributes.addClass(classes) }}>
+  <div id="main">
+    <div class="container two-col">
+      <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
+        <div class="box">
+          <h1 {{ attributes }}>
+            {{ 'Id de la revisión'|t }} : {{ node.title.value }}
+          </h1>
+          
+          <div class="info article">
+              <br>
+              <div>
+                <date>{{ content.created.value|date('U')|format_date('global') }}</date>
+              </div>
+              <br>
+          </div>
+
+        </div>
+        
+
+      </div>
+      
+      <div class="right">
+        <div class="content article">
+          <h3> {{ 'Detalle de la revisión del artículo'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          <div class="article__body">
+            {{ 'Calificación'|t }} : <br>
+            <ul>
+                <li>
+                    {{ '¿Qué tan original le parece el manuscrito asignado?'|t }} : {{ node.field_pregunta_1.value|raw }}
+                </li>
+                <li>
+                    {{ '¿Qué tan relevante es la información presentada en este manuscrito?'|t }} : {{ node.field_pregunta_2.value|raw }}
+                </li>
+                <li>
+                    {{ '¿Qué tan bien estructurada le parece la información presentada?'|t }} : {{ node.field_pregunta_3.value|raw }}
+                </li>
+                <li>
+                    {{ '¿Qué tan bien presentado está el contenido del manuscrito?'|t }} : {{ node.field_pregunta_4.value|raw }}
+                </li>
+                <li>
+                    {{ '¿Qué tan claro es el mensaje que deja el manuscrito?'|t }} : {{ node.field_pregunta_5.value|raw }}
+                </li>
+                <li>
+                    {% set field_decision_revisor = content.field_decision_revisor['#items'].getString() %}
+                    {{ 'Decisión'|t }} : {{ content.field_decision_revisor[0] }}
+                </li>
+            </ul>
+             
+          </div>
+        </div>
+      </div>
+    
+    </div><!-- /.container -->
+  </div><!-- /#main -->
+</article><!-- /.node -->
