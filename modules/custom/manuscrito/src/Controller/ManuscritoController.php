@@ -570,7 +570,7 @@ class ManuscritoController extends ControllerBase
 
                 $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
                 if($nodes != NULL){
-                    $array = $this->structureArticleRevision($nodes, $type);
+                    $array = $this->structureArticleRevision($nodes, $type, 'revisor');
                     return [
                         '#theme' => 'history_revisor',
                         '#type' => $type,
@@ -677,7 +677,7 @@ class ManuscritoController extends ControllerBase
                 }
                 $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
                 if($nodes != NULL){
-                    $array = $this->structureArticleRevision($nodes, $type);
+                    $array = $this->structureArticleRevision($nodes, $type,  'editor');
                     return [
                         '#theme' => 'history_editor',
                         '#type' => $type,
@@ -747,7 +747,7 @@ class ManuscritoController extends ControllerBase
         }
     }
 
-    public function structureArticleRevision($nodes,$type) {
+    public function structureArticleRevision($nodes,$type, $rol = NULL) {
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
 
@@ -758,7 +758,9 @@ class ManuscritoController extends ControllerBase
                 $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
                 $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
                 $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
-                $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
+                if($type == 'assigned' && $rol == 'revisor'){ 
+                    $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
+                }
                 if($type != 'assigned'){
                     $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
                     $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
