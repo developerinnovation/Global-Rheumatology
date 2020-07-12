@@ -21,6 +21,7 @@ main#info-article{
                 font: {
                     size: 14px;
                 }
+                outline: none;
             }
         }
         .option{
@@ -154,6 +155,7 @@ main#info-article{
                     border-radius: 10px;
                     margin: 0 auto 20px;
                     box-shadow: 0 6px 12px #e1e3e8;
+                    overflow: hidden;
                     tbody{
                         tr{
                             border: 0;
@@ -198,6 +200,17 @@ main#info-article{
                                 border: 0;
                                 td{
                                     border: 0;
+                                    &.tg-nrix{
+                                        &[colspan="4"]{
+                                            a{
+                                                background: $accent-blue;
+                                                color: #fff;
+                                                &:hover{
+                                                    text-decoration: underline;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
