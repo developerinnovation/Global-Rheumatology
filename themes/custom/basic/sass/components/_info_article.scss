@@ -164,17 +164,17 @@ main#info-article{
                                 &:last-child{
                                     border-right: 0;
                                 }
+                                &.tg-nrix{
+                                    a{
+                                        padding: 10px;
+                                        border-radius: 6px;
+                                        background: #f0f9fe;
+                                        color: $accent-blue;
+                                    }
+                                }
                             }
                             &:last-child{
                                 border: 0;
-                            }
-                            &.tg-nrix{
-                                a{
-                                    padding: 10px;
-                                    border-radius: 6px;
-                                    background: #f0f9fe;
-                                    color: $accent-blue;
-                                }
                             }
                         }
                     }
