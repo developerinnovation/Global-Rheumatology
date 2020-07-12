@@ -161,11 +161,17 @@ main#info-article{
                                 font: {
                                     size: 12px;
                                 }
+                                @media only screen and ($tablet){
+                                    font: {
+                                        size: 14px;
+                                    }
+                                }
                                 &:last-child{
                                     border-right: 0;
                                 }
                                 &.tg-nrix{
                                     a{
+                                        display: block;
                                         padding: 10px;
                                         border-radius: 6px;
                                         background: #f0f9fe;
