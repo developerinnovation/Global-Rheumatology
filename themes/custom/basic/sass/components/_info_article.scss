@@ -13,11 +13,14 @@ main#info-article{
             input[type="search"]{
                 margin: 15px auto;
                 width: calc(100% - 40px);
+                max-width: 420px;
                 height: 40px;
                 padding: 0 15px;
                 border: 2px solid $accent-blue;
                 border-radius: 20px;
-                font-size: 14px;
+                font: {
+                    size: 14px;
+                }
             }
         }
         .option{
@@ -146,10 +149,11 @@ main#info-article{
                 background: #f4f4f4;
                 padding: 20px 15px;
                 .tg {
+                    max-width: 1180px;
                     background: #fff;
                     border-radius: 10px;
-                    margin: 0 0 15px;
-                    box-shadow: 0 10px 20px #c3c8dc;
+                    margin: 0 auto 20px;
+                    box-shadow: 0 6px 12px #e1e3e8;
                     tbody{
                         tr{
                             border: 0;
@@ -174,13 +178,27 @@ main#info-article{
                                         display: block;
                                         padding: 10px;
                                         border-radius: 6px;
-                                        background: #f0f9fe;
+                                        background: #f3f3f9;
                                         color: $accent-blue;
+                                        -webkit-transition: all 0.1s linear;
+                                        transition: all 0.1s linear;
+                                        &:hover{
+                                            background: $accent-blue;
+                                            color: #fff;
+                                        }
+                                    }
+                                    &[colspan="4"]{
+                                        padding: 4px;
+                                        background: $accent-blue;
+                                        color: #fff;
                                     }
                                 }
                             }
                             &:last-child{
                                 border: 0;
+                                td{
+                                    border: 0;
+                                }
                             }
                         }
                     }
