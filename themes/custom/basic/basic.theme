@@ -339,7 +339,7 @@ function basic_revision_de_articulos_submit($form, \Drupal\Core\Form\FormStateIn
   $pr4 = $calificacion->get('field_pregunta_4')->getValue()[0]['value'];
   $pr5 = $calificacion->get('field_pregunta_5')->getValue()[0]['value'];
   $desicion = $calificacion->get('field_decision_revisor')->getValue()[0]['value'];
-
+  $promedio = ($pr1 + $pr2 +$pr3 + $pr4 + $pr5 )/5 ;
   $node = \Drupal::entityManager()->getStorage('node')->load($nidArticle);
 
   $execute = autor_revisor($node,$nidArticle);
@@ -369,6 +369,7 @@ function basic_revision_de_articulos_submit($form, \Drupal\Core\Form\FormStateIn
       <li>¿Qué tan bien estructurada le parece la información presentada? : '.$pr3.'</li>
       <li>¿Qué tan bien presentado está el contenido del manuscrito? : '.$pr4.'</li>
       <li>¿Qué tan claro es el mensaje que deja el manuscrito? : '.$pr5.'</li>
+      <li>Promedio de la calificación : '.$promedio.'</li>
       <li>Decisión : '.$TextDesicion.'</li>
     </ul>
   </ul>';

@@ -29,19 +29,27 @@
             {{ 'Calificación'|t }} : <br>
             <ul>
                 <li>
-                    {{ '¿Qué tan original le parece el manuscrito asignado?'|t }} : {{ node.field_pregunta_1.value|raw }}
+                    {% set pregunta_1 = node.field_pregunta_1.value|raw %}
+                    {{ '¿Qué tan original le parece el manuscrito asignado?'|t }} : {{ pregunta_1 }}
                 </li>
                 <li>
-                    {{ '¿Qué tan relevante es la información presentada en este manuscrito?'|t }} : {{ node.field_pregunta_2.value|raw }}
+                    {% set pregunta_2 = node.field_pregunta_2.value|raw %}
+                    {{ '¿Qué tan relevante es la información presentada en este manuscrito?'|t }} : {{ pregunta_2 }}
                 </li>
                 <li>
-                    {{ '¿Qué tan bien estructurada le parece la información presentada?'|t }} : {{ node.field_pregunta_3.value|raw }}
+                    {% set pregunta_3 = node.field_pregunta_3.value|raw %}
+                    {{ '¿Qué tan bien estructurada le parece la información presentada?'|t }} : {{ pregunta_3 }}
                 </li>
                 <li>
-                    {{ '¿Qué tan bien presentado está el contenido del manuscrito?'|t }} : {{ node.field_pregunta_4.value|raw }}
+                    {% set pregunta_4 = node.field_pregunta_4.value|raw %}
+                    {{ '¿Qué tan bien presentado está el contenido del manuscrito?'|t }} : {{ pregunta_4 }}
                 </li>
                 <li>
-                    {{ '¿Qué tan claro es el mensaje que deja el manuscrito?'|t }} : {{ node.field_pregunta_5.value|raw }}
+                    {% set pregunta_5 = node.field_pregunta_5.value|raw %}
+                    {{ '¿Qué tan claro es el mensaje que deja el manuscrito?'|t }} : {{ pregunta_5 }}
+                </li>
+                <li>
+                    {{ 'Promedio de la calificación'|t }} : {{  (pregunta_1 + pregunta_2 +pregunta_3 + pregunta_4 + pregunta_5)/5 }}
                 </li>
                 <li>
                     {% set field_decision_revisor = content.field_decision_revisor['#items'].getString() %}
