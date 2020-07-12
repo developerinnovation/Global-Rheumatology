@@ -9,6 +9,17 @@ main#info-article{
         margin: 0;
     }
     .list-type{
+        .search{
+            input[type="search"]{
+                margin: 15px auto;
+                width: calc(100% - 40px);
+                height: 40px;
+                padding: 0 15px;
+                border: 2px solid $accent-blue;
+                border-radius: 20px;
+                font-size: 14px;
+            }
+        }
         .option{
             padding: 20px;
             background: $primary-color;
@@ -129,6 +140,44 @@ main#info-article{
                 }
                 &.active{
                     display: block;
+                }
+            }
+            &.revision{
+                background: #f4f4f4;
+                padding: 20px 15px;
+                .tg {
+                    background: #fff;
+                    border-radius: 10px;
+                    margin: 0 0 15px;
+                    box-shadow: 0 10px 20px #c3c8dc;
+                    tbody{
+                        tr{
+                            border: 0;
+                            border-bottom: 1px solid #e1e1ef;
+                            td{
+                                padding: 10px;
+                                border: 0;
+                                border-right: 1px dashed #e1e1ef;
+                                font: {
+                                    size: 12px;
+                                }
+                                &:last-child{
+                                    border-right: 0;
+                                }
+                            }
+                            &:last-child{
+                                border: 0;
+                            }
+                            &.tg-nrix{
+                                a{
+                                    padding: 10px;
+                                    border-radius: 6px;
+                                    background: #f0f9fe;
+                                    color: $accent-blue;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
