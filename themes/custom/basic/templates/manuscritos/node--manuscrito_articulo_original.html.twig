@@ -122,23 +122,10 @@
                         </div>
                     {% endif %}
 
-                    {% if node.field_discusion.value %}    
-                        <div class="block discusion">
-                            <div class="title-block">
-                                <h2>Conclusión</h2>
-                                <button class="btn-show-text" data-id="discusion">cerrar</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_discusion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-
                     {% if node.field_conclusion.value %}    
                         <div class="block conclusion">
                             <div class="title-block">
-                                <h2>Conclusión</h2>
+                                <h2>Discusiones y conclusiones</h2>
                                 <button class="btn-show-text" data-id="conclusion">cerrar</button>
                             </div>
                             <div class="box active">
