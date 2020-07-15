@@ -755,9 +755,13 @@ class ManuscritoController extends ControllerBase
         foreach ($nodes as $node) {
             $nid = $node->get('nid')->getValue()[0]['value'];
             if($type != 'created'){
+                if($rol == 'revisor'){
+
+                    $comments_revisor = '/comments/review/revisor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+                }
                 $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
                 $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
-                $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+                
                 if($type == 'assigned' && $rol == 'revisor'){ 
                     $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
                 }
