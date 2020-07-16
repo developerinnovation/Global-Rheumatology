@@ -711,7 +711,7 @@ class ManuscritoController extends ControllerBase
         if(\Drupal::currentUser()->id() != 0){
             if($rol == 'autor' || $rol == 'editor' || $rol == 'revisor'){
                 $article = \Drupal::entityManager()->getStorage('node')->load($nid);        
-                if(hash('md5',$rol,false) == $tokenRol && hash('md5',$nid,false) == $tokenNid && $article){
+                if(hash('md5',$rol,false) == $tokenRol  && $article){
                     $typ = node_type_load('comentarios_para_'.$rol); 
                     $node = $this->entityManager()->getStorage('node')->create(array(
                         'type' => $typ->id(),
@@ -752,17 +752,17 @@ class ManuscritoController extends ControllerBase
         setlocale(LC_ALL, 'es_Es');
 
         $contents = [];
+        $nodesArticle = NULL;
         foreach ($nodes as $node) {
             $nid = $node->get('nid')->getValue()[0]['value'];
             if($type != 'created'){
-                if($rol == 'revisor'){
-
-                    $comments_revisor = '/comments/review/revisor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
-                }
-                $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
-                $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
-                
+                $comments_autor = '/comments/review/autor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
+                $comments_editor = '/comments/review/editor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+                $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
+ 
                 if($type == 'assigned' && $rol == 'revisor'){ 
+                    $idArticle = $node->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+                    $nodesArticle = \Drupal\node\Entity\Node::load($idArticle);
                     $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
                 }
                 if($type != 'assigned'){
@@ -774,6 +774,8 @@ class ManuscritoController extends ControllerBase
             }
 
             $content = [
+                'titleArticle' => $nodesArticle != NULL ? $nodesArticle->get('title')->getValue()[0]['value'] : '',
+                'urlArticle' => $nodesArticle != NULL ? \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $idArticle) : '',
                 'nid' => $nid,
                 'title' => $node->get('title')->getValue()[0]['value'],
                 'type' => $this->bundleLabel($node->bundle()),

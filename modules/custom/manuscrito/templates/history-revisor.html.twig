@@ -19,8 +19,16 @@
                 {% for item in data %}
                     <table class="tg">
                         <tbody>
+                            {% if type == 'assigned' %}
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Artículo'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">
+                                        <a href="{{ item.urlArticle }}" hreflang="es">{{ item.titleArticle }}</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
                             <tr>
-                                <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Id revisión'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
                                 </td>
