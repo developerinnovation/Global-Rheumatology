@@ -24,7 +24,13 @@
       
       <div class="right">
         <div class="content article">
-          <h3> {{ 'Detalle del comentario para artículo'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          <h3> {{ 'Detalle del comentario para artículo'|t }} : <a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }}</a></h3>
+          
+          <div class="article__body">
+            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ 'Ir al artículo'|t }} </a>
+            <br><br>
+          </div>
+          
           <div class="article__body">
             {{ 'Comentario'|t }} : <br>
             {{ node.field_comentarios.value|raw }}

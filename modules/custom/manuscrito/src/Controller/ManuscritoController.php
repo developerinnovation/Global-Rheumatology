@@ -750,20 +750,30 @@ class ManuscritoController extends ControllerBase
     public function structureArticleRevision($nodes,$type, $rol = NULL) {
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
-
+        $urlEdit = '';
         $contents = [];
         $nodesArticle = NULL;
         foreach ($nodes as $node) {
             $nid = $node->get('nid')->getValue()[0]['value'];
             if($type != 'created'){
-                $comments_autor = '/comments/review/autor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
-                $comments_editor = '/comments/review/editor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+                if($node->hasField('field_articulo_en_revision')){
+                    $comments_autor = '/comments/review/autor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
+                    $comments_editor = '/comments/review/editor/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+                }else{
+                    $comments_autor = '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false);
+                    $comments_editor = '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false);
+                }
                 $comments_revisor = '/comments/review/revisor/'.$nid.'/'.hash('md5','revisor',false).'/'.hash('md5',$nid,false);
  
                 if($type == 'assigned' && $rol == 'revisor'){ 
-                    $idArticle = $node->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+                    if($node->hasField('field_articulo_en_revision')){
+                        $idArticle = $node->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+                        $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
+                    }
+                    
+                    $urlEdit = '/update/'.str_replace(' ','_',$this->bundleLabel($node->bundle())).'/'.$nid;
                     $nodesArticle = \Drupal\node\Entity\Node::load($idArticle);
-                    $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
+                    
                 }
                 if($type != 'assigned'){
                     $assign = '/assign/'.$nid.'/'.hash('md5',$nid,false);
@@ -791,6 +801,7 @@ class ManuscritoController extends ControllerBase
                 'assign' => isset($assign) ? $assign : '',
                 'qualify' => isset($qualify) ? $qualify : '',
                 'node' => $node,
+                'urlEdit' => isset($urlEdit) ? $urlEdit : '',
             ];
             array_push($contents,$content);
         }

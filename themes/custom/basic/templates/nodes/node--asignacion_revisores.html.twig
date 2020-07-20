@@ -25,8 +25,13 @@
       <div class="right">
         <div class="content article">
           <h3> {{ 'Artículo en revisión'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          
           <div class="article__body">
-            
+            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ 'Ir al artículo'|t }} </a>
+            <br><br>
+          </div>
+          
+          <div class="article__body">
             {% set nombre %} {{ drupal_field('field_nombre', 'user', node.field_asignar_revisor.target_id) }}  {% endset %}
             {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.field_asignar_revisor.target_id) }} {% endset %}
             {{ 'Revisor asignado'|t }} : {{ nombre|raw }} {{ apellidos|raw }}

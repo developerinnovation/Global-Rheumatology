@@ -25,6 +25,12 @@
       <div class="right">
         <div class="content article">
           <h3> {{ 'Detalle de la revisión del artículo'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          
+          <div class="article__body">
+            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ 'Ir al artículo'|t }} </a>
+            <br><br>
+          </div>
+          
           <div class="article__body">
             {{ 'Calificación'|t }} : <br>
             <ul>

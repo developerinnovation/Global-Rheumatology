@@ -108,7 +108,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         $mensaje = $plantilla->get('body')->getValue()[0]['value'];
     
         $titleArticle = $article->get('title')->getValue()[0]['value'];
-        $url = \Drupal::request()->getSchemeAndHttpHost().\Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nidArticle);
+        $url = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination='.\Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nidArticle);
         $linkTitle = '<a href="'.$url.'">'.$titleArticle.'</a>';
         $convertDate = convertDate();
         
@@ -125,7 +125,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         if($status == 'assign'){
             $path = \Drupal::request()->getSchemeAndHttpHost()."/user/password";
             $recoverPass = '<a href="'.$path.'">'.$path.'</a>';
-            $link = \Drupal::request()->getSchemeAndHttpHost().'/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/assign/response';
+            $link = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination=/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/assign/response';
             $mensaje = str_replace('[token-recover-pass]', $recoverPass, $mensaje);
             $mensaje = str_replace('[token-link]', '<a href="'.$link.'">'.$link.'</a>', $mensaje);
         }
@@ -137,6 +137,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         if($status == 'qualify'){
             $mensaje = str_replace('[token-qualify]', $tokenExtra, $mensaje);
         }
+        $toMail = 'davidmartinezb1@hotmail.com';
         mail($toMail, $asunto, $mensaje, $cabeceras);	
     }
    
