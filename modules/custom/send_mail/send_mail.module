@@ -137,7 +137,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         if($status == 'qualify'){
             $mensaje = str_replace('[token-qualify]', $tokenExtra, $mensaje);
         }
-        $toMail = 'davidmartinezb1@hotmail.com';
+      
         mail($toMail, $asunto, $mensaje, $cabeceras);	
     }
    
