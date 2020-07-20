@@ -61,6 +61,9 @@
                     {% set field_decision_revisor = content.field_decision_revisor['#items'].getString() %}
                     {{ 'Decisión'|t }} : {{ content.field_decision_revisor[0] }}
                 </li>
+                <li>
+                  {{ 'Comentario'|t }} : {{ node.field_comentarios.value|raw }}
+                </li>
             </ul>
              
           </div>
