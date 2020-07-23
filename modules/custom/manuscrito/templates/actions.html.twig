@@ -1,0 +1,44 @@
+{% set roles = user.getroles(TRUE) %}
+
+{% if data.status != 0  %}
+
+    {# flujo editores #}
+    {% if 'editores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %}
+        <div class="tabs" style="text-align: center">
+            <span>{{ 'Mis acciones disponible cómo editor'|t }}</span>
+            <ul class="tabs primary">
+                <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.assign }}">{{ 'Asignar'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Aprobar o Rechazar'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.comments_autor }}">{{ 'Comentarios para el autor'|t }}</a></li>
+            </ul>
+        </div>
+    {% endif %}
+
+    {# flujo revisores #}
+    {% if 'revisores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %} 
+        <div class="tabs" style="text-align: center">
+                <span>{{ 'Mis acciones disponible cómo revisor'|t }}</span>
+            <ul class="tabs primary">
+                <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.qualify }}">{{ 'Revisar'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.comments_editor }}">{{ 'Comentarios para editor'|t }}</a></li>
+            </ul>
+        </div>
+    {% endif %}
+
+    {# flujo autores #}
+    {% if 'autores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %} 
+        <div class="tabs" style="text-align: center">
+            <span>{{ 'Mis acciones disponible cómo autor'|t }}</span>
+            <ul class="tabs primary">
+                <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Corregir artículo'|t }}</a></li>
+                <li class="tabs__tab"><a href="{{ data.comments_register }}">{{ 'Ver comentarios recibidos'|t }}</a></li>
+            </ul>
+        </div>
+    {% endif %}
+
+    
+
+{% endif %}

@@ -1,6 +1,10 @@
 {% set classes = ['node'] %}
 
 <article {{ attributes.addClass(classes) }}>
+  <ul class="tabs primary">
+      <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ 'Revisión del artículo'|t }}</a></li>
+      <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ 'Regresar al artículo'|t }}</a></li>
+  </ul>
   <div id="main">
     <div class="container two-col">
       <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">

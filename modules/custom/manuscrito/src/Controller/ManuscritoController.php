@@ -770,8 +770,8 @@ class ManuscritoController extends ControllerBase
                         $idArticle = $node->get('field_articulo_en_revision')->getValue()[0]['target_id'];
                         $qualify = '/article/qualify/'.$node->get('field_articulo_en_revision')->getValue()[0]['target_id'].'/'.hash('md5',$nid,false);
                     }
-                    
-                    $urlEdit = '/update/'.str_replace(' ','_',$this->bundleLabel($node->bundle())).'/'.$nid;
+
+                    $urlEdit ='/update/'.str_replace('manuscrito_','',$node->bundle()).'/'.$nid;
                     $nodesArticle = \Drupal\node\Entity\Node::load($idArticle);
                     
                 }

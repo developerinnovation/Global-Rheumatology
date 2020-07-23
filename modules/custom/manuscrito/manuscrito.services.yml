@@ -1,0 +1,4 @@
+services:  
+  manuscrito.actions:
+    class: Drupal\manuscrito\Plugin\Config\Block\ActionsBlockClass
+    arguments: []

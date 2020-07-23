@@ -6,6 +6,9 @@
 {% set classes = ['node'] %}
 
 <article {{ attributes.addClass(classes) }}>
+    <!-- ______________________ ACTION _______________________ -->
+    {{ drupal_block('global_rehumatology_actions', {'node' : node.id }) }}
+    <!-- ____________________ END ACTION ____________________ -->
     <div id="main" class="despliegue-nodo">
         <div class="container two-col">
             <div class="left" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">

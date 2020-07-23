@@ -105,5 +105,11 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             ),
             'template' => 'history-comments',
         ),
+        'actions' => array( 
+            'variables' => array(
+                'data' => NULL,
+            ),
+            'template' => 'actions',
+        ),
     );
 }
