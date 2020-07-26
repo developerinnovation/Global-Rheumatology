@@ -95,8 +95,12 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(245);
             break; 
         
-        case 'assignResponse': // articulo asignado para revision
+        case 'assignResponse': // revisor acepta revision
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(246);
+            break; 
+
+        case 'rejectedResponse': // revisor rechaza revision
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(273);
             break; 
         
         case 'qualify': // articulo asignado para revision
@@ -112,7 +116,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         $linkTitle = '<a href="'.$url.'">'.$titleArticle.'</a>';
         $convertDate = convertDate();
         
-        $mensaje = str_replace('[token-city]', 'Atlanta', $mensaje);
+        $mensaje = str_replace('[token-city]', 'Miami', $mensaje);
         $mensaje = str_replace('[token-date]', $convertDate, $mensaje);
         $mensaje = str_replace('[token-nid]', $articleId, $mensaje);
         $mensaje = str_replace('[token-title]', $linkTitle, $mensaje);
@@ -126,8 +130,10 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
             $path = \Drupal::request()->getSchemeAndHttpHost()."/user/password";
             $recoverPass = '<a href="'.$path.'">'.$path.'</a>';
             $link = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination=/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/assign/response';
+            $linkRejected = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination=/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/rejected/response';
             $mensaje = str_replace('[token-recover-pass]', $recoverPass, $mensaje);
             $mensaje = str_replace('[token-link]', '<a href="'.$link.'">'.$link.'</a>', $mensaje);
+            $mensaje = str_replace('[token-rejected]', '<a href="'.$linkRejected.'">'.$linkRejected.'</a>', $mensaje);
         }
 
         if($status == 'assignResponse'){

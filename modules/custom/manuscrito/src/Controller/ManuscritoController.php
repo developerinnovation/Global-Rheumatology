@@ -780,6 +780,7 @@ class ManuscritoController extends ControllerBase
                     $statusId = $node->get('field_estado_del_articulo')->getValue()[0]['target_id'];
                     $statusName = Term::load($statusId);
                     $valueStatusName =  $statusName->get('name')->getValue()[0]['value'];
+                    $urlEdit ='/update/'.str_replace('manuscrito_','',$node->bundle()).'/'.$nid.'#edit-field-estado-del-articulo';
                 }
             }
 
@@ -884,17 +885,62 @@ class ManuscritoController extends ControllerBase
                 $assign->save();
                 
                 exec_mail('assignResponse', $article, $nid, $editorMail, $tokenExtra);
-
+                $urlAcept = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination='.\Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$articleId);
+                $body = '<p>'.t('Gracias por aceptar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p><br> <p>'.t('puede ver el artículo realizando clic en el siguiente enlace ').': <a href="'.$urlAcept.'">'.$urlAcept.'</a></p>';
                 return [
                     '#theme' => 'error_list',
                     '#title' => t('Revisión aceptada.'),
-                    '#body' => '<p>'.t('Gracias por aceptar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p>',
+                    '#body' => $body,
                 ];
             }else{
                 return [
                     '#theme' => 'error_list',
                     '#title' => t('Revisión aceptada con anterioridad'),
                     '#body' => '<p>'.t('Hemos detectado que ya aceptó la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY, '.t('gracias por utilizar nuestra plataforma.').'</p>',
+                ];
+            }
+        }else{
+            return [
+                '#theme' => 'error_list',
+                '#title' => t('Actividad sospechosa'),
+                '#body' => '<p>'.t('Hemos detectado una actividad inusual en GLOBAL RHEUMATOLOGY, si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+            ];
+        }
+    }
+
+    public function rejectedResponse(Request $request, $nid = NULL, $tokenNid = NULL){
+        $assign = NULL;
+        if(hash('md5',$nid,false) == $tokenNid && $assign){
+            $assign = \Drupal::entityManager()->getStorage('node')->load($nid);        
+            if($assign != NULL) {
+
+                $accept = $assign->get('field_revisor_acepto_revision')->getValue()[0]['value'];
+                $revisionId = $assign->get('title')->getValue()[0]['value'];
+
+                $articleId = $assign->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+                $article = \Drupal::entityManager()->getStorage('node')->load($articleId);       
+                $titleArticle = $article->get('title')->getValue()[0]['value'];
+                
+                $idrevisor = $assign->get('field_asignar_revisor')->getValue()[0]['target_id'];
+                $revisor = User::load($idrevisor);
+                $revisorMail = $revisor->get('mail')->getValue()[0]['value'];
+                $editor = User::load($assign->getOwnerId());
+                $editorMail = $editor->get('mail')->getValue()[0]['value'];
+                $revisorName = ucfirst($revisor->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($revisor->get('field_apellidos')->getValue()[0]['value']);
+                $tokenExtra = 'El revisor <b>'.$revisorName.'</b> no aceptó la revisión del artículo "'.$titleArticle.'", por lo cual la asignación relacionada al Id '.$revisionId.'<br> será retirada de la plataforma.';
+                
+                exec_mail('rejectedResponse', $article, $nid, $editorMail, $tokenExtra);
+
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Revisión rechazada.'),
+                    '#body' => '<p>'.t('Lamentamos su desición de rechazar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p>',
+                ];
+            }else{
+                return [
+                    '#theme' => 'error_list',
+                    '#title' => t('Revisión rechazada con anterioridad'),
+                    '#body' => '<p>'.t('Hemos detectado que rechazó con anterioridad la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY, '.t('gracias por utilizar nuestra plataforma.').'</p>',
                 ];
             }
         }else{

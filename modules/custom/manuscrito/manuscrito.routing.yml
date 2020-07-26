@@ -124,3 +124,11 @@ response_assign_page:
         _title: 'Aceptar revision'
     requirements:
         _permission: 'Aceptar revision'
+
+response_rejected_page:
+    path: 'article/{nid}/review/{tokenNid}/rejected/response'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::rejectedResponse'
+        _title: 'Rechazar revision'
+    requirements:
+        _permission: 'Aceptar revision'
