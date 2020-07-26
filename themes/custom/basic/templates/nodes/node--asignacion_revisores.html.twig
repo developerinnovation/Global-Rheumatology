@@ -4,7 +4,7 @@
   <ul class="tabs primary">
       <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ 'Detalle asignación de revisores'|t }}</a></li>
       <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ 'Regresar al artículo'|t }}</a></li>
-      <li><a href="'/assign/{{ node.field_articulo_en_revision.target_id }}/{{ node.field_articulo_en_revision.target_id|md5 }}">{{ "Continuar asignando revisores"|t }}</a></li>
+      <li><a href="/assign/{{ node.field_articulo_en_revision.target_id }}/{{ node.field_articulo_en_revision.target_id|md5 }}">{{ "Continuar asignando revisores"|t }}</a></li>
   </ul>
   <div id="main">
     <div class="container two-col">
