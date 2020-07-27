@@ -113,14 +113,14 @@
                         </div>
                     {% endif %}
 
-                    {% if node.field_resultados.value %}
+                    {% if node.field_resultado.value %}
                         <div class="block resultados">
                             <div class="title-block">
                                 <h2>Resultados</h2>
                                 <button class="btn-show-text" data-id="resultados">cerrar</button>
                             </div> 
                             <div class="box active">
-                                <p>{{ node.field_resultados.value|raw }}</p>
+                                <p>{{ node.field_resultado.value|raw }}</p>
                             </div>
                         </div>
                     {% endif %}
