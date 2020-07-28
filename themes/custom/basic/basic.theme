@@ -247,13 +247,14 @@ function basic_manuscrito_form_update($form, \Drupal\Core\Form\FormStateInterfac
   $node = \Drupal::entityManager()->getStorage('node')->load($nid);
   $label = 'Actualización de artículo recibida';
 
-  $revisorId =  $node->get('revision_uid')->getValue()[0]['target_id'];
+  $userRevision =  $node->get('revision_uid')->getValue()[0]['target_id'];
+  $revisorId =  $node->get('field_revisor')->getValue()[0]['target_id'];
   $autorId = $node->get('uid')->getValue()[0]['target_id'];
   $execute = autor_revisor($node,$nid);
   $statusArticle = (string)$execute['status'];
   $revisorMail = $execute['to_revisor'];
   $autorMail = $execute['to_autor'];
-  if($revisorId == $autorId){    
+  if($userRevision == $revisorId){    
     exec_mail($statusArticle, $node, $nid, $autorMail); // notificacion autor
   }else{
     exec_mail('202', $node, $nid, $revisorMail); // notificacion revisor
