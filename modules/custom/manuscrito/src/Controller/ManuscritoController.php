@@ -910,7 +910,7 @@ class ManuscritoController extends ControllerBase
 
     public function rejectedResponse(Request $request, $nid = NULL, $tokenNid = NULL){
         $assign = NULL;
-        if(hash('md5',$nid,false) == $tokenNid && $assign){
+        if(hash('md5',$nid,false) == $tokenNid){
             $assign = \Drupal::entityManager()->getStorage('node')->load($nid);        
             if($assign != NULL) {
 
@@ -936,11 +936,12 @@ class ManuscritoController extends ControllerBase
                     '#title' => t('Revisión rechazada.'),
                     '#body' => '<p>'.t('Lamentamos su desición de rechazar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p>',
                 ];
+                $assign->delete();
             }else{
                 return [
                     '#theme' => 'error_list',
                     '#title' => t('Revisión rechazada con anterioridad'),
-                    '#body' => '<p>'.t('Hemos detectado que rechazó con anterioridad la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY, '.t('gracias por utilizar nuestra plataforma.').'</p>',
+                    '#body' => '<p>'.t('Hemos detectado que rechazó con anterioridad la revisión del artículo registrado en').' GLOBAL RHEUMATOLOGY, '.t('gracias por utilizar nuestra plataforma.').'</p>',
                 ];
             }
         }else{
