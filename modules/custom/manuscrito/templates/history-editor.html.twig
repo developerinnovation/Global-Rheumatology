@@ -51,9 +51,11 @@
                                     <td class="tg-nrix">
                                         <a href="{{ item.url }}" target="_blank"> {{ 'Ver'|t }} </a>
                                     </td>
-                                    <td class="tg-nrix">
-                                        <a href="{{ item.assign }}"> {{ 'Asignar'|t }} </a>
-                                    </td>
+                                    {% if type != 'rejected' %}
+                                        <td class="tg-nrix">
+                                            <a href="{{ item.assign }}"> {{ 'Asignar'|t }} </a>
+                                        </td>
+                                    {% endif %}
                                     <td class="tg-nrix">
                                         <a href="{{ item.urlEdit }}"> {{ 'Aprobar'|t }}/{{ 'Rechazar'|t }} </a>
                                     </td>

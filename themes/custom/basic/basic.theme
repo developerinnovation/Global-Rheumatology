@@ -321,7 +321,8 @@ function basic_asignacion_revisores_submit ($form, \Drupal\Core\Form\FormStateIn
   $idAsignacion = $asignacion->get('title')->getValue()[0]['value'];
   $nidArticle = $asignacion->get('field_articulo_en_revision')->getValue()[0]['target_id'];
   $node = \Drupal::entityManager()->getStorage('node')->load($nidArticle);
-  
+  $node->set('field_estado_del_articulo',573);
+  $node->save();
 
   $execute = autor_revisor($node,$nidArticle);
 
