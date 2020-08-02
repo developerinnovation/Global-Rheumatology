@@ -274,6 +274,7 @@ class ManuscritoController extends ControllerBase
         $user =   User::load($uid); 
         $experto = [
             'uid' => $user->get('uid')->getValue()[0]['value'],
+            'mail' => $user->get('mail')->getValue()[0]['value'],
             'name_author' => ucfirst($user->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($user->get('field_apellidos')->getValue()[0]['value']),
             'uri' => \Drupal::service('path.alias_manager')->getAliasByPath('/user/'.$user->get('uid')->getValue()[0]['value']),
         ];
@@ -781,6 +782,7 @@ class ManuscritoController extends ControllerBase
                     $statusName = Term::load($statusId);
                     $valueStatusName =  $statusName->get('name')->getValue()[0]['value'];
                     $urlEdit ='/update/'.str_replace('manuscrito_','',$node->bundle()).'/'.$nid.'#edit-field-estado-del-articulo';
+                    $listRevisor = $this->getRevisorAssigned($nid);
                 }
             }
 
@@ -803,6 +805,7 @@ class ManuscritoController extends ControllerBase
                 'qualify' => isset($qualify) ? $qualify : '',
                 'node' => $node,
                 'urlEdit' => isset($urlEdit) ? $urlEdit : '',
+                'listRevisor' => $listRevisor != '' ? $listRevisor : t('No hay revisores asignados'),
             ];
             array_push($contents,$content);
         }
@@ -1033,6 +1036,41 @@ class ManuscritoController extends ControllerBase
                 ];
             }
         }
+    }
+
+    public function getRevisorAssigned($nidArticle){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        $data = [];
+        $nid = NULL;
+        $textAutor = '';
+
+        $nid = \Drupal::entityQuery('node')
+            ->condition('type','asignacion_revisores')
+            ->condition('field_articulo_en_revision', $nidArticle)
+            ->sort('created' , 'DESC')
+            ->execute();
+
+        if($nid != NULL){
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nid);
+            foreach ($nodes as $node) {
+                $revisorId = $node->get('field_asignar_revisor')->getValue()[0]['target_id'];
+                $autor = $this->load_author($revisorId);
+                array_push($data,$autor);
+            }
+
+            if(count($data) > 0){
+                $textAutor .= '<ul>';
+                foreach ($data as $autor) {
+                    $textAutor .= '<li>';
+                        $textAutor .= '<a href="mailto:'.$autor['mail'].'">'.$autor['name_author'].' => '. $autor['mail'].'</a>';
+                    $textAutor .= '</li>';
+                }
+                $textAutor .= '</ul>';
+            }
+
+        }
+        return $textAutor;
     }
 
 }

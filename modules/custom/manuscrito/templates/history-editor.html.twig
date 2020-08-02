@@ -43,7 +43,12 @@
                                 <td class="tg-cly1">{{ 'Publicado el día'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.publish }}</td>
                             </tr>
+                            
                             {% if type != 'created' %}
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Revisores asignados'|t }}:</td>
+                                    <td class="tg-nrix" colspan="3">{{ item.listRevisor|raw }}</td>
+                                </tr>
                                 <tr>
                                     <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
                                 </tr>
