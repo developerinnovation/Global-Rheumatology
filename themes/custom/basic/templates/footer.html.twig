@@ -50,11 +50,14 @@
         <a href="#" class="privacy">{% trans%} Política de privacidad {% endtrans%}</a>
     </div>
     <div class="footer-region newsletter">
-      <h3>Suscríbase</h3>
-      <h2>{% trans%} Obtenga las últimas noticias directamente a su correo  {% endtrans%}</h2>
       <div>
-        <input type="text" placeholder="ingrese su correo">
-        <button>{% trans%} Subscribirse {% endtrans%}</button>
+        <button>
+            {% if logged_in %}
+                <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
+            {% else %}
+                <a href="/user/login?destination=/">{{ 'Registrarse'|t }}</a>
+            {% endif %}
+        </button>
       </div>
     </div>    
     <div class="footer-region copy">

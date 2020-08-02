@@ -156,11 +156,11 @@ sessionStorage.setItem('firstVisit', '0');
         // redirect to login user anonime
         $(".send-article.new-article.anonime").click(function() {
             if (document.documentElement.lang == "en") {
-                window.open("http://" + window.location.host + "/en/user/login?action=new-article");
+                window.open("http://" + window.location.host + "/en/user/login?destination=/new/type/manuscrito");
             } else if (document.documentElement.lang == "es") {
-                window.open("http://" + window.location.host + "/user/login?action=new-article");
+                window.open("http://" + window.location.host + "/user/login?destination=/new/type/manuscrito");
             } else {
-                window.open("http://" + window.location.host + "/po/user/login?action=new-article");
+                window.open("http://" + window.location.host + "/po/user/login?destination=/new/type/manuscrito");
             }
         });
 

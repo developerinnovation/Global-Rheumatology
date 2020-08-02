@@ -51,9 +51,9 @@ CSS files in the head. * - scripts: Script tags necessary to load the JavaScript
                             {{ page_top }} {{ page }} {{ page_bottom }}
 
                             <div class="launcher-box-message">
-                                <div id="launcher-button" class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /new/send/manuscrito {% else %}  {% endif %}">
-                                    <img src="\themes\custom\basic\images\icon-articulo.svg" border="0" alt="Twitter" width="48" height="48">
-                                    <span class="launcher-message">Envía un artículo</span>
+                                <div id="launcher-button" class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /user/login?destination=/new/send/manuscrito {% else %}  {% endif %}">
+                                    <img src="\themes\custom\basic\images\icon-articulo.svg" border="0" alt="enviar" width="48" height="48">
+                                    <span class="launcher-message">{{ 'Envía un artículo'|t }}</span>
                                 </div>
                             </div>
 
