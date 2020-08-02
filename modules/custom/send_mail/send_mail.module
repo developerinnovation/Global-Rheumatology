@@ -136,7 +136,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
             $mensaje = str_replace('[token-rejected]', '<a href="'.$linkRejected.'">'.$linkRejected.'</a>', $mensaje);
         }
 
-        if($status == 'assignResponse'){
+        if($status == 'assignResponse' || $status == 'rejectedResponse'){
             $mensaje = str_replace('[token-detalle]', $tokenExtra, $mensaje);
         }
 
