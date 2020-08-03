@@ -1,3 +1,4 @@
+{% set showSendArticle = false %}
 <footer id="footer">
   <div class="container">    
     <div class="footer-region info">
@@ -34,9 +35,11 @@
             {% endif %}
 
             {% if logged_in %}
-                <li class=" navigation__item">
-                    <a href="/new/send/manuscrito" class="">{% trans%}PUBLICAR{% endtrans%}</a>
-                </li>
+                {% if showSendArticle %}
+                    <li class=" navigation__item">
+                        <a href="/new/send/manuscrito" class="">{% trans%}PUBLICAR{% endtrans%}</a>
+                    </li>
+                {% endif %}
                 <li class=" navigation__item">
                     <a href="/show/saved/content" class="">{% trans%}ARTÍCULOS GUARDADOS{% endtrans%}</a>
                 </li>
@@ -51,16 +54,17 @@
     </div>
     <div class="footer-region newsletter">
       <div>
-        <button>
-            {% if logged_in %}
-                {% set showSendArticle = false %}
-                {% if showSendArticle %}
-                    <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
-                {% endif %}
-            {% else %}
-                <a href="/user/login?destination=/">{{ 'Registrarse'|t }}</a>
+        {% if logged_in %}
+            {% if showSendArticle %}
+            <button>
+                <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
+            </button>
             {% endif %}
+        {% else %}
+        <button>
+            <a href="/user/login?destination=/">{{ 'Registrarse'|t }}</a>
         </button>
+        {% endif %}
       </div>
     </div>    
     <div class="footer-region copy">
