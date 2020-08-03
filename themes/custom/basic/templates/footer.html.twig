@@ -53,7 +53,10 @@
       <div>
         <button>
             {% if logged_in %}
-                <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
+                {% set showSendArticle = false %}
+                {% if showSendArticle %}
+                    <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
+                {% endif %}
             {% else %}
                 <a href="/user/login?destination=/">{{ 'Registrarse'|t }}</a>
             {% endif %}
