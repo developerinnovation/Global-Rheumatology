@@ -95,7 +95,7 @@ revision_autor_page:
         _controller: '\Drupal\manuscrito\Controller\ManuscritoController::revisionAutor'
         _title: 'Artículos en revisión'
     requirements:
-        _permission: 'Review Manuscrito editor'
+        _permission: 'Review Manuscrito autores'
 comments_history_page:
     path: '/comments/register/article/{uid}/{nid}/{type}'
     defaults:
