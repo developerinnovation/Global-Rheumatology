@@ -6,9 +6,9 @@
             <div class="article active">
                 <ul>
                     <li class="target" style="width: calc(73.3% - 30px);">
-                        <p>El artículo "<b>{{ drupal_field('title', 'node', id) }}</b>" aún se encuentra en proceso de revisión, recuerda que solo podrás modificarlo cuando el artículo tenga asignado el estado <b>"En Edición"</b>. <b>{{ drupal_field('field_estado_del_articulo', 'node', id) }}</b> </p>
+                        <p>{{ 'El artículo'|t }} "<b>{{ drupal_field('title', 'node', id) }}</b>" {{ 'aún se encuentra en proceso de revisión, recuerda que solo podrás modificarlo cuando el artículo tenga asignado el estado'|t }} <b>"{{ 'Aceptado con condiciones'|t }}"</b>. <b>{{ drupal_field('field_estado_del_articulo', 'node', id) }}</b> </p>
                         <h3>
-                            <a href="{{ path('entity.node.canonical', {'node': id}) }}">Ver artículo</a>
+                            <a href="{{ path('entity.node.canonical', {'node': id}) }}">{{ 'Volver al artículo'|t }}</a>
                         </h3>
                     </li>                  
                 </ul>

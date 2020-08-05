@@ -1,0 +1,17 @@
+{% set doc = paragraph.field_adjunto.entity.getFilename|split('.') %}
+<div class="ico">
+    <a href="{{ file_url(paragraph.field_adjunto.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+        <div class="file {{  doc[1] }}"></div>
+        <div class="title">
+            <h3>
+                {% if content.field_fuente %}
+                    {{ content.field_titulo_anexo }}
+                {% else %}
+                    {{ doc[0]|slice(0, 13) }}...
+                {% endif %}
+            </h3>
+        </div>
+        {% if content.field_fuente %} <span>{{ 'Fuente'|t }} : {{ paragraph.field_fuente.value }}</span> {% endif %}
+    </a>
+</div>
+

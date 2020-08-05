@@ -60,14 +60,13 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
     switch ($status) {
         case 'new': // 196 
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(196);
-            
             break;
 
         case '573': // en revision // 194
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(194);
             break;
         
-        case '574': // en edicion " autor debe modificar el articulo " // 197
+        case '574': // aceptado con condiciones " autor debe modificar el articulo " 
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(197);
             break;
         
@@ -105,6 +104,10 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         
         case 'qualify': // articulo asignado para revision
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(253);
+            break; 
+
+        case 'update': // articulo actualizado por el autor, confirma su actualización enviandole un mail
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(340);
             break; 
     }
     if($status != '571'){

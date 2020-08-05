@@ -24,6 +24,7 @@ class ManuscritoController extends ControllerBase
 { 
 
     public function content(Request $request) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $type = node_type_load("manuscrito"); // replace this with the node type in which we need to display the form for
         $node = $this->entityManager()->getStorage('node')->create(array(
           'type' => $type->id(),
@@ -37,6 +38,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function edit(RouteMatchInterface $route_match, $nid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $node = $this->entityManager()->getStorage('node')->load($nid);
         $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
         $node_create_form = $this->entityFormBuilder()->getForm($node);   
@@ -83,6 +85,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function show(RouteMatchInterface $route_match){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $id_node = null;
         $rows = [];
         if(\Drupal::currentUser()->id() != 0 || null !== \Drupal::currentUser()->id()){
@@ -111,7 +114,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function send(Request $request, $type = NULL){
-        
+        \Drupal::service('page_cache_kill_switch')->trigger();
 
         $typ = node_type_load('manuscrito_'.$type); // replace this with the node type in which we need to display the form for
         $node = $this->entityManager()->getStorage('node')->create(array(
@@ -127,6 +130,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function guia(Request $request, $id = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $node = NULL;
         $data = array();
         $node = \Drupal::entityManager()->getStorage('node')->load($id);
@@ -141,6 +145,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function thanks(Request $request, $type = NULL, $nid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $node = \Drupal::entityManager()->getStorage('node')->load($nid);        
         if($node){
             return [
@@ -250,6 +255,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function structureContentDest($nodes) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
 
@@ -271,6 +277,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function load_author($uid){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $user =   User::load($uid); 
         $experto = [
             'uid' => $user->get('uid')->getValue()[0]['value'],
@@ -282,6 +289,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function bundleLabel($node_type){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $bundle_label = \Drupal::entityTypeManager()
             ->getStorage('node_type')
             ->load($node_type)
@@ -709,6 +717,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function comments(Request $request, $rol = NULL, $nid = NULL, $tokenRol = NULL, $tokenNid = NULL) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         if(\Drupal::currentUser()->id() != 0){
             if($rol == 'autor' || $rol == 'editor' || $rol == 'revisor'){
                 $article = \Drupal::entityManager()->getStorage('node')->load($nid);        
@@ -749,6 +758,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function structureArticleRevision($nodes,$type, $rol = NULL) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
         $urlEdit = '';
@@ -813,7 +823,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function assign(Request $request, $nid = NULL, $tokenNid = NULL){
-
+        \Drupal::service('page_cache_kill_switch')->trigger();
         if(\Drupal::currentUser()->id() != 0){
 
             $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
@@ -865,6 +875,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function assignResponse(Request $request, $nid = NULL, $tokenNid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $assign = \Drupal::entityManager()->getStorage('node')->load($nid);        
         if(hash('md5',$nid,false) == $tokenNid && $assign){
             $accept = $assign->get('field_revisor_acepto_revision')->getValue()[0]['value'];
@@ -912,10 +923,12 @@ class ManuscritoController extends ControllerBase
     }
 
     public function rejectedResponse(Request $request, $nid = NULL, $tokenNid = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $assign = NULL;
         if(hash('md5',$nid,false) == $tokenNid){
-            $assign = \Drupal::entityManager()->getStorage('node')->load($nid);        
-            if($assign != NULL) {
+            $assign = \Drupal::entityManager()->getStorage('node')->load($nid);  
+            $rechazo = $assign->get('field_revisor_rechazo_revision')->getValue()[0]['value'];      
+            if($rechazo == '1' || $rechazo == 1 ) {
 
                 $accept = $assign->get('field_revisor_acepto_revision')->getValue()[0]['value'];
                 $revisionId = $assign->get('title')->getValue()[0]['value'];
@@ -939,7 +952,8 @@ class ManuscritoController extends ControllerBase
                     '#title' => t('Revisión rechazada.'),
                     '#body' => '<p>'.t('Lamentamos su desición de rechazar la revisión del artículo'). ': "'.$titleArticle.'", '.t('registrado en').' GLOBAL RHEUMATOLOGY.</p>',
                 ];
-                $assign->delete();
+                $assign->set('field_revisor_rechazo_revision',1);
+                $assign->save();
             }else{
                 return [
                     '#theme' => 'error_list',
@@ -957,7 +971,7 @@ class ManuscritoController extends ControllerBase
     }
 
     public function getComments(Request $request, $uid = NULL, $nid = NULL, $type = NULL){
-        
+        \Drupal::service('page_cache_kill_switch')->trigger();
         date_default_timezone_set('America/Bogota');
         setlocale(LC_ALL, 'es_Es');
 

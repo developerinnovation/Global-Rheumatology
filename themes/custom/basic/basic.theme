@@ -255,12 +255,17 @@ function basic_manuscrito_form_update($form, \Drupal\Core\Form\FormStateInterfac
   $revisorMail = $execute['to_revisor'];
   $autorMail = $execute['to_autor'];
   if($userRevision == $revisorId){    
+    if($statusArticle == '586'){
+      $node->set('status',1);
+      $node->save();
+    }
     exec_mail($statusArticle, $node, $nid, $autorMail); // notificacion autor
   }else{
+    $node->set('field_estado_del_articulo',573);
+    $node->save();
     exec_mail('202', $node, $nid, $revisorMail); // notificacion revisor
+    exec_mail('update', $node, $nid, $autorMail); // confirmación al autor sobre su modificación
   }
-
-
 }
 
 function basic_manuscrito_form_submit($form, \Drupal\Core\Form\FormStateInterface $form_state){
