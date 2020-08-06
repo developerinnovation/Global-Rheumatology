@@ -48,4 +48,9 @@
   description: 'Permite ver el historial de comentarios recibidos, para autores, ediotres, revisores'
   restrict access: true
 
+'Ver historial completo de un articulo':
+  title: 'Ver historial completo de un articulo'
+  description: 'Permite ver el historial completo de un artículo ej: comentarios, asignaciones, calificaciones, etc...'
+  restrict access: true
+
 

@@ -111,5 +111,17 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             ),
             'template' => 'actions',
         ),
+        'all_history' => array( 
+            'variables' => array(
+                'id' => NULL,
+                'url' => NULL,
+                'article' => NULL,
+                'arrNodesCommentToAutor' => NULL,
+                'arrNodesCommentToEditor' => NULL,
+                'arrNodesRevision' => NULL,
+                'arrNodesAsign' => NULL,
+            ),
+            'template' => 'all-history',
+        ),
     );
 }

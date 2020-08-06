@@ -802,6 +802,7 @@ class ManuscritoController extends ControllerBase
                 'nid' => $nid,
                 'title' => $node->get('title')->getValue()[0]['value'],
                 'type' => $this->bundleLabel($node->bundle()),
+                'record' => '/article/'.$nid.'/all/record',
                 'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid),
                 'autor' => $this->load_author($node->getOwnerId()),
                 'date' =>  \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
@@ -1087,4 +1088,129 @@ class ManuscritoController extends ControllerBase
         return $textAutor;
     }
 
+    public function getHistory($nid){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        $article = \Drupal::entityManager()->getStorage('node')->load($nid);
+        $nodesCommentToAutor = NULL;
+        $nodesCommentToEditor = NULL;
+        $nodesAsign = NULL;
+        $nodesRevision = NULL;
+
+        $arrNodesCommentToAutor = [];
+        $arrNodesCommentToEditor = [];
+        $arrNodesAsign = [];
+        $arrNodesRevision = [];
+
+        $nodesCommentToAutor = \Drupal::entityQuery('node')
+            ->condition('type', 'comentarios_para_autor')
+            ->condition('field_articulo_en_revision', $nid)
+            ->sort('created' , 'DESC')
+            ->execute();
+
+        $nodesCommentToEditor = \Drupal::entityQuery('node')
+            ->condition('type', 'comentarios_para_editor')
+            ->condition('field_articulo_en_revision', $nid)
+            ->sort('created' , 'DESC')
+            ->execute();
+        
+        $nodesAsign = \Drupal::entityQuery('node')
+            ->condition('type','asignacion_revisores')
+            ->condition('field_articulo_en_revision', $nid)
+            ->sort('created' , 'DESC')
+            ->execute();
+            
+        $nodesRevision = \Drupal::entityQuery('node')
+            ->condition('type','revision_de_articulos')
+            ->condition('field_articulo_en_revision', $nid)
+            ->sort('created' , 'DESC')
+            ->execute();
+
+        if($nodesCommentToAutor != NULL){
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nodesCommentToAutor);
+            foreach ($nodes as $node) {
+                $data = [
+                    'author' => $this->load_author($node->getOwnerId()),
+                    'comment' => $node->get('field_comentarios')->getValue()[0]['value'],
+                    'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                    'id' => $node->get('title')->getValue()[0]['value'],
+                ];
+                array_push($arrNodesCommentToAutor,$data);
+            }
+        }
+        if($nodesCommentToEditor != NULL){
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nodesCommentToEditor);
+            foreach ($nodes as $node) {
+                $data = [
+                    'author' => $this->load_author($node->getOwnerId()),
+                    'comment' => $node->get('field_comentarios')->getValue()[0]['value'],
+                    'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                    'id' => $node->get('title')->getValue()[0]['value'],
+                ];
+                array_push($arrNodesCommentToEditor,$data);
+            }
+        }
+        if($nodesAsign != NULL){
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nodesAsign);
+            foreach ($nodes as $node) {
+                $data = [
+                    'revisor' => $this->load_author($node->get('field_asignar_revisor')->getValue()[0]['target_id']),
+                    'author' => $this->load_author($node->getOwnerId()),
+                    'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                    'response' => $node->get('field_revisor_acepto_revision')->getValue()[0]['value'] == 1 ? t('Revisión aceptada') : $node->get('field_revisor_rechazo_revision')->getValue()[0]['value'] == 1 ? t('Revisión rechazada') : 'noResponse',
+                    'dateResponse' => \Drupal::service('date.formatter')->format($node->get('changed')->getValue()[0]['value'], 'custom', 'd M Y'),
+                    'id' => $node->get('title')->getValue()[0]['value'],
+                ];
+                array_push($arrNodesAsign,$data);
+            }
+        }
+        if($nodesRevision != NULL){
+            $nodes = \Drupal\node\Entity\Node::loadMultiple($nodesRevision);
+            foreach ($nodes as $node) {
+                $pr1 = $node->get('field_pregunta_1')->getValue()[0]['value'];
+                $pr2 = $node->get('field_pregunta_3')->getValue()[0]['value'];
+                $pr3 = $node->get('field_pregunta_3')->getValue()[0]['value'];
+                $pr4 = $node->get('field_pregunta_4')->getValue()[0]['value'];
+                $pr5 = $node->get('field_pregunta_5')->getValue()[0]['value'];
+                $decision = $node->get('field_decision_revisor')->getValue()[0]['value'];
+                switch ($decision) {
+                    case 'aceptado':
+                      $TextDecision = 'Aceptado';
+                      break;
+                    
+                    case 'aceptado_condicion':
+                      $TextDecision = 'Aceptado con condiciones';
+                      break;
+                    
+                    case 'rechazado':
+                      $TextDecision = 'Rechazado';
+                      break;
+                }
+
+                $data = [
+                    'author' => $this->load_author($node->getOwnerId()),
+                    'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
+                    'question_1' => '¿Qué tan original le parece el manuscrito asignado? : '.$pr1,
+                    'question_2' => '¿Qué tan relevante es la información presentada en este manuscrito? : '.$pr2,
+                    'question_3' => '¿Qué tan bien estructurada le parece la información presentada? : '.$pr3,
+                    'question_4' => '¿Qué tan bien presentado está el contenido del manuscrito? : '.$pr4,
+                    'question_5' => '¿Qué tan claro es el mensaje que deja el manuscrito? : '.$pr5,
+                    'decision' => $TextDecision,
+                    'comentario' => isset($node->get('field_comentarios')->getValue()[0]['value']) ? $node->get('field_comentarios')->getValue()[0]['value'] : 'Ninguno',
+                    'promedio' => ($pr1 + $pr2 +$pr3 + $pr4 + $pr5 )/5 ,
+                    'id' => $node->get('title')->getValue()[0]['value'],
+                ];
+                array_push($arrNodesRevision,$data);
+            }
+        }
+        return [
+            '#theme' => 'all_history',
+            '#id' => $nid,
+            '#url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid),
+            '#article' => $article->get('title')->getValue()[0]['value'],
+            '#arrNodesCommentToAutor' => isset($arrNodesCommentToAutor) ? $arrNodesCommentToAutor : NULL,
+            '#arrNodesCommentToEditor' => isset($arrNodesCommentToEditor) ? $arrNodesCommentToEditor : NULL,
+            '#arrNodesRevision' => isset($arrNodesRevision) ? $arrNodesRevision : NULL,
+            '#arrNodesAsign' => isset($arrNodesAsign) ? $arrNodesAsign : NULL,
+        ];
+    }
 }

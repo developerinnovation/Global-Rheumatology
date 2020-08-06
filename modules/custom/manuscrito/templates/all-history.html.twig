@@ -1,0 +1,197 @@
+<main id="info-article">
+    <h2>{{ 'Historial del artículo '|t }} "{{ article }} - {{ id }}"</h2>
+    <a href="{{ url }}">{{ 'Ir al artículo' }}</a>
+    <div class="list-type">
+        <div class="box-type revision">   
+
+            {% if arrNodesCommentToAutor != NULL %}
+                <div class="article active">
+                    <div class="main-box">
+                        <h4>{{ 'Comentarios realizados por los editores a los autores' }}</h4>
+                        <button data-box="box-comment-autor">X</button>
+                    </div>
+                    <div class="box box-comment-autor">
+                        {% for item in arrNodesCommentToAutor %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Editor'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Fecha'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.created }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Comentario'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if arrNodesCommentToEditor != NULL %}
+                <div class="article active">
+                    <div class="main-box">
+                        <h4>{{ 'Comentarios realizados por los revisores al editor' }}</h4>
+                        <button data-box="box-comment-editor">X</button>
+                    </div>
+                    <div class="box box-comment-editor">
+                        {% for item in arrNodesCommentToEditor %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Revisor'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Fecha'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.created }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Comentario'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if arrNodesRevision != NULL %}
+                <div class="article active">
+                    <div class="main-box">
+                        <h4>{{ 'Calificaciones efectuadas al artículo' }}</h4>
+                        <button data-box="box-revision">X</button>
+                    </div>
+                    <div class="box box-revision">
+                        {% for item in arrNodesRevision %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Id de la calificación'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Fecha de la calificación'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.created }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Revisor'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Pregunta #1'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.question_1 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Pregunta #2'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.question_2 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Pregunta #3'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.question_3 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Pregunta #4'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.question_4 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Pregunta #5'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.question_5 }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Promedio'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.promedio }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Decisión'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.decision }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Comentarios del revisor'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.comentario }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if arrNodesAsign != NULL %}
+                <div class="article active">
+                    <div class="main-box">
+                        <h4>{{ 'Revisores asignados' }}</h4>
+                        <button data-box="box-comment-editor">X</button>
+                    </div>
+                    <div class="box box-comment-editor">
+                        {% for item in arrNodesAsign %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Id de la asignación'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Fecha de la asignación'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.created }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Revisor asignado'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.revisor.name_author }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Respuesta de la asignación'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">
+                                            {% if item.response == 'noResponse' %}
+                                                {{ 'Sin respuesta por parte del revisor'|t }}
+                                            {% else %}
+                                                {{ item.response }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Fecha de la respuesta'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">
+                                            {% if item.response == 'noResponse' %}
+                                                {{ 'Sin respuesta por parte del revisor'|t }}
+                                            {% else %}
+                                                {{ item.dateResponse }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>    
+    </div>
+</main>
+<script>
+    $('.launcher-box-message').removeClass('active');
+</script>
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-cly1{text-align:left;vertical-align:middle}
+    .tg .tg-nrix{text-align:center;vertical-align:middle}
+</style>

@@ -132,3 +132,11 @@ response_rejected_page:
         _title: 'Rechazar revision'
     requirements:
         _permission: 'Aceptar revision'
+
+all_history_article_page:
+    path: 'article/{nid}/all/record'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::getHistory'
+        _title: 'Historial del artículo'
+    requirements:
+        _permission: 'Ver historial completo de un articulo'
