@@ -1,16 +1,16 @@
-<main id="info-article">
+<main id="info-article" class="record">
     <h2>{{ 'Historial del artículo '|t }} "{{ article }} - {{ id }}"</h2>
     <a href="{{ url }}">{{ 'Ir al artículo' }}</a>
     <div class="list-type">
-        <div class="box-type revision">   
+        <div class="box-type revision">  active  
 
             {% if arrNodesCommentToAutor != NULL %}
-                <div class="article active">
-                    <div class="main-box">
+                <div class="article box-comment-autor active">
+                    <div class="action-box">
                         <h4>{{ 'Comentarios realizados por los editores a los autores' }}</h4>
-                        <button data-box="box-comment-autor">X</button>
+                        <button data-id="box-comment-autor" class="btn-show-text record">cerrar</button>
                     </div>
-                    <div class="box box-comment-autor">
+                    <div class="box box-comment-autor active">
                         {% for item in arrNodesCommentToAutor %}
                             <table class="tg">
                                 <tbody>
@@ -38,12 +38,12 @@
             {% endif %}
 
             {% if arrNodesCommentToEditor != NULL %}
-                <div class="article active">
-                    <div class="main-box">
+                <div class="article box-comment-editor active">
+                    <div class="action-box">
                         <h4>{{ 'Comentarios realizados por los revisores al editor' }}</h4>
-                        <button data-box="box-comment-editor">X</button>
+                        <button data-id="box-comment-editor" class="btn-show-text record">cerrar</button>
                     </div>
-                    <div class="box box-comment-editor">
+                    <div class="box box-comment-editor active">
                         {% for item in arrNodesCommentToEditor %}
                             <table class="tg">
                                 <tbody>
@@ -71,12 +71,12 @@
             {% endif %}
 
             {% if arrNodesRevision != NULL %}
-                <div class="article active">
-                    <div class="main-box">
+                <div class="article box-revision active">
+                    <div class="action-box">
                         <h4>{{ 'Calificaciones efectuadas al artículo' }}</h4>
-                        <button data-box="box-revision">X</button>
+                        <button data-id="box-revision" class="btn-show-text record">cerrar</button>
                     </div>
-                    <div class="box box-revision">
+                    <div class="box box-revision active">
                         {% for item in arrNodesRevision %}
                             <table class="tg">
                                 <tbody>
@@ -132,12 +132,12 @@
             {% endif %}
 
             {% if arrNodesAsign != NULL %}
-                <div class="article active">
-                    <div class="main-box">
+                <div class="article box-comment-editor active">
+                    <div class="action-box">
                         <h4>{{ 'Revisores asignados' }}</h4>
-                        <button data-box="box-comment-editor">X</button>
+                        <button data-id="box-comment-editor" class="btn-show-text record">cerrar</button>
                     </div>
-                    <div class="box box-comment-editor">
+                    <div class="box box-comment-editor active">
                         {% for item in arrNodesAsign %}
                             <table class="tg">
                                 <tbody>
