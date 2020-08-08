@@ -1,4 +1,12 @@
 article.node{
+    .block-manuscrito{
+        .tabs{
+            span{
+                background: $accent-blue;
+                color: #fff;
+            }
+        }
+    }
     .container{
         &.two-col{
             @media only screen and ($desktop){
