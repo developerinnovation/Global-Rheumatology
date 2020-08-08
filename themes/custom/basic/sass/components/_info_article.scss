@@ -8,6 +8,23 @@ main#info-article{
         background: #f4f4f4;
         margin: 0;
     }
+    >a{
+        display: block;
+        margin: 20px auto;
+        width: 140px;
+        background: $primary-color;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 40px;
+        text-align: center;
+        height: 40px;
+        transition: all 0.15s linear;
+        &:hover{
+            background-color: $accent-blue;
+        }
+    }
     .list-type{
         .search{
             input[type="search"]{
@@ -149,6 +166,52 @@ main#info-article{
             &.revision{
                 background: #f4f4f4;
                 padding: 20px 15px;
+                .article{
+                    .action-box{
+                        display: flex;
+                        justify-content: space-between;
+                        max-width: 1180px;
+                        padding: 20px 0;
+                        border-top: 1px solid #fff;
+                        margin: 0 auto;
+                        h4{
+                            line-height: 40px;
+                            margin: 0;
+                        }
+                        button{
+                            width: 40px;
+                            background: {
+                                image: url(../../images/icon-desplegar.svg);
+                                size: 20px;
+                                position: center;
+                                repeat: no-repeat;
+                                color: transparent;
+                            }
+                            -webkit-transform: rotate(180deg);
+                            transform: rotate(180deg);
+                            -webkit-transition: all 0.1s linear;
+                            transition: all 0.1s linear;
+                            font: {
+                                size: 0;
+                            }
+                            &.active{
+                                -webkit-transform: rotate(0);
+                                transform: rotate(0);
+                            }
+                        }
+                    }
+                    .box{
+                        display: none;
+                        &.active{
+                            display: block;
+                        }
+                    }
+                    &:first-child{
+                        .action-box{
+                            border-top: 0;
+                        }
+                    }
+                }
                 .tg {
                     max-width: 1180px;
                     background: #fff;
