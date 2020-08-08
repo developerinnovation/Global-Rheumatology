@@ -45,7 +45,7 @@ class ManuscritoController extends ControllerBase
         $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
         $node_create_form = $this->entityFormBuilder()->getForm($node);   
         $user_rol = $user->getRoles();
-        $permi = array("administrator", "editores","revisores");
+        $permi = array("administrator", "editores");
         $aut = FALSE;
 
         foreach($user_rol as $rep){
@@ -339,9 +339,8 @@ class ManuscritoController extends ControllerBase
                 $title = $article->get('title')->getValue()[0]['value'].' ('.$nid.')';
 
                 $nids = \Drupal::entityQuery('node')
-                    ->condition('status', $status)
                     ->condition('uid', $uid)
-                    ->condition('field_articulo_en_revision', [$nid], 'NOT IN')
+                    ->condition('field_articulo_en_revision', $nid)
                     ->condition('type','revision_de_articulos')
                     ->sort('created' , 'DESC')
                     ->execute();
@@ -351,7 +350,7 @@ class ManuscritoController extends ControllerBase
                     return [
                         '#theme' => 'error_list',
                         '#title' => t('Artículo calificado con anterioridad'),
-                        '#body' => '<p>'.t('Hemos detectado que ya realizaste la calificación en GLOBAL RHEUMATOLOGY del artículo').' "'.$title.'", '.t('si crees que es un error comunícate con nuestro equipo de soporte.').'</p>',
+                        '#body' => '<p>'.t('Hemos detectado que ya realizaste la calificación en GLOBAL RHEUMATOLOGY del artículo').' "'.$title.'", '.t('si crees que es un error comunícate con nuestro equipo de soporte.').' <br> <b><a href='.\Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid).'>'.t('Regresar al artículo').'</a></b></p>',
                     ];
                 }else{
                     $typ = node_type_load('revision_de_articulos'); 
@@ -1191,11 +1190,11 @@ class ManuscritoController extends ControllerBase
                 $data = [
                     'author' => $this->load_author($node->getOwnerId()),
                     'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
-                    'question_1' => '¿Qué tan original le parece el manuscrito asignado? : '.$pr1,
-                    'question_2' => '¿Qué tan relevante es la información presentada en este manuscrito? : '.$pr2,
-                    'question_3' => '¿Qué tan bien estructurada le parece la información presentada? : '.$pr3,
-                    'question_4' => '¿Qué tan bien presentado está el contenido del manuscrito? : '.$pr4,
-                    'question_5' => '¿Qué tan claro es el mensaje que deja el manuscrito? : '.$pr5,
+                    'question_1' => t('¿Qué tan original le parece el manuscrito asignado?').' : '.$pr1,
+                    'question_2' => t('¿Qué tan relevante es la información presentada en este manuscrito?').' : '.$pr2,
+                    'question_3' => t('¿Qué tan bien estructurada le parece la información presentada?').' : '.$pr3,
+                    'question_4' => t('¿Qué tan bien presentado está el contenido del manuscrito?').' : '.$pr4,
+                    'question_5' => t('¿Qué tan claro es el mensaje que deja el manuscrito?').' : '.$pr5,
                     'decision' => $TextDecision,
                     'comentario' => isset($node->get('field_comentarios')->getValue()[0]['value']) ? $node->get('field_comentarios')->getValue()[0]['value'] : 'Ninguno',
                     'promedio' => ($pr1 + $pr2 +$pr3 + $pr4 + $pr5 )/5 ,

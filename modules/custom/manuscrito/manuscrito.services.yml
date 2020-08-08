@@ -2,3 +2,6 @@ services:
   manuscrito.actions:
     class: Drupal\manuscrito\Plugin\Config\Block\ActionsBlockClass
     arguments: []
+  manuscrito.historial:
+    class: Drupal\manuscrito\Controller\ManuscritoController
+    arguments: []

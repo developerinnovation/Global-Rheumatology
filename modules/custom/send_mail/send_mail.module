@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\manuscrito\Controller\ManuscritoController;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
@@ -145,6 +146,50 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
 
         if($status == 'qualify'){
             $mensaje = str_replace('[token-qualify]', $tokenExtra, $mensaje);
+        }
+
+        if($status == '586' | $status == '585' | $status == '574'){
+            if($article->get('field_enviar_comentarios')->getValue()[0]['value'] == 'si'){
+                $historial =  \Drupal::service('manuscrito.historial')->getHistory($nidArticle);
+                $subtitle = '<h2>'.t('A continuación compartimos los detalles asociados a la revisión de su artículo').': </h2><br>';
+                $revision = '';
+                $comentarioEditor = '';
+                
+                if(count($historial['#node']) > 0){
+                    $comentarioEditor .=  '<div>';
+                        $comentarioEditor .= '<h4>'.t('Anotaciones por parte del editor').'</h4><br>';
+                        $comentarioEditor .= '<ul>';
+                            $comentarioEditor .= '<li>'.t('Editor').': '.$historial['#node']['editor']['name_author'].'</li>';
+                            $comentarioEditor .= '<li>'.t('Decisión').': '.$historial['#node']['decision'].'</li>';
+                            $comentarioEditor .= '<li>'.t('Comentario').': <p>'.$historial['#node']['commentEnd'].'</p></li>';
+                        $comentarioEditor .= '</ul>';
+                    $comentarioEditor .=  '</div>';
+                }
+
+                if(count($historial['#arrNodesRevision']) > 0){
+                    $revision .= '<div>';
+                        $revision .= '<h4>'.t('Calificación del artículo').'</h4>:<br>';
+                        foreach ($historial['#arrNodesRevision'] as $arrNodesRevision) {
+                            $revision = '<ul>';
+                                $revision .= '<li>'.t('Id de la revisión').': '.$arrNodesRevision['id'].'</li>';
+                                $revision .= '<li>'.t('Revisor').': '.$arrNodesRevision['author']['name_author'].'</li>';
+                                $revision .= '<li>'.$arrNodesRevision['question_1'].'</li>';
+                                $revision .= '<li>'.$arrNodesRevision['question_2'].'</li>';
+                                $revision .= '<li>'.$arrNodesRevision['question_3'].'</li>';
+                                $revision .= '<li>'.$arrNodesRevision['question_4'].'</li>';
+                                $revision .= '<li>'.$arrNodesRevision['question_5'].'</li>';
+                                $revision .= '<li>'.t('Promedio').': '.$arrNodesRevision['promedio'].'</li>';
+                                $revision .= '<li>'.t('Decisión').': '.$arrNodesRevision['decision'].'</li>';
+                                $revision .= '<li>'.t('Comentario').': <p>'.$arrNodesRevision['comentario'].'</p></li>';
+                            $revision .= '</ul>';
+                        }
+                    $revision .= '</div>';
+                }
+                $tokenDetalle = $subtitle.'<br>'.$comentarioEditor.'<br>'.$revision;
+                $mensaje = str_replace('[token-detalle]', $tokenDetalle, $mensaje);
+            }else{
+                $mensaje = str_replace('[token-detalle]', '', $mensaje);
+            }
         }
       
         mail($toMail, $asunto, $mensaje, $cabeceras);	
