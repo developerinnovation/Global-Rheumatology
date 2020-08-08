@@ -1,9 +1,34 @@
 article.node{
     .block-manuscrito{
         .tabs{
+            margin: 0 0 20px;
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             span{
+                display: block;
                 background: $accent-blue;
+                line-height: 24px;
                 color: #fff;
+            }
+            ul{
+                display: flex;
+                background: #F8F8F8;
+                li{
+                    width: 25%;
+                    a{
+                        display: block;
+                        height: 40px;
+                        line-height: 40px;
+                        &.is-active{
+                            background: #fff;
+                            border-bottom: 4px solid $accent-blue;
+                            font: {
+                                weight: 500;
+                            }
+                            color: $accent-blue;
+                        }
+                    }
+                }
             }
         }
     }
