@@ -116,6 +116,7 @@ function manuscrito_theme($existing, $type, $theme, $path) {
                 'id' => NULL,
                 'url' => NULL,
                 'article' => NULL,
+                'node' => NULL,
                 'arrNodesCommentToAutor' => NULL,
                 'arrNodesCommentToEditor' => NULL,
                 'arrNodesRevision' => NULL,

@@ -4,6 +4,47 @@
     <div class="list-type">
         <div class="box-type revision">  
 
+            {% if node != NULL %}
+                <div class="article box-comment-editor active">
+                    <div class="action-box">
+                        <h4>{{ 'Verificación rápida' }}</h4>
+                        <button data-id="box-article" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-article active">
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Id del artículo'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ node.id }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Cesión de derechos'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">
+                                        <a href="{{ node.cesionDerechos }}" target="_blank" download>{{ 'Clic para descargar' }}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Editor'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ node.editor.name_author }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Estado del artículo'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ node.decision }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ '¿Se enviaron todos los comentarios al autor?'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ node.sendComment }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Comentario final del editor'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ node.commentEnd }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}   
+
             {% if arrNodesCommentToAutor != NULL %}
                 <div class="article box-comment-autor active">
                     <div class="action-box">
@@ -132,12 +173,12 @@
             {% endif %}
 
             {% if arrNodesAsign != NULL %}
-                <div class="article box-comment-editor active">
+                <div class="article box-revisores active">
                     <div class="action-box">
                         <h4>{{ 'Revisores asignados' }}</h4>
-                        <button data-id="box-comment-editor" class="btn-show-text record">cerrar</button>
+                        <button data-id="box-revisores" class="btn-show-text record">cerrar</button>
                     </div>
-                    <div class="box box-comment-editor active">
+                    <div class="box box-revisores active">
                         {% for item in arrNodesAsign %}
                             <table class="tg">
                                 <tbody>

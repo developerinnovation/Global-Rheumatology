@@ -19,6 +19,8 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\rest\ResourceResponse;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
 
 class ManuscritoController extends ControllerBase
 { 
@@ -1202,6 +1204,43 @@ class ManuscritoController extends ControllerBase
                 array_push($arrNodesRevision,$data);
             }
         }
+        $nodeDetail = \Drupal\node\Entity\Node::load($nid);
+        $cesionDerechos = \Drupal\file\Entity\File::load($nodeDetail->get('field_cesion_derechos')->getValue()[0]['target_id']);
+        $decision = $nodeDetail->get('field_estado_del_articulo')->getValue()[0]['target_id'];
+        switch ($decision) {
+            case '586':
+                $TextDecision = t('Aceptado y publicado');
+                break;
+            
+            case '584':
+                $TextDecision = t('Aceptado con condiciones');
+                break;
+            
+            case '573':
+                $TextDecision = t('En revisión');
+                break;
+
+            case '572':
+                $TextDecision = t('Sin asignar');
+                break;
+
+            case '571':
+                $TextDecision = t('Recibido');
+                break;
+            
+            case '585':
+                $TextDecision = t('Rechazado');
+                break;
+        }
+        $detailNode = [
+            'id' => $nid,
+            'cesionDerechos' => file_create_url($cesionDerechos->getFileUri()),
+            'editor' => $this->load_author($nodeDetail->get('field_revisor')->getValue()[0]['target_id']),
+            'commentEnd' => isset($nodeDetail->get('field_comentarios')->getValue()[0]['value']) ? $nodeDetail->get('field_comentarios')->getValue()[0]['value'] : t('No hay comentarios registrados'),
+            'sendComment' => isset($nodeDetail->get('field_enviar_comentarios')->getValue()[0]['value']) ? $nodeDetail->get('field_enviar_comentarios')->getValue()[0]['value'] : t('No'),
+            'decision' => $TextDecision,
+        ];
+
         return [
             '#theme' => 'all_history',
             '#id' => $nid,
@@ -1211,6 +1250,7 @@ class ManuscritoController extends ControllerBase
             '#arrNodesCommentToEditor' => isset($arrNodesCommentToEditor) ? $arrNodesCommentToEditor : NULL,
             '#arrNodesRevision' => isset($arrNodesRevision) ? $arrNodesRevision : NULL,
             '#arrNodesAsign' => isset($arrNodesAsign) ? $arrNodesAsign : NULL,
+            '#node' => $detailNode,
         ];
     }
 }
