@@ -193,6 +193,12 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         }
       
         mail($toMail, $asunto, $mensaje, $cabeceras);	
+        $mailData = [
+            'to' => $toMail,
+            'asunto' => $asunto,
+            'mensaje' => $mensaje,
+        ];
+        \Drupal::logger('email_send')->info(print_r([$mailData], TRUE));
     }
    
 }
