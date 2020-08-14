@@ -61,6 +61,7 @@ class ActionsBlockClass {
             'comments_editor' => '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false),
             'comments_register' => '/comments/register/article/'.$uid.'/'.$nid.'/author',
             'status' => $node->status,
+            'uid_autor' => $node->getOwnerId() == $uid ? true : false,
         ];
     }
 

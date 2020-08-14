@@ -29,13 +29,15 @@
 
     {# flujo autores #}
     {% if 'autores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %} 
-        <div class="tabs" style="text-align: center">
-            <span>{{ 'Mis acciones disponible cómo autor'|t }}</span>
-            <ul class="tabs primary">
-                <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
-                <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Corregir artículo'|t }}</a></li>
-            </ul>
-        </div>
+        {% if data.uid_autor %}
+            <div class="tabs" style="text-align: center">
+                <span>{{ 'Mis acciones disponible cómo autor'|t }}</span>
+                <ul class="tabs primary">
+                    <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
+                    <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Corregir artículo'|t }}</a></li>
+                </ul>
+            </div>
+        {% endif %}
     {% endif %}
 
     
