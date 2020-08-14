@@ -57,7 +57,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
 
     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
     $cabeceras .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-
+    $cabeceras .= 'From: Global Rheumatology <no-reply@globalrheumpanlar.org>' . "\r\n";
     switch ($status) {
         case 'new': // 196 
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(196);
