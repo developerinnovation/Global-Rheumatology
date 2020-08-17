@@ -2,6 +2,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\manuscrito\Controller\ManuscritoController;
+use Drupal\Core\Mail;
+use core\lib\Drupal\Core\Mail\MailFormatHelper;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
@@ -51,13 +53,10 @@ function send_mail_user($to,$title,$body,$url_node,$nid,$label){
  * @return void
  */
 function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, $bodyExtra = NULL){
-
+    \Drupal::service('page_cache_kill_switch')->trigger();
     $articleId = $nidArticle;
     $titleArticle = '';
 
-    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-    $cabeceras .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-    $cabeceras .= 'From: Global Rheumatology <no-reply@globalrheumpanlar.org>' . "\r\n";
     switch ($status) {
         case 'new': // 196 
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(196);
@@ -192,17 +191,38 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
             }
         }
       
-        mail($toMail, $asunto, $mensaje, $cabeceras);	
-        $mailData = [
-            'to' => $toMail,
-            'asunto' => $asunto,
-            'mensaje' => $mensaje,
-        ];
-        \Drupal::logger('email_send')->info(print_r([$mailData], TRUE));
+        $params = [];
+        $params['from'] = \Drupal::config('system.site')->get('mail');
+        $params['subject'] = $asunto;
+        $params['body'] = $mensaje;
+        $params['message'] = $mensaje;
+
+        ob_start();
+            $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+            $send = \Drupal::service('plugin.manager.mail')->mail('send_mail', 'send_notification', $toMail, $langcode, $params, NULL, true);
+        ob_end_clean();
+        if ($send['result'] !== true) {
+            \Drupal::logger('email_send_result')->info('Se presentó un problema al enviar el correo');
+        }
+        \Drupal::logger('email_send_response')->info(print_r([$send], TRUE));
     }
    
 }
 
+function send_mail_mail($key, &$message, $params){
+    $options = array(
+        'langcode' => $message['langcode'],
+    );
+    switch ($key) {
+       case 'send_notification':
+            $message['from'] = \Drupal::config('system.site')->get('mail');
+            $message['subject'] = $params['subject'];
+            $message['body'][] = $params['message'];  
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['MIME-Version'] = '1.0';
+        break;
+    }
+}
 
 
 function convertDate(){
