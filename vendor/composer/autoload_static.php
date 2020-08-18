@@ -88,6 +88,10 @@ class ComposerStaticInit819c91c3a4fd08d4ef12629867852397
             'Laminas\\Escaper\\' => 16,
             'Laminas\\Diactoros\\' => 18,
         ),
+        'I' => 
+        array (
+            'Ifsnop\\' => 7,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -263,6 +267,10 @@ class ComposerStaticInit819c91c3a4fd08d4ef12629867852397
         'Laminas\\Diactoros\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-diactoros/src',
+        ),
+        'Ifsnop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ifsnop/mysqldump-php/src/Ifsnop',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
