@@ -1,6 +1,6 @@
 {% set roles = user.getroles(TRUE) %}
 
-{% if data.status == 0  %}
+{% if data.status == '0'  %}
     {% if data is not null  %}
         {# flujo editores #}
         {% if 'editores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %}

@@ -61,7 +61,7 @@ class ActionsBlockClass {
                 'comments_autor' => '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false),
                 'comments_editor' => '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false),
                 'comments_register' => '/comments/register/article/'.$uid.'/'.$nid.'/author',
-                'status' => $node->status,
+                'status' => $node->get('status')->getValue()[0]['value'],
                 'uid_autor' => $node->getOwnerId() == $uid ? true : false,
             ];
         }
