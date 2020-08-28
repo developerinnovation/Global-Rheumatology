@@ -50,19 +50,21 @@ class ActionsBlockClass {
     }
 
     public function preparate($node){
-        $nid = $node->get('nid')->getValue()[0]['value'];
-        $uid = \Drupal::currentUser()->id();
-        return [
-            'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid),
-            'urlEdit' => '/update/'.str_replace('manuscrito_','',$node->bundle()).'/'.$nid,
-            'assign' => '/assign/'.$nid.'/'.hash('md5',$nid,false),
-            'qualify' => '/article/qualify/'.$nid.'/'.hash('md5',$nid,false),
-            'comments_autor' => '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false),
-            'comments_editor' => '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false),
-            'comments_register' => '/comments/register/article/'.$uid.'/'.$nid.'/author',
-            'status' => $node->status,
-            'uid_autor' => $node->getOwnerId() == $uid ? true : false,
-        ];
+        if($node != null){
+            $nid = $node->get('nid')->getValue()[0]['value'];
+            $uid = \Drupal::currentUser()->id();
+            return [
+                'url' => \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $nid),
+                'urlEdit' => '/update/'.str_replace('manuscrito_','',$node->bundle()).'/'.$nid,
+                'assign' => '/assign/'.$nid.'/'.hash('md5',$nid,false),
+                'qualify' => '/article/qualify/'.$nid.'/'.hash('md5',$nid,false),
+                'comments_autor' => '/comments/review/autor/'.$nid.'/'.hash('md5','autor',false).'/'.hash('md5',$nid,false),
+                'comments_editor' => '/comments/review/editor/'.$nid.'/'.hash('md5','editor',false).'/'.hash('md5',$nid,false),
+                'comments_register' => '/comments/register/article/'.$uid.'/'.$nid.'/author',
+                'status' => $node->status,
+                'uid_autor' => $node->getOwnerId() == $uid ? true : false,
+            ];
+        }
     }
 
     public function bundleLabel($node_type){
