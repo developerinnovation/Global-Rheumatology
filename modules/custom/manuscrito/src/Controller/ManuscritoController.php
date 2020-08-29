@@ -1153,11 +1153,20 @@ class ManuscritoController extends ControllerBase
         if($nodesAsign != NULL){
             $nodes = \Drupal\node\Entity\Node::loadMultiple($nodesAsign);
             foreach ($nodes as $node) {
+                
+                if($node->get('field_revisor_acepto_revision')->getValue()[0]['value'] == 1 ){
+                    $responseStatus = t('Revisión aceptada');
+                }elseif($node->get('field_revisor_rechazo_revision')->getValue()[0]['value'] == 1){
+                    $responseStatus = t('Revisión rechazada');
+                }else{
+                    $responseStatus = 'noResponse';
+                }
+                
                 $data = [
                     'revisor' => $this->load_author($node->get('field_asignar_revisor')->getValue()[0]['target_id']),
                     'author' => $this->load_author($node->getOwnerId()),
                     'created' => \Drupal::service('date.formatter')->format($node->get('created')->getValue()[0]['value'], 'custom', 'd M Y'),
-                    'response' => $node->get('field_revisor_acepto_revision')->getValue()[0]['value'] == 1 ? t('Revisión aceptada') : $node->get('field_revisor_rechazo_revision')->getValue()[0]['value'] == 1 ? t('Revisión rechazada') : 'noResponse',
+                    'response' => $responseStatus,
                     'dateResponse' => \Drupal::service('date.formatter')->format($node->get('changed')->getValue()[0]['value'], 'custom', 'd M Y'),
                     'id' => $node->get('title')->getValue()[0]['value'],
                 ];
