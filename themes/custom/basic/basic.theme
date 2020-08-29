@@ -379,7 +379,7 @@ function basic_revision_de_articulos_submit($form, \Drupal\Core\Form\FormStateIn
       <li>¿Qué tan claro es el mensaje que deja el manuscrito? : '.$pr5.'</li>
       <li>Promedio de la calificación : '.$promedio.'</li>
       <li>Decisión : '.$TextDecision.'</li>
-      <li>Comentatio : '.$comentario.'</li>
+      <li>Comentario : '.$comentario.'</li>
     </ul>
   </ul>';
 
