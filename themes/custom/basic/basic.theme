@@ -19,7 +19,7 @@ use Drupal\Core\Url;
  * Prepares variables for the html.html.twig template.
  */
 function basic_preprocess_html(&$variables) {
-
+  $variables['test'] = 'ssss';
   try {
     $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
     $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
@@ -160,6 +160,7 @@ function basic_preprocess_page(&$variables) {
     $variables['register_form'] = \Drupal::service('renderer')->render($form);
 
   }
+  
 }
 
 /**''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''**/
@@ -434,4 +435,12 @@ function load_saved_node(){
 function basic_preprocess(array &$variables, $hook) {
   //this is a global hook, its variables are available in any template file
   $variables['nodo_saved'] = load_saved_node();
+}
+function basic_preprocess_views_view_fields(&$variables) {
+  
+  $factory = \Drupal::service('tempstore.shared');
+  $store = $factory->get('more_shared.shared');
+  $value = $store->get('more_shared_count');
+  $more_shared_count = json_decode($value, true);
+  $variables['more_shared_count'] = $more_shared_count;
 }

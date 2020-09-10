@@ -1217,7 +1217,7 @@ class ManuscritoController extends ControllerBase
         $decision = $nodeDetail->get('field_estado_del_articulo')->getValue()[0]['target_id'];
         switch ($decision) {
             case '586':
-                $TextDecision = t('Aceptado y publicado');
+                $TextDecision = t('Aceptado');
                 break;
             
             case '584':
@@ -1260,5 +1260,41 @@ class ManuscritoController extends ControllerBase
             '#arrNodesAsign' => isset($arrNodesAsign) ? $arrNodesAsign : NULL,
             '#node' => $detailNode,
         ];
+    }
+
+    public function sendRecordatorio (){
+        $message = 'Cron run: ' . date('Y-m-d H:i:s');
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        $query_consult = "SELECT DISTINCT node_field_data.langcode AS node_field_data_langcode, node_field_data.nid AS nid, users_field_data_node_field_data.uid AS users_field_data_node_field_data_uid
+        FROM
+        {node_field_data} node_field_data
+        LEFT JOIN {users_field_data} users_field_data_node_field_data ON node_field_data.uid = users_field_data_node_field_data.uid
+        LEFT JOIN {node__field_revisor_acepto_revision} node__field_revisor_acepto_revision ON node_field_data.nid = node__field_revisor_acepto_revision.entity_id AND node__field_revisor_acepto_revision.deleted = '0'
+        LEFT JOIN {node__field_revisor_rechazo_revision} node__field_revisor_rechazo_revision ON node_field_data.nid = node__field_revisor_rechazo_revision.entity_id AND node__field_revisor_rechazo_revision.deleted = '0'
+        WHERE (node_field_data.status = '0') AND (node_field_data.type IN ('asignacion_revisores')) AND (node__field_revisor_acepto_revision.field_revisor_acepto_revision_value <> '1') AND (node__field_revisor_rechazo_revision.field_revisor_rechazo_revision_value <> '1')";
+
+        $database = \Drupal::database();
+        $query = $database->query($query_consult);
+        $result = $query->fetchAll();
+        
+        if($result){
+            foreach ($result as $key => $value) {
+                $node = \Drupal\node\Entity\Node::load($value->nid);
+                if($node->get('field_revisor_acepto_revision')->getValue()[0]['value'] == 0 && $node->get('field_revisor_rechazo_revision')->getValue()[0]['value'] == 0){
+                    $diff = diff_date($date);
+                    if($diff > 11 && $diff <= 20){
+                        $autor = $this->load_author($node->get('field_asignar_revisor')->getValue()[0]['target_id']);
+                        $toMail = $autor['mail'];
+                        $status = 'recordatorioAssign';
+                        $nidArticle = $node->get('field_articulo_en_revision')->getValue()[0]['target_id'];
+                        $article = \Drupal\node\Entity\Node::load($nidArticle);
+                        $bodyExtra = '';
+                        exec_mail($status, $article, $nidArticle, $toMail);
+                    }
+                }
+            }
+            
+        }
+        \Drupal::logger('send_mail')->notice($message);
     }
 }

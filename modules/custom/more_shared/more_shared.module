@@ -1,0 +1,51 @@
+<?php 
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * more_shared_help
+ *
+ * @param  mixed $route_name
+ * @param  mixed $route_match
+ * @return void
+ */
+function more_shared_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+      // Main module help for the more_shared module.
+      case 'help.page.more_shared':
+          $output = '';
+          $output .= t('<h3>' . 'About') . '</h3>';
+          $output .= t('<p>' . 'Customización para traer los artículos más compartidos') . '</p>';
+      return $output;
+
+  default:
+  }
+}
+
+// function more_shared_cron(){
+//   $more_shared = \Drupal::service('more_shared.general')->getAllNodePublished();
+//   if(count($more_shared) > 0){
+//     $factory = \Drupal::service('tempstore.shared');
+//     $store = $factory->get('more_shared.shared');
+//     $storeJson = json_encode($more_shared);
+//     $store->set('more_shared_count', $storeJson);
+
+//   }
+
+// }
+
+
+function more_shared_preprocess_page(&$variables){
+  $nid = [];
+  $factory = \Drupal::service('tempstore.shared');
+  $store = $factory->get('more_shared.shared');
+  $value = $store->get('more_shared_count');
+  $more_shared_count = json_decode($value, true);
+  foreach ($more_shared_count as $key => $value) {
+    array_push($nid, key($value));
+  }
+  $variables['more_shared_nid'] = implode(',', $nid);
+  $variables['more_shared'] = $more_shared_count;
+}

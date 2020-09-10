@@ -1,0 +1,9 @@
+shared.more_shared_form:
+  path: '/admin/config/facebook/more-shared-config'
+  defaults:
+    _form: '\Drupal\more_shared\Plugin\Form\moreSharedForm'
+    _title: 'Configuración para facebook'
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE

@@ -1,0 +1,6 @@
+shared.more_shared_form:
+  title: 'Más compartidas Facebook'
+  route_name: 'shared.more_shared_form'
+  description: 'Configuración de client secret App y client id App para traer los artículos más compartidos'
+  parent: system.admin_config_system
+  weight: 99

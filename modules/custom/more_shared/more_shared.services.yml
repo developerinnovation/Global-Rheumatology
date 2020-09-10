@@ -1,0 +1,5 @@
+services:
+  more_shared.general:
+    class: Drupal\more_shared\general
+    arguments: []
+    

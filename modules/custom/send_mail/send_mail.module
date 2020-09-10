@@ -7,6 +7,7 @@ use core\lib\Drupal\Core\Mail\MailFormatHelper;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
+use Drupal\Core\Database\Connection;
 
 function send_mail_help($route_name, RouteMatchInterface $route_match) {
     switch ($route_name) {
@@ -21,10 +22,24 @@ function send_mail_help($route_name, RouteMatchInterface $route_match) {
     }
 }
 
+function diff_date($date){
+    $now = date('y-m-d');
+    $date1=date_create("2013-03-15");
+    $date2=date_create("2013-12-12");
+    $diff=date_diff($date1,$date2);
+    return $diff->d;
+}
+
+/**
+ * Implements hook_cron().
+ */
+// function send_mail_cron() {
+//     \Drupal::service('manuscrito.historial')->sendRecordatorio();
+// }
 
 
 function send_mail_user($to,$title,$body,$url_node,$nid,$label){
-
+    
 
     // Para enviar un correo HTML, debe establecerse la cabecera Content-type
     $titulo = 'Global Rheumatology - '.$label;
@@ -109,6 +124,9 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         case 'update': // articulo actualizado por el autor, confirma su actualización enviandole un mail
             $plantilla = \Drupal::entityManager()->getStorage('node')->load(340);
             break; 
+        case 'recordatorioAssign': // recordatorio realizar revisión
+            $plantilla = \Drupal::entityManager()->getStorage('node')->load(374);
+            break; 
     }
     if($status != '571'){
         $asunto = $plantilla->get('title')->getValue()[0]['value'];
@@ -127,9 +145,10 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
         if($bodyExtra != NULL){
             $mensaje = str_replace('[token-id-comment]', $tokenExtra, $mensaje);
             $mensaje = str_replace('[token-comment]', $bodyExtra, $mensaje);
+            $mensaje = str_replace('[token-process-type]', $bodyExtra, $mensaje);
         }
 
-        if($status == 'assign'){
+        if($status == 'assign' || $status == 'recordatorioAssign'){
             $path = \Drupal::request()->getSchemeAndHttpHost()."/user/password";
             $recoverPass = '<a href="'.$path.'">'.$path.'</a>';
             $link = \Drupal::request()->getSchemeAndHttpHost().'/user/login?destination=/article/'.$nidArticle.'/review/'.hash('md5',$nidArticle,false).'/assign/response';
