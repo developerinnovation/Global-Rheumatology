@@ -22,13 +22,13 @@ CSS files in the head. * - scripts: Script tags necessary to load the JavaScript
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                         <script type="text/javascript" src="/themes/custom/basic/js/jquery.mousewheel-3.0.4.pack.js"></script>
                         <script type="text/javascript" src="/themes/custom/basic/js/owlcarrousel/owl-carousel/owl.carousel.js"></script>
-                        <script type="text/javascript" src="/themes/custom/basic/js/general.js?temp={{ " now "|date("m/d/Y/H/i/s ") }}"></script>
+                        <script type="text/javascript" src="/themes/custom/basic/js/general.js"></script>
                         <link rel="stylesheet" href="/themes/custom/basic/js/owlcarrousel/owl-carousel/owl.carousel.css">
                         <link rel="stylesheet" href="/themes/custom/basic/js/mediaelement-and-player.min.js">
                         </script>
-                        <link rel="stylesheet" href="/themes/custom/basic/css/base/base.css?temp={{ " now "|date("m/d/Y/H/i/s ") }}" />
-                        <link rel="stylesheet" href="/themes/custom/basic/css/puntual.css?temp={{ " now "|date("m/d/Y/H/i/s ") }}" />
-                        <link rel="stylesheet" href="/themes/custom/basic/css/components/components.css?temp={{ " now "|date("m/d/Y/H/i/s ") }}" />
+                        <link rel="stylesheet" href="/themes/custom/basic/css/base/base.css" />
+                        <link rel="stylesheet" href="/themes/custom/basic/css/puntual.css" />
+                        <link rel="stylesheet" href="/themes/custom/basic/css/components/components.css" />
                         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&amp;subset=latin-ext" rel="stylesheet"> {% set classes = [] %} {% for role in user.roles %} {% set classes = classes|merge(['role--' ~ role|clean_class]) %} {% endfor %} {% set sidebar_first = page.sidebar_first|render %} {% set sidebar_second = page.sidebar_second|render
                         %}
                         <body{{ attributes.addClass(classes, not is_front ? 'with-subnav', sidebar_first ? 'sidebar-first', sidebar_second ? 'sidebar-second', (sidebar_first and not sidebar_second) or (sidebar_second and not sidebar_first) ? 'one-sidebar', (sidebar_first and
