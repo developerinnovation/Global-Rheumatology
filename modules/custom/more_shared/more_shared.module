@@ -24,17 +24,17 @@ function more_shared_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
-// function more_shared_cron(){
-//   $more_shared = \Drupal::service('more_shared.general')->getAllNodePublished();
-//   if(count($more_shared) > 0){
-//     $factory = \Drupal::service('tempstore.shared');
-//     $store = $factory->get('more_shared.shared');
-//     $storeJson = json_encode($more_shared);
-//     $store->set('more_shared_count', $storeJson);
+function more_shared_cron(){
+  $more_shared = \Drupal::service('more_shared.general')->getAllNodePublished();
+  if(count($more_shared) > 0){
+    $factory = \Drupal::service('tempstore.shared');
+    $store = $factory->get('more_shared.shared');
+    $storeJson = json_encode($more_shared);
+    $store->set('more_shared_count', $storeJson);
 
-//   }
+  }
 
-// }
+}
 
 
 function more_shared_preprocess_page(&$variables){
