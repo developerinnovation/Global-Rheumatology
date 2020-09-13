@@ -19,21 +19,20 @@
                         {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
                         {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                         {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
-                        <div class="author">
-                            <span>Por: <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
-                        </div>
-                        <br>
                         <div>
-                            <date>{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
+                            <span class="author">Por: <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> {{ afiliacion|striptags|trim }}</span>
                         </div>
-                        <br>
+                    </div>
+
+                    <div class="info article">
+                        <date>{{ content.field_fecha.value|date('U')|format_date('global') }}</date>
                     </div>
 
                     <div class="statistics">
                         <label>Estadísticas</label>
                         <div class="item views">
-                            <i class="icon icon-views">Vistas</i>
-                            <span><b>1,909</b>Vistas</span>
+                            <i class="icon icon-views">{{ 'Vistas' | t }}</i>
+                            <span><b>{{ node_stats }}</b>{{ 'Vistas' | t }}</span>
                         </div>
                     </div>
 

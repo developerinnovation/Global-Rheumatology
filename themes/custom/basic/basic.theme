@@ -444,3 +444,13 @@ function basic_preprocess_views_view_fields(&$variables) {
   $more_shared_count = json_decode($value, true);
   $variables['more_shared_count'] = $more_shared_count;
 }
+
+function basic_preprocess_node(&$variables) {
+  // Get statistics count for current node.
+  $statistics = \Drupal::service('statistics.storage.node')->fetchView($variables['node']->id());
+  if ($statistics !== FALSE) {
+    $variables['node_stats'] = $statistics->getTotalCount();
+  }else{
+    $variables['node_stats'] = '1';
+  }
+}
