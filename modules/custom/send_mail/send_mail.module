@@ -187,10 +187,11 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
                 if(count($historial['#arrNodesRevision']) > 0){
                     $revision .= '<div>';
                         $revision .= '<h4>'.t('Calificación del artículo').'</h4>:<br>';
+                        $num_revisor = 1;
                         foreach ($historial['#arrNodesRevision'] as $arrNodesRevision) {
                             $revision = '<ul>';
                                 $revision .= '<li>'.t('Id de la revisión').': '.$arrNodesRevision['id'].'</li>';
-                                $revision .= '<li>'.t('Revisor').': '.$arrNodesRevision['author']['name_author'].'</li>';
+                                $revision .= '<li>'.t('Revisor').' '.$num_revisor.'</li>';
                                 $revision .= '<li>'.$arrNodesRevision['question_1'].'</li>';
                                 $revision .= '<li>'.$arrNodesRevision['question_2'].'</li>';
                                 $revision .= '<li>'.$arrNodesRevision['question_3'].'</li>';
@@ -200,6 +201,7 @@ function exec_mail($status, $article, $nidArticle, $toMail, $tokenExtra = NULL, 
                                 $revision .= '<li>'.t('Decisión').': '.$arrNodesRevision['decision'].'</li>';
                                 $revision .= '<li>'.t('Comentario').': <p>'.$arrNodesRevision['comentario'].'</p></li>';
                             $revision .= '</ul>';
+                            $num_revisor ++;
                         }
                     $revision .= '</div>';
                 }

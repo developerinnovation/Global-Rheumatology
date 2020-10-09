@@ -15,7 +15,9 @@
         <p class="sumary">{{ fields.body.content }}</p>
         <div class="info">
             {% for key, shared in more_shared_count %}
-                <span class="cont"> <i class="reader"></i> {{ shared[nid]['count'] }} {{ 'compartidas' }} </span>
+                {% if shared[nid] !=  more_shared_count[key-1][nid] %}
+                    <span class="cont"> <i class="reader"></i> {{ shared[nid]['count'] }} {{ 'compartidas' }} </span>
+                {% endif %}
             {% endfor %}
             <date>{{ fields.created.content }}</date>
         </div>
