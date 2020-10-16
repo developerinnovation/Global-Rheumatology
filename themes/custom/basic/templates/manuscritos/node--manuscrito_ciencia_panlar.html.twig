@@ -56,6 +56,30 @@
                         {% endif %} 
                     </div>
 
+                    {% if node.status.value == 1 %}
+                        {% if node.field_articulo_pdf %}
+                            <div class="tablas">
+                                <label> {{ 'Artículo en pdf'|t }} </label> 
+                                {% set doc = node.field_articulo_pdf.entity.getFilename|split('.') %}
+                                <div class="ico">
+                                    <a href="{{ file_url(node.field_articulo_pdf.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+                                        <div class="file {{  doc[1] }}"></div>
+                                        <div class="title">
+                                            <h3>
+                                                {% if content.field_fuente %}
+                                                    {{ content.field_titulo_anexo }}
+                                                {% else %}
+                                                    {{ doc[0]|slice(0, 13) }}...
+                                                {% endif %}
+                                            </h3>
+                                        </div>
+                                        
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %} 
+                    {% endif %} 
+
                     {% if node.field_anexos %}
                         <div class="tablas">
                             <label> {{ 'Anexos'|t }} </label> 
