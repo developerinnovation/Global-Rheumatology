@@ -1246,7 +1246,7 @@ class ManuscritoController extends ControllerBase
             $editor = [
                 'uid' => 0,
                 'mail' => 'noreply“global',
-                'name_author' => t('No hay Editor asignado para este artíiculo'),
+                'name_author' => t('No hay Editor asignado para este artículo'),
                 'uri' => '#',
             ];
         }
