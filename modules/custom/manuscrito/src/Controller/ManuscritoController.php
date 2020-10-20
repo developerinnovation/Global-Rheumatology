@@ -1240,10 +1240,21 @@ class ManuscritoController extends ControllerBase
                 $TextDecision = t('Rechazado');
                 break;
         }
+        if($nodeDetail->get('field_revisor')->getValue()[0]['target_id']){
+            $editor = $this->load_author($nodeDetail->get('field_revisor')->getValue()[0]['target_id']);
+        }else{
+            $editor = [
+                'uid' => 0,
+                'mail' => 'noreply“global',
+                'name_author' => t('No hay Editor asignado para este artíiculo'),
+                'uri' => '#',
+            ];
+        }
+        
         $detailNode = [
             'id' => $nid,
             'cesionDerechos' => file_create_url($cesionDerechos->getFileUri()),
-            'editor' => $this->load_author($nodeDetail->get('field_revisor')->getValue()[0]['target_id']),
+            'editor' => $editor,
             'commentEnd' => isset($nodeDetail->get('field_comentarios')->getValue()[0]['value']) ? $nodeDetail->get('field_comentarios')->getValue()[0]['value'] : t('No hay comentarios registrados'),
             'sendComment' => isset($nodeDetail->get('field_enviar_comentarios')->getValue()[0]['value']) ? $nodeDetail->get('field_enviar_comentarios')->getValue()[0]['value'] : t('No'),
             'decision' => $TextDecision,
