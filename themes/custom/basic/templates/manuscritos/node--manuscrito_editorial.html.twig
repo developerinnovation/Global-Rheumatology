@@ -19,11 +19,19 @@
                     <div class="revision">                        
                         <div class="item-news manuscrito">
                             <div class="text">
-                                <div class="block last-mod">
-                                    <label>{{ 'Creado'|t }}:</label>
-                                    <span class="date">{{ content.created.value|date('U')|format_date('global') }}</span>
-                                </div>
+                                
+                                {% if node.status.value != 0 %}
+                                    <div class="block last-mod">
+                                        <label>{{ 'Publicado'|t }}:</label>
+                                        <span class="date">{{ content.field_fecha_publicacion_oficial.value|date('U')|format_date('global') }}</span>
+                                    </div>
+                                {% endif %}
+
                                 {% if node.status.value == 0 %}
+                                    <div class="block last-mod">
+                                        <label>{{ 'Creado'|t }}:</label>
+                                        <span class="date">{{ content.created.value|date('U')|format_date('global') }}</span>
+                                    </div>
                                     <div class="block last-mod">
                                         <label>{{ 'Última modificación'|t }}:</label>
                                         <span class="date">{{ content.changed.value|date('U')|format_date('global') }}</span>
@@ -36,10 +44,20 @@
                                     {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
                                     {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                                     {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
+                                    {% set correo %} {{ drupal_field('email', 'user', node.getOwnerId()) }} {% endset %}
                                     <div class="block status">
-                                        <label>{{ 'Por'|t }}:</label>
-                                        <span><b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
+                                        {% if node.field_autor_es %}
+                                            <label> {{ 'Autores'|t }}: </label> 
+                                            <br>
+                                            <ul>
+                                                {% for item in node.field_autor_es %}
+                                                    {{ drupal_entity('paragraph', item.target_id) }}
+                                                    <br>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
+
                                 {% endif %}
                             </div>
                         </div>
@@ -118,23 +136,85 @@
                 <div class="content article">
                     <div class="title large">
                         <h2>{{ node.field_titulo_ingles.value }}</h2> 
-                    </div>
-                            
-                    {% if node.field_editorial.value %}
-                        <div class="block editorial">
+                    </div>   
+
+                    {% if node.field_introduccion.value %}
+                        <div class="block introduccion">
                             <div class="title-block">
-                                <h2>Editorial</h2>
-                                <button class="btn-show-text" data-id="editorial">cerrar</button>
+                                <h2>Introducción</h2>
+                                <button class="btn-show-text" data-id="introduccion">cerrar</button>
                             </div> 
                             <div class="box active">
-                                <p>{{ node.field_editorial.value|raw }}</p>
+                                <p>{{ node.field_introduccion.value|raw }}</p>
                             </div>
                         </div>
                     {% endif %}
 
-              
+
+                    {% if node.field_conclusion.value %}    
+                        <div class="block conclusion">
+                            <div class="title-block">
+                                <h2>{{ 'Discusión y conclusiones'|t }}</h2>
+                                <button class="btn-show-text" data-id="conclusion">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conclusion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    {% if node.agradecimientos.value %}
+                        <div class="block agradecimiento">
+                            <div class="title-block">
+                                <h2>Agradecimiento</h2>
+                                <button class="btn-show-text" data-id="agradecimiento">cerrar</button>
+                            </div> 
+                            <div class="box active">
+                                <p>{{ node.agradecimientos.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_conflicto_interes.value %}
+                        <div class="block conflic">
+                            <div class="title-block">
+                                <h2>Conflicto de interés</h2>
+                                <button class="btn-show-text" data-id="conflic">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_conflicto_interes.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if node.field_financiacion.value %}
+                        <div class="block finan">
+                            <div class="title-block">
+                                <h2>Financiación</h2>
+                                <button class="btn-show-text" data-id="finan">cerrar</button>
+                            </div>
+                            <div class="box active">
+                                <p>{{ node.field_financiacion.value|raw }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="block referencias">
+                        <div class="title-block">
+                            <h2>Referencias</h2>
+                            <button class="btn-show-text" data-id="referencias">cerrar</button>
+                        </div>
+                        <div class="box active">
+                            {{ node.field_referencia.value|raw }}
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+
         </div>
 
         <div class="container">
