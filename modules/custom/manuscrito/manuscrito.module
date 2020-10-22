@@ -124,5 +124,15 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             ),
             'template' => 'all-history',
         ),
+        'statistics_platform' => array( 
+            'variables' => array(
+                'node' => NULL,
+                'average' => NULL,
+                'count_user_Rol' => NULL,
+                'count_user' => NULL,
+                'autor_more_active' => NULL,
+            ),
+            'template' => 'statistics-platform',
+        ),
     );
 }

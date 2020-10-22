@@ -53,4 +53,9 @@
   description: 'Permite ver el historial completo de un artículo ej: comentarios, asignaciones, calificaciones, etc...'
   restrict access: true
 
+'Ver estadísticas':
+  title: 'Ver estadísticas'
+  description: 'Permite ver las estadísticas de la plataforma'
+  restrict access: true
+
 

@@ -1308,4 +1308,119 @@ class ManuscritoController extends ControllerBase
         }
         \Drupal::logger('send_mail')->notice($message);
     }
+
+    public function getPlatformStatisticsNode(){
+        $data = [];
+        $average = 0;
+        $database = \Drupal::database();
+
+        $countUsers = $this->countUser();
+        $countUserByRol = $this->countUserByRol();
+        $getUserMoreActive = $this->getUserMoreActive();
+
+        $query_consult = "SELECT node_field_data.langcode AS node_field_data_langcode, node_counter.totalcount AS node_counter_totalcount, node_field_data.title AS title,  node_field_data.status AS status, node_field_data.type AS type, node_field_data.created AS node_field_data_created, node_field_data.nid AS nid
+        FROM
+        {node_field_data} node_field_data
+        LEFT JOIN {node_counter} node_counter ON node_field_data.nid = node_counter.nid
+        WHERE (node_field_data.type NOT IN ('asignacion_revisores', 'comentarios_para_autor', 'comentarios_para_editor', 'manuscrito', 'page', 'revision_de_articulos', 'plantillas_correos'))
+        ORDER BY node_field_data_created DESC";
+        
+        $query = $database->query($query_consult);
+        $result = $query->fetchAll();
+        
+        if($result){
+            foreach ($result as $key => $value) {
+                array_push($data, [
+                    'title' => $value->title,
+                    'count' => $value->node_counter_totalcount,
+                    'type' => ucfirst(str_replace('_', ' ', $value->type)),
+                    'nid' => $value->nid,
+                    'status' => $value->status == 1 ? t('Publicado') : t('Sin publicar'),
+                ]);
+                $average += $value->node_counter_totalcount;
+            }
+        }
+
+        
+
+        return [
+            '#theme' => 'statistics_platform',
+            '#node' => $data,
+            '#average' => $average,
+            '#count_user' => $countUsers,
+            '#count_user_Rol' => $countUserByRol,
+            '#autor_more_active' => $getUserMoreActive,
+        ];
+
+    }
+
+    public function countUser(){
+        $database = \Drupal::database();
+        $query_consult = "SELECT count(uid) as count FROM {users} users";
+        $query = $database->query($query_consult);
+        $result = $query->fetchAll();
+        if($result){
+            return $result[0]->count;
+        }
+        return 0;
+    }
+
+    public function countUserByRol(){
+
+        $idsAdministrator = \Drupal::entityQuery('user')
+            ->condition('roles', 'administrator')
+            ->execute();
+        
+        $idsAutores = \Drupal::entityQuery('user')
+            ->condition('roles', 'autores')
+            ->execute();
+        
+        $idsEditores = \Drupal::entityQuery('user')
+            ->condition('roles', 'editores')
+            ->execute();
+
+        $idsRevisores = \Drupal::entityQuery('user')
+            ->condition('roles', 'revisores')
+            ->execute();
+
+        $idsLectores = \Drupal::entityQuery('user')
+            ->condition('roles', 'lector')
+            ->execute();
+
+        $idsAutorMagazine = \Drupal::entityQuery('user')
+            ->condition('roles', 'autor_magazine')
+            ->execute();
+        
+        return [
+            'idsAdministrator' => count($idsAdministrator),
+            'idsAutores' => count($idsAutores),
+            'idsEditores' => count($idsEditores),
+            'idsRevisores' => count($idsRevisores),
+            'idsLectores' => count($idsLectores),
+            'idsAutorMagazine' => count($idsAutorMagazine),
+        ];
+    }
+
+    public function getUserMoreActive(){
+        $data = [];
+        $database = \Drupal::database();
+
+        $query_consult = "SELECT uid, COUNT( uid ) AS total FROM node_field_data 
+        WHERE (node_field_data.type NOT IN ('asignacion_revisores', 'comentarios_para_autor', 'comentarios_para_editor', 'manuscrito', 'page', 'revision_de_articulos', 'plantillas_correos')) AND uid != 1
+        GROUP BY uid ORDER BY total DESC limit 10";
+
+        $query = $database->query($query_consult);
+        $result = $query->fetchAll();
+        if($result){
+            foreach ($result as $key => $value) {
+                $autor = $this->load_author($value->uid);
+                array_push($data, [
+                    'autor' => $autor['name_author'],
+                    'count' => $value->total,
+                ]);
+            }
+        }
+        return $data;
+
+    }
 }

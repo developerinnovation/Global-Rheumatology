@@ -140,3 +140,11 @@ all_history_article_page:
         _title: 'Historial del artículo'
     requirements:
         _permission: 'Ver historial completo de un articulo'
+
+platform_statistics_node:
+    path: 'platform/statistics/all/record/node'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::getPlatformStatisticsNode'
+        _title: 'Estadísticas'
+    requirements:
+        _permission: 'Ver estadísticas'

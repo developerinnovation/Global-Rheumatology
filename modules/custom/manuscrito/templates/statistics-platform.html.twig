@@ -1,0 +1,162 @@
+<main id="info-article" class="record">
+    <h2>{{ 'Datos rápidos de estadísticas'|t }}</h2>
+    <div class="list-type">
+        <div class="box-type revision">  
+
+            {% if average != NULL %}
+                <div class="article box-average active">
+                    <div class="action-box">
+                        <h4>{{ 'Total de lecturas' }}</h4>
+                        <button data-id="box-average" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-average active">
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Total'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ average }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %}   
+
+            {% if count_user != NULL %}
+                <div class="article box-count_user active">
+                    <div class="action-box">
+                        <h4>{{ 'Total de usuarios registrados' }}</h4>
+                        <button data-id="box-count_user" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-count_user active">
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Total'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %} 
+
+
+            {% if count_user_Rol != NULL %}
+                <div class="article box-count_user_Rol active">
+                    <div class="action-box">
+                        <h4>{{ 'Total de usuarios registrados por roles' }}</h4>
+                        <button data-id="box-count_user_Rol" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-count_user_Rol active">
+                        <table class="tg">
+                            <tbody>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Administradores'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAdministrator }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Autores'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAutores }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Revisores'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsRevisores }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Editores'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsEditores }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Autores de magazine'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAutorMagazine }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tg-cly1">{{ 'Lectores'|t }}:<br></td>
+                                    <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsLectores }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% endif %} 
+
+
+            
+
+            {% if autor_more_active != NULL %}
+                <div class="article box-top active">
+                    <div class="action-box">
+                        <h4>{{ 'Top 10 de usuarios que más publican' }}</h4>
+                        <button data-id="box-top" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-top active">
+                        {% for item in autor_more_active %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Nombre'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.autor }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Cantidad de publicaciones'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.count }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+           
+
+            {% if node != NULL %}
+                <div class="article box-all active">
+                    <div class="action-box">
+                        <h4>{{ 'Contenido almacenado en la plataforma' }}</h4>
+                        <button data-id="box-all" class="btn-show-text record">cerrar</button>
+                    </div>
+                    <div class="box box-all active">
+                        {% for item in node %}
+                            <table class="tg">
+                                <tbody>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Identificador interno'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.nid }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Cantidad de visualizaciones'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tg-cly1">{{ 'Estado'|t }}:<br></td>
+                                        <td class="tg-nrix" colspan="3">{{ item.status }}</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>    
+    </div>
+</main>
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-cly1{text-align:left;vertical-align:middle}
+    .tg .tg-nrix{text-align:center;vertical-align:middle}
+</style>
