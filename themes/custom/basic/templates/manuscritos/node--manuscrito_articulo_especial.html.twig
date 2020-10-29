@@ -21,7 +21,7 @@
                             <div class="text">
                                 {% if node.status.value != 0 %}
                                     <div class="block last-mod">
-                                        {% if node.field_fecha_publicacion_oficial.value != '' %}
+                                        {% if node.field_fecha_publicacion_oficial is not empty  %}
                                             <label>{{ 'Publicado'|t }}:</label>
                                             <span class="date">{{ node.field_fecha_publicacion_oficial.value|date('U')|format_date('global') }}</span>
                                         {% endif %}
