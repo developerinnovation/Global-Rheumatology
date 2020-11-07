@@ -137,6 +137,7 @@ function manuscrito_theme($existing, $type, $theme, $path) {
         'list_articles_type' => array( 
             'variables' => array(
                 'type' => NULL,
+                'name' => NULL,
             ),
             'template' => 'list-articles-type',
         ),

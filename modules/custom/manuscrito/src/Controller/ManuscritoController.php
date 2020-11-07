@@ -1427,42 +1427,55 @@ class ManuscritoController extends ControllerBase
 
     public function show_article_type_page(RouteMatchInterface $route_match, $type){
         $typeSearch = ''; 
-        
+        $titleType = t('Artículos tipo ');
+
         switch ($type) {
             case 'revision':
+                $titleType = t('Artículos tipo revisón');
                 $typeSearch = 'manuscrito_articulo_revision';
                 break;
-            case 'articulos_especial':
+            case 'articulos-especial':
+                $titleType = t('Artículos tipo especial');
                 $typeSearch = 'manuscrito_articulo_especial';
                 break;
             case 'original':
+                $titleType = t('Artículos tipo original');
                 $typeSearch = 'manuscrito_articulo_original';
                 break;
-            case '':
+            case 'ciencia-panlar':
+                $titleType = t('Artículos tipo ciencia Panlar');
                 $typeSearch = 'manuscrito_ciencia_panlar';
                 break;
             case 'columnas':
+                $titleType = t('Artículos tipo columnas');
                 $typeSearch = 'manuscrito_columnas';
                 break;
-            case 'comentarios_respuestas':
+            case 'comentarios-respuestas':
+                $titleType = t('Artículos tipo comentarios y respuestas');
                 $typeSearch = 'manuscrito_comentarios_respues';
                 break;
             case 'editorial':
+                $titleType = t('Artículos tipo editorial');
                 $typeSearch = 'manuscrito_editorial';
                 break;
-            case 'mini_revision':
+            case 'mini-revision':
+                $titleType = t('Artículos tipo mini revisión');
                 $typeSearch = 'manuscrito_mini_revision';
                 break;
             case 'multimedia':
+                $titleType = t('Artículos tipo multimedia');
                 $typeSearch = 'manuscrito_multimedia';
                 break;
             case 'noticia':
+                $titleType = t('Artículos tipo noticia');
                 $typeSearch = 'manuscrito_noticia';
                 break;
-            case 'reportajes_especiales':
+            case 'reportajes-especiales':
+                $titleType = t('Artículos tipo reportajes especiales');
                 $typeSearch = 'manuscrito_reportajes_especiales';
                 break;
-            case 'rondas_clinicas':
+            case 'rondas-clinicas':
+                $titleType = t('Artículos tipo rondas clínicas');
                 $typeSearch = 'manuscrito_rondas_clinicas';
                 break;
             
@@ -1470,6 +1483,7 @@ class ManuscritoController extends ControllerBase
         return [
             '#theme' => 'list_articles_type',
             '#type' => $typeSearch,
+            '#name' => $titleType,
         ];
     }
 }
