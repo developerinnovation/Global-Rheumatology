@@ -148,3 +148,11 @@ platform_statistics_node:
         _title: 'Estadísticas'
     requirements:
         _permission: 'Ver estadísticas'
+
+list_articles_type:
+    path: 'articulos/tipo/{type}'
+    defaults:
+        _controller: '\Drupal\manuscrito\Controller\ManuscritoController::show_article_type_page'
+        _title: 'Artículos tipo'
+    requirements:
+        _permission: 'Show articles type'

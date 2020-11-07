@@ -1423,4 +1423,53 @@ class ManuscritoController extends ControllerBase
         return $data;
 
     }
+
+
+    public function show_article_type_page(RouteMatchInterface $route_match, $type){
+        $typeSearch = ''; 
+        
+        switch ($type) {
+            case 'revision':
+                $typeSearch = 'manuscrito_articulo_revision';
+                break;
+            case 'articulos_especial':
+                $typeSearch = 'manuscrito_articulo_especial';
+                break;
+            case 'original':
+                $typeSearch = 'manuscrito_articulo_original';
+                break;
+            case '':
+                $typeSearch = 'manuscrito_ciencia_panlar';
+                break;
+            case 'columnas':
+                $typeSearch = 'manuscrito_columnas';
+                break;
+            case 'comentarios_respuestas':
+                $typeSearch = 'manuscrito_comentarios_respues';
+                break;
+            case 'editorial':
+                $typeSearch = 'manuscrito_editorial';
+                break;
+            case 'mini_revision':
+                $typeSearch = 'manuscrito_mini_revision';
+                break;
+            case 'multimedia':
+                $typeSearch = 'manuscrito_multimedia';
+                break;
+            case 'noticia':
+                $typeSearch = 'manuscrito_noticia';
+                break;
+            case 'reportajes_especiales':
+                $typeSearch = 'manuscrito_reportajes_especiales';
+                break;
+            case 'rondas_clinicas':
+                $typeSearch = 'manuscrito_rondas_clinicas';
+                break;
+            
+        }
+        return [
+            '#theme' => 'list_articles_type',
+            '#type' => $typeSearch,
+        ];
+    }
 }

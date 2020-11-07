@@ -58,4 +58,8 @@
   description: 'Permite ver las estadísticas de la plataforma'
   restrict access: true
 
+'Show articles type':
+  title: 'Artículos tipo'
+  description: 'Permite ver las los diferentes artículos tipo publicados a cualquier usuario'
+  restrict access: false
 

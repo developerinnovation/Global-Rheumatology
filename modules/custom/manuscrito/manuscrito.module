@@ -134,5 +134,11 @@ function manuscrito_theme($existing, $type, $theme, $path) {
             ),
             'template' => 'statistics-platform',
         ),
+        'list_articles_type' => array( 
+            'variables' => array(
+                'type' => NULL,
+            ),
+            'template' => 'list-articles-type',
+        ),
     );
 }
