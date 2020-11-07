@@ -1,0 +1,12 @@
+{% set doc = paragraph.field_pdf_con_correcciones.entity.getFilename|split('.') %}
+<div class="ico">
+    <a href="{{ file_url(paragraph.field_pdf_con_correcciones.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+        <div class="file {{  doc[1] }}"></div>
+        <div class="title">
+            <h3>
+                {{ 'Descargar corrección'|t }}
+            </h3>
+        </div>
+    </a>
+</div>
+
