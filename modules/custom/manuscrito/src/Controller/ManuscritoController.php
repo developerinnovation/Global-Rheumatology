@@ -1431,47 +1431,47 @@ class ManuscritoController extends ControllerBase
 
         switch ($type) {
             case 'revision':
-                $titleType = t('Artículos tipo revisón');
+                $titleType = t('Artículos de revisón');
                 $typeSearch = 'manuscrito_articulo_revision';
                 break;
             case 'articulos-especial':
-                $titleType = t('Artículos tipo especial');
+                $titleType = t('Artículos especiales');
                 $typeSearch = 'manuscrito_articulo_especial';
                 break;
             case 'original':
-                $titleType = t('Artículos tipo original');
+                $titleType = t('Artículos originales');
                 $typeSearch = 'manuscrito_articulo_original';
                 break;
             case 'ciencia-panlar':
-                $titleType = t('Artículos tipo ciencia Panlar');
+                $titleType = t('Ciencia Panlar');
                 $typeSearch = 'manuscrito_ciencia_panlar';
                 break;
             case 'columnas':
-                $titleType = t('Artículos tipo columnas');
+                $titleType = t('Columnas');
                 $typeSearch = 'manuscrito_columnas';
                 break;
             case 'comentarios-respuestas':
-                $titleType = t('Artículos tipo comentarios y respuestas');
+                $titleType = t('Comentarios y respuestas');
                 $typeSearch = 'manuscrito_comentarios_respues';
                 break;
             case 'editorial':
-                $titleType = t('Artículos tipo editorial');
+                $titleType = t('Editorial');
                 $typeSearch = 'manuscrito_editorial';
                 break;
             case 'mini-revision':
-                $titleType = t('Artículos tipo mini revisión');
+                $titleType = t('Mini revisión');
                 $typeSearch = 'manuscrito_mini_revision';
                 break;
             case 'multimedia':
-                $titleType = t('Artículos tipo multimedia');
+                $titleType = t('Multimedia');
                 $typeSearch = 'manuscrito_multimedia';
                 break;
             case 'noticia':
-                $titleType = t('Artículos tipo noticia');
+                $titleType = t('Noticias');
                 $typeSearch = 'manuscrito_noticia';
                 break;
             case 'reportajes-especiales':
-                $titleType = t('Artículos tipo reportajes especiales');
+                $titleType = t('Reportajes especiales');
                 $typeSearch = 'manuscrito_reportajes_especiales';
                 break;
             case 'rondas-clinicas':
