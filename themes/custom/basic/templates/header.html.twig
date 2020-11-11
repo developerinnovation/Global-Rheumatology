@@ -92,7 +92,7 @@
                                     <a href="/new/send/manuscrito" class="seconds submenu">{{"Publish"|t}}</a>
                                     <ul class="seconds inactive">
                                         <li class="last_submenu">
-                                            <a href="/show/saved/content">{{"Saved Items"|t}}</a>
+                                            <a href="/show/saved/content">{{"Saved articles"|t}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -104,10 +104,10 @@
                                                 <a href="/articles/editor/created/{{ user.id }}">{{"My articles"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/process/{{ user.id }}">{{"Items in process"|t}}</a>
+                                                <a href="/articles/editor/process/{{ user.id }}">{{"Items in progress"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/rejected/{{ user.id }}">{{"Rejected items"|t}}<{/a>
+                                                <a href="/articles/editor/rejected/{{ user.id }}">{{"Rejected articles"|t}}<{/a>
                                             </li>
                                             <li class="last_submenu">
                                                 <a href="/articles/editor/published/{{ user.id }}">{{"published articles"|t}}</a>
@@ -120,10 +120,10 @@
                                         <a class="seconds submenu">{{"Actions for author"|t}}</a>
                                         <ul class="seconds inactive">
                                             <li class="last_submenu">
-                                                <a href="/articles/author/process/{{ user.id }}">{{"Items in process"|t}}</a>
+                                                <a href="/articles/author/process/{{ user.id }}">{{"Articles in progress"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/author/rejected/{{ user.id }}">{{"Rejected items"|t}}</a>
+                                                <a href="/articles/author/rejected/{{ user.id }}">{{"Rejected articles"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
                                                 <a href="/articles/author/published/{{ user.id }}">{{"published articles"|t}}</a>
@@ -161,12 +161,12 @@
                                 <ul class="box main inactive">
                                     {% for submenu_item in menu_item.submenu %}
                                         <li class="{% if submenu_item.submenu %}seconds navigation__item submenu{% endif %}">
-                                            <a {% if not submenu_item.submenu  %}href="{{ submenu_item.url }}"{% endif %} class="seconds submenu{{ link_class }}">{{ submenu_item.text }}</a>
+                                            <a {% if not submenu_item.submenu  %}href="{{ submenu_item.url }}"{% endif %} class="seconds submenu{{ link_class }}">{{ submenu_item.text|t }}</a>
                                             {% if submenu_item.submenu %}
                                                 <ul class="seconds inactive">
                                                     {% for last_submenu_item in submenu_item.submenu %}
                                                         <li class="last_submenu">
-                                                            <a href="{{ last_submenu_item.url }}" class="{{ link_class }}">{{ last_submenu_item.text }}</a>
+                                                            <a href="{{ last_submenu_item.url }}" class="{{ link_class }}">{{ last_submenu_item.text|t }}</a>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>
