@@ -3,11 +3,11 @@
 <article {{ attributes.addClass(classes) }}>
   <div class="block-manuscrito">
     <div class="tabs" style="text-align: center">
-      <span>{{ 'Acciones disponible'|t }}</span>
+      <span>{{ "Available Actions"|t }}</span>
         <ul class="tabs primary">
-          <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ 'Detalle asignación de revisores'|t }}</a></li>
-          <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ 'Regresar al artículo'|t }}</a></li>
-          <li><a href="/assign/{{ node.field_articulo_en_revision.target_id }}/{{ node.field_articulo_en_revision.target_id|md5 }}">{{ "Continuar asignando revisores"|t }}</a></li>
+          <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ "Reviewer assignment detail"|t }}</a></li>
+          <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ "Return to article"|t }}</a></li>
+          <li><a href="/assign/{{ node.field_articulo_en_revision.target_id }}/{{ node.field_articulo_en_revision.target_id|md5 }}">{{ "Continue assigning reviewers"|t }}</a></li>
         </ul>
     </div>
   </div>
@@ -16,7 +16,7 @@
       <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
         <div class="box">
           <h1 {{ attributes }}>
-            {{ 'Id de asignación'|t }} : {{ node.title.value }}
+            {{ "Asignment id"|t }} : {{ node.title.value }}
           </h1>
           
           <div class="info article">
@@ -34,17 +34,17 @@
       
       <div class="right">
         <div class="content article">
-          <h3> {{ 'Artículo en revisión'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          <h3> {{ "Article under review"|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
           
           <div class="article__body">
-            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ 'Ir al artículo'|t }} </a>
+            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ "Go to article"|t }} </a>
             <br><br>
           </div>
           
           <div class="article__body">
             {% set nombre %} {{ drupal_field('field_nombre', 'user', node.field_asignar_revisor.target_id) }}  {% endset %}
             {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.field_asignar_revisor.target_id) }} {% endset %}
-            {{ 'Revisor asignado'|t }} : {{ nombre|raw }} {{ apellidos|raw }}
+            {{ "Asigned reviewer"|t }} : {{ nombre|raw }} {{ apellidos|raw }}
           </div>
         </div>
       </div>

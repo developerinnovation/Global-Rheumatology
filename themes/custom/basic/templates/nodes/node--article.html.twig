@@ -28,7 +28,7 @@
               {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
               {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
               <div>
-                 <span>Por: <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
+                 <span>{{ "For"|t }} <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
               </div>
               <br>
               <div>
@@ -42,14 +42,14 @@
           </div>
 
           <div class="statistics">
-              <label>Estadísticas</label>
+              <label>{{ "statistics"|t }}</label>
             <div class="item views">
-              <i class="icon icon-views">{{ 'Vistas' | t }}</i>
-              <span><b>{{ node_stats }}</b>{{ 'Vistas' | t }}</span>
+              <i class="icon icon-views">{{ "Views" | t }}</i>
+              <span><b>{{ node_stats }}</b>{{ "Views" | t }}</span>
             </div>
             <!--<div class="item shareds">
-              <i class="icon icon-shared">Compartidas</i>
-              <span><b>1,909</b>Compartidas</span>
+              <i class="icon icon-shared">{{ "Shared"|t }}</i>
+              <span><b>1,909</b>{{ "Shared"|t }}</span>
             </div>-->
           </div>
 
@@ -65,7 +65,7 @@
           </div>
 
           <div class="shared">
-            <label>Compartir</label>          
+            <label>{{ "Share"|t }}</label>          
 
             <div class="a2a_kit a2a_default_style">
                 <a class="a2a_button_facebook">
@@ -114,7 +114,7 @@
     <div class="container">
         <div class="news related last_news"> 
             <div class="block-title">
-                <h3>Artículos relacionados</h3>
+                <h3>{{ "Related posts"|t }}</h3>
             </div>
             <dd>{{ drupal_view('articulos', 'block_1') }}</dd>
         </div>

@@ -9,7 +9,7 @@
         </p>
 
         <div class="contact">
-            <span>{% trans%} Contáctenos {% endtrans%}:</span>
+            <span>{{"Contact Us"|t}}:</span>
             <a href="mailto:info@globalrheumpanlar.org">info@globalrheumpanlar.org</a>
         </div>
 
@@ -29,16 +29,16 @@
         <ul class="sections">
             {% if logged_in != true %}
                 <li class=" navigation__item">
-                    <a href="/user/login" class="">{% trans%}INICIAR SESIÓN{% endtrans%}</a>
+                    <a href="/user/login" class="">{{"Log in"|t}}</a>
                 </li>
             {% endif %}
 
             {% if logged_in %}
                 <li class=" navigation__item">
-                    <a href="/new/send/manuscrito" class="">{% trans%}PUBLICAR{% endtrans%}</a>
+                    <a href="/new/send/manuscrito" class="">{{"Publish"|t}}</a>
                 </li>
                 <li class=" navigation__item">
-                    <a href="/show/saved/content" class="">{% trans%}ARTÍCULOS GUARDADOS{% endtrans%}</a>
+                    <a href="/show/saved/content" class="">{{"Saved Items"|t}}</a>
                 </li>
             {% endif %}
             {% for menu_item in items.menu_tree %}
@@ -47,15 +47,15 @@
                 </li>
             {% endfor %}
         </ul>
-        <a href="#" class="privacy">{% trans%} Política de privacidad {% endtrans%}</a>
+        <a href="#" class="privacy">{{"privacy Policy"|t}}</a>
     </div>
     <div class="footer-region newsletter">
       <div>
         <button>
             {% if logged_in %}
-                <a href="/new/type/manuscrito">{{ 'Enviar un artículo'|t }}</a>
+                <a href="/new/type/manuscrito">{{"Submit an article"|t }}</a>
             {% else %}
-                <a href="/user/login?destination=/">{{ 'Registrarse'|t }}</a>
+                <a href="/user/login?destination=/">{{"Sign in"|t }}</a>
             {% endif %}
         </button>
       </div>
@@ -64,14 +64,14 @@
       <figure class="logo-iv">
         <img src="/{{ directory }}/images/inteligencia-viral.webp" alt="Global Rheumatology" width="200" height="200" />
       </figure>
-      <p class="copy-text">Diseño & desarrollo por Inteligencia Viral <br> &copy;2019 Global Rheumatology by Panlar.</p>
+      <p class="copy-text">{{"Design & development by Viral Intelligence"|t }} <br> &copy;2019 Global Rheumatology by Panlar.</p>
     </div>
   </div>
   <nav id="menu-fixed" class="mobile">
-      <a class="icon home" href="/">Inicio</a>
-      <a class="icon search" href="/search/content/by/type">Buscar</a>
-      <a class="icon multimedia" href="/secciones/26/multimedia">Multimedia</a>
-      <a class="icon save" href="/user/login?destination=/show/saved/content">Guardados</a>
-      <a class="icon perfil" href="/user">Perfil</a>
+      <a class="icon home" href="/">{{"Home"|t }}</a>
+      <a class="icon search" href="/search/content/by/type">{{"search"|t }}</a>
+      <a class="icon multimedia" href="/secciones/26/multimedia">{{"Multimedia"|t }}</a>
+      <a class="icon save" href="/user/login?destination=/show/saved/content">{{"Saved"|t }}</a>
+      <a class="icon perfil" href="/user">{{"Profile"|t }}</a>
   </nav>
 </footer>

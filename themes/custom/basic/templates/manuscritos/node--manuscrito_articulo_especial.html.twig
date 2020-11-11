@@ -22,7 +22,7 @@
                                 {% if node.status.value != 0 %}
                                     <div class="block last-mod">
                                         {% if node.field_fecha_publicacion_oficial is not empty  %}
-                                            <label>{{ 'Publicado'|t }}:</label>
+                                        <label>{{ "Publish"|t }}:</label>
                                             <span class="date">{{ node.field_fecha_publicacion_oficial.value|date('U')|format_date('global') }}</span>
                                         {% endif %}
                                     </div>
@@ -30,15 +30,15 @@
 
                                 {% if node.status.value == 0 %}
                                     <div class="block last-mod">
-                                        <label>{{ 'Creado'|t }}:</label>
+                                        <label>{{ "created"|t }}:</label>
                                         <span class="date">{{ content.created.value|date('U')|format_date('global') }}</span>
                                     </div>
                                     <div class="block last-mod">
-                                        <label>{{ 'Última modificación'|t }}:</label>
+                                        <label>{{ "Last modification"|t }}:</label>
                                         <span class="date">{{ content.changed.value|date('U')|format_date('global') }}</span>
                                     </div>
                                     <div class="block status">
-                                        <label>{{ 'Estado actual'|t }}:</label>
+                                        <label>{{ "Actual state"|t }}:</label>
                                         <span>{{ content.field_estado_del_articulo[0]['#title'] }}</span>
                                     </div>
                                 {%else%}
@@ -46,7 +46,7 @@
                                     {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                                     {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
                                     <div class="block status">
-                                        <label>{{ 'Por'|t }}:</label>
+                                        <label>{{"by"|t }}:</label>
                                         <span><b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
                                     </div>
                                 {% endif %}
@@ -68,7 +68,7 @@
                     {% if node.status.value == 1 %}
                         {% if node.field_articulo_pdf %}
                             <div class="tablas">
-                                <label> {{ 'Artículo en pdf'|t }} </label> 
+                                <label> {{ "article in pdf"|t }} </label> 
                                 {% set doc = node.field_articulo_pdf.entity.getFilename|split('.') %}
                                 <div class="ico">
                                     <a href="{{ file_url(node.field_articulo_pdf.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
@@ -91,7 +91,7 @@
 
                     {% if node.field_anexos %}
                         <div class="tablas">
-                            <label> {{ 'Anexos'|t }} </label> 
+                            <label> {{ "annexes"|t }} </label> 
                             {% for item in node.field_anexos %}
                                 {{ drupal_entity('paragraph', item.target_id) }}
                             {% endfor %}
@@ -100,7 +100,7 @@
 
                     {% if node.status.value == 1 %}
                     <div class="shared">
-                        <label>Compartir</label>          
+                        <label>{{"Share"|t }}</label>          
 
                         <div class="a2a_kit a2a_default_style">
                             <a class="a2a_button_facebook">
@@ -131,8 +131,8 @@
 
                     <div class="block abstract">
                         <div class="title-block">
-                            <h2>Resumen</h2>
-                            <button class="btn-show-text" data-id="abstract">cerrar</button>
+                            <h2>{{"Summary"|t }}</h2>
+                            <button class="btn-show-text" data-id="abstract">{{"Close"|t }}</button>
                         </div> 
                         <div class="box active">
                             {{ content.field_resumen_abstract }}  
@@ -142,8 +142,8 @@
                     {% if node.field_mensajes_clave.value %}
                         <div class="block mensaje">
                             <div class="title-block">
-                                <h2>Mensajes Claves</h2>
-                                <button class="btn-show-text" data-id="mensaje">cerrar</button>
+                                <h2>{{"Key messages"|t }}</h2>
+                                <button class="btn-show-text" data-id="mensaje">{{"Close"|t }}</button>
                             </div> 
                             <div class="box active">
                                 <p>{{ node.field_mensajes_clave.value|raw }}</p>
@@ -154,8 +154,8 @@
                     {% if node.field_introduccion.value %}
                         <div class="block introduccion">
                             <div class="title-block">
-                                <h2>Introducción</h2>
-                                <button class="btn-show-text" data-id="introduccion">cerrar</button>
+                                <h2>{{"introduction"|t }}</h2>
+                                <button class="btn-show-text" data-id="introduccion">{{"Close"|t }}</button>
                             </div> 
                             <div class="box active">
                                 <p>{{ node.field_introduccion.value|raw }}</p>
@@ -166,8 +166,8 @@
                     {% if node.field_conclusion.value %}    
                         <div class="block conclusion">
                             <div class="title-block">
-                                <h2>{{ 'Discusión y conclusiones'|t }}</h2>
-                                <button class="btn-show-text" data-id="conclusion">cerrar</button>
+                                <h2>{{ "Discussion and Conclusions"|t }}</h2>
+                                <button class="btn-show-text" data-id="conclusion">{{"Close"|t }}</button>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_conclusion.value|raw }}</p>
@@ -178,8 +178,8 @@
                     {% if node.agradecimientos.value %}
                         <div class="block agradecimiento">
                             <div class="title-block">
-                                <h2>Agradecimiento</h2>
-                                <button class="btn-show-text" data-id="agradecimiento">cerrar</button>
+                                <h2>{{"Gratitude"|t }}</h2>
+                                <button class="btn-show-text" data-id="agradecimiento">{{"Close"|t }}</button>
                             </div> 
                             <div class="box active">
                                 <p>{{ node.agradecimientos.value|raw }}</p>
@@ -190,8 +190,8 @@
                     {% if node.field_conflicto_interes.value %}
                         <div class="block conflic">
                             <div class="title-block">
-                                <h2>Conflicto de interés</h2>
-                                <button class="btn-show-text" data-id="conflic">cerrar</button>
+                                <h2>{{"Interest conflict"|t }}</h2>
+                                <button class="btn-show-text" data-id="conflic">{{"Close"|t }}</button>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_conflicto_interes.value|raw }}</p>
@@ -202,8 +202,8 @@
                     {% if node.field_financiacion.value %}
                         <div class="block finan">
                             <div class="title-block">
-                                <h2>Financiación</h2>
-                                <button class="btn-show-text" data-id="finan">cerrar</button>
+                                <h2>{{"Financing"|t }}</h2>
+                                <button class="btn-show-text" data-id="finan">{{"Close"|t }}</button>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_financiacion.value|raw }}</p>
@@ -214,8 +214,8 @@
 
                     <div class="block referencias">
                         <div class="title-block">
-                            <h2>Referencias</h2>
-                            <button class="btn-show-text" data-id="referencias">cerrar</button>
+                            <h2>{{"References"|t }}</h2>
+                            <button class="btn-show-text" data-id="referencias">{{"Close"|t }}</button>
                         </div>
                         <div class="box active">
                             {{ node.field_referencia.value|raw }}
@@ -231,7 +231,7 @@
             <div class="news infinite-contents manuscrito">
                 {% set array = [user.id,node.nid.value] %}
                 <div class="block-title">
-                    <h3>Mis manuscritos</h3>
+                    <h3>{{"My manuscripts"|t }}</h3>
                 </div>
                 {# drupal_view('manuscritos', 'block_2',user.id) #}
             </div>

@@ -31,7 +31,7 @@
     <div class="container">
         <div class="infinite-contents">
             <div class="block-title">
-                <h3>Publicaciones de: {{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+                <h3>{{"Publications of"|t }} {{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
             </div>
             {{ drupal_view('perfil_usuario', 'block_1') }}
         </div>

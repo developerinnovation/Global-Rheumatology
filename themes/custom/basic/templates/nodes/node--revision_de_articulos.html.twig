@@ -3,10 +3,10 @@
 <article {{ attributes.addClass(classes) }}>
 <div class="block-manuscrito">
     <div class="tabs" style="text-align: center">
-      <span>{{ 'Acciones disponible'|t }}</span>
+      <span>{{ "Actions available"|t }}</span>
       <ul class="tabs primary">
-          <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ 'Revisión del artículo'|t }}</a></li>
-          <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ 'Regresar al artículo'|t }}</a></li>
+          <li class="tabs__tab tabs__tab--active"><a href="" class="is-active">{{ "article review"|t }}</a></li>
+          <li class="tabs__tab"><a href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}">{{ "Return to article"|t }}</a></li>
       </ul>
     </div>
   </div>
@@ -15,7 +15,7 @@
       <div class="left"  style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
         <div class="box">
           <h1 {{ attributes }}>
-            {{ 'Id de la revisión'|t }} : {{ node.title.value }}
+            {{ "Revision id"|t }} : {{ node.title.value }}
           </h1>
           
           <div class="info article">
@@ -33,19 +33,19 @@
       
       <div class="right">
         <div class="content article">
-          <h3> {{ 'Detalle de la revisión del artículo'|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
+          <h3> {{ "Detail of the article review"|t }} : {{ drupal_field('title', 'node', node.field_articulo_en_revision.target_id) }} </h3>
           
           <div class="article__body">
-            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ 'Ir al artículo'|t }} </a>
+            <a style="text-decoration: underline;" href="{{ path('entity.node.canonical', {'node': node.field_articulo_en_revision.target_id}) }}"> {{ "Go to article"|t }} </a>
             <br><br>
           </div>
           
           <div class="article__body">
-            {{ 'Calificación'|t }} : <br>
+            {{ "qualification"|t }} : <br>
             <ul>
                 <li>
                     {% set pregunta_1 = node.field_pregunta_1.value|raw %}
-                    {{ '¿Qué tan original le parece el manuscrito asignado?'|t }} : {{ pregunta_1 }}
+                    {{ "How original do you find the assigned manuscript?"|t }} : {{ pregunta_1 }}
                 </li>
                 <li>
                     {% set pregunta_2 = node.field_pregunta_2.value|raw %}
@@ -53,7 +53,7 @@
                 </li>
                 <li>
                     {% set pregunta_3 = node.field_pregunta_3.value|raw %}
-                    {{ '¿Qué tan bien estructurada le parece la información presentada?'|t }} : {{ pregunta_3 }}
+                    {{ "How relevant is the information presented in this manuscript?"|t }} : {{ pregunta_3 }}
                 </li>
                 <li>
                     {% set pregunta_4 = node.field_pregunta_4.value|raw %}
@@ -61,17 +61,17 @@
                 </li>
                 <li>
                     {% set pregunta_5 = node.field_pregunta_5.value|raw %}
-                    {{ '¿Qué tan claro es el mensaje que deja el manuscrito?'|t }} : {{ pregunta_5 }}
+                    {{ "How well presented is the content of the manuscript?"|t }} : {{ pregunta_5 }}
                 </li>
                 <li>
-                    {{ 'Promedio de la calificación'|t }} : {{  (pregunta_1 + pregunta_2 +pregunta_3 + pregunta_4 + pregunta_5)/5 }}
+                    {{ "Grade average"|t }} : {{  (pregunta_1 + pregunta_2 +pregunta_3 + pregunta_4 + pregunta_5)/5 }}
                 </li>
                 <li>
                     {% set field_decision_revisor = content.field_decision_revisor['#items'].getString() %}
-                    {{ 'Decisión'|t }} : {{ content.field_decision_revisor[0] }}
+                    {{ "Decision"|t }} : {{ content.field_decision_revisor[0] }}
                 </li>
                 <li>
-                  {{ 'Comentario'|t }} : {{ node.field_comentarios.value|raw }}
+                  {{ "Commentary"|t }} : {{ node.field_comentarios.value|raw }}
                 </li>
             </ul>
              

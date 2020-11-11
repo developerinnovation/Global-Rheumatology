@@ -4,24 +4,24 @@
         <ul class="option">
             <li class="login active">
                 <i class="icon icon-login"></i>
-                <a href="/user/login">{% trans%} Iniciar sesión {% endtrans%}</a>
+                <a href="/user/login">{{"Log in"|t }}</a>
             </li>
             <hr>
             <li class="register">
                 <i class="icon icon-register"></i>
-                <a href="/user/register">{% trans%} Registrarse {% endtrans%}</a>
+                <a href="/user/register">{{"Sign in"|t }}</a>
             </li>
             <hr>
             <li class="password">
                 <i class="icon icon-pwd"></i>
-                <a href="/user/password">{% trans%} Forgot password {% endtrans%}</a>
+                <a href="/user/password">{{"Forgot password"|t }}</a>
             </li>
         </ul>
     </div>-->
 
     <div class="container user" id="form-login">
         <div class="block-title">
-            <h3>{% trans%} Iniciar sesión {% endtrans%}</h3>
+            <h3>{{"Log in"|t }}</h3>
         </div>
         <div class="profile">
               <dd>{{ login_form }}</dd>
@@ -30,13 +30,13 @@
             <span>ó</span>
         </div>
         <div class="options">
-            <a href="/user/register" class="register">{% trans%} Registrarse {% endtrans%}</a>
-            <a href="/user/password" class="password">{% trans%} ¿Has olvidado tu contraseña ? {% endtrans%}</a>
+            <a href="/user/register" class="register">{{"Sign in"|t }}</a>
+            <a href="/user/password" class="password">{{"Have you forgotten your password?"|t }}</a>
         </div>
     </div><!-- /.container -->
 
     <div class="shared">
-    <label>{% trans%} Comparte esta web con tus colegas {% endtrans%}</label>  
+    <label>{{"Share this website with your colleagues"|t }}</label>  
         <div class="a2a_kit a2a_default_style redes">
             <a class="a2a_button_facebook">
                 <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
@@ -56,7 +56,7 @@
     <!-- <div class="container">
         <div class="last_news">  
             <div class="block-title">
-                <h3>{% trans%} Last articles {% endtrans%}</h3>
+                <h3>{{"Last articles"|t }}</h3>
             </div>
             <dd></dd>
         </div>

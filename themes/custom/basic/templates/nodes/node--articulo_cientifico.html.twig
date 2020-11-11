@@ -37,14 +37,14 @@
           </div>
 
           <div class="statistics">
-              <label>Estadísticas</label>
+              <label> {{ "statistics"|t }}</label>
             <div class="item views">
               <i class="icon icon-views">{{ 'Vistas' | t }}</i>
               <span><b>{{ node_stats }}</b>{{ 'Vistas' | t }}</span>
             </div>
             <!--<div class="item shareds">
-              <i class="icon icon-shared">Compartidas</i>
-              <span><b>1,909</b>Compartidas</span>
+              <i class="icon icon-shared"> {{ "Shared"|t }}</i>
+              <span><b>1,909</b> {{ "Shared"|t }}</span>
             </div>-->
           </div>
 
@@ -79,7 +79,7 @@
           </div>
 
           <div class="tablas">
-            <label>Descargas</label> 
+            <label> {{ "downloads"|t }}</label> 
 
             <div class="ico">
               <a href="/xml/{{node.id}}/content/article/doaj" class="link" target="_blank" >
@@ -140,8 +140,8 @@
 
           <div class="block resumen">
               <div class="title-block">
-                  <h2>Resumen</h2>
-                  <button class="btn-show-text active" data-id="resumen">cerrar</button>
+                  <h2> {{ "Summary"|t }}</h2>
+                  <button class="btn-show-text active" data-id="resumen"> {{ "Close"|t }}</button>
               </div>
               <div class="box active">
                   <p>{{ node.field_resumen.value|raw }}</p>
@@ -150,8 +150,8 @@
 
           <div class="block introduccion">
               <div class="title-block">
-                  <h2>Introducción</h2>
-                  <button class="btn-show-text active" data-id="introduccion">cerrar</button>
+                  <h2> {{ "Introduction"|t }}</h2>
+                  <button class="btn-show-text active" data-id="introduccion"> {{ "close"|t }}</button>
               </div>
               <div class="box active">
                   <p>{{ node.field_introduccion.value|raw }}</p>
@@ -160,8 +160,8 @@
 
           <div class="block metodos">
               <div class="title-block">
-                  <h2>Métodos</h2>
-                  <button class="btn-show-text active" data-id="metodos">cerrar</button>
+                  <h2> {{ "Methods"|t }}</h2>
+                  <button class="btn-show-text active" data-id="metodos">{{ "Close"|t }}</button>
               </div>
               <div class="box active">
                   <p>{{ node.field_metodos.value|raw }}</p>
@@ -170,8 +170,8 @@
 
           <div class="block resultados">
               <div class="title-block">
-                  <h2>Resultados</h2>
-                  <button class="btn-show-text active" data-id="resultados">cerrar</button>
+                  <h2> {{ "Results"|t }}</h2>
+                  <button class="btn-show-text active" data-id="resultados">{{ "Close"|t }}</button>
               </div>
               <div class="box active">
                   <p>{{ node.field_resultado.value|raw }}</p>
@@ -180,8 +180,8 @@
 
           <div class="block conclusiones">
               <div class="title-block">
-                  <h2>Conclusiones</h2>
-                  <button class="btn-show-text active" data-id="reconclusiones">cerrar</button>
+                  <h2> {{ "Conclusions"|t }}</h2>
+                  <button class="btn-show-text active" data-id="reconclusiones"> {{ "Close"|t }}</button>
               </div>
               <div class="box active">
                   <p>{{ node.field_conclusion.value|raw }}</p>
@@ -190,8 +190,8 @@
      
           <div class="block referencias">
               <div class="title-block">
-                  <h2>Referencias</h2>
-                  <button class="btn-show-text" data-id="referencias">cerrar</button>
+                  <h2>{{ "References"|t }}</h2>
+                  <button class="btn-show-text" data-id="referencias">{{ "Close"|t }}</button>
               </div>
               <div class="box">
                 {% for item in node.field_referencias %}
@@ -218,7 +218,7 @@
     <div class="container">
         <div class="news related last_news"> 
             <div class="block-title">
-                <h3>Artículos científicos</h3>
+                <h3>{{ "Scientific articles"|t }}</h3>
             </div>
             <dd>{{ drupal_view('articulos', 'block_1') }}</dd>
         </div>

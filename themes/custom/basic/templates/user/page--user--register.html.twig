@@ -4,24 +4,24 @@
         <ul class="option">
             <li class="login">
                 <i class="icon icon-login"></i>
-                <a href="/user/login">{% trans%} Iniciar sesión {% endtrans%}</a>
+                <a href="/user/login">{{"Log in"|t }}</a>
             </li>
             <hr>
             <li class="register active">
                 <i class="icon icon-register"></i>
-                <a href="/user/register">{% trans%} Registrarse {% endtrans%}</a>
+                <a href="/user/register">{{"Sign in"|t }}</a>
             </li>
             <hr>
             <li class="password">
                 <i class="icon icon-pwd"></i>
-                <a href="/user/password">{% trans%} Recuperar Contraseña {% endtrans%}</a>
+                <a href="/user/password">{{"recover password"|t }}</a>
             </li>
         </ul>
     </div>
 
     <div class="container user" id="form-password">
         <div class="block-title">
-            <h3>{% trans%} Registrarse {% endtrans%}</h3>
+            <h3>{{"Sign in"|t }}</h3>
         </div>
         <div class="profile">
             <dd>{{ register_form }}</dd>
@@ -31,7 +31,7 @@
     <!--<div class="container">
         <div class="last_news">  
             <div class="block-title">
-                <h3>{% trans%} Last articles {% endtrans%}</h3>
+                <h3>{{"Last articles"|t }}</h3>
             </div>
             <dd></dd>
         </div>

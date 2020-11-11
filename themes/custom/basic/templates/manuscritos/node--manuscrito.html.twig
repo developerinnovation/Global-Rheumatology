@@ -59,7 +59,7 @@
                     {% if node.field_metodos.value %}
                         <div class="block metodos">
                             <div class="title-block">
-                                <h2>Métodos</h2>
+                                <h2>{{ "Methods"|t }}</h2>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_metodos.value|raw }}</p>
@@ -70,7 +70,7 @@
                     {% if node.field_resultado.value %}
                         <div class="block resultados">
                             <div class="title-block">
-                                <h2>Resultados</h2>
+                                <h2>{{ "Results"|t }}</h2>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_resultado.value|raw }}</p>
@@ -81,7 +81,7 @@
                     {% if node.field_conclusion.value %}
                         <div class="block conclusiones">
                             <div class="title-block">
-                                <h2>Conclusiones</h2>
+                                <h2>{{ "Conclusions"|t }}</h2>
                             </div>
                             <div class="box active">
                                 <p>{{ node.field_conclusion.value|raw }}</p>
@@ -93,7 +93,7 @@
                         {{ dump(node.field_referencias) }}
                         <div class="block referencias">
                             <div class="title-block">
-                                <h2>Referencias</h2>
+                                <h2>{{ "References"|t }}</h2>
                             </div>
                             <div class="box">
                                 {% for item in node.field_referencias %}
@@ -113,7 +113,7 @@
             <div class="news infinite-contents manuscrito">
                 {% set array = [user.id,node.nid.value] %}
                 <div class="block-title">
-                    <h3>Mis manuscritos</h3>
+                    <h3>{{ "My manuscripts"|t }}</h3>
                 </div>
                 {{ drupal_view('manuscritos', 'block_2',user.id) }}
             </div>

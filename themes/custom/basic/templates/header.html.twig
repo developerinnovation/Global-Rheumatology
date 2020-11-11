@@ -44,10 +44,10 @@
         <!--<div class="box-notification">
             <ul>
                 <li>
-                    <a href="">Envía un artículo</a>
+                    <a href="">{{"Submit items"|t}}</a>
                 </li>
                 <li>
-                    <a href="">Completa tu perfil</a>
+                    <a href="">{{"Complete your profile"|t}}<</a>
                 </li>
                 <li>
                     <a href="">test</a>
@@ -64,11 +64,11 @@
                 <div class="info">                
                     {% if logged_in %}
                         <span class="nombre">{{ user.nombres }}</span>
-                        <a class="editar" href="/user/{{ user.id }}">Mi perfil</a>
-                        <a class="editar" href="/user/{{ user.id }}/edit">Editar perfil</a>
-                        <a class="editar" href="/user/logout">Cerrar sesión</a>
+                        <a class="editar" href="/user/{{ user.id }}">{{"My profile"|t}}<</a>
+                        <a class="editar" href="/user/{{ user.id }}/edit">{{"Edit profile"|t}}<</a>
+                        <a class="editar" href="/user/logout">{{"Log out"|t}}<</a>
                     {% else %}
-                        <span class="nombre">{% trans%} Invitado {% endtrans%}</span>
+                        <span class="nombre">{{"Invited"|t}}</span>
                     {% endif %}
                 </div>   
             </div>
@@ -77,10 +77,10 @@
                 <ul> <!-- menu principal -->
                     {% if logged_in != true %}
                         <li class=" navigation__item">
-                            <a href="/" class="submenu">{% trans%}Home{% endtrans%}</a>
+                            <a href="/" class="submenu">{{"Home"|t}}</a>
                         </li>
                         <li class=" navigation__item">
-                            <a href="/user/login" class="submenu">{% trans%}Iniciar sesión{% endtrans%}</a>
+                            <a href="/user/login" class="submenu">{{"Log in"|t}}</a>
                         </li>
                     {% endif %}
 
@@ -89,63 +89,63 @@
                             <a href="/" class="submenu ">Home</a>
                             <ul class="box main inactive">
                                 <li class="seconds navigation__item submenu">
-                                    <a href="/new/send/manuscrito" class="seconds submenu">{% trans%}Publicar{% endtrans%}</a>
+                                    <a href="/new/send/manuscrito" class="seconds submenu">{{"Publish"|t}}</a>
                                     <ul class="seconds inactive">
                                         <li class="last_submenu">
-                                            <a href="/show/saved/content">{% trans%}Artículos guardados{% endtrans%}</a>
+                                            <a href="/show/saved/content">{{"Saved Items"|t}}</a>
                                         </li>
                                     </ul>
                                 </li>
                                 {% if 'editores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
                                     <li class="seconds navigation__item submenu">
-                                        <a class="seconds submenu">{% trans%}Acciones para Editor{% endtrans%}</a>
+                                        <a class="seconds submenu">{{"Actions for editor"|t}}</a>
                                         <ul class="seconds inactive">
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/created/{{ user.id }}">{% trans%}Mis Artículos{% endtrans%}</a>
+                                                <a href="/articles/editor/created/{{ user.id }}">{{"My articles"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/process/{{ user.id }}">{% trans%}Artículos en proceso{% endtrans%}</a>
+                                                <a href="/articles/editor/process/{{ user.id }}">{{"Items in process"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/rejected/{{ user.id }}">{% trans%}Artículos rechazados{% endtrans%}</a>
+                                                <a href="/articles/editor/rejected/{{ user.id }}">{{"Rejected items"|t}}<{/a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/editor/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                                <a href="/articles/editor/published/{{ user.id }}">{{"published articles"|t}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                 {% endif %}
                                 {% if 'autores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
                                     <li class="seconds navigation__item submenu">
-                                        <a class="seconds submenu">{% trans%}Acciones para Autor{% endtrans%}</a>
+                                        <a class="seconds submenu">{{"Actions for author"|t}}</a>
                                         <ul class="seconds inactive">
                                             <li class="last_submenu">
-                                                <a href="/articles/author/process/{{ user.id }}">{% trans%}Artículos en proceso{% endtrans%}</a>
+                                                <a href="/articles/author/process/{{ user.id }}">{{"Items in process"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/author/rejected/{{ user.id }}">{% trans%}Artículos rechazados{% endtrans%}</a>
+                                                <a href="/articles/author/rejected/{{ user.id }}">{{"Rejected items"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/author/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                                <a href="/articles/author/published/{{ user.id }}">{{"published articles"|t}}</a>
                                             </li>
                                         </ul>
                                     </li>
                                 {% endif %}
                                 {% if 'revisores' in user.getroles(TRUE) or  'administrator' in user.getroles(TRUE) %}
                                     <li class="seconds navigation__item submenu">
-                                        <a class="seconds submenu">{% trans%}Acciones para Revisor{% endtrans%}</a>
+                                        <a class="seconds submenu">{{"Actions for reviewer"|t}}</a>
                                         <ul class="seconds inactive">
                                             <li class="last_submenu">
-                                                <a href="/articles/reviser/created/{{ user.id }}">{% trans%}Mis artículos{% endtrans%}</a>
+                                                <a href="/articles/reviser/created/{{ user.id }}">{{"Items in process"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/reviser/assigned/{{ user.id }}">{% trans%}Artículos asignados{% endtrans%}</a>
+                                                <a href="/articles/reviser/assigned/{{ user.id }}">{{"ASsigned items"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/reviser/reviewed/{{ user.id }}">{% trans%}Artículos Revisados{% endtrans%}</a>
+                                                <a href="/articles/reviser/reviewed/{{ user.id }}">{{"Reviewed articles"|t}}</a>
                                             </li>
                                             <li class="last_submenu">
-                                                <a href="/articles/reviser/published/{{ user.id }}">{% trans%}Artículos publicados{% endtrans%}</a>
+                                                <a href="/articles/reviser/published/{{ user.id }}">{{"published articles"|t}}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -188,10 +188,10 @@
                 <div class="info">
                     <ul>
                         <li>
-                            <a class="support" href="http://" target="_blank" rel="noopener noreferrer">{% trans%} Soporte {% endtrans%}</a>
+                            <a class="support" href="http://" target="_blank" rel="noopener noreferrer">{{"Support"|t}}</a>
                         </li>
                         <li>
-                            <a href="http://" target="_blank" rel="noopener noreferrer">{% trans%} Política de privacidad {% endtrans%}</a>
+                            <a href="http://" target="_blank" rel="noopener noreferrer">{{"Privacy policy"|t}}</a>
                         </li>
                     </ul>
                 </div>

@@ -12,14 +12,14 @@
         <div class="send_article">
             <div class="block-title">
             <h3>{{ drupal_field('title', 'node',  208) }}</h3>
-                <!--<h3>{% trans%} Envie su artículo {% endtrans%}</h3>-->
+                <!--<h3>{{"Send your article"|t}}<</h3>-->
             </div>
             <div>
                 {{ drupal_field('body', 'node',  208) }}
             </div>
 
             <!--<p>Sea parte de Global Rheumalology enviando sus contenidos. <br> Revise en línea el estado de sus publicaciones y revisiones. </p>-->
-            <button class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /new/send/manuscrito {% else %}  {% endif %}">{% trans%} Enviar artículo {% endtrans%} </button>
+            <button class="send-article new-article {% if user.id != 0 %}authentificate{% else %}anonime{% endif %}" data-heref="{% if user.id != 0 %} /new/send/manuscrito {% else %}  {% endif %}">{{"Submit article"|t }}</button>
         </div>
     </div>
     <!-- /.container -->
@@ -29,13 +29,13 @@
             <div class="top">
                 <div class="left">
                     <div class="block-title">
-                        <h3>{% trans%} Últimos artículos {% endtrans%}</h3>
+                        <h3>{{"Latest articles"|t }}</h3>
                     </div>
                 </div>
                 <div class="right">
-                    <span id="article-cientifico" class="more-cientifico active">{% trans%} Artículos científicos {% endtrans%}</span>
+                    <span id="article-cientifico" class="more-cientifico active">{{"Scientific articles"|t }}</span>
                     <hr>
-                    <span id="article-magazine" class="more-magazine">{% trans%} Magazine {% endtrans%}</span>
+                    <span id="article-magazine" class="more-magazine">{{"Magazine"|t }}</span>
                 </div>
             </div>
             <div class="bottom">
@@ -55,13 +55,13 @@
             <div class="top">
                 <div class="left">
                     <div class="block-title">
-                        <h3>{% trans%} Tendencias {% endtrans%}</h3>
+                        <h3>{{"Trends"|t }}</h3>
                     </div>
                 </div>
                 <div class="right">
-                    <span id="read" class="more-read active">{% trans%} Lo más visto {% endtrans%}</span>
+                    <span id="read" class="more-read active">{{"The most seen"|t }}</span>
                     <hr>
-                    <span id="shared" class="more-shared">{% trans%} Lo más compartido {% endtrans%}</span>
+                    <span id="shared" class="more-shared">{{"The most shared"|t }}</span>
                 </div>
             </div>
             <div class="bottom">
@@ -79,7 +79,7 @@
     <div class="container">
         <div class="magazine_news">
             <div class="block-title">
-                <h3>{% trans%} Magazine {% endtrans%}</h3>
+                <h3>{{"Magazine"|t }}</h3>
             </div>
             <dd>{{ drupal_view('home', 'block_6') }}</dd>
         </div>
