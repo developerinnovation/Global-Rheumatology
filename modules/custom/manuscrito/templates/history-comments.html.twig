@@ -1,11 +1,11 @@
 <main id="info-article">
     <h2>
         {% if type == 'author' %}
-            {{ 'Historial de comentarios recibidos'|t }}
+            {{ 'History of comments received'|t }}
         {% elseif type  == 'editor' %}
-            {{ 'Historial de comentarios en plataforma'|t }}
+            {{ 'History of comments on platform'|t }}
         {% else %}
-            {{ 'Historial de comentarios realizados'|t }}
+            {{ 'History of comments made'|t }}
         {% endif %}
     </h2>
     <div class="list-type">
@@ -17,7 +17,7 @@
                 <table class="tg">
                     <tbody>
                         <tr>
-                            <td class="tg-cly1">{{ 'Artículo relacionado'|t }}:<br></td>
+                            <td class="tg-cly1">{{ 'Related article'|t }}:<br></td>
                             <td class="tg-nrix" colspan="3"><b>{{ titleArticle }}</b></td>
                         </tr>
                     </tbody>
@@ -26,15 +26,15 @@
                     <table class="tg">
                         <tbody>
                             <tr>
-                                <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Comment id'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">{{ item.id }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Received the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.date }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Detalle del comentario'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Comment detail'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
                             </tr>
                         </tbody>

@@ -175,7 +175,7 @@
                                     {% endfor %}
                                 </ul>
                             {% else %}
-                                <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text }}</a>
+                                <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text|t }}</a>
                             {% endif %}
                         </li>                   
                     {% endfor %} 

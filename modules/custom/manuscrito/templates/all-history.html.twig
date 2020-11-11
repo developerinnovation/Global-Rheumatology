@@ -14,13 +14,13 @@
                         <table class="tg">
                             <tbody>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Id del artículo'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Article id'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ node.id }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Cesión de derechos'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Cession of rights'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">
-                                        <a href="{{ node.cesionDerechos }}" target="_blank" download>{{ 'Clic para descargar' }}</a>
+                                        <a href="{{ node.cesionDerechos }}" target="_blank" download>{{ 'Download' }}</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -28,15 +28,15 @@
                                     <td class="tg-nrix" colspan="3">{{ node.editor.name_author }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Estado del artículo'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Article status'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ node.decision }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ '¿Se enviaron todos los comentarios al autor?'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ '¿All comments were sent to the author?'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ node.sendComment }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Comentario final del editor'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Editor's final comment'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ node.commentEnd }}</td>
                                 </tr>
                             </tbody>
@@ -48,7 +48,7 @@
             {% if arrNodesCommentToAutor != NULL %}
                 <div class="article box-comment-autor active">
                     <div class="action-box">
-                        <h4>{{ 'Comentarios realizados por los editores a los autores' }}</h4>
+                        <h4>{{ 'Comments made by editors to authors'|t }}</h4>
                         <button data-id="box-comment-autor" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-comment-autor active">
@@ -56,7 +56,7 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Comment Id'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.id }}</td>
                                     </tr>
                                     <tr>
@@ -64,11 +64,11 @@
                                         <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Fecha'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Date'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.created }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Comentario'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Comments'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
                                     </tr>
                                 </tbody>
@@ -81,7 +81,7 @@
             {% if arrNodesCommentToEditor != NULL %}
                 <div class="article box-comment-editor active">
                     <div class="action-box">
-                        <h4>{{ 'Comentarios realizados por los revisores al editor' }}</h4>
+                        <h4>{{ 'Comments made by reviewers to the editor'|t }}</h4>
                         <button data-id="box-comment-editor" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-comment-editor active">
@@ -89,7 +89,7 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Id del comentario'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Comment Id'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.id }}</td>
                                     </tr>
                                     <tr>
@@ -97,11 +97,11 @@
                                         <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Fecha'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Date'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.created }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Comentario'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Comments'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.comment }}</td>
                                     </tr>
                                 </tbody>
@@ -114,7 +114,7 @@
             {% if arrNodesRevision != NULL %}
                 <div class="article box-revision active">
                     <div class="action-box">
-                        <h4>{{ 'Calificaciones efectuadas al artículo' }}</h4>
+                        <h4>{{ 'Qualification of article' }}</h4>
                         <button data-id="box-revision" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-revision active">
@@ -122,11 +122,11 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Id de la calificación'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Qualification Id'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.id }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Fecha de la calificación'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Date'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.created }}</td>
                                     </tr>
                                     <tr>
@@ -134,35 +134,35 @@
                                         <td class="tg-nrix" colspan="3">{{ item.author.name_author }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Pregunta #1'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Question #1'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.question_1 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Pregunta #2'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Question #2'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.question_2 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Pregunta #3'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Question #3'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.question_3 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Pregunta #4'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Question #4'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.question_4 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Pregunta #5'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Question #5'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.question_5 }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Promedio'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Average'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.promedio }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Decisión'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Decision'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.decision }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Comentarios del revisor'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Reviewer Comments'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.comentario }}</td>
                                     </tr>
                                 </tbody>
@@ -175,7 +175,7 @@
             {% if arrNodesAsign != NULL %}
                 <div class="article box-revisores active">
                     <div class="action-box">
-                        <h4>{{ 'Revisores asignados' }}</h4>
+                        <h4>{{ 'Assigned reviewers' }}</h4>
                         <button data-id="box-revisores" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-revisores active">
@@ -183,32 +183,32 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Id de la asignación'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Assignment id'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.id }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Fecha de la asignación'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Date'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.created }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Revisor asignado'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Reviewer'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.revisor.name_author }}</td>
                                     </tr>
                                     <tr>
                                         <td class="tg-cly1">{{ 'Respuesta de la asignación'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">
                                             {% if item.response == 'noResponse' %}
-                                                {{ 'Sin respuesta por parte del revisor'|t }}
+                                                {{ 'No response from the reviewer'|t }}
                                             {% else %}
                                                 {{ item.response }}
                                             {% endif %}
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Fecha de la respuesta'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Reply date'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">
                                             {% if item.response == 'noResponse' %}
-                                                {{ 'Sin respuesta por parte del revisor'|t }}
+                                                {{ 'No response from the reviewer'|t }}
                                             {% else %}
                                                 {{ item.dateResponse }}
                                             {% endif %}

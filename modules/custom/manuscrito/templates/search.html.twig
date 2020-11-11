@@ -1,21 +1,21 @@
 <main id="info-article">
    <div style="text-align: center;font-size: 10px;">
-    <h2>Buscar artículos por:</h2>
+    <h2>{{'Search articles by'|t}}:</h2>
    </div>
     <div class="list-type">
         <div class="option">
             <ul>
                 <li class="target active" id="name">
                     <img src="/themes/custom/basic/images/article_tipo/articulo.svg" width="100">
-                    <h2>Nombre</h2>
+                    <h2>{{ 'Name'|t }}</h2>
                 </li>
                 <li class="target" id="autor">
                     <img src="/themes/custom/basic/images/article_tipo/autor.svg" width="100">
-                    <h2>Autor</h2>
+                    <h2>{{ 'Author'|t }}</h2>
                 </li>
                 <li class="target" id="tipo">
                     <img src="/themes/custom/basic/images/article_tipo/contenido.svg" width="100">
-                    <h2>Tipo</h2>
+                    <h2>{{ 'Type'|t }}</h2>
                 </li>
             </ul>
         </div>
@@ -36,7 +36,7 @@
                                     <div class="item-news last-article">
                                         <div class="text">
                                             <div class="save no" data-id=" {{ item.nid }}" data-session="authentificate">
-                                                <a href="#" class="node_saved">Guardar</a>
+                                                <a href="#" class="node_saved">{{ 'Save' }}</a>
                                             </div>
                                             <h3 class="title">
                                                 <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
@@ -57,7 +57,7 @@
                             </div>
                         {% else %}
                             <div class="no-result">
-                                <p>No hay resultados para la búsqueda.</p>
+                                <p>{{ 'No search results'|t }}.</p>
                             </div>
                         {% endif %}
                     {% endif %}
@@ -84,7 +84,7 @@
                                     <div class="item-news last-article">
                                         <div class="text">
                                             <div class="save no" data-id=" {{ item.nid }}" data-session="authentificate">
-                                                <a href="#" class="node_saved">Guardar</a>
+                                                <a href="#" class="node_saved">{{ 'Save'|t }}</a>
                                             </div>
                                             <h3 class="title">
                                                 <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
@@ -97,7 +97,7 @@
                                                 <date>{{ item.date }}</date>
                                             </div>
                                             <div class="explorer">
-                                                <a href="{{ path('entity.node.canonical', {'node': item.nid}) }}">Ver más</a>
+                                                <a href="{{ path('entity.node.canonical', {'node': item.nid}) }}">{{ 'Show more' }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                             </div>
                         {% else %}
                             <div class="no-result">
-                                <p>No hay resultados para la búsqueda.</p>
+                                <p>{{ 'No search results'|t }}.</p>
                             </div>
                         {% endif %}
                     {% endif %}
@@ -116,24 +116,24 @@
                 <div class="input">
                     <form action="/search/content/by/type" method="get">
                         <select name="tipo" id="tipo-input">
-                            <option value="article">Artículo</option>
-                            <option value="infografias">Infografías</option>
-                            <option value="microlearning">Microlearning</option>
-                            <option value="podcast">Podcast</option>
-                            <option value="videos">Videos</option>
-                            <option value="articulo_cientifico">Articulo cientifico</option>
-                            <option value="manuscrito_articulo_revision">Artículo de Revisión</option>
-                            <option value="manuscrito_articulo_especial">Artículo especial</option>
-                            <option value="manuscrito_articulo_original">Artículo original</option>
-                            <option value="manuscrito_ciencia_panlar">Ciencia Panlar</option>
-                            <option value="manuscrito_columnas">Columnas</option>
-                            <option value="manuscrito_comentarios_respues">Comentarios y Respuestas	</option>
-                            <option value="manuscrito_editorial">Editorial</option>
+                            <option value="article">{{ 'Articles'|t }}</option>
+                            <option value="infografias">{{ 'Infographics'|t }}</option>
+                            <option value="microlearning">{{ 'Microlearning'|t }}</option>
+                            <option value="podcast">{{ 'Podcast'|t }}</option>
+                            <option value="videos">{{ 'Video'|t }}</option>
+                            <option value="articulo_cientifico">{{ 'Scientific article'|t }}</option>
+                            <option value="manuscrito_articulo_revision">{{ 'Review article'|t }}</option>
+                            <option value="manuscrito_articulo_especial">{{ 'Special article'|t }}</option>
+                            <option value="manuscrito_articulo_original">{{ 'Original article'|t }}</option>
+                            <option value="manuscrito_ciencia_panlar">{{ 'Ciencia Panlar'|t }}</option>
+                            <option value="manuscrito_columnas">{{ 'Columns' }}</option>
+                            <option value="manuscrito_comentarios_respues">{{ 'Comments and responses'|t }}</option>
+                            <option value="manuscrito_editorial">{{ 'Editorial'|t }}</option>
                             <option value="manuscrito_mini_revision">Mini Revisión</option>
-                            <option value="manuscrito_multimedia">Multimedia</option>
-                            <option value="manuscrito_noticia">Noticia</option>
-                            <option value="manuscrito_reportajes_especiales">Reportajes Especiales	</option>
-                            <option value="manuscrito_rondas_clinicas">Rondas Clínicas</option>
+                            <option value="manuscrito_multimedia">{{ 'Multimedia'|t }}</option>
+                            <option value="manuscrito_noticia">{{ 'News'|t }}</option>
+                            <option value="manuscrito_reportajes_especiales">{{ 'Special Reports'|t }}</option>
+                            <option value="manuscrito_rondas_clinicas">{{ 'Clinical Rounds'|t }}</option>
                         </select>
                         <input type="submit" value="Buscar">
                     </form>
@@ -146,7 +146,7 @@
                                     <div class="item-news last-article">
                                         <div class="text">
                                             <div class="save no" data-id=" {{ item.nid }}" data-session="authentificate">
-                                                <a href="#" class="node_saved">Guardar</a>
+                                                <a href="#" class="node_saved">{{ 'Save' }}</a>
                                             </div>
                                             <h3 class="title">
                                                 <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
@@ -159,7 +159,7 @@
                                                 <date>{{ item.date }}</date>
                                             </div>
                                             <div class="explorer">
-                                                <a href="{{ path('entity.node.canonical', {'node': item.nid}) }}">Ver más</a>
+                                                <a href="{{ path('entity.node.canonical', {'node': item.nid}) }}">{{ 'Show more'|t }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -167,7 +167,7 @@
                             </div>
                         {% else %}
                             <div class="no-result">
-                                <p>No hay resultados para la búsqueda.</p>
+                                <p>{{ 'No search results'|t }}.</p>
                             </div>
                         {% endif %}
                     {% endif %}

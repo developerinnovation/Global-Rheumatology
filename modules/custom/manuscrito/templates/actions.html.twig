@@ -5,11 +5,11 @@
         {# flujo editores #}
         {% if 'editores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %}
             <div class="tabs" style="text-align: center">
-                <span>{{ 'Mis acciones disponible cómo editor'|t }}</span>
+                <span>{{ 'My actions available as editor'|t }}</span>
                 <ul class="tabs primary">
-                    <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
-                    <li class="tabs__tab"><a href="{{ data.assign }}">{{ 'Asignar'|t }}</a></li>
-                    <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Aprobar o Rechazar'|t }}</a></li>
+                    <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Show'|t }}</a></li>
+                    <li class="tabs__tab"><a href="{{ data.assign }}">{{ 'Assign'|t }}</a></li>
+                    <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Approve or Reject'|t }}</a></li>
                 </ul>
             </div>
         {% endif %}
@@ -17,10 +17,10 @@
         {# flujo revisores #}
         {% if 'revisores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %} 
             <div class="tabs" style="text-align: center">
-                    <span>{{ 'Mis acciones disponible cómo revisor'|t }}</span>
+                    <span>{{ 'My actions available as  revisor'|t }}</span>
                 <ul class="tabs primary">
-                    <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
-                    <li class="tabs__tab"><a href="{{ data.qualify }}">{{ 'Revisar y Calificar'|t }}</a></li>
+                    <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Show'|t }}</a></li>
+                    <li class="tabs__tab"><a href="{{ data.qualify }}">{{ 'Review and Rate'|t }}</a></li>
                 </ul>
             </div>
         {% endif %}
@@ -29,10 +29,10 @@
         {% if 'autores' in user.getroles(TRUE) or 'administrator' in user.getroles(TRUE) %} 
             {% if data.uid_autor %}
                 <div class="tabs" style="text-align: center">
-                    <span>{{ 'Mis acciones disponible cómo autor'|t }}</span>
+                    <span>{{ 'My actions available as  autor'|t }}</span>
                     <ul class="tabs primary">
-                        <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Ver'|t }}</a></li>
-                        <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Corregir artículo'|t }}</a></li>
+                        <li class="tabs__tab tabs__tab--active"><a href="{{ data.url }}" class="is-active">{{ 'Show'|t }}</a></li>
+                        <li class="tabs__tab"><a href="{{ data.urlEdit }}">{{ 'Modify article'|t }}</a></li>
                     </ul>
                 </div>
             {% endif %}

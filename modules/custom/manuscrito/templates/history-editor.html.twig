@@ -1,5 +1,5 @@
 <main id="info-article">
-    <h2> {{ 'Historial de revisiones'|t }} </h2>
+    <h2> {{ 'Revision history'|t }} </h2>
     <div class="list-type">
         <div class="search">
             <input type="search" name="search-article-history" id="search-article-history" placeholder="{{ 'Buscar artículo'|t }}" onkeyup="searchRevision(this.value)">
@@ -10,68 +10,68 @@
                     <table class="tg">
                         <tbody>
                             <tr>
-                                <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Title'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Type'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">{{ item.type }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Autor'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Author'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.autor.uri }}" hreflang="es">{{ item.autor.name_author }}</a>
                                 </td>
                             </tr>
                             {% if type != 'created' %}
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Estado'|t }}:</td>
+                                    <td class="tg-cly1">{{ 'Status'|t }}:</td>
                                     <td class="tg-nrix" colspan="3">{{ item.status }}</td>
                                 </tr>
                             {% endif %}
                             <tr>
-                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Received the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.date }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Actualizado el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Update the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.update }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Publicado el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Posted the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.publish }}</td>
                             </tr>
                             
                             {% if type != 'created' %}
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Revisores asignados'|t }}:</td>
+                                    <td class="tg-cly1">{{ 'Assigned reviewers'|t }}:</td>
                                     <td class="tg-nrix" colspan="3">{{ item.listRevisor|raw }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Ver historial completo'|t }}:</td>
+                                    <td class="tg-cly1">{{ 'See full history'|t }}:</td>
                                     <td class="tg-nrix" colspan="3">
-                                        <a href="{{ item.record }}"> {{ 'Ir al historial'|t }} </a>
+                                        <a href="{{ item.record }}"> {{ 'Go to history'|t }} </a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
+                                    <td class="tg-nrix" colspan="4">{{ 'Actions'|t }}</td>
                                 </tr>
                                 <tr>
                                     <td class="tg-nrix">
-                                        <a href="{{ item.url }}" target="_blank"> {{ 'Ver'|t }} </a>
+                                        <a href="{{ item.url }}" target="_blank"> {{ 'Show'|t }} </a>
                                     </td>
                                     {% if type != 'rejected' %}
                                         <td class="tg-nrix">
-                                            <a href="{{ item.assign }}"> {{ 'Asignar'|t }} </a>
+                                            <a href="{{ item.assign }}"> {{ 'Sssign'|t }} </a>
                                         </td>
                                     {% endif %}
                                     <td class="tg-nrix">
-                                        <a href="{{ item.urlEdit }}"> {{ 'Aprobar'|t }}/{{ 'Rechazar'|t }} </a>
+                                        <a href="{{ item.urlEdit }}"> {{ 'Approve'|t }}/{{ 'Reject'|t }} </a>
                                     </td>
                                     <td class="tg-nrix">
-                                        <a href="{{ item.comments_autor }}"> {{ 'Comentarios para autor'|t }} </a>
+                                        <a href="{{ item.comments_autor }}"> {{ 'Comments to autho'|t }} </a>
                                     </td>
                                 </tr>
                             {% endif %}

@@ -1,13 +1,13 @@
 <main id="info-article">
     <h2>
         {% if type == 'assigned' %}
-            {{ 'Historial de asignaciones'|t }}
+            {{ 'Assignment history'|t }}
         {% elseif type  == 'reviewed' %}
-            {{ 'Artículos revisados'|t }}
+            {{ 'Reviewed articles'|t }}
         {% elseif type  == 'created' %}
-            {{ 'Mis Artículos'|t }}
+            {{ 'My articles'|t }}
         {% else %}
-            {{ 'Artículos published'|t }}
+            {{ 'Articles published'|t }}
         {% endif %}
     </h2>
     <div class="list-type">
@@ -21,52 +21,52 @@
                         <tbody>
                             {% if type == 'assigned' %}
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Artículo'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Article'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">
                                         <a href="{{ item.urlArticle }}" hreflang="es">{{ item.titleArticle }}</a>
                                     </td>
                                 </tr>
                             {% endif %}
                             <tr>
-                                <td class="tg-cly1">{{ 'Id revisión'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Revision Id'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Type'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">{{ item.type }}</td>
                             </tr>
                             {% if type != 'created' and type != 'assigned' %}
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Autor'|t }}:</td>
+                                    <td class="tg-cly1">{{ 'Author'|t }}:</td>
                                     <td class="tg-nrix" colspan="3">
                                         <a href="{{ item.autor.uri }}" hreflang="es">{{ item.autor.name_author }}</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Estado'|t }}:</td>
+                                    <td class="tg-cly1">{{ 'Status'|t }}:</td>
                                     <td class="tg-nrix" colspan="3">{{ item.status }}</td>
                                 </tr>
                             {% endif %}
                             <tr>
-                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Received the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.date }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Actualizado el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Updated the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.update }}</td>
                             </tr>
                             {% if type != 'created' %}
                                 <tr>
-                                    <td class="tg-nrix" colspan="4">{{ 'Acciones'|t }}</td>
+                                    <td class="tg-nrix" colspan="4">{{ 'Actions'|t }}</td>
                                 </tr>
                                 <tr>
                                     <td class="tg-nrix">
-                                        <a href="{{ item.urlArticle }}" target="_blank"> {{ 'Ver artículo'|t }} </a>
+                                        <a href="{{ item.urlArticle }}" target="_blank"> {{ 'Show article'|t }} </a>
                                     </td>
                                     <td class="tg-nrix">
-                                        <a href="{{ item.qualify }}"> {{ 'Revisar y calificar'|t }} </a>
+                                        <a href="{{ item.qualify }}"> {{ 'Review and rate'|t }} </a>
                                     </td>
                                 </tr>
                             {% endif %}

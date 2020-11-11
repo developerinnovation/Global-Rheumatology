@@ -18,40 +18,40 @@
                     <table class="tg">
                         <tbody>
                             <tr>
-                                <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Title'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.url }}" hreflang="es">{{ item.title }}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                <td class="tg-cly1">{{ 'Type'|t }}:<br></td>
                                 <td class="tg-nrix" colspan="3">{{ item.type }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Autor'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Author'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">
                                     <a href="{{ item.autor.uri }}" hreflang="es">{{ item.autor.name_author }}</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Estado'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Status'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.status }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Recibido el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Received the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.date }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Actualizado el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Updated the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.update }}</td>
                             </tr>
                             <tr>
-                                <td class="tg-cly1">{{ 'Publicado el día'|t }}:</td>
+                                <td class="tg-cly1">{{ 'Posted the day'|t }}:</td>
                                 <td class="tg-nrix" colspan="3">{{ item.publish }}</td>
                             </tr>
                             <tr>
                                 <td class="tg-nrix" colspan="4">
-                                    <a href="/comments/register/article/{{ item.autor.uid }}/{{ item.nid }}/author">{{ 'Ver comentarios recibidos'|t }}</a>
+                                    <a href="/comments/register/article/{{ item.autor.uid }}/{{ item.nid }}/author">{{ 'Show comments'|t }}</a>
                                 </td>
                             </tr>
                         </tbody>

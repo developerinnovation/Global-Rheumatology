@@ -6,9 +6,9 @@
             <div class="article active">
                 <ul>
                     <li class="target" style="width: calc(73.3% - 30px);">
-                        <p>La revista <b>GLOBAL RHEUMATOLOGY</b> le da las gracias por enviar su artículo titulado  </br> "<b>{{ drupal_field('title', 'node', id) }}</b>" el cual fue guardado de forma satisfactoria en nuestra plataforma. Uno de nuestros revisores iniciará el proceso de verificación del artículo recibido. Por favor observe su correo electrónico de forma periódica en el cual se enviarán las notificaciones pertinentes al proceso de revisión</p>
+                        <p><b>GLOBAL RHEUMATOLOGY</b> {{ 'thanks you for submitting your article titled'|t }}  </br> "<b>{{ drupal_field('title', 'node', id) }}</b>" {{ 'which was successfully saved on our platform. One of our reviewers will initiate the verification process of the received article. Please check your email periodically in which notifications relevant to the review process will be sent'|t }}</p>
                         <h3>
-                            <a href="{{ path('entity.node.canonical', {'node': id}) }}">Ver artículo</a>
+                            <a href="{{ path('entity.node.canonical', {'node': id}) }}">{{ 'Show article' }}</a>
                         </h3>
                     </li>                  
                 </ul>

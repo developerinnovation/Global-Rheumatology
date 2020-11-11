@@ -1,12 +1,12 @@
 <main id="info-article" class="record">
-    <h2>{{ 'Datos rápidos de estadísticas'|t }}</h2>
+    <h2>{{ 'Quick statistics data'|t }}</h2>
     <div class="list-type">
         <div class="box-type revision">  
 
             {% if average != NULL %}
                 <div class="article box-average active">
                     <div class="action-box">
-                        <h4>{{ 'Total de lecturas' }}</h4>
+                        <h4>{{ 'Total readings'|t }}</h4>
                         <button data-id="box-average" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-average active">
@@ -25,7 +25,7 @@
             {% if count_user != NULL %}
                 <div class="article box-count_user active">
                     <div class="action-box">
-                        <h4>{{ 'Total de usuarios registrados' }}</h4>
+                        <h4>{{ 'Total registered users'|t }}</h4>
                         <button data-id="box-count_user" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-count_user active">
@@ -45,22 +45,22 @@
             {% if count_user_Rol != NULL %}
                 <div class="article box-count_user_Rol active">
                     <div class="action-box">
-                        <h4>{{ 'Total de usuarios registrados por roles' }}</h4>
+                        <h4>{{ 'User by rol'|t }}</h4>
                         <button data-id="box-count_user_Rol" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-count_user_Rol active">
                         <table class="tg">
                             <tbody>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Administradores'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Administrator'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAdministrator }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Autores'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Authors'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAutores }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Revisores'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Reviewers'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsRevisores }}</td>
                                 </tr>
                                 <tr>
@@ -68,11 +68,11 @@
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsEditores }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Autores de magazine'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Author magazine'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsAutorMagazine }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="tg-cly1">{{ 'Lectores'|t }}:<br></td>
+                                    <td class="tg-cly1">{{ 'Readers'|t }}:<br></td>
                                     <td class="tg-nrix" colspan="3">{{ count_user_Rol.idsLectores }}</td>
                                 </tr>
                             </tbody>
@@ -87,7 +87,7 @@
             {% if autor_more_active != NULL %}
                 <div class="article box-top active">
                     <div class="action-box">
-                        <h4>{{ 'Top 10 de usuarios que más publican' }}</h4>
+                        <h4>{{ 'Top 10 users who publish'|t }}</h4>
                         <button data-id="box-top" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-top active">
@@ -95,11 +95,11 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Nombre'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Name'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.autor }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Cantidad de publicaciones'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Number of posts'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.count }}</td>
                                     </tr>
                                 </tbody>
@@ -113,7 +113,7 @@
             {% if node != NULL %}
                 <div class="article box-all active">
                     <div class="action-box">
-                        <h4>{{ 'Contenido almacenado en la plataforma' }}</h4>
+                        <h4>{{ 'All articles'|t }}</h4>
                         <button data-id="box-all" class="btn-show-text record">cerrar</button>
                     </div>
                     <div class="box box-all active">
@@ -121,23 +121,23 @@
                             <table class="tg">
                                 <tbody>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Título'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Title'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.title }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Identificador interno'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Id'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.nid }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Cantidad de visualizaciones'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Number of views'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.count }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Tipo'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Type'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.type }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="tg-cly1">{{ 'Estado'|t }}:<br></td>
+                                        <td class="tg-cly1">{{ 'Status'|t }}:<br></td>
                                         <td class="tg-nrix" colspan="3">{{ item.status }}</td>
                                     </tr>
                                     
