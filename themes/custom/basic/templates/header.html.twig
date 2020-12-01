@@ -12,15 +12,21 @@
                 </a>
             </div>
         </div>
-        <div id="logo">
+        <div id="logo" style="display:flex">
             {% if is_front %}
-                <a href="/">
+                <a href="/" style="margin: auto;">
                     <img src="/{{ directory }}/images/logo-blanco.svg" class="logo home" alt="Global Rheumaatology" width="200" height="200" />
                 </a>
+                <div style="margin: 16px;width: 207px;border-left: 2px solid #c1c1c1;text-align: center;position: relative;top: 25%;-ms-transform: translateY(-50%);-webkit-transform: translateY(-50%);transform: translateY(-50%);padding: 1.5%;">
+                    <span style="color:#ffffff">E-ISSN: 2709-5533</span>
+                </div>
             {% else %}
-                <a href="/">
+                <a href="/" style="margin: auto;">
                     <img src="/{{ directory }}/images/logo-color.svg" class="logo not-home" alt="Global Rheumaatology" width="200" height="200" />
                 </a>
+                <div style="margin: 16px;width: 207px;border-left: 2px solid #c1c1c1;text-align: center;position: relative;top: 25%;-ms-transform: translateY(-50%);-webkit-transform: translateY(-50%);transform: translateY(-50%);padding: 1.5%;">
+                    <span style="color:#7f7f7f">E-ISSN: 2709-5533</span>
+                </div>
             {% endif %}
         </div>
         <div class="right">
