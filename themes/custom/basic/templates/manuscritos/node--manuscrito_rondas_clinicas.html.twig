@@ -6,9 +6,9 @@
 {% set classes = ['node'] %}
 
 <article {{ attributes.addClass(classes) }}>
-    <!-- ______________________ ACTION _______________________ -->
+    <!-- ________ ACTION _________ -->
     {{ drupal_block('global_rehumatology_actions', {'node' : node.id }) }}
-    <!-- ____________________ END ACTION ____________________ -->
+    <!-- _______ END ACTION _______ -->
     <div id="main" class="despliegue-nodo">
         <div class="container two-col">
             <div class="left" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
@@ -30,24 +30,29 @@
 
                                 {% if node.status.value == 0 %}
                                     <div class="block last-mod">
-                                        <label>{{ "Created"|t }}:</label>
+                                        <label>{{ "Creado"|t }}:</label>
                                         <span class="date">{{ content.created.value|date('U')|format_date('global') }}</span>
                                     </div>
                                     <div class="block last-mod">
-                                        <label>{{ "Last Modification"|t }}:</label>
+                                        <label>{{ "Last modification"|t }}:</label>
                                         <span class="date">{{ content.changed.value|date('U')|format_date('global') }}</span>
                                     </div>
-                                    <div class="block status">
-                                        <label>{{ "Actual state"|t }}:</label>
-                                        <span>{{ content.field_estado_del_articulo[0]['#title'] }}</span>
-                                    </div>
                                 {%else%}
-                                    {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
+                                {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
                                     {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                                     {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
+                                    {% set correo %} {{ drupal_field('email', 'user', node.getOwnerId()) }} {% endset %}
                                     <div class="block status">
-                                        <label>{{ "for" |t }}:</label>
-                                        <span><b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
+                                        {% if node.field_autor_es %}
+                                            <label> {{ "Autor"|t }}: </label> 
+                                            <br>
+                                            <ul>
+                                                {% for item in node.field_autor_es %}
+                                                    {{ drupal_entity('paragraph', item.target_id) }}
+                                                    <br>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             </div>
@@ -56,7 +61,7 @@
 
                     <div class="tags">
                         {% if content.field_tags[0] %}
-                        <label>Tags</label>
+                        <label>{{ "Key words"|t}}</label>
                         <ul>
                             {% for key, item in content.field_tags if key|first != '#' %}
                             <li>{{ item }}</li>
@@ -64,6 +69,29 @@
                         </ul>
                         {% endif %} 
                     </div> 
+
+
+                    {% if node.status.value == 1 %}
+                    <div class="shared">
+                        <label>{{ "Share"|t }}</label>          
+
+                        <div class="a2a_kit a2a_default_style">
+                            <a class="a2a_button_facebook">
+                                <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_whatsapp">
+                                <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_twitter">
+                                <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
+                            </a>
+                            <a class="a2a_button_linkedin">
+                                <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
+                            </a>
+                            {{ drupal_block('block_printfriendly') }}
+                        </div>
+                    </div>
+                    {% endif %} 
 
                     {% if node.status.value == 1 %}
                         {% if node.field_articulo_pdf %}
@@ -89,37 +117,6 @@
                         {% endif %} 
                     {% endif %} 
 
-                    {% if node.field_anexos %}
-                        <div class="tablas">
-                            <label> {{ "Annexes"|t }} </label> 
-                            {% for item in node.field_anexos %}
-                                {{ drupal_entity('paragraph', item.target_id) }}
-                            {% endfor %}
-                        </div>
-                    {% endif %} 
-
-                    {% if node.status.value == 1 %}
-                    <div class="shared">
-                        <label>{{ "Share"|t }}</label>          
-
-                        <div class="a2a_kit a2a_default_style">
-                            <a class="a2a_button_facebook">
-                                <img src="\themes\custom\basic\images\redes-facebook.svg" border="0" alt="Facebook" width="27" height="27">
-                            </a>
-                            <a class="a2a_button_whatsapp">
-                                <img src="\themes\custom\basic\images\redes-whatsapp.svg" border="0" alt="Twitter" width="27" height="27">
-                            </a>
-                            <a class="a2a_button_twitter">
-                                <img src="\themes\custom\basic\images\redes-twitter.svg" border="0" alt="Twitter" width="27" height="27">
-                            </a>
-                            <a class="a2a_button_linkedin">
-                                <img src="\themes\custom\basic\images\redes-linkedin.svg" border="0" alt="Share" width="27" height="27">
-                            </a>
-                            {{ drupal_block('block_printfriendly') }}
-                        </div>
-                    </div>
-                    {% endif %} 
-
                 </div>
             </div>
 
@@ -127,107 +124,19 @@
                 <div class="content article">
                     <div class="title large">
                         <h2>{{ node.field_titulo_ingles.value }}</h2> 
-                    </div>
+                    </div> 
 
-                    <div class="block abstract">
-                        <div class="title-block">
-                            <h2>{{ "Summary"|t }}</h2>
-                            <button class="btn-show-text" data-id="abstract">{{ "Close"|t }}</button>
-                        </div> 
-                        <div class="box active">
-                            {{ content.field_resumen_abstract }}  
-                        </div>
-                    </div>    
-
-                    {% if node.field_mensajes_clave.value %}
+                    {% if node.field_mensajes_claves.value %}
                         <div class="block mensaje">
-                            <div class="title-block">
-                                <h2>{{ "Key messages"|t }}</h2>
-                                <button class="btn-show-text" data-id="mensaje">{{ "Close"|t }}</button>
-                            </div> 
                             <div class="box active">
-                                <p>{{ node.field_mensajes_clave.value|raw }}</p>
+                                <p>{{ node.field_mensajes_claves.value|raw }}</p>
                             </div>
                         </div>
-                    {% endif %}
-
-                    
-                    {% if node.field_introduccion.value %}
-                        <div class="block introduccion">
-                            <div class="title-block">
-                                <h2>{{ "Introduction"|t }}</h2>
-                                <button class="btn-show-text" data-id="introduccion">{{ "Close"|t }}</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_introduccion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_introduccion.value %}
-                        <div class="block caso">
-                            <div class="title-block">
-                                <h2>{{ "clinical case"|t }}</h2>
-                                <button class="btn-show-text" data-id="caso">{{ "Close"|t }}</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_caso_clinico.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_discusion.value %}
-                        <div class="block discusion">
-                            <div class="title-block">
-                                <h2>{{ "Discussions and conclusions"|t }}</h2>
-                                <button class="btn-show-text" data-id="discusion">{{ "Close"|t }}</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.field_discusion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}  
-
-                    {% if node.agradecimientos.value %}
-                        <div class="block agradecimiento">
-                            <div class="title-block">
-                                <h2>{{ "Gratitude"|t }}</h2>
-                                <button class="btn-show-text" data-id="agradecimiento">{{ "Close"|t }}</button>
-                            </div> 
-                            <div class="box active">
-                                <p>{{ node.agradecimientos.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_conflicto_interes.value %}
-                        <div class="block conflic">
-                            <div class="title-block">
-                                <h2>{{ "Interes conflict"|t }}</h2>
-                                <button class="btn-show-text" data-id="conflic">{{ "Close"|t }}</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_conflicto_interes.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    {% if node.field_financiacion.value %}
-                        <div class="block finan">
-                            <div class="title-block">
-                                <h2>{{ "Financing"|t }}</h2>
-                                <button class="btn-show-text" data-id="finan">{{ "Close"|t }}</button>
-                            </div>
-                            <div class="box active">
-                                <p>{{ node.field_financiacion.value|raw }}</p>
-                            </div>
-                        </div>
-                    {% endif %}
-                 
+                    {% endif %}         
 
                     <div class="block referencias">
                         <div class="title-block">
-                            <h2>{{ "References"|t }}</h2>
+                            <h2>{{ "Referencias"|t }}</h2>
                             <button class="btn-show-text" data-id="referencias">{{ "Close"|t }}</button>
                         </div>
                         <div class="box active">
@@ -239,7 +148,7 @@
             </div>
         </div>
 
-        
+       
         <!--<div class="container">
             <div class="news infinite-contents manuscrito">
                 {% set array = [user.id,node.nid.value] %}

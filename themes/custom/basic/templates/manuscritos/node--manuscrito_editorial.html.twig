@@ -67,7 +67,7 @@
 
                     <div class="tags">
                         {% if content.field_tags[0] %}
-                        <label>Tags</label>
+                        <label>{{ "Key words"|t}}</label>
                         <ul>
                             {% for key, item in content.field_tags if key|first != '#' %}
                             <li>{{ item }}</li>
