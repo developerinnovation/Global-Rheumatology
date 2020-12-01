@@ -27,6 +27,12 @@
                                             <span class="date">{{ node.field_fecha_publicacion_oficial.value|date('U')|format_date('global') }}</span>
                                         {% endif %}
                                     </div>
+                                    {% if node.field_doi_articulo is not empty  %}
+                                        <div class="block last-mod"></div>
+                                            <label>{{ "DOI"|t }}:</label>
+                                            <span class="date">{{ node.field_doi_articulo.value }}</span>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
 
                                 {% if node.status.value == 0 %}
