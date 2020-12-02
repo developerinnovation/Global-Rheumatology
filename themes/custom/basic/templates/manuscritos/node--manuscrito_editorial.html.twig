@@ -30,7 +30,7 @@
                                     {% if node.field_doi_articulo is not empty  %}
                                         <div class="block last-mod">
                                             <label>{{ "DOI"|t }}:</label>
-                                            <span class="date">{{ node.field_doi_articulo.value }}</span>
+                                            <span class="date"><a target="_blank" href="{{ node.field_doi_articulo.value }}">{{ node.field_doi_articulo.value }}</a></span>
                                         </div>
                                     {% endif %}
                                 {% endif %}
