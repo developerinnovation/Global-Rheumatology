@@ -36,6 +36,13 @@
               </div>
               <br>
           </div>
+          
+          {% if node.field_doi_articulo is not empty  %}
+              <div class="block last-mod">
+                  <label>{{ "DOI"|t }}:</label>
+                  <span class="date"><a target="_blank" style="color: white;" href="{{ node.field_doi_articulo.value }}">{{ node.field_doi_articulo.value }}</a></span>
+              </div>
+          {% endif %}
 
           <div class="read article">
             <p class="why">"{{ node.field_porque_leer.value }}"</p>
