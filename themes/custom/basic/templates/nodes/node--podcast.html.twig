@@ -27,6 +27,13 @@
                         <date>{{ node.created.value|date('U')|format_date('global') }}</date>
                     </div>
 
+                    {% if node.field_doi_articulo is not empty  %}
+                        <div class="block last-mod info article" style="display: flex; color: #fff;">
+                            <label>{{ "DOI"|t }}:</label>
+                            <span class="date"><a target="_blank" style="color: white;" href="{{ node.field_doi_articulo.value }}">{{ node.field_doi_articulo.value }}</a></span>
+                        </div>
+                    {% endif %}
+
                     <div class="statistics">
                         <label>{{ "statistics"|t }}</label>
                         <div class="item views">
