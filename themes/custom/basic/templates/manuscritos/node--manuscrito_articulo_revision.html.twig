@@ -105,6 +105,17 @@
                         </div>
                     {% endif %} 
 
+                    {% if node.status.value == 0 %}
+                        {% if node.field_correcciones %}
+                            <div class="tablas">
+                                <label> {{ "Corrections in pdf"|t }} </label> 
+                                {% for item in node.field_correcciones %}
+                                    {{ drupal_entity('paragraph', item.target_id) }}
+                                {% endfor %}
+                            </div>
+                        {% endif %} 
+                    {% endif %} 
+
                     {% if node.status.value == 1 %}
                     <div class="shared">
                         <label>{{ "Share"|t }}</label>          
