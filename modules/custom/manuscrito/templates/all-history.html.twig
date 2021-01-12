@@ -172,55 +172,12 @@
                 </div>
             {% endif %}
 
-            {% if arrNodesAsign != NULL %}
-                <div class="article box-revisores active">
-                    <div class="action-box">
-                        <!-- <h4>{{ 'Assigned reviewers' }}</h4> -->
-                        <button data-id="box-revisores" class="btn-show-text record">cerrar</button>
-                    </div>
-                    <div class="box box-revisores active">
-                        {% for item in arrNodesAsign %}
-                            <table class="tg">
-                                <tbody>
-                                    <tr>
-                                        <!-- <td class="tg-cly1">{{ 'Assignment id'|t }}:<br></td> -->
-                                        <!-- <td class="tg-nrix" colspan="3">{{ item.id }}</td> -->
-                                    </tr>
-                                    <tr>
-                                        <!-- <td class="tg-cly1">{{ 'Date'|t }}:<br></td> -->
-                                        <!-- <td class="tg-nrix" colspan="3">{{ item.created }}</td> -->
-                                    </tr>
-                                    <tr>
-                                        <!-- <td class="tg-cly1">{{ 'Reviewer'|t }}:<br></td> -->
-                                        <!-- <td class="tg-nrix" colspan="3">{{ item.revisor.name_author }}</td> -->
-                                    </tr>
-                                    <tr>
-                                        <!-- <td class="tg-cly1">{{ 'Respuesta de la asignación'|t }}:<br></td> -->
-                                        <td class="tg-nrix" colspan="3">
-                                            {% if item.response == 'noResponse' %}
-                                                <!-- {{ 'No response from the reviewer'|t }} -->
-                                            {% else %}
-                                                <!-- {{ item.response }} -->
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <!-- <td class="tg-cly1">{{ 'Reply date'|t }}:<br></td> -->
-                                        <td class="tg-nrix" colspan="3">
-                                           
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endif %}
+           
         </div>    
     </div>
 </main>
 <script>
-    $(".launcher-box-message").removeClass("active");
+    $('.launcher-box-message').removeClass('active');
 </script>
 <style type="text/css">
     .tg  {border-collapse:collapse;border-spacing:0;}
