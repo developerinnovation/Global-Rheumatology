@@ -1,5 +1,5 @@
 talkify:
-  version: 1.x
+  version: 2.x
   css:
     theme:
       asset/css/talkify-audiocontrols.css: {}
