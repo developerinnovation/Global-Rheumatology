@@ -72,40 +72,40 @@
 
 })(jQuery, Drupal, drupalSettings);
 
-$(document).ready(function() {
-    var text = $('body #main .right').text().trim();
+jQuery(document).ready(function() {
+    var text = jQuery('body #main .right').text().trim();
     var player = null;
-    $('.buttons .sound').click(function() {
-        $(this).removeClass("active");
-        $(".control-audio").addClass("active");
+    jQuery('.buttons .sound').click(function() {
+        jQuery(this).removeClass("active");
+        jQuery(".control-audio").addClass("active");
         player = new talkify.TtsPlayer();
         player.setRate = 0;
         player.playText(text);
         var intervel = setInterval(function(){ 
             if(!player.isPlaying()){
-                $(".buttons .control-audio .stop").click();
+                jQuery(".buttons .control-audio .stop").click();
                 clearInterval(intervel);
             }
         }, 60000);
     });
 
-    $(".buttons .control-audio .stop").click(function()  {
-        $(".control-audio").removeClass("active");
-        $(".buttons .control-audio .pause").addClass("active");
-        $(".top .buttons .sound").addClass("active");
-        $(".buttons .control-audio .play").removeClass("active");
+    jQuery(".buttons .control-audio .stop").click(function()  {
+        jQuery(".control-audio").removeClass("active");
+        jQuery(".buttons .control-audio .pause").addClass("active");
+        jQuery(".top .buttons .sound").addClass("active");
+        jQuery(".buttons .control-audio .play").removeClass("active");
         player.dispose();
     });
 
-    $(".buttons .control-audio .pause").click(function()  {
-        $(this).removeClass("active");
-        $(".buttons .control-audio .play").addClass("active");
+    jQuery(".buttons .control-audio .pause").click(function()  {
+        jQuery(this).removeClass("active");
+        jQuery(".buttons .control-audio .play").addClass("active");
         player.pause();
     });
 
-    $(".buttons .control-audio .play").click(function()  {
-        $(this).removeClass("active");
-        $(".buttons .control-audio .pause").addClass("active");
+    jQuery(".buttons .control-audio .play").click(function()  {
+        jQuery(this).removeClass("active");
+        jQuery(".buttons .control-audio .pause").addClass("active");
         player.play();
     });
     
