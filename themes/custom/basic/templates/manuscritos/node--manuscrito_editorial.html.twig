@@ -83,7 +83,7 @@
                     </div> 
 
                     {% if node.status.value == 0 %}
-                        {% if node.field_copia_articulo %}
+                        {% if node.field_copia_articulo.value %}
                             <div class="tablas">
                                 <label> {{ "Copy of the article"|t }} </label> 
                                 {% set doc = node.field_copia_articulo.entity.getFilename|split('.') %}

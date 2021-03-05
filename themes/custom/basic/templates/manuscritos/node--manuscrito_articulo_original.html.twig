@@ -132,7 +132,7 @@
                     {% endif %} 
 
                     {% if node.status.value == 0 %}
-                        {% if node.field_correcciones %}
+                        {% if node.field_correcciones.value %}
                             <div class="tablas">
                                 <label> {{ "Corrections in pdf"|t }} </label> 
                                 {% for item in node.field_correcciones %}
