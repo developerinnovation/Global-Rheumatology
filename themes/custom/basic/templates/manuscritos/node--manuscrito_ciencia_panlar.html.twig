@@ -71,6 +71,23 @@
                         {% endif %} 
                     </div>
 
+                    {% if node.status.value == 0 %}
+                        {% if node.field_copia_articulo %}
+                            <div class="tablas">
+                                <label> {{ "Copy of the article"|t }} </label> 
+                                {% set doc = node.field_copia_articulo.entity.getFilename|split('.') %}
+                                <div class="ico">
+                                    <a href="{{ file_url(node.field_articulo_pdf.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+                                        <div class="file {{  doc[1] }}"></div>
+                                        <div class="title">
+                                            <h3>{{ 'Download' }}</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %} 
+                    {% endif %} 
+
                     {% if node.status.value == 1 %}
                         {% if node.field_articulo_pdf %}
                             <div class="tablas">
