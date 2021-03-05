@@ -77,7 +77,7 @@
                                 <label> {{ "Article in pdf"|t }} </label> 
                                 {% set doc = node.field_articulo_pdf.entity.getFilename|split('.') %}
                                 <div class="ico">
-                                    <a href="{{ file_url(node.field_articulo_pdf.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
+                                    <a href="{{ file_url(node.field_copia_articulo.entity.fileuri) }}" class="link" download title="{{ doc[0] }}">
                                         <div class="file {{  doc[1] }}"></div>
                                         <div class="title">
                                             <h3>
