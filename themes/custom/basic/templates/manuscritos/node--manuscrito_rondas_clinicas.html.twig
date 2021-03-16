@@ -104,6 +104,14 @@
                         {% endif %} 
                     {% endif %} 
 
+                    <div class="statistics">
+                        <label>{{ "statistics"|t }}</label>
+                        <div class="item views">
+                        <i class="icon icon-views">{{ "Views" | t }}</i>
+                        <span><b>{{ node_stats }}</b>{{ "Views" | t }}</span>
+                        </div>
+                    </div>
+
                     {% if node.status.value == 1 %}
                     <div class="shared">
                         <label>{{ "Share"|t }}</label>          
