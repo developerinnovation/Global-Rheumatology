@@ -21,6 +21,18 @@
                             <div class="text">
                                 {% if node.status.value != 0 %}
                                     <div class="block last-mod">
+                                        {% if node.created is not empty  %}
+                                            <label>{{ "Received"| t }}:</label>
+                                            <span class="date">{{ node.created.value|date('U')|format_date('global') }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <!--<div class="block last-mod">
+                                        {% if node.changed is not empty  %}
+                                            <label>{{ "Accepted"| t }}:</label>
+                                            <span class="date">{{ node.changed.value|date('U')|format_date('global') }}</span>
+                                        {% endif %}
+                                    </div>-->
+                                    <div class="block last-mod">
                                         {% if node.field_fecha_publicacion_oficial is not empty  %}
                                             <label>{{ "Published"|t }}:</label>
                                             <span class="date">{{ node.field_fecha_publicacion_oficial.value|date('U')|format_date('global') }}</span>
