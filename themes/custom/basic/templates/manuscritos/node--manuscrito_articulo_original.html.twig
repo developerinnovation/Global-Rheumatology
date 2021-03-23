@@ -26,12 +26,14 @@
                                             <span class="date">{{ node.created.value|date('U')|format_date('global') }}</span>
                                         {% endif %}
                                     </div>
-                                    <!--<div class="block last-mod">
-                                        {% if node.changed is not empty  %}
-                                            <label>{{ "Accepted"| t }}:</label>
-                                            <span class="date">{{ node.changed.value|date('U')|format_date('global') }}</span>
+
+                                    <div class="block last-mod">
+                                        {% if node.field_fecha_aceptacion is not empty  %}
+                                            <label>{{ "acceptance"| t }}:</label>
+                                            <span class="date">{{ node.field_fecha_aceptacion.value|date('U')|format_date('global') }}</span>
                                         {% endif %}
-                                    </div>-->
+                                    </div>
+
                                     <div class="block last-mod">
                                         {% if node.field_fecha_publicacion_oficial is not empty  %}
                                             <label>{{ "Published"| t }}:</label>
