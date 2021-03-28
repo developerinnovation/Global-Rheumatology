@@ -39,7 +39,7 @@ function more_shared_cron(){
 
 function more_shared_preprocess_page(&$variables){
   $data = get_data_more_shared();
-  $variables['more_shared_nid'] = implode(',', $data['array_keys']);
+  $variables['more_shared_nid'] = $data['array_keys'];
   $variables['more_shared_data'] = $data['shared'];
 }
 
