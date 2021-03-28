@@ -276,6 +276,11 @@ sessionStorage.setItem('firstVisit', '0');
             }
         });
 
+        const dataShared = drupalSettings.more_shared_data;
+        $.each(dataShared, function( index, value ) {
+            $('span.data-nid-'+ index).text(value.count);
+        });
+
         // perfil usuario
         $(".user-form .container .profile form .form-actions #edit-submit--5").click(function(event) {
             var error = false;

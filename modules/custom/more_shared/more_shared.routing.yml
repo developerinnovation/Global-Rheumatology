@@ -7,3 +7,12 @@ shared.more_shared_form:
     _permission: 'access administration pages'
   option:
     _admin_route: TRUE
+
+list_more_shared:
+  path: 'articles/more/shared'
+  defaults:
+      _controller: '\Drupal\more_shared\general::more_shared'
+      _title: 'Artículos más compartidos'
+  requirements:
+    _access: 'TRUE'
+       
