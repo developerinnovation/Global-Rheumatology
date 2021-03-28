@@ -256,7 +256,7 @@ function basic_manuscrito_form_update($form, \Drupal\Core\Form\FormStateInterfac
   $revisorMail = $execute['to_revisor'];
   $autorMail = $execute['to_autor'];
   if($userRevision == $revisorId){    
-    if($statusArticle == '586'){
+    if($statusArticle == '708'){
       $node->set('status',1);
       $node->save();
     }
