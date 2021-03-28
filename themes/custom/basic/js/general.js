@@ -278,7 +278,7 @@ sessionStorage.setItem('firstVisit', '0');
 
         const dataShared = drupalSettings.more_shared_data;
         $.each(dataShared, function( index, value ) {
-            $('span.data-nid-'+ index).text(value.count);
+            $('span.data-nid-'+ index).text(value.count); 
         });
 
         // perfil usuario
