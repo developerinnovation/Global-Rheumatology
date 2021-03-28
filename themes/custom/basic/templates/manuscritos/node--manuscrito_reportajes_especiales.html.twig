@@ -13,7 +13,12 @@
         <div class="container two-col">
             <div class="left" style="background-image: url('{{ file_url(node.field_image.entity.uri.value) }}');background-repeat: no-repeat">
                 <div class="box">
-
+                
+                    <div class="top"> 
+                        <div class="article__categoria">
+                            <a href="/articulos/tipo/reportajes-especiales">{{ 'Special report'|t }}</a>
+                        </div>
+                    </div>
                     <h1 {{ attributes }}>{{ node.title.value }}</h1>
                     
                     <div class="revision">                        
