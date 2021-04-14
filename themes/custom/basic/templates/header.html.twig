@@ -70,9 +70,9 @@
                 <div class="info">                
                     {% if logged_in %}
                         <span class="nombre">{{ user.nombres }}</span>
-                        <a class="editar" href="/user/{{ user.id }}">{{"My profile"|t}}<</a>
-                        <a class="editar" href="/user/{{ user.id }}/edit">{{"Edit profile"|t}}<</a>
-                        <a class="editar" href="/user/logout">{{"Log out"|t}}<</a>
+                        <a class="editar" href="/user/{{ user.id }}">{{"My profile"|t}}</a>
+                        <a class="editar" href="/user/{{ user.id }}/edit">{{"Edit profile"|t}}</a>
+                        <a class="editar" href="/user/logout">{{"Log out"|t}}</a>
                     {% else %}
                         <span class="nombre">{{"Invited"|t}}</span>
                     {% endif %}
