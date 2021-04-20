@@ -500,7 +500,7 @@ function checkWord(e){
             limit = 5000;
         break;
         case 'mini_revision':
-            limit = 3000;
+            limit = 3500;
         break;
         case 'rondas_clinicas':
             limit = 1500;
