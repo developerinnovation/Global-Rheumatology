@@ -64,12 +64,21 @@
                                         <span>{{ content.field_estado_del_articulo[0]['#title'] }}</span>
                                     </div>
                                 {%else%}
-                                    {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
+                                {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
                                     {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                                     {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
+                                    {% set correo %} {{ drupal_field('email', 'user', node.getOwnerId()) }} {% endset %}
                                     <div class="block status">
-                                        <label>{{ "For"|t }}:</label>
-                                        <span><b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}</span>
+                                        {% if node.field_autor_es %}
+                                            <label> {{ "Authors"|t }}: </label> 
+                                            <br>
+                                            <ul>
+                                                {% for item in node.field_autor_es %}
+                                                    {{ drupal_entity('paragraph', item.target_id) }}
+                                                    <br>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             </div>
