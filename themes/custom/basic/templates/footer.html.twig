@@ -5,7 +5,7 @@
             <img src="/{{ directory }}/images/logo-blanco.svg" alt="Global Rheumatology" width="200" height="200" />
         </figure>
         <p class="description">
-            Es un órgano de divulgación de la Liga Panamericana de Asociaciones de Reumatología (PANLAR). 
+            {{ 'It is an outreach body of the Pan American League of Rheumatology Associations (PANLAR). '|t}}
         </p>
 
         <div class="contact">
@@ -43,7 +43,7 @@
             {% endif %}
             {% for menu_item in items.menu_tree %}
                 <li class="{{ item_class }} navigation_item">
-                    <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text }}</a>
+                    <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.text|t }}</a>
                 </li>
             {% endfor %}
         </ul>
