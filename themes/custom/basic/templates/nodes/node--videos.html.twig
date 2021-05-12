@@ -19,17 +19,8 @@
                         {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
                         {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
                         <div>
-                            <span class="author">{{ 'For'|t }} : 
-                            <br>
-                                <ul>
-                                    {% for item in node.field_autores %}
-                                        {{ drupal_entity('paragraph', item.target_id) }}
-                                        <br>
-                                    {% endfor %}
-                                </ul>
-                            </span>
+                            <span class="author">{{ 'For'|t }} : <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> {{ afiliacion|striptags|trim }}</span>
                         </div>
-                     
                     </div>
 
                     <div class="info article">
