@@ -25,7 +25,7 @@
                                         {% set apellidos %} {{ drupal_field('field_apellidos', 'user', item.target_id) }} {% endset %}
                                         {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', item.target_id) }} {% endset %}
 
-                                        <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}
+                                        <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> {% if afiliacion is not null %}<br>{{ afiliacion|striptags|trim }} {% endif %}
                                         
                                         <br><br>
                                     {% endfor %}
