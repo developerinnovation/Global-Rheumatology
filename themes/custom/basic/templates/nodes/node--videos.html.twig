@@ -15,11 +15,22 @@
                     <h1 {{ attributes }}> {{ node.title.value }} </h1>
 
                     <div class="info article">
-                        {% set nombre %} {{ drupal_field('field_nombre', 'user', node.getOwnerId()) }}  {% endset %}
-                        {% set apellidos %} {{ drupal_field('field_apellidos', 'user', node.getOwnerId()) }} {% endset %}
-                        {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', node.getOwnerId()) }} {% endset %}
+                       
                         <div>
-                            <span class="author">{{ 'For'|t }} : <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> {{ afiliacion|striptags|trim }}</span>
+                            <span class="author">{{ 'For'|t }} : 
+                            
+                                <ul>
+                                    {% for item in node.field_autores %}
+                                        {% set nombre %} {{ drupal_field('field_nombre', 'user', item.target_id) }}  {% endset %}
+                                        {% set apellidos %} {{ drupal_field('field_apellidos', 'user', item.target_id) }} {% endset %}
+                                        {% set afiliacion %} {{ drupal_field('field_afiliacion', 'user', item.target_id) }} {% endset %}
+
+                                        <b>{{ nombre|striptags|trim }} {{ apellidos|striptags|trim }}</b> <br>{{ afiliacion|striptags|trim }}
+                                        
+                                        <br><br>
+                                    {% endfor %}
+                                </ul>
+                            </span>
                         </div>
                     </div>
 

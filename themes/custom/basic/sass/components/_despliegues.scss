@@ -73,7 +73,6 @@ article{
                 }
                 @media only screen and ($desktop){
                     width: calc(50% - 100px);
-                    height: calc(100vh - 80px);
                     min-height: 700px;
                     padding: 40px 40px 40px calc(50% - 590px);
                     position: sticky;
@@ -180,10 +179,6 @@ article{
                             }
                             line-height: 22px;
                             color: #fff;
-                            &:after{
-                                content: ',';
-                                margin: 0 3px 0 0;
-                            }
                         }
                     }
                     date{
