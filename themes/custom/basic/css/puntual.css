@@ -31,3 +31,19 @@
 audio#talkify-audio {
     display: none;
 }
+
+.block-ngt-license {
+    color: #fff;
+}
+
+.block-ngt-license h3{
+    font-weight: 700;
+    font-size: 20px;
+}
+.block-ngt-license p{
+    font-size: 14px;
+    font-style: italic;
+}
+.block-ngt-license .block-license{
+    margin: 30px 0px;
+}
