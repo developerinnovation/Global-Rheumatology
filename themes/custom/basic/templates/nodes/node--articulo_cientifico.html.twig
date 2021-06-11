@@ -122,6 +122,8 @@
             {% endfor %}
           </div>
 
+
+
           {% if node.field_incluir_enlace.value == "si" %}
             <div class="item-news article-node cientifico"> 
               <div class="text">
@@ -131,6 +133,10 @@
               </div>              
             </div>
           {% endif %}
+
+          <!-- bloque licencia -->
+          {{ drupal_block('global_rehumatology_license') }} 
+          <!-- fin bloque licencia -->
 
         </div>
         
