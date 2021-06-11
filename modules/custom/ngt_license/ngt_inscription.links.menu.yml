@@ -1,0 +1,6 @@
+license.license_form:
+  title: 'NGT Configuracion para texto de licencias'
+  route_name: 'license.license_form'
+  description: 'Configuración para textos de licencias'
+  parent: system.admin_config_system
+  weight: 99

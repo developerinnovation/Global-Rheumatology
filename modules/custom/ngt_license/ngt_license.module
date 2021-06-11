@@ -1,0 +1,41 @@
+<?php 
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\UserInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * ngt_license_help
+ *
+ * @param  mixed $route_name
+ * @param  mixed $route_match
+ * @return void
+ */
+function ngt_license_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+      // Main module help for the ngt_license module.
+      case 'help.page.ngt_license':
+          $output = '';
+          $output .= t('<h3>' . 'About') . '</h3>';
+          $output .= t('<p>' . 'Customización para bloque de licencia') . '</p>';
+      return $output;
+
+  default:
+  }
+}
+
+/**
+ * Implements hook_theme()
+ */
+function ngt_license_theme() {
+  return [
+    'ngt_license' => [
+      'variables' => [
+        'title_license' => NULL,
+        'txt_license' => NULL,
+      ],
+      'template' => 'block--ngt_license',
+    ],
+  ];
+}

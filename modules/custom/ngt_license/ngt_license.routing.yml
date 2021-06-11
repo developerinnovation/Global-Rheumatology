@@ -1,0 +1,11 @@
+license.license_form:
+  path: '/admin/config/ngt/license/text'
+  defaults:
+    _form: '\Drupal\ngt_license\Plugin\Form\LicenseForm'
+    _title: 'Configuraciones para licencias '
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE
+
+    

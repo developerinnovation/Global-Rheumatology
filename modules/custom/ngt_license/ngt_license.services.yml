@@ -1,0 +1,4 @@
+services:
+  ngt_license.license:
+    class: Drupal\ngt_license\Plugin\Config\Block\LicenseBlockClass
+    arguments: []

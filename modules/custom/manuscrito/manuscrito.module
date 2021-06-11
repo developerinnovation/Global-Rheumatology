@@ -4,7 +4,9 @@
  * Implements hook_preprocess_page()
  */
 function manuscrito_preprocess_page(&$vars) {
-    $vars['get']['name'] = $_GET['name'];
+    if(isset($_GET['name'])) {
+        $vars['get']['name'] = $_GET['name'];
+    }
 }
 
 function manuscrito_theme($existing, $type, $theme, $path) {

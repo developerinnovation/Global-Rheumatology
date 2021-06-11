@@ -51,6 +51,7 @@ function more_shared_page_attachments(array &$attachments) {
 function get_data_more_shared(){
   $test = FALSE;
   $nid = [];
+  $array_keys = [];
   $factory = \Drupal::service('tempstore.shared');
   $store = $factory->get('more_shared.shared');
   $value = $store->get('more_shared_count');
