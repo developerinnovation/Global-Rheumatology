@@ -122,13 +122,20 @@
 <script type="text/javascript">
     $(window).load(function() {
         var miAudio = document.getElementsByClassName("audio-player-r");
-        var duracion = parseInt(miAudio[1].duration);
-        var segundos_d;
-        var minutos_d;
-        segundos_d = duracion % 60;
-        minutos_d = parseInt(duracion / 60);
-        if (segundos_d < 10) segundos_d = '0' + duracion % 60;
-        if (minutos_d < 10) minutos_d = '0' + parseInt(duracion / 60);
+        var duracion = 0;
+        var segundos_d = 0;
+        var minutos_d = 0;
+        if(miAudio[1] != undefined) {
+            duracion = parseInt(miAudio[1].duration);
+        }else ifif(miAudio[1] != undefined) {
+            duracion = parseInt(miAudio[0].duration);
+        }
+        if (duracion > 0) {
+            segundos_d = duracion % 60;
+            minutos_d = parseInt(duracion / 60);
+            if (segundos_d < 10) segundos_d = '0' + duracion % 60;
+            if (minutos_d < 10) minutos_d = '0' + parseInt(duracion / 60);
+        }
         $(".mejs-clear").html("<span>" + minutos_d + ":" + segundos_d + "s</span>");
     });
 </script>
